@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Layer &#8212; @script 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
+    
+    <script src="../_static/documentation_options.js?v=672d6955"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Effect" href="../Effect/index.html" />
+    <link rel="prev" title="Comp" href="../Comp/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Effect/index.html" title="Effect"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Comp/index.html" title="Comp"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Layer</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="layer">
+<h1>Layer<a class="headerlink" href="#layer" title="Link to this heading">¶</a></h1>
+<section id="layer-getactivelayer">
+<h2>Layer.getActiveLayer()<a class="headerlink" href="#layer-getactivelayer" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getActiveLayer():</span> <span class="pre">Layer</span> <span class="pre">|</span> <span class="pre">null;</span></code></p>
+<p>タイムラインが表示されているコンポの中で選択されているレイヤーを返す。</p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetActiveLayer#aegp-layersuite9">AEGP_GetActiveLayer</a></p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="layer-getid">
+<h2>Layer.getID()<a class="headerlink" href="#layer-getid" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getID(layer:</span> <span class="pre">Layer):</span> <span class="pre">number;</span></code></p>
+<p>レイヤーのIDを取得する。スクリプトでもCC2022からサポートされた。</p>
+<p>参照: <a class="reference external" href="https://ae-scripting.docsforadobe.dev/layers/layer.html#layer-id">Layer.id</a></p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getID</span><span class="p">(</span><span class="nx">layer</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="layer-getbounds">
+<h2>Layer.getBounds()<a class="headerlink" href="#layer-getbounds" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getBounds(layer:</span> <span class="pre">AVLayer,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number</span> <span class="pre">}):</span> <span class="pre">Rect;</span></code></p>
+<p>不透明の範囲を取得する。クロップしたいときに用いる。</p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="o">:</span><span class="w"> </span><span class="kt">Layer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">bounds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getBounds</span><span class="p">(</span><span class="nx">layer</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="layer-getmaskbounds">
+<h2>Layer.getMaskBounds()<a class="headerlink" href="#layer-getmaskbounds" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getMaskBounds(layer:</span> <span class="pre">AVLayer,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">Rect;</span></code></p>
+<p>マスクによって囲まれた範囲を取得する。</p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetLayerMaskedBounds#aegp-layersuite9">AEGP_GetLayerMaskedBounds</a></p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="o">:</span><span class="w"> </span><span class="kt">Layer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">bounds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getMaskBounds</span><span class="p">(</span><span class="nx">layer</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="layer-getmoments">
+<h2>Layer.getMoments()<a class="headerlink" href="#layer-getmoments" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getMoments(layer:</span> <span class="pre">AVLayer,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">binary?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">Moments;</span></code></p>
+<p>画像モーメントを取得する。</p>
+<p>参照: <a class="reference external" href="https://docs.opencv.org/4.8.0/d3/dc0/group__imgproc__shape.html#ga556a180f43cab22649c23ada36a8a139">cv::moments</a></p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="o">:</span><span class="w"> </span><span class="kt">Layer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">moments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getMoments</span><span class="p">(</span><span class="nx">layer</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="layer-saveframetopng">
+<h2>Layer.saveFrameToPng()<a class="headerlink" href="#layer-saveframetopng" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">saveFrameToPng(layer:</span> <span class="pre">AVLayer,</span> <span class="pre">file:</span> <span class="pre">File,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">downsample?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>レイヤーの画をpngで保存する。</p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="o">:</span><span class="w"> </span><span class="kt">Layer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">layer</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">_</span><span class="si">${</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="si">}</span><span class="sb">.png`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">saveFrameToPng</span><span class="p">(</span><span class="nx">layer</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="layer-saveframetojpg">
+<h2>Layer.saveFrameToJpg()<a class="headerlink" href="#layer-saveframetojpg" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">saveFrameToJpg(layer:</span> <span class="pre">AVLayer,</span> <span class="pre">file:</span> <span class="pre">File,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">downsample?:</span> <span class="pre">number;</span> <span class="pre">quality?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>レイヤーの画をjpegで保存する。</p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="o">:</span><span class="w"> </span><span class="kt">Layer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">layer</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">_</span><span class="si">${</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="si">}</span><span class="sb">.jpg`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">saveFrameToJpg</span><span class="p">(</span><span class="nx">layer</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="layer-saveframetohdr">
+<h2>Layer.saveFrameToHdr()<a class="headerlink" href="#layer-saveframetohdr" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">saveFrameToHdr(layer:</span> <span class="pre">AVLayer,</span> <span class="pre">file:</span> <span class="pre">File,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">downsample?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>レイヤーの画をhdrで保存する。</p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="o">:</span><span class="w"> </span><span class="kt">Layer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">layer</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">_</span><span class="si">${</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="si">}</span><span class="sb">.hdr`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">saveFrameToHdr</span><span class="p">(</span><span class="nx">layer</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="layer-saveframetoclipboard">
+<h2>Layer.saveFrameToClipboard()<a class="headerlink" href="#layer-saveframetoclipboard" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">saveFrameToClipboard(layer:</span> <span class="pre">AVLayer,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">downsample?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>レイヤーの画をクリップボードに保存する。</p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="o">:</span><span class="w"> </span><span class="kt">Layer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">saveFrameToClipboard</span><span class="p">(</span><span class="nx">layer</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="layer-saveframestogif">
+<h2>Layer.saveFramesToGif()<a class="headerlink" href="#layer-saveframestogif" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">saveFramesToGif(layer:</span> <span class="pre">AVLayer,</span> <span class="pre">startTime:</span> <span class="pre">number,</span> <span class="pre">endTime:</span> <span class="pre">number,</span> <span class="pre">file:</span> <span class="pre">File,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">downsample?:</span> <span class="pre">number;</span> <span class="pre">skip?:</span> <span class="pre">number;</span> <span class="pre">speed?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>レイヤーのある範囲の画をアニメーションgifとして保存する。</p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="o">:</span><span class="w"> </span><span class="kt">Layer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">layer</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">_</span><span class="si">${</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="si">}</span><span class="sb">.gif`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">saveFramesToGif</span><span class="p">(</span><span class="nx">layer</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaStart</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaStart</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaDuration</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="layer-saveframestoapng">
+<h2>Layer.saveFramesToApng()<a class="headerlink" href="#layer-saveframestoapng" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">saveFramesToApng(layer:</span> <span class="pre">AVLayer,</span> <span class="pre">startTime:</span> <span class="pre">number,</span> <span class="pre">endTime:</span> <span class="pre">number,</span> <span class="pre">file:</span> <span class="pre">File,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">downsample?:</span> <span class="pre">number;</span> <span class="pre">skip?:</span> <span class="pre">number;</span> <span class="pre">speed?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>レイヤーのある範囲の画をアニメーションpngとして保存する。</p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="o">:</span><span class="w"> </span><span class="kt">Layer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">layer</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">_</span><span class="si">${</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="si">}</span><span class="sb">.png`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">saveFramesToApng</span><span class="p">(</span><span class="nx">layer</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaStart</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaStart</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaDuration</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="layer-sampleimage">
+<h2>Layer.sampleImage()<a class="headerlink" href="#layer-sampleimage" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">sampleImage(layer:</span> <span class="pre">AVLayer,</span> <span class="pre">points:</span> <span class="pre">readonly</span> <span class="pre">Readonly&lt;Vector2&gt;[],</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">ColorA[];</span></code></p>
+<p>レイヤーのピクセルの値を取得する。</p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="o">:</span><span class="w"> </span><span class="kt">Layer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">layer</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">pixels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">sampleImage</span><span class="p">(</span><span class="nx">layer</span><span class="p">,</span><span class="w"> </span><span class="p">[[</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">height</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="nx">width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">]]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Layer</a><ul>
+<li><a class="reference internal" href="#layer-getactivelayer">Layer.getActiveLayer()</a></li>
+<li><a class="reference internal" href="#layer-getid">Layer.getID()</a></li>
+<li><a class="reference internal" href="#layer-getbounds">Layer.getBounds()</a></li>
+<li><a class="reference internal" href="#layer-getmaskbounds">Layer.getMaskBounds()</a></li>
+<li><a class="reference internal" href="#layer-getmoments">Layer.getMoments()</a></li>
+<li><a class="reference internal" href="#layer-saveframetopng">Layer.saveFrameToPng()</a></li>
+<li><a class="reference internal" href="#layer-saveframetojpg">Layer.saveFrameToJpg()</a></li>
+<li><a class="reference internal" href="#layer-saveframetohdr">Layer.saveFrameToHdr()</a></li>
+<li><a class="reference internal" href="#layer-saveframetoclipboard">Layer.saveFrameToClipboard()</a></li>
+<li><a class="reference internal" href="#layer-saveframestogif">Layer.saveFramesToGif()</a></li>
+<li><a class="reference internal" href="#layer-saveframestoapng">Layer.saveFramesToApng()</a></li>
+<li><a class="reference internal" href="#layer-sampleimage">Layer.sampleImage()</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../Comp/index.html"
+                          title="previous chapter">Comp</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../Effect/index.html"
+                          title="next chapter">Effect</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Effect/index.html" title="Effect"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Comp/index.html" title="Comp"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Layer</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Atarabi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    </div>
+  </body>
+</html>

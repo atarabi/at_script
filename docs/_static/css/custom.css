@@ -1,0 +1,5 @@
+div.body p, div.body dd, div.body li, div.body blockquote {
+    text-align: start;
+}
+
+.highlight .si { font-style: normal }

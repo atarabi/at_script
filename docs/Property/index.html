@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Property &#8212; @script 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
+    
+    <script src="../_static/documentation_options.js?v=672d6955"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Register" href="../Register/index.html" />
+    <link rel="prev" title="Effect" href="../Effect/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Register/index.html" title="Register"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Effect/index.html" title="Effect"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Property</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="property">
+<h1>Property<a class="headerlink" href="#property" title="Link to this heading">¶</a></h1>
+<p>多くがスクリプトにすでにあるメソッドの再実装となっているが、こちらを使用する場合、パラメータが <strong>hidden</strong> かどうかは気にしなくなくてもよい。</p>
+<section id="property-getparamdef">
+<h2>Property.getParamDef()<a class="headerlink" href="#property-getparamdef" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getParamDef(property:</span> <span class="pre">Property):</span> <span class="pre">ParamDef;</span></code></p>
+<p>エフェクトのパラメータの詳細を得ることが出来る。</p>
+</section>
+<section id="property-getpropertyparameters">
+<h2>Property.getPropertyParameters()<a class="headerlink" href="#property-getpropertyparameters" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getPropertyParameters(property:</span> <span class="pre">Property):</span> <span class="pre">string;</span></code></p>
+<p>内部的には、 <strong>Property.getParamDef()</strong> を呼び出しているだけ。ドロップダウンメニューのパラメータの文字列を取得する。 <strong>Dropdown Menu Control</strong> が追加され、それに対し <strong>Property.setPropertyParameters()</strong> も実装されたが、メニューの文字列が取得出来なかったため応用範囲も限られていた。</p>
+<p>参照: <a class="reference external" href="https://ae-scripting.docsforadobe.dev/properties/property.html?highlight=Property.setPropertyParameters()#property-setpropertyparameters">Property.setPropertyParameters()</a></p>
+</section>
+<section id="property-getvalue">
+<h2>Property.getValue()<a class="headerlink" href="#property-getvalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getValue(property:</span> <span class="pre">Property,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">preExpression?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">ValueType;</span></code></p>
+<p>マーカー、テキストドキュメントを扱えない以外はスクリプトと同等。 <strong>hidden</strong> 属性のパラメータにも適用できる。</p>
+</section>
+<section id="property-setvalue">
+<h2>Property.setValue()<a class="headerlink" href="#property-setvalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setValue(property:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">Readonly&lt;ValueType&gt;,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">key?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>マーカー、テキストドキュメントを扱えない以外はスクリプトと同等。 <strong>hidden</strong> 属性のパラメータにも適用できる。</p>
+</section>
+<section id="property-getvalueatkey">
+<h2>Property.getValueAtKey()<a class="headerlink" href="#property-getvalueatkey" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getValueAtKey(property:</span> <span class="pre">Property,</span> <span class="pre">ketIndex:</span> <span class="pre">number):</span> <span class="pre">ValueType;</span></code></p>
+<p>マーカー、テキストドキュメントを扱えない以外はスクリプトと同等。 <strong>hidden</strong> 属性のパラメータにも適用できる。</p>
+</section>
+<section id="property-setvalueatkey">
+<h2>Property.setValueAtKey()<a class="headerlink" href="#property-setvalueatkey" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setValueAtKey(property:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">Readonly&lt;ValueType&gt;,</span> <span class="pre">keyIndex:</span> <span class="pre">number):</span> <span class="pre">void;</span></code></p>
+<p>マーカー、テキストドキュメントを扱えない以外はスクリプトと同等。 <strong>hidden</strong> 属性のパラメータにも適用できる。</p>
+</section>
+<section id="property-getkeyparameters">
+<h2>Property.getKeyParameters()<a class="headerlink" href="#property-getkeyparameters" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getKeyParameters(property:</span> <span class="pre">Property,</span> <span class="pre">keyIndex:</span> <span class="pre">number):</span> <span class="pre">KeyParameters;</span></code></p>
+<p>スクリプトと同等。 <strong>hidden</strong> 属性のパラメータにも適用できる。</p>
+</section>
+<section id="property-setkeyparameters">
+<h2>Property.setKeyParameters()<a class="headerlink" href="#property-setkeyparameters" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setKeyParameters(property:</span> <span class="pre">Property,</span> <span class="pre">keyIndex:</span> <span class="pre">number,</span> <span class="pre">params:</span> <span class="pre">Readonly&lt;KeyParameters&gt;):</span> <span class="pre">void;</span></code></p>
+<p>スクリプトと同等。 <strong>hidden</strong> 属性のパラメータにも適用できる。</p>
+</section>
+<section id="property-ismodified">
+<h2>Property.isModified()<a class="headerlink" href="#property-ismodified" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">isModified(property:</span> <span class="pre">PropertyBase):</span> <span class="pre">boolean;</span></code></p>
+<p>値がデフォルト値から変わっているかどうかを取得する。</p>
+</section>
+<section id="property-ishidden">
+<h2>Property.isHidden()<a class="headerlink" href="#property-ishidden" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">isHidden(property:</span> <span class="pre">PropertyBase):</span> <span class="pre">boolean;</span></code></p>
+<p>パラメータが隠れているかどうかを調べる。</p>
+</section>
+<section id="property-sethidden">
+<h2>Property.setHidden()<a class="headerlink" href="#property-sethidden" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setHidden(property:</span> <span class="pre">PropertyBase,</span> <span class="pre">set:</span> <span class="pre">boolean):</span> <span class="pre">void;</span></code></p>
+<p>パラメータに <strong>hidden</strong> 属性を付加ないし除去する。あまり勝手にやるのは行儀が良くない。</p>
+</section>
+<section id="property-getexpression">
+<h2>Property.getExpression()<a class="headerlink" href="#property-getexpression" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getExpression(property:</span> <span class="pre">Property):</span> <span class="pre">string;</span></code></p>
+<p>エクスプレッションを取得する。 <strong>hidden</strong> 属性のパラメータにも適用できる。</p>
+</section>
+<section id="property-setexpression">
+<h2>Property.setExpression()<a class="headerlink" href="#property-setexpression" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setExpression(property:</span> <span class="pre">Property,</span> <span class="pre">expression:</span> <span class="pre">string):</span> <span class="pre">void;</span></code></p>
+<p>エクスプレッションを設定する。 <strong>hidden</strong> 属性のパラメータにも適用できる。</p>
+</section>
+<section id="property-userchangedparam">
+<h2>Property.userChangedParam()<a class="headerlink" href="#property-userchangedparam" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">userChangedParam(property:</span> <span class="pre">Property):</span> <span class="pre">void;</span></code></p>
+<p>対象のエフェクトのあるパラメータに対して、 <strong>PF_Cmd_USER_CHANGED_PARAM</strong> コマンドを発火させる。パラメータには <strong>PF_ParamFlag_SUPERVISE</strong> フラグが付されているものがあり（よくあるのはボタンやドロップダウンリストでプリセットを選択させる形式のもの <a class="footnote-reference brackets" href="#ucp1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> ）、このパラメータが変動した際に、イベントが発火するようになっている。そういったパラメータに対して、能動的に発火させる。</p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/effect-details/parameter-supervision.html?highlight=PF_Cmd_USER_CHANGED_PARAM#parameter-supervision">PF_Cmd_USER_CHANGED_PARAM</a>
+参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/effect-basics/PF_ParamDef.html?highlight=PF_ParamFlag_SUPERVISE#parameter-flags">PF_ParamFlag_SUPERVISE</a></p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="ucp1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>標準プラグインの <strong>Gradient Ramp</strong>, <strong>Tint</strong>, <strong>Detail-preserving Upscale</strong> などのボタンに対しては発火しなかった。</p>
+</aside>
+</aside>
+</section>
+<section id="property-clickbutton">
+<h2>Property.clickButton()<a class="headerlink" href="#property-clickbutton" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">clickButton(property:</span> <span class="pre">Property):</span> <span class="pre">void;</span></code></p>
+<p>内部的には、 <strong>Property.userChangedParam()</strong> に同じ。ボタンかどうか確認した後に発火させる。</p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="o">:</span><span class="w"> </span><span class="kt">Layer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ramp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">layer</span><span class="p">.</span><span class="nx">effects</span><span class="p">.</span><span class="nx">addProperty</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Property</a><ul>
+<li><a class="reference internal" href="#property-getparamdef">Property.getParamDef()</a></li>
+<li><a class="reference internal" href="#property-getpropertyparameters">Property.getPropertyParameters()</a></li>
+<li><a class="reference internal" href="#property-getvalue">Property.getValue()</a></li>
+<li><a class="reference internal" href="#property-setvalue">Property.setValue()</a></li>
+<li><a class="reference internal" href="#property-getvalueatkey">Property.getValueAtKey()</a></li>
+<li><a class="reference internal" href="#property-setvalueatkey">Property.setValueAtKey()</a></li>
+<li><a class="reference internal" href="#property-getkeyparameters">Property.getKeyParameters()</a></li>
+<li><a class="reference internal" href="#property-setkeyparameters">Property.setKeyParameters()</a></li>
+<li><a class="reference internal" href="#property-ismodified">Property.isModified()</a></li>
+<li><a class="reference internal" href="#property-ishidden">Property.isHidden()</a></li>
+<li><a class="reference internal" href="#property-sethidden">Property.setHidden()</a></li>
+<li><a class="reference internal" href="#property-getexpression">Property.getExpression()</a></li>
+<li><a class="reference internal" href="#property-setexpression">Property.setExpression()</a></li>
+<li><a class="reference internal" href="#property-userchangedparam">Property.userChangedParam()</a></li>
+<li><a class="reference internal" href="#property-clickbutton">Property.clickButton()</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../Effect/index.html"
+                          title="previous chapter">Effect</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../Register/index.html"
+                          title="next chapter">Register</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Register/index.html" title="Register"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Effect/index.html" title="Effect"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Property</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Atarabi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    </div>
+  </body>
+</html>

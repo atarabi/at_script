@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>README &#8212; @script 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
+    
+    <script src="../_static/documentation_options.js?v=672d6955"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="JSON" href="../JSON/index.html" />
+    <link rel="prev" title="@script" href="../index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../JSON/index.html" title="JSON"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="@script"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">README</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="readme">
+<h1>README<a class="headerlink" href="#readme" title="Link to this heading">¶</a></h1>
+<section id="summary">
+<span id="id1"></span><h2>概要<a class="headerlink" href="#summary" title="Link to this heading">¶</a></h2>
+<p>&#64;scriptは、スクリプトからAEGPのAPIに気軽にアクセスするために開発されたAfter Effectsプラグインである。</p>
+<p>開発背景は、 <a class="reference external" href="https://atarabi.hateblo.jp/entry/2023/09/02/211426">After Effectsのスクリプトの可能性を広げる。</a> に詳しい。</p>
+<p>このドキュメントは例示を含め、TypeScript環境を前提としているので、適宜調べてください。</p>
+</section>
+<section id="repository">
+<span id="id2"></span><h2>リポジトリ<a class="headerlink" href="#repository" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://github.com/atarabi/at_script/">https://github.com/atarabi/at_script/</a></p>
+</section>
+<section id="target">
+<span id="id3"></span><h2>対象<a class="headerlink" href="#target" title="Link to this heading">¶</a></h2>
+<p>Win, Mac</p>
+<p>CC2018-</p>
+</section>
+<section id="how-to">
+<span id="id4"></span><h2>導入方法<a class="headerlink" href="#how-to" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://github.com/atarabi/at_script/releases">Releases · atarabi/at_script</a> から <strong>&#64;script.zip</strong> をダウンロード。
+プラグインはプラグインのフォルダにコピー。Startup時にAPIを用いたい場合は、 <strong>!&#64;script_initializer.jsx</strong> をスクリプトのStartupのフォルダにコピー。</p>
+<p>自身でAPIを用いたスクリプトを開発したい場合は、リポジトリをクローンし、 <strong>script</strong> フォルダをコピーし作業フォルダにし、 <strong>src</strong> フォルダ内に適当にフォルダを作成し、その中でtsxという拡張子でスクリプトファイルを作っていけばよい。</p>
+<div class="line-block">
+<div class="line">script（適当にリネーム）</div>
+<div class="line">├── src</div>
+<div class="line">│   ├── MyScripts(適当に作成)</div>
+<div class="line">│   │ └──MyScript.tsx</div>
+<div class="line">│   ├── ScriptUI(削除して良い)</div>
+<div class="line">│   └── StartUP(削除して良い)</div>
+<div class="line">├── types</div>
+<div class="line">└── tsconfig.json</div>
+</div>
+</section>
+<section id="atarabi-version">
+<h2>Atarabi.version<a class="headerlink" href="#atarabi-version" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">version:</span> <span class="pre">string;</span></code></p>
+<p>0.1.0(2023/8/28)</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">README</a><ul>
+<li><a class="reference internal" href="#summary">概要</a></li>
+<li><a class="reference internal" href="#repository">リポジトリ</a></li>
+<li><a class="reference internal" href="#target">対象</a></li>
+<li><a class="reference internal" href="#how-to">導入方法</a></li>
+<li><a class="reference internal" href="#atarabi-version">Atarabi.version</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../index.html"
+                          title="previous chapter">&#64;script</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../JSON/index.html"
+                          title="next chapter">JSON</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../JSON/index.html" title="JSON"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="@script"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">README</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Atarabi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    </div>
+  </body>
+</html>
