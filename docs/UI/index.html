@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>UI &#8212; @script 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
+    
+    <script src="../_static/documentation_options.js?v=672d6955"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Clipboard" href="../Clipboard/index.html" />
+    <link rel="prev" title="Register" href="../Register/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Clipboard/index.html" title="Clipboard"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Register/index.html" title="Register"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">UI</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="ui">
+<h1>UI<a class="headerlink" href="#ui" title="Link to this heading">¶</a></h1>
+<section id="ui-showcontextmenu">
+<h2>UI.showContextMenu()<a class="headerlink" href="#ui-showcontextmenu" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">showContextMenu(items:</span> <span class="pre">{</span> <span class="pre">text:</span> <span class="pre">string;</span> <span class="pre">checked?:</span> <span class="pre">boolean;</span> <span class="pre">}[]):</span> <span class="pre">number;</span></code></p>
+<p>コンテクストメニューを表示する。選択した項目のindexの値が返ってくる。選択されなければ-1。</p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;AAA&#39;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="s1">&#39;BBB&#39;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="s1">&#39;CCC&#39;</span><span class="p">}];</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">showContextMenu</span><span class="p">(</span><span class="nx">items</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="ui-progress">
+<h2>UI.progress()<a class="headerlink" href="#ui-progress" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">progress(title:</span> <span class="pre">string,</span> <span class="pre">total:</span> <span class="pre">number,</span> <span class="pre">fn:</span> <span class="pre">ProgressFunc):</span> <span class="pre">void;</span></code></p>
+<p>PF_CreateNewAppProgressDialog(CC2014.1で追加されている)を用いて、プログレスバーを表示する。</p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/intro/whats-new.html?highlight=PF_CreateNewAppProgressDialog#what-s-new-in-cc-2014-1-13-1">PF_CreateNewAppProgressDialog</a>
+参照: <a class="reference external" href="https://community.adobe.com/t5/after-effects-discussions/pf-createnewappprogressdialog-how-to-use-it/td-p/7987142">PF_CreateNewAppProgressDialog - how to use it?</a></p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="c1">// コンポを大量に作る。</span>
+<span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">app</span><span class="p">.</span><span class="nx">beginUndoGroup</span><span class="p">(</span><span class="s1">&#39;Make Numerous Comps&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">progress</span><span class="p">(</span><span class="s1">&#39;Progress Example&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">500</span><span class="p">,</span><span class="w"> </span><span class="nx">ctx</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">addComp</span><span class="p">(</span><span class="sb">`Comp </span><span class="si">${</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// pass</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">app</span><span class="p">.</span><span class="nx">endUndoGroup</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">})();</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">UI</a><ul>
+<li><a class="reference internal" href="#ui-showcontextmenu">UI.showContextMenu()</a></li>
+<li><a class="reference internal" href="#ui-progress">UI.progress()</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../Register/index.html"
+                          title="previous chapter">Register</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../Clipboard/index.html"
+                          title="next chapter">Clipboard</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Clipboard/index.html" title="Clipboard"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Register/index.html" title="Register"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">UI</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Atarabi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    </div>
+  </body>
+</html>

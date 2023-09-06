@@ -15,4 +15,5 @@
    Effect/index
    Property/index
    Register/index
+   UI/index
    Clipboard/index
