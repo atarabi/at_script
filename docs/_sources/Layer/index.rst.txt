@@ -11,10 +11,16 @@ Layer.getActiveLayer()
 
 参照: `AEGP_GetActiveLayer <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetActiveLayer#aegp-layersuite9>`_
 
-.. code-block:: typescript
+.. tabs::
 
-    const layer = Atarabi.layer.getActiveLayer();
+    .. code-tab:: TypeScript
 
+        const layer = Atarabi.layer.getActiveLayer();
+
+    .. code-tab:: JavaScript
+
+        var layer = Atarabi.layer.getActiveLayer();
+	
 Layer.getID()
 ----------------
 
@@ -24,12 +30,21 @@ Layer.getID()
 
 参照: `Layer.id <https://ae-scripting.docsforadobe.dev/layers/layer.html#layer-id>`_
 
-.. code-block:: typescript
+.. tabs::
 
-    const layer = Atarabi.layer.getActiveLayer();
-    if (layer) {
-        alert(Atarabi.layer.getID(layer));
-    }
+    .. code-tab:: TypeScript
+
+        const layer = Atarabi.layer.getActiveLayer();
+        if (layer) {
+            alert(Atarabi.layer.getID(layer));
+        }
+
+    .. code-tab:: JavaScript
+
+        var layer = Atarabi.layer.getActiveLayer();
+        if (layer) {
+            alert(Atarabi.layer.getID(layer));
+        }
 
 Layer.getBounds()
 -------------------
@@ -38,15 +53,27 @@ Layer.getBounds()
 
 不透明の範囲を取得する。クロップしたいときに用いる。
 
-.. code-block:: typescript
+.. tabs::
 
-    const layer = Atarabi.layer.getActiveLayer();
-    const isAVLayer = (layer: Layer): layer is AVLayer => {
-        return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
-    };
-    if (layer && isAVLayer(layer)) {
-        const bounds = Atarabi.layer.getBounds(layer);
-    }
+    .. code-tab:: TypeScript
+
+        const layer = Atarabi.layer.getActiveLayer();
+        const isAVLayer = (layer: Layer): layer is AVLayer => {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            const bounds = Atarabi.layer.getBounds(layer);
+        }
+
+    .. code-tab:: JavaScript
+        
+        var layer = Atarabi.layer.getActiveLayer();
+        var isAVLayer = function (layer) {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            var bounds = Atarabi.layer.getBounds(layer);
+        }
 
 Layer.getMaskBounds()
 -----------------------
@@ -57,15 +84,27 @@ Layer.getMaskBounds()
 
 参照: `AEGP_GetLayerMaskedBounds <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetLayerMaskedBounds#aegp-layersuite9>`_
 
-.. code-block:: typescript
+.. tabs::
 
-    const layer = Atarabi.layer.getActiveLayer();
-    const isAVLayer = (layer: Layer): layer is AVLayer => {
-        return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
-    };
-    if (layer && isAVLayer(layer)) {
-        const bounds = Atarabi.layer.getMaskBounds(layer);
-    }
+    .. code-tab:: TypeScript
+
+        const layer = Atarabi.layer.getActiveLayer();
+        const isAVLayer = (layer: Layer): layer is AVLayer => {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            const bounds = Atarabi.layer.getMaskBounds(layer);
+        }
+
+    .. code-tab:: JavaScript
+	
+        var layer = Atarabi.layer.getActiveLayer();
+        var isAVLayer = function (layer) {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            var bounds = Atarabi.layer.getMaskBounds(layer);
+        }
 
 Layer.getMoments()
 -----------------------
@@ -76,15 +115,27 @@ Layer.getMoments()
 
 参照: `cv::moments <https://docs.opencv.org/4.8.0/d3/dc0/group__imgproc__shape.html#ga556a180f43cab22649c23ada36a8a139>`_
 
-.. code-block:: typescript
+.. tabs::
 
-    const layer = Atarabi.layer.getActiveLayer();
-    const isAVLayer = (layer: Layer): layer is AVLayer => {
-        return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
-    };
-    if (layer && isAVLayer(layer)) {
-        const moments = Atarabi.layer.getMoments(layer);
-    }
+    .. code-tab:: TypeScript
+
+        const layer = Atarabi.layer.getActiveLayer();
+        const isAVLayer = (layer: Layer): layer is AVLayer => {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            const moments = Atarabi.layer.getMoments(layer);
+        }
+
+    .. code-tab:: JavaScript
+	
+        var layer = Atarabi.layer.getActiveLayer();
+        var isAVLayer = function (layer) {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            var moments = Atarabi.layer.getMoments(layer);
+        }
 
 Layer.saveFrameToPng()
 ------------------------
@@ -93,16 +144,29 @@ Layer.saveFrameToPng()
 
 レイヤーの画をpngで保存する。
 
-.. code-block:: typescript
+.. tabs::
 
-    const layer = Atarabi.layer.getActiveLayer();
-    const isAVLayer = (layer: Layer): layer is AVLayer => {
-        return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
-    };
-    if (layer && isAVLayer(layer)) {
-        const file = new File(`${Folder.desktop.absoluteURI}/${layer.name}_${Date.now()}.png`);
-        Atarabi.layer.saveFrameToPng(layer, file);
-    }
+    .. code-tab:: TypeScript
+
+        const layer = Atarabi.layer.getActiveLayer();
+        const isAVLayer = (layer: Layer): layer is AVLayer => {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            const file = new File(`${Folder.desktop.absoluteURI}/${layer.name}_${Date.now()}.png`);
+            Atarabi.layer.saveFrameToPng(layer, file);
+        }
+
+    .. code-tab:: JavaScript
+	
+        var layer = Atarabi.layer.getActiveLayer();
+        var isAVLayer = function (layer) {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            var file = new File("".concat(Folder.desktop.absoluteURI, "/").concat(layer.name, "_").concat(Date.now(), ".png"));
+            Atarabi.layer.saveFrameToPng(layer, file);
+        }
 
 Layer.saveFrameToJpg()
 ------------------------
@@ -111,16 +175,29 @@ Layer.saveFrameToJpg()
 
 レイヤーの画をjpegで保存する。
 
-.. code-block:: typescript
+.. tabs::
 
-    const layer = Atarabi.layer.getActiveLayer();
-    const isAVLayer = (layer: Layer): layer is AVLayer => {
-        return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
-    };
-    if (layer && isAVLayer(layer)) {
-        const file = new File(`${Folder.desktop.absoluteURI}/${layer.name}_${Date.now()}.jpg`);
-        Atarabi.layer.saveFrameToJpg(layer, file);
-    }
+    .. code-tab:: TypeScript
+
+        const layer = Atarabi.layer.getActiveLayer();
+        const isAVLayer = (layer: Layer): layer is AVLayer => {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            const file = new File(`${Folder.desktop.absoluteURI}/${layer.name}_${Date.now()}.jpg`);
+            Atarabi.layer.saveFrameToJpg(layer, file);
+        }
+
+    .. code-tab:: JavaScript
+
+        var layer = Atarabi.layer.getActiveLayer();
+        var isAVLayer = function (layer) {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            var file = new File("".concat(Folder.desktop.absoluteURI, "/").concat(layer.name, "_").concat(Date.now(), ".jpg"));
+            Atarabi.layer.saveFrameToJpg(layer, file);
+        }
 
 Layer.saveFrameToHdr()
 ------------------------
@@ -129,16 +206,29 @@ Layer.saveFrameToHdr()
 
 レイヤーの画をhdrで保存する。
 
-.. code-block:: typescript
+.. tabs::
 
-    const layer = Atarabi.layer.getActiveLayer();
-    const isAVLayer = (layer: Layer): layer is AVLayer => {
-        return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
-    };
-    if (layer && isAVLayer(layer)) {
-        const file = new File(`${Folder.desktop.absoluteURI}/${layer.name}_${Date.now()}.hdr`);
-        Atarabi.layer.saveFrameToHdr(layer, file);
-    }
+    .. code-tab:: TypeScript
+
+        const layer = Atarabi.layer.getActiveLayer();
+        const isAVLayer = (layer: Layer): layer is AVLayer => {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            const file = new File(`${Folder.desktop.absoluteURI}/${layer.name}_${Date.now()}.hdr`);
+            Atarabi.layer.saveFrameToHdr(layer, file);
+        }
+
+    .. code-tab:: JavaScript
+
+        var layer = Atarabi.layer.getActiveLayer();
+        var isAVLayer = function (layer) {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            var file = new File("".concat(Folder.desktop.absoluteURI, "/").concat(layer.name, "_").concat(Date.now(), ".hdr"));
+            Atarabi.layer.saveFrameToHdr(layer, file);
+        }
 
 Layer.saveFrameToClipboard()
 ------------------------------
@@ -147,16 +237,28 @@ Layer.saveFrameToClipboard()
 
 レイヤーの画をクリップボードに保存する。
 
-.. code-block:: typescript
+.. tabs::
 
-    const layer = Atarabi.layer.getActiveLayer();
-    const isAVLayer = (layer: Layer): layer is AVLayer => {
-        return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
-    };
-    if (layer && isAVLayer(layer)) {
-        Atarabi.layer.saveFrameToClipboard(layer);
-    }
+    .. code-tab:: TypeScript
 
+        const layer = Atarabi.layer.getActiveLayer();
+        const isAVLayer = (layer: Layer): layer is AVLayer => {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            Atarabi.layer.saveFrameToClipboard(layer);
+        }
+
+    .. code-tab:: JavaScript
+	
+        var layer = Atarabi.layer.getActiveLayer();
+        var isAVLayer = function (layer) {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            Atarabi.layer.saveFrameToClipboard(layer);
+        }
+    
 Layer.saveFramesToGif()
 ------------------------------
 
@@ -164,16 +266,31 @@ Layer.saveFramesToGif()
 
 レイヤーのある範囲の画をアニメーションgifとして保存する。
 
-.. code-block:: typescript
+.. tabs::
 
-    const layer = Atarabi.layer.getActiveLayer();
-    const isAVLayer = (layer: Layer): layer is AVLayer => {
-        return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
-    };
-    if (layer && isAVLayer(layer)) {
-        const file = new File(`${Folder.desktop.absoluteURI}/${layer.name}_${Date.now()}.gif`);
-        Atarabi.layer.saveFramesToGif(layer, comp.workAreaStart, comp.workAreaStart + comp.workAreaDuration, file);
-    }
+    .. code-tab:: TypeScript
+
+        const layer = Atarabi.layer.getActiveLayer();
+        const isAVLayer = (layer: Layer): layer is AVLayer => {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            const comp = layer.containingComp;
+            const file = new File(`${Folder.desktop.absoluteURI}/${layer.name}_${Date.now()}.gif`);
+            Atarabi.layer.saveFramesToGif(layer, comp.workAreaStart, comp.workAreaStart + comp.workAreaDuration, file);
+        }
+
+    .. code-tab:: JavaScript
+	
+        var layer = Atarabi.layer.getActiveLayer();
+        var isAVLayer = function (layer) {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            var comp = layer.containingComp;
+            var file = new File("".concat(Folder.desktop.absoluteURI, "/").concat(layer.name, "_").concat(Date.now(), ".gif"));
+            Atarabi.layer.saveFramesToGif(layer, comp.workAreaStart, comp.workAreaStart + comp.workAreaDuration, file);
+        }
 
 Layer.saveFramesToApng()
 ------------------------------
@@ -182,16 +299,31 @@ Layer.saveFramesToApng()
 
 レイヤーのある範囲の画をアニメーションpngとして保存する。
 
-.. code-block:: typescript
+.. tabs::
 
-    const layer = Atarabi.layer.getActiveLayer();
-    const isAVLayer = (layer: Layer): layer is AVLayer => {
-        return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
-    };
-    if (layer && isAVLayer(layer)) {
-        const file = new File(`${Folder.desktop.absoluteURI}/${layer.name}_${Date.now()}.png`);
-        Atarabi.layer.saveFramesToApng(layer, comp.workAreaStart, comp.workAreaStart + comp.workAreaDuration, file);
-    }
+    .. code-tab:: TypeScript
+
+        const layer = Atarabi.layer.getActiveLayer();
+        const isAVLayer = (layer: Layer): layer is AVLayer => {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            const comp = layer.containingComp;
+            const file = new File(`${Folder.desktop.absoluteURI}/${layer.name}_${Date.now()}.png`);
+            Atarabi.layer.saveFramesToApng(layer, comp.workAreaStart, comp.workAreaStart + comp.workAreaDuration, file);
+        }
+
+    .. code-tab:: JavaScript
+
+        var layer = Atarabi.layer.getActiveLayer();
+        var isAVLayer = function (layer) {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            var comp = layer.containingComp;
+            var file = new File("".concat(Folder.desktop.absoluteURI, "/").concat(layer.name, "_").concat(Date.now(), ".png"));
+            Atarabi.layer.saveFramesToApng(layer, comp.workAreaStart, comp.workAreaStart + comp.workAreaDuration, file);
+        }
 
 Layer.sampleImage()
 ------------------------------
@@ -200,13 +332,26 @@ Layer.sampleImage()
 
 レイヤーのピクセルの値を取得する。
 
-.. code-block:: typescript
+.. tabs::
 
-    const layer = Atarabi.layer.getActiveLayer();
-    const isAVLayer = (layer: Layer): layer is AVLayer => {
-        return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
-    };
-    if (layer && isAVLayer(layer)) {
-        const { width, height } = layer;
-        const pixels = Atarabi.layer.sampleImage(layer, [[0, 0], [0.5 * width, 0.5 * height], [width - 1, height - 1]]);
-    }
+    .. code-tab:: TypeScript
+
+        const layer = Atarabi.layer.getActiveLayer();
+        const isAVLayer = (layer: Layer): layer is AVLayer => {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            const { width, height } = layer;
+            const pixels = Atarabi.layer.sampleImage(layer, [[0, 0], [0.5 * width, 0.5 * height], [width - 1, height - 1]]);
+        }
+
+    .. code-tab:: JavaScript
+
+        var layer = Atarabi.layer.getActiveLayer();
+        var isAVLayer = function (layer) {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            var width = layer.width, height = layer.height;
+            var pixels = Atarabi.layer.sampleImage(layer, [[0, 0], [0.5 * width, 0.5 * height], [width - 1, height - 1]]);
+        }

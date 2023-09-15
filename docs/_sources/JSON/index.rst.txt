@@ -9,9 +9,15 @@ JSON.stringify()
 
 オブジェクト、値をJSON文字列にする。中身はjson2.js。
 
-.. code-block:: typescript
+.. tabs::
 
-    const dataStr = Atarabi.JSON.stringify({index: 1, time: 2.0});
+    .. code-tab:: TypeScript
+
+        const dataStr = Atarabi.JSON.stringify({index: 1, time: 2.0});
+
+    .. code-tab:: JavaScript
+
+        var dataStr = Atarabi.JSON.stringify({ index: 1, time: 2.0 });
 
 JSON.parse()
 ------------
@@ -20,9 +26,16 @@ JSON.parse()
 
 JSON文字列をオブジェクト、値に変換する。中身はjson2.js。
 
-.. code-block:: typescript
+.. tabs::
 
-    const data = Atarabi.JSON.parse('{"index":1,"time":2}');
+    .. code-tab:: TypeScript
+
+        const data = Atarabi.JSON.parse('{"index":1,"time":2}');
+
+
+    .. code-tab:: JavaScript
+
+        var data = Atarabi.JSON.parse('{"index":1,"time":2}');
 
 JSON.isValid()
 --------------
@@ -31,9 +44,15 @@ JSON.isValid()
 
 文字列が有効なJSON文字列か確かめる。C++側で、 `JSON for Modern C++ <https://github.com/nlohmann/json>`_ というライブラリを用いてチェックしている。
 
-.. code-block:: typescript
+.. tabs::
 
-    const isJSON = Atarabi.JSON.isValid('invalid json');
+    .. code-tab:: TypeScript
+
+        const isJSON = Atarabi.JSON.isValid('invalid json');
+
+    .. code-tab:: JavaScript
+
+        var isJSON = Atarabi.JSON.isValid('invalid json');
 
 JSON.isValidFile()
 ------------------
@@ -42,10 +61,17 @@ JSON.isValidFile()
 
 ファイルが有効なJSONファイルか確かめる。C++側で、 `JSON for Modern C++ <https://github.com/nlohmann/json>`_ というライブラリを用いてチェックしている。
 
-.. code-block:: typescript
+.. tabs::
 
-    const file = new File('test.json');
-    const isJSONFile = Atarabi.JSON.isValidFile(file);
+    .. code-tab:: TypeScript
+
+        const file = new File('test.json');
+        const isJSONFile = Atarabi.JSON.isValidFile(file);
+
+    .. code-tab:: JavaScript
+
+        var file = new File('test.json');
+        var isJSONFile = Atarabi.JSON.isValidFile(file);
 
 JSON.parseFast()
 ----------------
@@ -54,6 +80,12 @@ JSON.parseFast()
 
 JSON.isValid()で有効なJSON文字列かを確かめた後、eval()を用いて、オブジェクト、値に変換する。ExtendScript実行環境下だと、特に複雑なJSON文字列の場合、処理に時間が掛かることがある。そこで、C++側でチェックした後にeval()を用いることで、高速化を図っている。
 
-.. code-block:: typescript
+.. tabs::
 
-    const data = Atarabi.JSON.parseFast('{"very":true,"complicated":true}');
+    .. code-tab:: TypeScript
+
+        const data = Atarabi.JSON.parseFast('{"very":true,"complicated":true}');
+
+    .. code-tab:: JavaScript
+
+        var data = Atarabi.JSON.parseFast('{"very":true,"complicated":true}');

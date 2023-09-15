@@ -11,14 +11,29 @@ Effect.updateParamUI()
 
 参照: `PF_Cmd_UPDATE_PARAMS_UI <https://ae-plugins.docsforadobe.dev/effect-details/parameter-supervision.html?highlight=PF_Cmd_UPDATE_PARAMS_UI#updating-parameter-ui>`_
 
-.. code-block:: typescript
+.. tabs::
 
-    const comp = Atarabi.comp.getMostRecentlyUsedComp();
-    if (comp) {
-        const properties = comp.selectedProperties;
-        for (const property of properties) {
-            if (property instanceof PropertyGroup && property.isEffect) {
-                Atarabi.effect.updateParamUI(property);
+    .. code-tab:: TypeScript
+
+        const comp = Atarabi.comp.getMostRecentlyUsedComp();
+        if (comp) {
+            const properties = comp.selectedProperties;
+            for (const property of properties) {
+                if (property instanceof PropertyGroup && property.isEffect) {
+                    Atarabi.effect.updateParamUI(property);
+                }
             }
         }
-    }
+
+    .. code-tab:: JavaScript
+	
+        var comp = Atarabi.comp.getMostRecentlyUsedComp();
+        if (comp) {
+            var properties = comp.selectedProperties;
+            for (var _i = 0, properties_1 = properties; _i < properties_1.length; _i++) {
+                var property = properties_1[_i];
+                if (property instanceof PropertyGroup && property.isEffect) {
+                    Atarabi.effect.updateParamUI(property);
+                }
+            }
+        }

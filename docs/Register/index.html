@@ -5,14 +5,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Register &#8212; @script 0.1.0 documentation</title>
+    <title>Register &#8212; @script 0.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
+    <link rel="stylesheet" type="text/css" href="../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../_static/documentation_options.js?v=672d6955"></script>
+    <script src="../_static/documentation_options.js?v=f552b7be"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/code-tabs.js?v=c983d12e"></script>
     
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -32,7 +34,7 @@
         <li class="right" >
           <a href="../Property/index.html" title="Property"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Register</a></li> 
       </ul>
     </div>  
@@ -49,7 +51,12 @@
 <p><code class="docutils literal notranslate"><span class="pre">insertCommand(menu:</span> <span class="pre">Menu,</span> <span class="pre">order:</span> <span class="pre">Order,</span> <span class="pre">name:</span> <span class="pre">string,</span> <span class="pre">fn:</span> <span class="pre">CommandFunc,</span> <span class="pre">enabledWhen?:</span> <span class="pre">EnabledWhen):</span> <span class="pre">Uuid;</span></code></p>
 <p>新たなコマンドを作る。</p>
 <p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_InsertMenuCommand#aegp-commandsuite1">AEGP_InsertMenuCommand</a></p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">register</span><span class="p">.</span><span class="nx">insertCommand</span><span class="p">(</span><span class="s1">&#39;Layer&#39;</span><span class="w"> </span><span class="cm">/* Layerメニューに挿入する */</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;AtTop&#39;</span><span class="w"> </span><span class="cm">/* 一番上に挿入する */</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Set Null&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">comp</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">CompItem</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
@@ -72,13 +79,44 @@
 <span class="p">})();</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">register</span><span class="p">.</span><span class="nx">insertCommand</span><span class="p">(</span><span class="s1">&#39;Layer&#39;</span><span class="w"> </span><span class="cm">/* Layerメニューに挿入する */</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;AtTop&#39;</span><span class="w"> </span><span class="cm">/* 一番上に挿入する */</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Set Null&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">comp</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">CompItem</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">app</span><span class="p">.</span><span class="nx">beginUndoGroup</span><span class="p">(</span><span class="s1">&#39;Set Null&#39;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedLayers</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">_a</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">var</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_a</span><span class="p">[</span><span class="nx">_i</span><span class="p">];</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">setNull</span><span class="p">(</span><span class="nx">layer</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// pass</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">app</span><span class="p">.</span><span class="nx">endUndoGroup</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="s1">&#39;LayerSelected&#39;</span><span class="p">);</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div></section>
 <section id="register-hookcommand">
 <h2>Register.hookCommand()<a class="headerlink" href="#register-hookcommand" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">hookCommand(commandId:</span> <span class="pre">number,</span> <span class="pre">fn:</span> <span class="pre">HookCoomandFunc):</span> <span class="pre">Uuid;</span></code></p>
 <p>既存のコマンドをフックする。</p>
 <p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_RegisterCommandHook#aegp-registersuites5">AEGP_RegisterCommandHook</a></p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="cm">/* レイヤーを複製をした回数を数える */</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="cm">/* レイヤーを複製をした回数を数える */</span>
 <span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
 <span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">register</span><span class="p">.</span><span class="nx">hookCommand</span><span class="p">(</span><span class="mf">2080</span><span class="w"> </span><span class="cm">/* Duplicate */</span><span class="p">,</span><span class="w"> </span><span class="nx">ctx</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
@@ -90,12 +128,30 @@
 <span class="p">})();</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="cm">/* レイヤーを複製をした回数を数える */</span>
+<span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">register</span><span class="p">.</span><span class="nx">hookCommand</span><span class="p">(</span><span class="mf">2080</span><span class="w"> </span><span class="cm">/* Duplicate */</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">fallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// デフォルトの処理にフォールバックする。</span>
+<span class="w">        </span><span class="c1">// ctx.stopIteration = true; 同じコマンドに複数個フックしている場合に、後続の呼び出しを止める。</span>
+<span class="w">        </span><span class="nx">counter</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">$</span><span class="p">.</span><span class="nx">writeln</span><span class="p">(</span><span class="s2">&quot;Duplicate: &quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">counter</span><span class="p">));</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div></section>
 <section id="register-unhookcommand">
 <h2>Register.unhookCommand()<a class="headerlink" href="#register-unhookcommand" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">unhookCommand(commandId:</span> <span class="pre">number,</span> <span class="pre">uuid:</span> <span class="pre">Uuid):</span> <span class="pre">boolean;</span></code></p>
 <p><strong>Register.hookCommand()</strong> で実行したフックを解除する。</p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">uuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">register</span><span class="p">.</span><span class="nx">hookCommand</span><span class="p">(</span><span class="mf">2080</span><span class="w"> </span><span class="cm">/* Duplicate */</span><span class="p">,</span><span class="w"> </span><span class="nx">ctx</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// do nothing</span>
 <span class="w">    </span><span class="p">});</span>
@@ -103,7 +159,16 @@
 <span class="p">})();</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">uuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">register</span><span class="p">.</span><span class="nx">hookCommand</span><span class="p">(</span><span class="mf">2080</span><span class="w"> </span><span class="cm">/* Duplicate */</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// do nothing</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">register</span><span class="p">.</span><span class="nx">unhookCommand</span><span class="p">(</span><span class="mf">2080</span><span class="p">,</span><span class="w"> </span><span class="nx">uuid</span><span class="p">);</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div></section>
 <section id="register-importflavor">
 <h2>Register.importFlavor()<a class="headerlink" href="#register-importflavor" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">importFlavor(extension:</span> <span class="pre">string,</span> <span class="pre">fn:</span> <span class="pre">ImportFlavorFunc):</span> <span class="pre">void;</span></code></p>
@@ -123,9 +188,12 @@
 </div>
 </div>
 <p>この場合、1920x1080のサイズの30fps、10secのコンポを作り、赤の平面を敷くという意味になる。</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">zjf_importer.tsx</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">register</span><span class="p">.</span><span class="nx">importFlavor</span><span class="p">(</span><span class="s1">&#39;zjf&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">({</span><span class="nx">path</span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
 <span class="w">        </span><span class="nx">file</span><span class="p">.</span><span class="nx">encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;utf-8&#39;</span><span class="p">;</span>
@@ -151,8 +219,34 @@
 <span class="p">})();</span>
 </pre></div>
 </div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">register</span><span class="p">.</span><span class="nx">importFlavor</span><span class="p">(</span><span class="s1">&#39;zjf&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">_a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_a</span><span class="p">.</span><span class="nx">path</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">file</span><span class="p">.</span><span class="nx">encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;utf-8&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">file</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">read</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">file</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">body</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">compSpec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lines</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;\s&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">compSpec</span><span class="p">[</span><span class="mf">0</span><span class="p">],</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">compSpec</span><span class="p">[</span><span class="mf">1</span><span class="p">],</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">frameRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">parseFloat</span><span class="p">(</span><span class="nx">compSpec</span><span class="p">[</span><span class="mf">2</span><span class="p">]);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">parseFloat</span><span class="p">(</span><span class="nx">compSpec</span><span class="p">[</span><span class="mf">3</span><span class="p">]);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">solidSpec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lines</span><span class="p">[</span><span class="mf">1</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;\s&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">red</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">parseFloat</span><span class="p">(</span><span class="nx">solidSpec</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">green</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">parseFloat</span><span class="p">(</span><span class="nx">solidSpec</span><span class="p">[</span><span class="mf">1</span><span class="p">]);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">blue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">parseFloat</span><span class="p">(</span><span class="nx">solidSpec</span><span class="p">[</span><span class="mf">2</span><span class="p">]);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">addComp</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">displayName</span><span class="p">),</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">frameRate</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">solid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">layers</span><span class="p">.</span><span class="nx">addSolid</span><span class="p">([</span><span class="nx">red</span><span class="p">,</span><span class="w"> </span><span class="nx">green</span><span class="p">,</span><span class="w"> </span><span class="nx">blue</span><span class="p">],</span><span class="w"> </span><span class="s1">&#39;Solid&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">})();</span>
+</pre></div>
 </div>
-</section>
+</div></div></section>
 </section>
 
 
@@ -211,13 +305,13 @@
         <li class="right" >
           <a href="../Property/index.html" title="Property"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Register</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2023, Atarabi.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

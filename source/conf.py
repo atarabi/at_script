@@ -9,12 +9,12 @@
 project = '@script'
 copyright = '2023, Atarabi'
 author = 'Atarabi'
-release = '0.1.0'
+release = '0.2.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinx.ext.githubpages']
+extensions = ['sphinx.ext.githubpages', 'sphinx_code_tabs']
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']

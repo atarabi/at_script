@@ -5,14 +5,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>UI &#8212; @script 0.1.0 documentation</title>
+    <title>UI &#8212; @script 0.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
+    <link rel="stylesheet" type="text/css" href="../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../_static/documentation_options.js?v=672d6955"></script>
+    <script src="../_static/documentation_options.js?v=f552b7be"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/code-tabs.js?v=c983d12e"></script>
     
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -32,7 +34,7 @@
         <li class="right" >
           <a href="../Register/index.html" title="Register"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">UI</a></li> 
       </ul>
     </div>  
@@ -48,18 +50,33 @@
 <h2>UI.showContextMenu()<a class="headerlink" href="#ui-showcontextmenu" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">showContextMenu(items:</span> <span class="pre">{</span> <span class="pre">text:</span> <span class="pre">string;</span> <span class="pre">checked?:</span> <span class="pre">boolean;</span> <span class="pre">}[]):</span> <span class="pre">number;</span></code></p>
 <p>コンテクストメニューを表示する。選択した項目のindexの値が返ってくる。選択されなければ-1。</p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;AAA&#39;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="s1">&#39;BBB&#39;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="s1">&#39;CCC&#39;</span><span class="p">}];</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;AAA&#39;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="s1">&#39;BBB&#39;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="s1">&#39;CCC&#39;</span><span class="p">}];</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">showContextMenu</span><span class="p">(</span><span class="nx">items</span><span class="p">);</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;AAA&#39;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;BBB&#39;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;CCC&#39;</span><span class="w"> </span><span class="p">}];</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">showContextMenu</span><span class="p">(</span><span class="nx">items</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div></section>
 <section id="ui-progress">
 <h2>UI.progress()<a class="headerlink" href="#ui-progress" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">progress(title:</span> <span class="pre">string,</span> <span class="pre">total:</span> <span class="pre">number,</span> <span class="pre">fn:</span> <span class="pre">ProgressFunc):</span> <span class="pre">void;</span></code></p>
 <p>PF_CreateNewAppProgressDialog(CC2014.1で追加されている)を用いて、プログレスバーを表示する。</p>
 <p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/intro/whats-new.html?highlight=PF_CreateNewAppProgressDialog#what-s-new-in-cc-2014-1-13-1">PF_CreateNewAppProgressDialog</a>
 参照: <a class="reference external" href="https://community.adobe.com/t5/after-effects-discussions/pf-createnewappprogressdialog-how-to-use-it/td-p/7987142">PF_CreateNewAppProgressDialog - how to use it?</a></p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="c1">// コンポを大量に作る。</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="c1">// コンポを大量に作る。</span>
 <span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
@@ -76,7 +93,25 @@
 <span class="p">})();</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="c1">// コンポを大量に作る。</span>
+<span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">app</span><span class="p">.</span><span class="nx">beginUndoGroup</span><span class="p">(</span><span class="s1">&#39;Make Numerous Comps&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">progress</span><span class="p">(</span><span class="s1">&#39;Progress Example&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">500</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">addComp</span><span class="p">(</span><span class="s2">&quot;Comp &quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">),</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// pass</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">app</span><span class="p">.</span><span class="nx">endUndoGroup</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div></section>
 </section>
 
 
@@ -133,13 +168,13 @@
         <li class="right" >
           <a href="../Register/index.html" title="Register"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">UI</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2023, Atarabi.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

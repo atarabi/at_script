@@ -115,14 +115,3 @@ Property.clickButton()
 ``clickButton(property: Property): void;``
 
 内部的には、 **Property.userChangedParam()** に同じ。ボタンかどうか確認した後に発火させる。
-
-
-.. code-block:: typescript
-
-    const layer = Atarabi.layer.getActiveLayer();
-    const isAVLayer = (layer: Layer): layer is AVLayer => {
-        return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
-    };
-    if (layer && isAVLayer(layer)) {
-        const ramp = layer.effects.addProperty('');
-    }

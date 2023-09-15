@@ -5,14 +5,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Property &#8212; @script 0.1.0 documentation</title>
+    <title>Property &#8212; @script 0.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
+    <link rel="stylesheet" type="text/css" href="../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../_static/documentation_options.js?v=672d6955"></script>
+    <script src="../_static/documentation_options.js?v=f552b7be"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/code-tabs.js?v=c983d12e"></script>
     
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -32,7 +34,7 @@
         <li class="right" >
           <a href="../Effect/index.html" title="Effect"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Property</a></li> 
       </ul>
     </div>  
@@ -128,15 +130,6 @@
 <h2>Property.clickButton()<a class="headerlink" href="#property-clickbutton" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">clickButton(property:</span> <span class="pre">Property):</span> <span class="pre">void;</span></code></p>
 <p>内部的には、 <strong>Property.userChangedParam()</strong> に同じ。ボタンかどうか確認した後に発火させる。</p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">layer</span><span class="p">.</span><span class="nx">getActiveLayer</span><span class="p">();</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="o">:</span><span class="w"> </span><span class="kt">Layer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="p">;</span>
-<span class="p">};</span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">layer</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ramp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">layer</span><span class="p">.</span><span class="nx">effects</span><span class="p">.</span><span class="nx">addProperty</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
 </section>
 </section>
 
@@ -207,13 +200,13 @@
         <li class="right" >
           <a href="../Effect/index.html" title="Effect"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Property</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2023, Atarabi.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

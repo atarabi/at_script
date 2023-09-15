@@ -5,18 +5,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Clipboard &#8212; @script 0.1.0 documentation</title>
+    <title>Clipboard &#8212; @script 0.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
+    <link rel="stylesheet" type="text/css" href="../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../_static/documentation_options.js?v=672d6955"></script>
+    <script src="../_static/documentation_options.js?v=f552b7be"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/code-tabs.js?v=c983d12e"></script>
     
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Keyboard" href="../Keyboard/index.html" />
     <link rel="prev" title="UI" href="../UI/index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -26,9 +29,12 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../Keyboard/index.html" title="Keyboard"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="../UI/index.html" title="UI"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Clipboard</a></li> 
       </ul>
     </div>  
@@ -44,18 +50,36 @@
 <h2>Clipboard.getText()<a class="headerlink" href="#clipboard-gettext" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">getText():</span> <span class="pre">string;</span></code></p>
 <p>クリップボードにある文字列を取得する。</p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">getText</span><span class="p">();</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">getText</span><span class="p">();</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">getText</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div></section>
 <section id="clipboard-settext">
 <h2>Clipboard.setText()<a class="headerlink" href="#clipboard-settext" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">setText(text:</span> <span class="pre">string):</span> <span class="pre">void;</span></code></p>
 <p>クリップボードに文字列を設定する。</p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;wiggle(3, 100)&#39;</span><span class="p">);</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;wiggle(3, 100)&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;wiggle(3, 100)&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div></section>
 </section>
 
 
@@ -81,6 +105,11 @@
     <p class="topless"><a href="../UI/index.html"
                           title="previous chapter">UI</a></p>
   </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../Keyboard/index.html"
+                          title="next chapter">Keyboard</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -102,15 +131,18 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="../Keyboard/index.html" title="Keyboard"
+             >next</a> |</li>
+        <li class="right" >
           <a href="../UI/index.html" title="UI"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Clipboard</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2023, Atarabi.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

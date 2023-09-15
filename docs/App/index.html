@@ -5,14 +5,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>App &#8212; @script 0.1.0 documentation</title>
+    <title>App &#8212; @script 0.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
+    <link rel="stylesheet" type="text/css" href="../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../_static/documentation_options.js?v=672d6955"></script>
+    <script src="../_static/documentation_options.js?v=f552b7be"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/code-tabs.js?v=c983d12e"></script>
     
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -32,7 +34,7 @@
         <li class="right" >
           <a href="../JSON/index.html" title="JSON"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">App</a></li> 
       </ul>
     </div>  
@@ -49,33 +51,187 @@
 <p><code class="docutils literal notranslate"><span class="pre">colorPicker(initialColor:</span> <span class="pre">Color):</span> <span class="pre">Color</span> <span class="pre">|</span> <span class="pre">null;</span></code></p>
 <p>カラーピッカーを呼び出します。キャンセルされた場合は <strong>null</strong> が返ります。</p>
 <p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_AppColorPickerDialog#pf-appsuite">PF_AppColorPickerDialog</a></p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">yourFavoriteColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">colorPicker</span><span class="p">([</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">]);</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">yourFavoriteColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">colorPicker</span><span class="p">([</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">]);</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">yourFavoriteColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">colorPicker</span><span class="p">([</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div></div></section>
 <section id="app-getcolor">
 <h2>App.getColor()<a class="headerlink" href="#app-getcolor" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">getColor(colorType:</span> <span class="pre">ColorType):</span> <span class="pre">Color</span> <span class="pre">|</span> <span class="pre">null;</span></code></p>
 <p>AEのUIの各要素の色を取得する。</p>
 <p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_AppGetColor#pf-appsuite">PF_AppGetColor</a></p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">buttonTextColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">getColor</span><span class="p">(</span><span class="s1">&#39;Button Text&#39;</span><span class="p">);</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">buttonTextColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">getColor</span><span class="p">(</span><span class="s1">&#39;Button Text&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">buttonTextColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">getColor</span><span class="p">(</span><span class="s1">&#39;Button Text&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div></section>
 <section id="app-getbackgroundcolor">
 <h2>App.getBackgroundColor()<a class="headerlink" href="#app-getbackgroundcolor" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">getBackgroundColor():</span> <span class="pre">Color;</span></code></p>
 <p>AEの背景色を取得する。</p>
 <p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_AppGetBgColor#pf-appsuite">PF_AppGetBgColor</a></p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">bgColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">getBackgroundColor</span><span class="p">();</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">bgColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">getBackgroundColor</span><span class="p">();</span>
 </pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">bgColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">getBackgroundColor</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div></section>
+<section id="app-setprojectdirty">
+<h2>App.setProjectDirty()<a class="headerlink" href="#app-setprojectdirty" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setProjectDirty():</span> <span class="pre">void;</span></code></p>
+<p>プロジェクトを <strong>dirty</strong> (プロジェクトが最後に保存したときから変更されている)に設定する。</p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_SetProjectDirty#pf-advappsuite2">PF_SetProjectDirty</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">setProjectDirty</span><span class="p">();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">setProjectDirty</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.0.</span></p>
+</div>
+</section>
+<section id="app-savebackgroundstate">
+<h2>App.saveBackgroundState()<a class="headerlink" href="#app-savebackgroundstate" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">saveBackgroundState():</span> <span class="pre">void;</span></code></p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_SaveBackgroundState#pf-advappsuite2">PF_SaveBackgroundState</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">saveBackgroundState</span><span class="p">();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">saveBackgroundState</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.0.</span></p>
+</div>
+</section>
+<section id="app-forceforeground">
+<h2>App.forceForeground()<a class="headerlink" href="#app-forceforeground" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">forceForeground():</span> <span class="pre">void;</span></code></p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_ForceForeground#pf-advappsuite2">PF_ForceForeground</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">forceForeground</span><span class="p">();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">forceForeground</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.0.</span></p>
+</div>
+</section>
+<section id="app-restorebackgroundstate">
+<h2>App.restoreBackgroundState()<a class="headerlink" href="#app-restorebackgroundstate" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">restoreBackgroundState():</span> <span class="pre">void;</span></code></p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_RestoreBackgroundState#pf-advappsuite2">PF_RestoreBackgroundState</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">restoreBackgroundState</span><span class="p">();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">restoreBackgroundState</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.0.</span></p>
+</div>
+</section>
+<section id="app-refreshallwindows">
+<h2>App.refreshAllWindows()<a class="headerlink" href="#app-refreshallwindows" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">refreshAllWindows():</span> <span class="pre">void;</span></code></p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_RefreshAllWindows#pf-advappsuite2">PF_RefreshAllWindows</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">refreshAllWindows</span><span class="p">();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">refreshAllWindows</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.0.</span></p>
+</div>
+</section>
+<section id="app-getmainhwnd">
+<h2>App.getMainHWND()<a class="headerlink" href="#app-getmainhwnd" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getMainHWND():</span> <span class="pre">number;</span></code></p>
+<p>AEのHWNDを取得する(Windowsのみ)。</p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetMainHWND#aegp-utilitysuite6">AEGP_GetMainHWND</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">hwnd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">getMainHWND</span><span class="p">();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">hwnd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">getMainHWND</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.0.</span></p>
 </div>
 </section>
 <section id="app-debounce">
 <h2>App.debounce()<a class="headerlink" href="#app-debounce" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">debounce(callback:</span> <span class="pre">()</span> <span class="pre">=&gt;</span> <span class="pre">void,</span> <span class="pre">delay:</span> <span class="pre">number):</span> <span class="pre">()</span> <span class="pre">=&gt;</span> <span class="pre">void;</span></code></p>
 <p>イベントが高頻度で発生する場合に、関数の呼び出しを間引く。例えば、 <strong>EditText.onChanging</strong> のように、キー入力イベントが高頻度で発火する可能性がある場合などに用いる。</p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">win</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Window</span><span class="p">(</span><span class="s1">&#39;dialog&#39;</span><span class="p">);</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">win</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Window</span><span class="p">(</span><span class="s1">&#39;dialog&#39;</span><span class="p">);</span>
 <span class="nx">win</span><span class="p">.</span><span class="nx">preferredSize</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">200</span><span class="p">;</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">editText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">win</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;edittext&#39;</span><span class="p">);</span>
 <span class="nx">editText</span><span class="p">.</span><span class="nx">alignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;fill&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;top&#39;</span><span class="p">];</span>
@@ -85,7 +241,18 @@
 <span class="nx">win</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">win</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Window</span><span class="p">(</span><span class="s1">&#39;dialog&#39;</span><span class="p">);</span>
+<span class="nx">win</span><span class="p">.</span><span class="nx">preferredSize</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">200</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">editText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">win</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;edittext&#39;</span><span class="p">);</span>
+<span class="nx">editText</span><span class="p">.</span><span class="nx">alignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;fill&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;top&#39;</span><span class="p">];</span>
+<span class="nx">editText</span><span class="p">.</span><span class="nx">onChanging</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">debounce</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="nx">editText</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
+<span class="p">},</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
+<span class="nx">win</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div></section>
 </section>
 
 
@@ -102,6 +269,12 @@
 <li><a class="reference internal" href="#app-colorpicker">App.colorPicker()</a></li>
 <li><a class="reference internal" href="#app-getcolor">App.getColor()</a></li>
 <li><a class="reference internal" href="#app-getbackgroundcolor">App.getBackgroundColor()</a></li>
+<li><a class="reference internal" href="#app-setprojectdirty">App.setProjectDirty()</a></li>
+<li><a class="reference internal" href="#app-savebackgroundstate">App.saveBackgroundState()</a></li>
+<li><a class="reference internal" href="#app-forceforeground">App.forceForeground()</a></li>
+<li><a class="reference internal" href="#app-restorebackgroundstate">App.restoreBackgroundState()</a></li>
+<li><a class="reference internal" href="#app-refreshallwindows">App.refreshAllWindows()</a></li>
+<li><a class="reference internal" href="#app-getmainhwnd">App.getMainHWND()</a></li>
 <li><a class="reference internal" href="#app-debounce">App.debounce()</a></li>
 </ul>
 </li>
@@ -144,13 +317,13 @@
         <li class="right" >
           <a href="../JSON/index.html" title="JSON"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">App</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2023, Atarabi.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

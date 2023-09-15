@@ -9,9 +9,15 @@ Clipboard.getText()
 
 クリップボードにある文字列を取得する。
 
-.. code-block:: typescript
+.. tabs::
 
-    const text = Atarabi.clipboard.getText();
+    .. code-tab:: TypeScript
+
+        const text = Atarabi.clipboard.getText();
+
+    .. code-tab:: JavaScript
+	
+        var text = Atarabi.clipboard.getText();
 
 Clipboard.setText()
 -------------------
@@ -20,6 +26,12 @@ Clipboard.setText()
 
 クリップボードに文字列を設定する。
 
-.. code-block:: typescript
+.. tabs::
 
-    Atarabi.clipboard.setText('wiggle(3, 100)');
+    .. code-tab:: TypeScript
+
+        Atarabi.clipboard.setText('wiggle(3, 100)');
+
+    .. code-tab:: JavaScript
+	
+        Atarabi.clipboard.setText('wiggle(3, 100)');

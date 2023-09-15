@@ -11,29 +11,57 @@ Register.insertCommand()
 
 参照: `AEGP_InsertMenuCommand <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_InsertMenuCommand#aegp-commandsuite1>`_
 
-.. code-block:: typescript
+.. tabs::
 
-    (() => {
-        Atarabi.register.insertCommand('Layer' /* Layerメニューに挿入する */, 'AtTop' /* 一番上に挿入する */, 'Set Null', () => {
-            const comp = app.project.activeItem;
-            if (!(comp instanceof CompItem)) {
-                return;
-            }
-            try {
-                app.beginUndoGroup('Set Null');
-                for (const layer of comp.selectedLayers) {
-                    if (layer instanceof ShapeLayer || layer instanceof TextLayer || layer instanceof AVLayer) {
-                        Atarabi.layer.setNull(layer, true);
+    .. code-tab:: TypeScript
+
+        (() => {
+            Atarabi.register.insertCommand('Layer' /* Layerメニューに挿入する */, 'AtTop' /* 一番上に挿入する */, 'Set Null', () => {
+                const comp = app.project.activeItem;
+                if (!(comp instanceof CompItem)) {
+                    return;
+                }
+                try {
+                    app.beginUndoGroup('Set Null');
+                    for (const layer of comp.selectedLayers) {
+                        if (layer instanceof ShapeLayer || layer instanceof TextLayer || layer instanceof AVLayer) {
+                            Atarabi.layer.setNull(layer, true);
+                        }
+                    }
+                } catch (e) {
+                    // pass
+                } finally {
+                    app.endUndoGroup();
+                }
+
+            }, 'LayerSelected');
+        })();
+
+    .. code-tab:: JavaScript
+
+        (function () {
+            Atarabi.register.insertCommand('Layer' /* Layerメニューに挿入する */, 'AtTop' /* 一番上に挿入する */, 'Set Null', function () {
+                var comp = app.project.activeItem;
+                if (!(comp instanceof CompItem)) {
+                    return;
+                }
+                try {
+                    app.beginUndoGroup('Set Null');
+                    for (var _i = 0, _a = comp.selectedLayers; _i < _a.length; _i++) {
+                        var layer = _a[_i];
+                        if (layer instanceof ShapeLayer || layer instanceof TextLayer || layer instanceof AVLayer) {
+                            Atarabi.layer.setNull(layer, true);
+                        }
                     }
                 }
-            } catch (e) {
-                // pass
-            } finally {
-                app.endUndoGroup();
-            }
-
-        }, 'LayerSelected');
-    })();
+                catch (e) {
+                    // pass
+                }
+                finally {
+                    app.endUndoGroup();
+                }
+            }, 'LayerSelected');
+        })();
 
 Register.hookCommand()
 ------------------------
@@ -44,19 +72,34 @@ Register.hookCommand()
 
 参照: `AEGP_RegisterCommandHook <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_RegisterCommandHook#aegp-registersuites5>`_
 
-.. code-block:: typescript
+.. tabs::
 
-    /* レイヤーを複製をした回数を数える */
-    (() => {
-        let counter = 0;
-        Atarabi.register.hookCommand(2080 /* Duplicate */, ctx => {
-            ctx.fallback = true; // デフォルトの処理にフォールバックする。
-            // ctx.stopIteration = true; 同じコマンドに複数個フックしている場合に、後続の呼び出しを止める。
-            counter++;
-            $.writeln(`Duplicate: ${counter}`);
-        });
-    })();
+    .. code-tab:: TypeScript
 
+        /* レイヤーを複製をした回数を数える */
+        (() => {
+            let counter = 0;
+            Atarabi.register.hookCommand(2080 /* Duplicate */, ctx => {
+                ctx.fallback = true; // デフォルトの処理にフォールバックする。
+                // ctx.stopIteration = true; 同じコマンドに複数個フックしている場合に、後続の呼び出しを止める。
+                counter++;
+                $.writeln(`Duplicate: ${counter}`);
+            });
+        })();
+
+    .. code-tab:: JavaScript
+
+        /* レイヤーを複製をした回数を数える */
+        (function () {
+            var counter = 0;
+            Atarabi.register.hookCommand(2080 /* Duplicate */, function (ctx) {
+                ctx.fallback = true; // デフォルトの処理にフォールバックする。
+                // ctx.stopIteration = true; 同じコマンドに複数個フックしている場合に、後続の呼び出しを止める。
+                counter++;
+                $.writeln("Duplicate: ".concat(counter));
+            });
+        })();
+	
 Register.unhookCommand()
 ------------------------
 
@@ -64,15 +107,25 @@ Register.unhookCommand()
 
 **Register.hookCommand()** で実行したフックを解除する。
 
-.. code-block:: typescript
+.. tabs::
 
-    (() => {
-        const uuid = Atarabi.register.hookCommand(2080 /* Duplicate */, ctx => {
-            // do nothing
-        });
-        Atarabi.register.unhookCommand(2080, uuid);
-    })();
+    .. code-tab:: TypeScript
 
+        (() => {
+            const uuid = Atarabi.register.hookCommand(2080 /* Duplicate */, ctx => {
+                // do nothing
+            });
+            Atarabi.register.unhookCommand(2080, uuid);
+        })();
+
+    .. code-tab:: JavaScript
+        
+        (function () {
+            var uuid = Atarabi.register.hookCommand(2080 /* Duplicate */, function (ctx) {
+                // do nothing
+            });
+            Atarabi.register.unhookCommand(2080, uuid);
+        })();
 
 Register.importFlavor()
 ------------------------
@@ -98,30 +151,58 @@ Register.importFlavor()
 
 この場合、1920x1080のサイズの30fps、10secのコンポを作り、赤の平面を敷くという意味になる。
 
-.. code-block:: typescript
-    :caption: zjf_importer.tsx
+.. tabs::
 
-    (() => {
-        Atarabi.register.importFlavor('zjf', ({path}) => {
-            const file = new File(path);
-            file.encoding = 'utf-8';
-            if (!file.open('r')) {
-                return;
-            }
-            const body = file.read();
-            file.close();
-            const lines = body.split('\n');
-            const compSpec = lines[0].split('\s');
-            const width = parseInt(compSpec[0], 10);
-            const height = parseInt(compSpec[1], 10);
-            const frameRate = parseFloat(compSpec[2]);
-            const duration = parseFloat(compSpec[3]);
-            const solidSpec = lines[1].split('\s');
-            const red = parseFloat(solidSpec[0]);
-            const green = parseFloat(solidSpec[1]);
-            const blue = parseFloat(solidSpec[2]);
+    .. code-tab:: TypeScript
         
-            const comp = app.project.items.addComp(`${file.displayName}`, width, height, 1, duration, frameRate);
-            const solid = comp.layers.addSolid([red, green, blue], 'Solid', width, height, 1);
-        });
-    })();
+        (() => {
+            Atarabi.register.importFlavor('zjf', ({path}) => {
+                const file = new File(path);
+                file.encoding = 'utf-8';
+                if (!file.open('r')) {
+                    return;
+                }
+                const body = file.read();
+                file.close();
+                const lines = body.split('\n');
+                const compSpec = lines[0].split('\s');
+                const width = parseInt(compSpec[0], 10);
+                const height = parseInt(compSpec[1], 10);
+                const frameRate = parseFloat(compSpec[2]);
+                const duration = parseFloat(compSpec[3]);
+                const solidSpec = lines[1].split('\s');
+                const red = parseFloat(solidSpec[0]);
+                const green = parseFloat(solidSpec[1]);
+                const blue = parseFloat(solidSpec[2]);
+            
+                const comp = app.project.items.addComp(`${file.displayName}`, width, height, 1, duration, frameRate);
+                const solid = comp.layers.addSolid([red, green, blue], 'Solid', width, height, 1);
+            });
+        })();
+
+    .. code-tab:: JavaScript
+
+        (function () {
+            Atarabi.register.importFlavor('zjf', function (_a) {
+                var path = _a.path;
+                var file = new File(path);
+                file.encoding = 'utf-8';
+                if (!file.open('r')) {
+                    return;
+                }
+                var body = file.read();
+                file.close();
+                var lines = body.split('\n');
+                var compSpec = lines[0].split('\s');
+                var width = parseInt(compSpec[0], 10);
+                var height = parseInt(compSpec[1], 10);
+                var frameRate = parseFloat(compSpec[2]);
+                var duration = parseFloat(compSpec[3]);
+                var solidSpec = lines[1].split('\s');
+                var red = parseFloat(solidSpec[0]);
+                var green = parseFloat(solidSpec[1]);
+                var blue = parseFloat(solidSpec[2]);
+                var comp = app.project.items.addComp("".concat(file.displayName), width, height, 1, duration, frameRate);
+                var solid = comp.layers.addSolid([red, green, blue], 'Solid', width, height, 1);
+            });
+        })();

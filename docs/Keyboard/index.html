@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Keyboard &#8212; @script 0.2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
+    <link rel="stylesheet" type="text/css" href="../_static/code-tabs.css?v=1bc26e2f" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
+    
+    <script src="../_static/documentation_options.js?v=f552b7be"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/code-tabs.js?v=c983d12e"></script>
+    
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Clipboard" href="../Clipboard/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Clipboard/index.html" title="Clipboard"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Keyboard</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="keyboard">
+<h1>Keyboard<a class="headerlink" href="#keyboard" title="Link to this heading">¶</a></h1>
+<section id="keyboard-hook">
+<h2>Keyboard.hook()<a class="headerlink" href="#keyboard-hook" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">hook(key:</span> <span class="pre">Keyboard.Key,</span> <span class="pre">fn:</span> <span class="pre">Keyboard.HookFunc):</span> <span class="pre">Uuid;</span></code></p>
+<p>キー入力をフックします。 <strong>fn</strong> が <strong>true</strong> を返した場合、デフォルトの処理が無視され、 <strong>false</strong> を返した場合、続いてデフォルトの処理が実行されます。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Aを入力するとコンポをつくる。</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">uuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">hook</span><span class="p">({</span><span class="w"> </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">ctx</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">addComp</span><span class="p">(</span><span class="s1">&#39;Comp&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// trueを返した場合、デフォルトの処理が呼ばれなくなる。</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Aを入力するとコンポをつくる。</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">uuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">hook</span><span class="p">({</span><span class="w"> </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">addComp</span><span class="p">(</span><span class="s1">&#39;Comp&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// trueを返した場合、デフォルトの処理が呼ばれなくなる。</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.0.</span></p>
+</div>
+</section>
+<section id="keyboard-unhook">
+<h2>Keyboard.unhook()<a class="headerlink" href="#keyboard-unhook" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">unhook(uuid:</span> <span class="pre">Uuid):</span> <span class="pre">void;</span></code></p>
+<p>キー入力のフックを解除します。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">uuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">hook</span><span class="p">({</span><span class="w"> </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">ctrlOrCmdKey</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">ctx</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">unhook</span><span class="p">(</span><span class="nx">uuid</span><span class="p">);</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">uuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">hook</span><span class="p">({</span><span class="w"> </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">ctrlOrCmdKey</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">unhook</span><span class="p">(</span><span class="nx">uuid</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.0.</span></p>
+</div>
+</section>
+<section id="keyboard-enablehook">
+<h2>Keyboard.enableHook()<a class="headerlink" href="#keyboard-enablehook" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">enableHook(enable:</span> <span class="pre">boolean):</span> <span class="pre">void;</span></code></p>
+<p>フック機能をオンorオフにします。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">enableHook</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">enableHook</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.0.</span></p>
+</div>
+</section>
+<section id="keyboard-enablehookbyuuid">
+<h2>Keyboard.enableHookByUuid()<a class="headerlink" href="#keyboard-enablehookbyuuid" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">enableHookByUuid(uuid:</span> <span class="pre">Uuid,</span> <span class="pre">enable:</span> <span class="pre">boolean):</span> <span class="pre">void;</span></code></p>
+<p>個別のフックに対してオンorオフにします。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">uuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">hook</span><span class="p">({</span><span class="w"> </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">ctrlOrCmdKey</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">ctx</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">enableHookByUuid</span><span class="p">(</span><span class="nx">uuid</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">uuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">hook</span><span class="p">({</span><span class="w"> </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">ctrlOrCmdKey</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">enableHookByUuid</span><span class="p">(</span><span class="nx">uuid</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.0.</span></p>
+</div>
+</section>
+<section id="keyboard-sendkeys">
+<h2>Keyboard.sendKeys()<a class="headerlink" href="#keyboard-sendkeys" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">sendKeys(keys:</span> <span class="pre">Keyboard.Key[]):</span> <span class="pre">void;</span></code></p>
+<p>キー入力します。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="c1">// 新規カメラレイヤー</span>
+<span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">sendKeys</span><span class="p">([{</span><span class="w"> </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">ctrlOrCmdKey</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span><span class="w"> </span><span class="nx">altKey</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span><span class="w"> </span><span class="nx">shiftKey</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="p">}]);</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="c1">// 新規カメラレイヤー</span>
+<span class="nx">Atarabi</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">sendKeys</span><span class="p">([{</span><span class="w"> </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">ctrlOrCmdKey</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">altKey</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">shiftKey</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}]);</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.0.</span></p>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Keyboard</a><ul>
+<li><a class="reference internal" href="#keyboard-hook">Keyboard.hook()</a></li>
+<li><a class="reference internal" href="#keyboard-unhook">Keyboard.unhook()</a></li>
+<li><a class="reference internal" href="#keyboard-enablehook">Keyboard.enableHook()</a></li>
+<li><a class="reference internal" href="#keyboard-enablehookbyuuid">Keyboard.enableHookByUuid()</a></li>
+<li><a class="reference internal" href="#keyboard-sendkeys">Keyboard.sendKeys()</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../Clipboard/index.html"
+                          title="previous chapter">Clipboard</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Clipboard/index.html" title="Clipboard"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Keyboard</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Atarabi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

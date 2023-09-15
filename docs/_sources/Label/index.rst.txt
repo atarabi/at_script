@@ -9,10 +9,15 @@ Label.setColor()
 
 ラベル(1から16)の色を設定します。
 
-.. code-block:: typescript
+.. tabs::
 
-    Atarabi.label.setColor(1, [1, 0, 0]);
+    .. code-tab:: TypeScript
 
+        Atarabi.label.setColor(1, [1, 0, 0]);
+
+    .. code-tab:: JavaScript
+
+        Atarabi.label.setColor(1, [1, 0, 0]);
 
 Label.getColor()
 ----------------
@@ -21,6 +26,13 @@ Label.getColor()
 
 ラベル(1から16)の色を取得します。
 
-.. code-block:: typescript
+.. tabs::
 
-    const maybeRed = Atarabi.label.getColor(1);
+    .. code-tab:: TypeScript
+
+        const maybeRed = Atarabi.label.getColor(1);
+
+    .. code-tab:: JavaScript
+
+        var maybeRed = Atarabi.label.getColor(1);
+    

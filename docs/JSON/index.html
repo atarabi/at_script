@@ -5,14 +5,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>JSON &#8212; @script 0.1.0 documentation</title>
+    <title>JSON &#8212; @script 0.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
+    <link rel="stylesheet" type="text/css" href="../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../_static/documentation_options.js?v=672d6955"></script>
+    <script src="../_static/documentation_options.js?v=f552b7be"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/code-tabs.js?v=c983d12e"></script>
     
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -32,7 +34,7 @@
         <li class="right" >
           <a href="../README/index.html" title="README"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">JSON</a></li> 
       </ul>
     </div>  
@@ -48,43 +50,89 @@
 <h2>JSON.stringify()<a class="headerlink" href="#json-stringify" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">stringify(value:</span> <span class="pre">any,</span> <span class="pre">replacer?:</span> <span class="pre">(string</span> <span class="pre">|</span> <span class="pre">number)[]</span> <span class="pre">|</span> <span class="pre">((key:</span> <span class="pre">string,</span> <span class="pre">value:</span> <span class="pre">any)</span> <span class="pre">=&gt;</span> <span class="pre">any),</span> <span class="pre">space?:</span> <span class="pre">number</span> <span class="pre">|</span> <span class="pre">string):</span> <span class="pre">string;</span></code></p>
 <p>オブジェクト、値をJSON文字列にする。中身はjson2.js。</p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">dataStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="nx">index</span><span class="o">:</span><span class="w"> </span><span class="kt">1</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="o">:</span><span class="w"> </span><span class="kt">2.0</span><span class="p">});</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">dataStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="nx">index</span><span class="o">:</span><span class="w"> </span><span class="kt">1</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="o">:</span><span class="w"> </span><span class="kt">2.0</span><span class="p">});</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">dataStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="nx">index</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="o">:</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="p">});</span>
+</pre></div>
+</div>
+</div></div></section>
 <section id="json-parse">
 <h2>JSON.parse()<a class="headerlink" href="#json-parse" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">parse(text:</span> <span class="pre">string,</span> <span class="pre">reviver?:</span> <span class="pre">(key:</span> <span class="pre">string,</span> <span class="pre">value:</span> <span class="pre">any)</span> <span class="pre">=&gt;</span> <span class="pre">any):</span> <span class="pre">any;</span></code></p>
 <p>JSON文字列をオブジェクト、値に変換する。中身はjson2.js。</p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">&#39;{&quot;index&quot;:1,&quot;time&quot;:2}&#39;</span><span class="p">);</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">&#39;{&quot;index&quot;:1,&quot;time&quot;:2}&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">&#39;{&quot;index&quot;:1,&quot;time&quot;:2}&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div></section>
 <section id="json-isvalid">
 <h2>JSON.isValid()<a class="headerlink" href="#json-isvalid" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">isValid(text:</span> <span class="pre">string):</span> <span class="pre">boolean;</span></code></p>
 <p>文字列が有効なJSON文字列か確かめる。C++側で、 <a class="reference external" href="https://github.com/nlohmann/json">JSON for Modern C++</a> というライブラリを用いてチェックしている。</p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">isJSON</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">isValid</span><span class="p">(</span><span class="s1">&#39;invalid json&#39;</span><span class="p">);</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">isJSON</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">isValid</span><span class="p">(</span><span class="s1">&#39;invalid json&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">isJSON</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">isValid</span><span class="p">(</span><span class="s1">&#39;invalid json&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div></section>
 <section id="json-isvalidfile">
 <h2>JSON.isValidFile()<a class="headerlink" href="#json-isvalidfile" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">isValidFile(file:</span> <span class="pre">File):</span> <span class="pre">boolean;</span></code></p>
 <p>ファイルが有効なJSONファイルか確かめる。C++側で、 <a class="reference external" href="https://github.com/nlohmann/json">JSON for Modern C++</a> というライブラリを用いてチェックしている。</p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">);</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">);</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">isJSONFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">isValidFile</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">isJSONFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">isValidFile</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div></section>
 <section id="json-parsefast">
 <h2>JSON.parseFast()<a class="headerlink" href="#json-parsefast" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">parseFast(text:</span> <span class="pre">string):</span> <span class="pre">any;</span></code></p>
 <p>JSON.isValid()で有効なJSON文字列かを確かめた後、eval()を用いて、オブジェクト、値に変換する。ExtendScript実行環境下だと、特に複雑なJSON文字列の場合、処理に時間が掛かることがある。そこで、C++側でチェックした後にeval()を用いることで、高速化を図っている。</p>
-<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parseFast</span><span class="p">(</span><span class="s1">&#39;{&quot;very&quot;:true,&quot;complicated&quot;:true}&#39;</span><span class="p">);</span>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parseFast</span><span class="p">(</span><span class="s1">&#39;{&quot;very&quot;:true,&quot;complicated&quot;:true}&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-</section>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parseFast</span><span class="p">(</span><span class="s1">&#39;{&quot;very&quot;:true,&quot;complicated&quot;:true}&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div></section>
 </section>
 
 
@@ -144,13 +192,13 @@
         <li class="right" >
           <a href="../README/index.html" title="README"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">JSON</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2023, Atarabi.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>
