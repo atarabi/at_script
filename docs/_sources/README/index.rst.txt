@@ -50,4 +50,36 @@ Atarabi.version
 
 ``version: string;``
 
-0.1.0(2023/8/28)
+v0.2.0(2023/09/16)
+^^^^^^^^^^^^^^^^^^^^
+
+API
+"""""""""""
+- App.setProjectDirty() の追加
+- App.saveBackgroundState() の追加
+- App.forceForeground() の追加
+- App.restoreBackgroundState() の追加
+- App.refreshAllWindows() の追加
+- App.getMainHWND() の追加
+- Item.touchActiveItem() の追加
+- Item.moveTimeStepActiveItem() の追加
+- Item.getFootageSoundDataFormat() の追加
+- Camera.getDefaultCameraDistanceToImagePlane() の追加
+- Camera.getFilmSize() の追加
+- Camera.setFilmSize() の追加
+- Keyboard.hook() の追加
+- Keyboard.unhook() の追加
+- Keyboard.enableHook() の追加
+- Keyboard.enableHookByUuid() の追加
+- Keyboard.sendKeys() の追加
+
+Script
+"""""""""""
+- @script_UI を !\@script_UI にリネーム
+- @effect_launcher の追加
+- @hook_] の追加
+- @save_to_desktop の追加
+- @toggle_mfr の追加
+
+v0.1.0(2023/08/28)
+^^^^^^^^^^^^^^^^^^^^
