@@ -7,12 +7,14 @@ declare interface Atarabi {
     label: Atarabi.Label;
     item: Atarabi.Item_;
     comp: Atarabi.Comp;
+    camera: Atarabi.Camera;
     layer: Atarabi.Layer_;
     effect: Atarabi.Effect;
     property: Atarabi.Property_;
     register: Atarabi.Register;
     UI: Atarabi.UI;
     clipboard: Atarabi.Clipboard;
+    keyboard: Atarabi.Keyboard;
 }
 
 declare namespace Atarabi {
@@ -27,7 +29,17 @@ declare namespace Atarabi {
 
     type Vector3 = [number, number, number];
 
+    type Vector4 = [number, number, number, number];
+
+    type Mat2 = [Vector2, Vector2];
+
+    type Mat3 = [Vector3, Vector3, Vector3];
+
+    type Mat4 = [Vector4, Vector4, Vector4, Vector4];
+
     type Rect = { left: number; top: number; width: number; height: number; };
+
+    type Ratio = { num: number; den: number; };
 
     type Brand<T extends string> = string & { __brand: T };
 
@@ -36,17 +48,37 @@ declare namespace Atarabi {
     interface JSON {
         // by json2.js
         stringify(value: any, replacer?: (string | number)[] | ((key: string, value: any) => any), space?: number | string): string;
+
         parse(text: string, reviver?: (key: string, value: any) => any): any;
+
         // -----------
         isValid(text: string): boolean;
+
         isValidFile(file: File): boolean;
+
         parseFast(text: string): any;
     }
 
     interface App {
         colorPicker(initialColor: Atarabi.Color): Atarabi.Color | null;
+
         getColor(colorType: App.ColorType): Atarabi.Color | null;
+
         getBackgroundColor(): Atarabi.Color;
+
+        setProjectDirty(): void;
+
+        saveBackgroundState(): void;
+
+        forceForeground(): void;
+
+        restoreBackgroundState(): void;
+
+        refreshAllWindows(): void;
+
+        // for windows
+        getMainHWND(): number;
+
         debounce(callback: () => void, delay: number): () => void;
     }
 
@@ -56,12 +88,27 @@ declare namespace Atarabi {
 
     interface Label {
         setColor(index: number, color: Color): void;
+
         getColor(index: number): Color;
     }
-    
+
     interface Item_ {
         getActiveItem(): Item | null;
+
+        touchActiveItem(): void;
+
+        // steps must be integer
+        moveTimeStepActiveItem(steps: number): void;
+
+        getFootageSoundDataFormat(item: FootageItem): SoundDataFormat;
     }
+
+    type SoundDataFormat = {
+        sampleRate: number;
+        encoding: 'UnsignedPCM' | 'SignedPCM' | 'Float';
+        bytesPerSample: number; // 1, 2 or 4
+        channels: number; // 1 for mono, 2 for stereo
+    };
 
     interface Comp {
         getMostRecentlyUsedComp(): CompItem | null;
@@ -95,6 +142,19 @@ declare namespace Atarabi {
         // 8pbc, default: downsample=1, skip=0, speed=1
         saveFramesToApng(comp: CompItem, startTime: number, endTime: number, file: File, options?: { downsample?: number; skip?: number; speed?: number; }): void;
     }
+
+    interface Camera {
+        getDefaultCameraDistanceToImagePlane(comp: CompItem): number;
+
+        getFilmSize(cameraLayer: CameraLayer): FilmSize;
+
+        setFilmSize(cameraLayer: CameraLayer, filmSize: FilmSize): void;
+    }
+
+    type FilmSize = {
+        unit: 'Horizontal' | 'Vertical' | 'Diagonal';
+        size: number;
+    };
 
     interface Layer_ {
         getActiveLayer(): Layer | null;
@@ -254,7 +314,39 @@ declare namespace Atarabi {
 
     interface Clipboard {
         getText(): string;
+        
         setText(text: string): void;
+    }
+
+    interface Keyboard {
+        hook(key: Keyboard.Key, fn: Keyboard.HookFunc): Uuid;
+
+        unhook(uuid: Uuid): void;
+
+        enableHook(enable: boolean): void;
+
+        enableHookByUuid(uuid: Uuid, enable: boolean): void;
+
+        sendKeys(keys: Keyboard.Key[]): void;
+    }
+
+    namespace Keyboard {
+        type Key = {
+            altKey?: boolean;
+            ctrlKey?: boolean;
+            cmdKey?: boolean;
+            ctrlOrCmdKey?: boolean; // ctrl for win, cmd for mac / if true, ctrlKey and cmdKey are overriden
+            shiftKey?: boolean;
+            code: Code;
+        }
+
+        type Code = 'Escape' | 'Tab' | 'Backspace' | 'Space' | 'CapsLock' | 'ScrollLock' | 'NumLock' | 'F1' | 'F2' | 'F3' | 'F4' | 'F5' | 'F6' | 'F7' | 'F8' | 'F9' | 'F10' | 'F11' | 'F12' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | ',' | '.' | '/' | ';' | ':' | ']' | '@' | '`' | '[' | '-' | '^' | '=' | '\'' | '\\' | 'Pad0' | 'Pad1' | 'Pad2' | 'Pad3' | 'Pad4' | 'Pad5' | 'Pad6' | 'Pad7' | 'Pad8' | 'Pad9' | 'PadMultiply' | 'PadAdd' | 'PadSubtract' | 'PadDecimal' | 'PadDivide' | 'Enter' | 'Insert' | 'Delete' | 'Home' | 'End' | 'PageUp' | 'PageDown' | 'Left' | 'Up' | 'Down' | 'Right' | 'Shift' | 'Alt' | 'Control' | 'Command';
+
+        interface HookContext {
+            mousePosition: { x: number; y: number; };
+        }
+
+        type HookFunc = (context: Keyboard.HookContext) => boolean;
     }
 
     /*

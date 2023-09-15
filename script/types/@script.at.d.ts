@@ -71,10 +71,10 @@ declare namespace Atarabi {
         }
 
         interface Effect {
-            getEffectMatrix(effect: PropertyGroup, time?: number): EffectMatrix;
+            getCameraMatrix(effect: PropertyGroup, time?: number): CameraMatrix;
         }
 
-        type EffectMatrix = {
+        type CameraMatrix = {
             cameraMatrix: number[][];
             dstToPlane: number;
             planeWidth: number;
