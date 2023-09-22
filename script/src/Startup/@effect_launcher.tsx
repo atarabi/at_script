@@ -1,5 +1,8 @@
 /**
- * @effect_launcher v1.0.0
+ * @effect_launcher v1.0.1
+ * 
+ *      v1.0.1(2023/09/23)  Fix strange behavior
+ *      v1.0.0(2023/09/16)
  */
 (() => {
 
@@ -83,12 +86,15 @@
             switch (ev.keyName) {
                 case 'Up':
                     moveList(-1);
+                    ev.preventDefault();
                     break;
                 case 'Down':
                     moveList(1);
+                    ev.preventDefault();
                     break;
                 case 'Enter':
                     apply();
+                    ev.preventDefault();
                     break;
             }
         });
