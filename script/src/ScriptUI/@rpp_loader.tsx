@@ -1,5 +1,8 @@
 /**
- * @rpp_loader v1.0.0
+ * @rpp_loader v1.0.1
+ * 
+ *      v1.0.1(2023/10/08)  Fix empty source
+ *      v1.0.0(2023/08/28)
  */
 ((global: Panel | Global) => {
 
@@ -283,6 +286,9 @@
             if (section.children['SOURCE']) {
                 let source = section.children['SOURCE'][0];
                 switch (source.values[0]) {
+                    case 'EMPTY':
+                        this.sourceType = 'EMPTY';
+                        break;
                     case 'MIDI':
                         this.sourceType = 'MIDI';
                         break;
@@ -519,8 +525,11 @@
             } else if (root.properties['RENDER_PATTERN'] && root.properties['RENDER_PATTERN'][0][0]) {
                 const pattern = root.properties['RENDER_PATTERN'][0][0];
                 const files = this.file.parent.getFiles(`${pattern}.*`) as File[];
-                if (files) {
-                    this.renderFile = files[0].absoluteURI;
+                for (let file of files) {
+                    if (/\.(wav|mp3|flac)$/i.test(file.displayName)) {
+                        this.renderFile = file.absoluteURI;
+                        break;
+                    }
                 }
             }
 
@@ -818,7 +827,17 @@
             ui.helpTip = 'Browse a reaper project path';
             ui.onClick = () => {
                 const path = builder.get(Param.Path) as string;
-                const file = path ? new File(path).openDlg('Reaper Project', '*.rpp') as File : File.openDialog('Reaper Project', '*.rpp') as File;
+                let file: File = null;
+                if (path) {
+                    file =new File(path).openDlg('Reaper Project', '*.rpp') as File;
+                } else {
+                    const projectFile = app.project.file;
+                    if (projectFile) {
+                        file = (new File(projectFile.parent.absoluteURI)).openDlg('Reaper Project', '*.rpp') as File;
+                    } else {
+                        file = File.openDialog('Reaper Project', '*.rpp') as File;
+                    }
+                }
                 if (file) {
                     builder.set(Param.Path, file.fsName);
                     if (file.exists) {
