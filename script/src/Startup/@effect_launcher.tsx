@@ -1,6 +1,7 @@
 /**
- * @effect_launcher v1.0.1
+ * @effect_launcher v1.0.2
  * 
+ *      v1.0.2(2023/12/05)  Fix lock bug
  *      v1.0.1(2023/09/23)  Fix strange behavior
  *      v1.0.0(2023/09/16)
  */
@@ -54,23 +55,45 @@
         return avLayers;
     };
 
+    const applyEffect = (avLayers: AVLayer[], effectMatchName: string) => {
+        for (const layer of avLayers) {
+            const properties = layer.selectedProperties.slice();
+            let index = 0;
+            for (const property of properties) {
+                if (property.isEffect) {
+                    index = property.propertyIndex;
+                }
+                property.selected = false;
+            }
+            const effects = layer.effect;
+            const newEffect = effects.addProperty(effectMatchName);
+            if (index > 0) {
+                newEffect.moveTo(index + 1);
+                effects(index + 1).selected = true;
+            } else {
+                newEffect.selected = true;
+            }
+        }
+    };
+
     const mod = (x: number, y: number) => {
         const z = x % y;
         return z < 0 ? z + y : z;
     };
 
-    let isLock = false;
+    let time = 0;
 
     Atarabi.keyboard.hook({ code: 'Space', ctrlOrCmdKey: true }, ctx => {
-        if (isLock) {
+        const newTime = Date.now();
+        const elapsed = newTime - time; 
+        time = newTime;
+        if (elapsed < 2000) {
             return false;
         }
         const avLayers = getActiveAVLayers();
         if (!avLayers.length) {
             return false;
         }
-
-        isLock = true;
 
         const win = new Window('dialog', undefined, undefined, { borderless: true });
         win.spacing = 0;
@@ -83,6 +106,7 @@
             updateList(searchbox.text);
         }, 200);
         searchbox.addEventListener('keydown', (ev: KeyboardEvent) => {
+            time = Date.now();
             switch (ev.keyName) {
                 case 'Up':
                     moveList(-1);
@@ -170,9 +194,7 @@
             const matchName = item.matchName;
             try {
                 app.beginUndoGroup(`Apply: ${item.displayName}`)
-                for (const avLayer of avLayers) {
-                    avLayer.effect.addProperty(matchName);
-                }
+                applyEffect(avLayers, matchName);
             } catch (e) {
                 // pass
             } finally {
@@ -187,7 +209,7 @@
         win.location = [ctx.mousePosition.x, ctx.mousePosition.y];
         win.show();
 
-        isLock = false;
+        time = 0;
 
         return true;
     });
