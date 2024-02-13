@@ -1,7 +1,14 @@
 /**
- * @command_set_null v1.0.0
+ * @command_set_null v1.0.1
+ * 
+ *      v1.0.1(2024/02/13) Fix dynamic link bug
+ *      v1.0.0(2023/08/28)
  */
 (() => {
+
+    if (Atarabi.isDynamicLink()) {
+        return;
+    }
 
     Atarabi.register.insertCommand('Layer', 'AtTop', 'Set Null', () => {
         const comp = app.project.activeItem;

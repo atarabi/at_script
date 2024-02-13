@@ -1,7 +1,14 @@
 /**
- * @hook_] v1.0.0
+ * @hook_] v1.0.1
+ * 
+ *      v1.0.1(2024/02/13)  Fix dynamic link bug
+ *      v1.0.0(2023/09/16)
  */
 (() => {
+
+    if (Atarabi.isDynamicLink()) {
+        return;
+    }
 
     Atarabi.keyboard.hook({code: ']'}, ctx => {
         const comp = Atarabi.comp.getMostRecentlyUsedComp();

@@ -2,6 +2,7 @@ declare var Atarabi: Atarabi;
 
 declare interface Atarabi {
     version: string;
+    isDynamicLink(): boolean; // defined in !@script_initializer
     JSON: Atarabi.JSON;
     app: Atarabi.App;
     label: Atarabi.Label;
@@ -15,6 +16,7 @@ declare interface Atarabi {
     UI: Atarabi.UI;
     clipboard: Atarabi.Clipboard;
     keyboard: Atarabi.Keyboard;
+    mouse: Atarabi.Mouse;
 }
 
 declare namespace Atarabi {
@@ -300,13 +302,16 @@ declare namespace Atarabi {
     }
 
     interface UI {
-        // returns -1 if no item is selected, cheked is win only
-        showContextMenu(items: { text: string; checked?: boolean; }[]): number;
+        // null means separator
+        // returns -1 if no item is selected
+        showContextMenu(items: (UI.MenuItem | string | null)[]): number;
 
         progress(title: string, total: number, fn: UI.ProgressFunc): void;
     }
 
     namespace UI {
+        type MenuItem = { text: string; checked?: boolean; };
+
         type ProgressFunc = (context?: ProgressContext) => void;
 
         type ProgressContext = { readonly index: number; readonly total: number; stopIteration: boolean; };
@@ -340,10 +345,46 @@ declare namespace Atarabi {
             code: Code;
         }
 
-        type Code = 'Escape' | 'Tab' | 'Backspace' | 'Space' | 'CapsLock' | 'ScrollLock' | 'NumLock' | 'F1' | 'F2' | 'F3' | 'F4' | 'F5' | 'F6' | 'F7' | 'F8' | 'F9' | 'F10' | 'F11' | 'F12' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | ',' | '.' | '/' | ';' | ':' | ']' | '@' | '`' | '[' | '-' | '^' | '=' | '\'' | '\\' | 'Pad0' | 'Pad1' | 'Pad2' | 'Pad3' | 'Pad4' | 'Pad5' | 'Pad6' | 'Pad7' | 'Pad8' | 'Pad9' | 'PadMultiply' | 'PadAdd' | 'PadSubtract' | 'PadDecimal' | 'PadDivide' | 'Enter' | 'Insert' | 'Delete' | 'Home' | 'End' | 'PageUp' | 'PageDown' | 'Left' | 'Up' | 'Down' | 'Right' | 'Shift' | 'Alt' | 'Control' | 'Command';
+        type Code = 'Escape' | 'Tab' | 'Backspace' | 'Space' | 'CapsLock' | 'ScrollLock' | 'NumLock' | 'F1' | 'F2' | 'F3' | 'F4' | 'F5' | 'F6' | 'F7' | 'F8' | 'F9' | 'F10' | 'F11' | 'F12' | 'F13' | 'F14' | 'F15' | 'F16' | 'F17' | 'F18' | 'F19' | 'F20' | 'F21' | 'F22' | 'F23' | 'F24' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | ',' | '.' | '/' | ';' | ':' | ']' | '@' | '`' | '[' | '-' | '^' | '=' | '\'' | '\\' | 'Pad0' | 'Pad1' | 'Pad2' | 'Pad3' | 'Pad4' | 'Pad5' | 'Pad6' | 'Pad7' | 'Pad8' | 'Pad9' | 'PadMultiply' | 'PadAdd' | 'PadSubtract' | 'PadDecimal' | 'PadDivide' | 'Enter' | 'Insert' | 'Delete' | 'Home' | 'End' | 'PageUp' | 'PageDown' | 'Left' | 'Up' | 'Down' | 'Right' | 'Shift' | 'Alt' | 'Control' | 'Command';
 
         interface HookContext {
             mousePosition: { x: number; y: number; };
+        }
+
+        type HookFunc = (context: Keyboard.HookContext) => boolean;
+    }
+
+    interface Mouse {
+        getPosition(): Mouse.Position;
+
+        hook(click: Mouse.Click, fn: Mouse.HookFunc): Uuid;
+
+        unhook(uuid: Uuid): void;
+
+        enableHook(enable: boolean): void;
+
+        enableHookByUuid(uuid: Uuid, enable: boolean): void;
+
+        sendClick(click: Mouse.Click): void;
+    }
+
+    namespace Mouse {
+        type Position = { x: number; y: number; };
+
+        type Button = 'Left' | 'Middle' | 'Right';
+
+        type Click = {
+            button: Button;
+            count: 1 | 2;
+            altKey?: boolean;
+            ctrlKey?: boolean;
+            cmdKey?: boolean;
+            ctrlOrCmdKey?: boolean; // ctrl for win, cmd for mac / if true, ctrlKey and cmdKey are overriden
+            shiftKey?: boolean;
+        };
+
+        interface HookContext {
+            mousePosition: Position;
         }
 
         type HookFunc = (context: Keyboard.HookContext) => boolean;

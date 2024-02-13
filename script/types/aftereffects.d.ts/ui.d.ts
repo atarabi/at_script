@@ -69,9 +69,9 @@ declare class ScriptUIGraphics {
   lineTo(x: number, y: number): Point;
   measureString(text: string, font: ScriptUIFont, boundingWidth?: number): Dimension;
   moveTo(x: number, y: number): Point;
-  newBrush(brushType: number, color: [number, number, number, number] | string): ScriptUIBrush;
+  newBrush(brushType: number, color: [number, number, number] | [number, number, number, number] | string): ScriptUIBrush;
   newPath(): ScriptUIPath;
-  newPen(penType: number, color: [number, number, number, number] | string, lineWidth: number): ScriptUIPen;
+  newPen(penType: number, color: [number, number, number] | [number, number, number, number] | string, lineWidth: number): ScriptUIPen;
   rectPath(left: number, top: number, width?: number, height?: number): Point;
   strokePath(pen: ScriptUIPen): void;
 }

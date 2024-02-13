@@ -96,6 +96,11 @@ declare namespace Atarabi {
             columnTitles?: string[];
         }
 
+        interface CustomOptions<Value> {
+            get?: () => Value;
+            set?: (value: Value) => void;
+        }
+
         type NumberUI = Omit<EditText, 'onChanging' | 'text'>;
 
         type ColorUI = Omit<Button, 'onClick' | 'onDraw'> & { onChange: Function; };
@@ -131,6 +136,7 @@ declare namespace Atarabi {
             addSlider<K extends string>(key: K, value?: { initialvalue?: number; minvalue?: number; maxvalue?: number; }, options?: SliderOptions, uiFn?: (ui: Slider, emitter: EventEmitter) => void): K extends keyof UIs ? never : BuilderOptions<Groups, Controls & { [P in K]: number; }, Lists, UIs & { [P in K]: Slider; }, Stack>;
             addColor<K extends string>(key: K, defaultValue?: Color, options?: ColorOptions, uiFn?: (ui: ColorUI, emitter: EventEmitter) => void): K extends keyof UIs ? never : BuilderOptions<Groups, Controls & { [P in K]: Color; }, Lists, UIs & { [P in K]: ColorUI; }, Stack>;
             addButton<K extends string>(key: K, defaultValue?: string, options?: ButtonOptions, uiFn?: (ui: Button, emitter: EventEmitter) => void): K extends keyof UIs ? never : BuilderOptions<Groups, Controls & { [P in K]: string; }, Lists, UIs & { [P in K]: Button; }, Stack>;
+            addCustom<K extends string, Value = any>(key: K, uiFn: (container: Window | Panel | Group, emitter: EventEmitter) => CustomOptions<Value>): K extends keyof UIs ? never : BuilderOptions<Groups, Controls & { [P in K]: Value; }, Lists, UIs, Stack>;
 
             // Lists
             addDropDownList<K extends string>(key: K, items?: string[], options?: DropDownListOptions, uiFn?: (ui: DropDownList, emitter: EventEmitter) => void): K extends keyof UIs ? never : BuilderOptions<Groups, Controls, Lists & { [P in K]: string; }, UIs & { [P in K]: DropDownList; }, Stack>;

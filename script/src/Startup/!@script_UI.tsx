@@ -1,5 +1,8 @@
 /**
- * @script_UI v0.1.0
+ * @script_UI v0.2.0
+ * 
+ *      v0.2.0(2024/02/13)  Add custom
+ *      v0.1.0(2023/08/28)
  */
 (() => {
 
@@ -166,7 +169,14 @@
         ui?: ListBox;
     }
 
-    type Value = PanelValue | PanelEndValue | GroupValue | GroupEndValue | TabbedPanelValue | TabbedPanelEndValue | TabValue | TabEndValue | CheckboxValue | RadioButtonValue | StaticTextValue | EditTextValue | NumberValue | SliderValue | ColorValue | ButtonValue | DropDownListValue | ListBoxValue;
+    interface CustomValue {
+        type: 'custom';
+        key: string;
+        uiFn?: (container: Window | Panel | Group, emitter: Atarabi.UI.EventEmitter) => Atarabi.UI.CustomOptions<any>;
+        options?: Atarabi.UI.CustomOptions<any>;
+    }
+
+    type Value = PanelValue | PanelEndValue | GroupValue | GroupEndValue | TabbedPanelValue | TabbedPanelEndValue | TabValue | TabEndValue | CheckboxValue | RadioButtonValue | StaticTextValue | EditTextValue | NumberValue | SliderValue | ColorValue | ButtonValue | DropDownListValue | ListBoxValue | CustomValue;
 
     const isGroupValue = (value: Value): value is PanelValue | GroupValue | TabbedPanelValue | TabValue => {
         switch (value.type) {
@@ -210,6 +220,13 @@
             case 'dropdownlist':
             case 'listbox':
                 return true;
+        }
+        return false;
+    };
+
+    const isCustomValue = (value: Value): value is CustomValue => {
+        switch (value.type) {
+            case 'custom':
         }
         return false;
     };
@@ -417,6 +434,15 @@
                 key,
                 defaultValue,
                 options,
+                uiFn,
+            });
+            return this as any;
+        }
+        addCustom<K extends string, CustomValue = any>(key: K, uiFn: (container: Window | Panel | Group, emitter: Atarabi.UI.EventEmitter) => Atarabi.UI.CustomOptions<CustomValue>): K extends keyof UIs ? never : BuilderOptions<Groups, Controls & { [P in K]: CustomValue; }, Lists, UIs, Stack> {
+            this.checkKey(key);
+            this.values.push({
+                type: 'custom',
+                key,
                 uiFn,
             });
             return this as any;
@@ -695,6 +721,13 @@
                             this._values[value.key] = value;
                         }
                         break;
+                    case 'custom':
+                        {
+                            const result = value.uiFn(container, this);
+                            value.options = result;
+                            this._values[value.key] = value;
+                        }
+                        break;
                     // Lists
                     case 'dropdownlist':
                         {
@@ -777,31 +810,31 @@
         // Groups / Controls / Lists
         show<K extends keyof UIs>(key: K): void {
             const _value = this._values[key as string];
-            if (!isGroupEndValue(_value)) {
+            if (!(isGroupEndValue(_value) || isCustomValue(_value))) {
                 _value.ui.show();
             }
         }
         hide<K extends keyof UIs>(key: K): void {
             const _value = this._values[key as string];
-            if (!isGroupEndValue(_value)) {
+            if (!(isGroupEndValue(_value) || isCustomValue(_value))) {
                 _value.ui.hide();
             }
         }
         enable<K extends keyof UIs>(key: K): void {
             const _value = this._values[key as string];
-            if (!isGroupEndValue(_value)) {
+            if (!(isGroupEndValue(_value) || isCustomValue(_value))) {
                 _value.ui.enabled = true;
             }
         }
         disable<K extends keyof UIs>(key: K): void {
             const _value = this._values[key as string];
-            if (!isGroupEndValue(_value)) {
+            if (!(isGroupEndValue(_value) || isCustomValue(_value))) {
                 _value.ui.enabled = false;
             }
         }
         ui<K extends keyof UIs>(key: K): UIs[K] {
             const _value = this._values[key as string];
-            if (isGroupEndValue(_value)) {
+            if (isGroupEndValue(_value) || isCustomValue(_value)) {
                 return null;
             }
             return _value.ui as any;
@@ -842,6 +875,12 @@
                     return _value.ui.value as any;
                 case 'button':
                     return _value.ui.text as any;
+                case 'custom':
+                    if (_value.options && isFunction(_value.options.get)) {
+                        return _value.options.get();
+                    } else {
+                        return null;
+                    }
                 case 'dropdownlist':
                 case 'listbox':
                     {
@@ -914,6 +953,11 @@
                             throw 'value must be string';
                         }
                         _value.ui.text = value;
+                    }
+                    break;
+                case 'custom':
+                    if (_value.options && isFunction(_value.options.set)) {
+                        _value.options.set(value);
                     }
                     break;
                 case 'dropdownlist':

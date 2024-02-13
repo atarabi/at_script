@@ -1,11 +1,16 @@
 /**
- * @effect_launcher v1.0.2
+ * @effect_launcher v1.0.3
  * 
+ *      v1.0.3(2024/02/13)  Fix dynamic link bug
  *      v1.0.2(2023/12/05)  Fix lock bug
  *      v1.0.1(2023/09/23)  Fix strange behavior
  *      v1.0.0(2023/09/16)
  */
 (() => {
+
+    if (Atarabi.isDynamicLink()) {
+        return;
+    }
 
     type EffectItem = { displayName: string; matchName: string; category: string; };
     const EFFECT_LIST: EffectItem[] = [];

@@ -1012,6 +1012,9 @@ declare class Project {
   /** CC2019(16.0)- */
   expressionEngine: 'extendscript' | 'javascript-1.0';
 
+  /** True if the project has been modified from the last save; otherwise false. (CC2020-) */
+  readonly dirty: boolean;
+
   /** Retrieves an item from the project. */
   item(index: number): Item;
 

@@ -1,5 +1,7 @@
 /**
  * @effects_in_use v1.0.0
+ * 
+ *      v1.0.0(2023/12/05)
  */
 ((global: Panel | Global) => {
 
