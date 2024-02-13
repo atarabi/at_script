@@ -5,7 +5,7 @@ UI
 UI.showContextMenu()
 --------------------
 
-``showContextMenu(items: { text: string; checked?: boolean; }[]): number;``
+``showContextMenu(items: (UI.MenuItem | string | null)[]): number;``
 
 コンテクストメニューを表示する。選択した項目のindexの値が返ってくる。選択されなければ-1。
 

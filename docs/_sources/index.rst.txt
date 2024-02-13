@@ -19,3 +19,4 @@
    UI/index
    Clipboard/index
    Keyboard/index
+   Mouse/index

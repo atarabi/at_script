@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>README &#8212; @script 0.2.0 documentation</title>
+    <title>README &#8212; @script 0.3.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
     <link rel="stylesheet" type="text/css" href="../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../_static/documentation_options.js?v=f552b7be"></script>
+    <script src="../_static/documentation_options.js?v=8487fde7"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/code-tabs.js?v=c983d12e"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="../index.html" title="@script"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.3.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">README</a></li> 
       </ul>
     </div>  
@@ -80,10 +80,42 @@
 <section id="atarabi-version">
 <h2>Atarabi.version<a class="headerlink" href="#atarabi-version" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">version:</span> <span class="pre">string;</span></code></p>
-<section id="v0-2-0-2023-09-16">
-<h3>v0.2.0(2023/09/16)<a class="headerlink" href="#v0-2-0-2023-09-16" title="Link to this heading">¶</a></h3>
+<section id="v0-3-0-2024-02-13">
+<h3>v0.3.0(2024/02/13)<a class="headerlink" href="#v0-3-0-2024-02-13" title="Link to this heading">¶</a></h3>
+<section id="fix">
+<h4>Fix<a class="headerlink" href="#fix" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Windows環境で、AME起動時などDynamic Link経由でAfterFXが起動する際にStartupのスクリプトがAfterFXをクラッシュさせる問題の対処 (<a class="reference external" href="https://github.com/atarabi/at_script/issues/1">#1</a>)</p></li>
+</ul>
+</section>
 <section id="api">
 <h4>API<a class="headerlink" href="#api" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Atarabi.isDynamicLink() の追加</p></li>
+<li><p>Mouse.getPosition() の追加</p></li>
+<li><p>Mouse.hook() の追加</p></li>
+<li><p>Mouse.unhook() の追加</p></li>
+<li><p>Mouse.enableHook() の追加</p></li>
+<li><p>Mouse.enableHookByUuid() の追加</p></li>
+<li><p>Mouse.sendClick() の追加</p></li>
+</ul>
+</section>
+<section id="script">
+<h4>Script<a class="headerlink" href="#script" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Dynamic Linkに関するバグに伴う、Startup系のスクリプトの修正</p></li>
+<li><p>&#64;effect_launcher が表示されなくなることがある問題の修正</p></li>
+<li><p>&#64;rpp_loader でプロジェクト内にEmpty Itemがあるときに読み込みが失敗する問題の修正</p></li>
+<li><p>Atarabi.UI.Builder にaddCustom()を追加</p></li>
+<li><p>&#64;effects_in_use の追加</p></li>
+<li><p>&#64;swatch の追加</p></li>
+</ul>
+</section>
+</section>
+<section id="v0-2-0-2023-09-16">
+<h3>v0.2.0(2023/09/16)<a class="headerlink" href="#v0-2-0-2023-09-16" title="Link to this heading">¶</a></h3>
+<section id="id6">
+<h4>API<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>App.setProjectDirty() の追加</p></li>
 <li><p>App.saveBackgroundState() の追加</p></li>
@@ -104,8 +136,8 @@
 <li><p>Keyboard.sendKeys() の追加</p></li>
 </ul>
 </section>
-<section id="script">
-<h4>Script<a class="headerlink" href="#script" title="Link to this heading">¶</a></h4>
+<section id="id7">
+<h4>Script<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>&#64;script_UI を !&#64;script_UI にリネーム</p></li>
 <li><p>&#64;effect_launcher の追加</p></li>
@@ -137,9 +169,15 @@
 <li><a class="reference internal" href="#target">対象</a></li>
 <li><a class="reference internal" href="#how-to">導入方法</a></li>
 <li><a class="reference internal" href="#atarabi-version">Atarabi.version</a><ul>
-<li><a class="reference internal" href="#v0-2-0-2023-09-16">v0.2.0(2023/09/16)</a><ul>
+<li><a class="reference internal" href="#v0-3-0-2024-02-13">v0.3.0(2024/02/13)</a><ul>
+<li><a class="reference internal" href="#fix">Fix</a></li>
 <li><a class="reference internal" href="#api">API</a></li>
 <li><a class="reference internal" href="#script">Script</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v0-2-0-2023-09-16">v0.2.0(2023/09/16)</a><ul>
+<li><a class="reference internal" href="#id6">API</a></li>
+<li><a class="reference internal" href="#id7">Script</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#v0-1-0-2023-08-28">v0.1.0(2023/08/28)</a></li>
@@ -186,12 +224,12 @@
         <li class="right" >
           <a href="../index.html" title="@script"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.3.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">README</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-    &#169; Copyright 2023, Atarabi.
+    &#169; Copyright 2023-2024, Atarabi.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>

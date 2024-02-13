@@ -50,6 +50,32 @@ Atarabi.version
 
 ``version: string;``
 
+v0.3.0(2024/02/13)
+^^^^^^^^^^^^^^^^^^^^
+
+Fix
+"""""""""""
+- Windows環境で、AME起動時などDynamic Link経由でAfterFXが起動する際にStartupのスクリプトがAfterFXをクラッシュさせる問題の対処 (`#1 <https://github.com/atarabi/at_script/issues/1>`_)
+
+API
+"""""""""""
+- Atarabi.isDynamicLink() の追加
+- Mouse.getPosition() の追加
+- Mouse.hook() の追加
+- Mouse.unhook() の追加
+- Mouse.enableHook() の追加
+- Mouse.enableHookByUuid() の追加
+- Mouse.sendClick() の追加
+
+Script
+"""""""""""
+- Dynamic Linkに関するバグに伴う、Startup系のスクリプトの修正
+- @effect_launcher が表示されなくなることがある問題の修正
+- @rpp_loader でプロジェクト内にEmpty Itemがあるときに読み込みが失敗する問題の修正
+- Atarabi.UI.Builder にaddCustom()を追加
+- @effects_in_use の追加
+- @swatch の追加
+
 v0.2.0(2023/09/16)
 ^^^^^^^^^^^^^^^^^^^^
 
