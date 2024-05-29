@@ -274,9 +274,12 @@ declare namespace Atarabi {
     interface Register {
         insertCommand(menu: Register.Menu, order: Register.Order, name: string, fn: Register.CommandFunc, enabledWhen?: Register.EnabledWhen): Uuid;
 
-        hookCommand(commandId: number, fn: Register.HookCoomandFunc): Uuid;
+        // default: order='AtBottom'
+        hookCommand(commandId: number, fn: Register.HookCoomandFunc, options?: { order?: Register.HookOrder; }): Uuid;
 
         unhookCommand(commandId: number, uuid: Uuid): boolean;
+
+        unhookCommandAll(commandId: number): boolean;
 
         // extension: [a-z0-9]{3}
         importFlavor(extension: string, fn: Register.ImportFlavorFunc): void;
@@ -291,6 +294,8 @@ declare namespace Atarabi {
         type CommandFunc = () => void;
 
         type EnabledWhen = 'Any' | 'ItemActive' | 'FolderActive' | 'CompActive' | 'LayerSelected';
+
+        type HookOrder = 'AtBottom' | 'AtTop';
 
         type HookCoomandFunc = (context?: HookCommandContext) => void;
 
