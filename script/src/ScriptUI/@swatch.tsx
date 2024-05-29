@@ -1,6 +1,7 @@
 /**
- * @swatch v1.0.0
+ * @swatch v1.0.1
  * 
+ *      v1.0.1(2024/05/29) Add helptip
  *      v1.0.0(2024/02/13)
  */
 ((global: Panel | Global) => {
@@ -193,6 +194,7 @@
         function createColorButton(color: Color) {
             const button = panel.add('button', undefined, '') as ColorButton;
             button.color = color;
+            button.helpTip = `(${color[0]}, ${color[1]}, ${color[2]})`;
             button.onDraw = colorButtonOnDraw;
             button.addEventListener('mousedown', (ev: MouseEvent) => {
                 if (ev.button === 0 && ev.detail === 2) {

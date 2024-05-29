@@ -1,6 +1,7 @@
 /**
- * @hook_solid v1.0.1
+ * @hook_solid v1.1.0
  * 
+ *      v1.1.0(2024/05/29) Add color panel
  *      v1.0.1(2024/02/13) Fix dynamic link bug
  *      v1.0.0(2023/08/28)
  */
@@ -20,13 +21,19 @@
             return;
         }
 
+        const settings = loadSettings();
+        const solidItems = collectSolidItems();
+        const black = [0, 0, 0] satisfies Atarabi.Color;
+        const white = [1, 1, 1] satisfies Atarabi.Color;
+
         const win = new Window('dialog', 'Solid Settings', undefined, { resizeable: false });
 
         // size
         const sizePanel = win.add('panel', undefined, 'Size');
         sizePanel.orientation = 'column';
+        sizePanel.alignment = ['fill', 'top'];
 
-        let prevRatio = comp.width / comp.height;
+        let prevRatio: [number, number] = ratio(comp.width, comp.height);
         let prevWidth = comp.width;
         let prevHeight = comp.height;
 
@@ -44,8 +51,13 @@
         const heightText = heightGroup.add('edittext', undefined, `${prevHeight}`);
         heightText.characters = 10;
 
-        const lockCheckBox = sizePanel.add('checkbox', undefined, 'Lock Aspect Ratio');
+        const lockCheckBox = sizePanel.add('checkbox', undefined, `Lock Aspect Ratio to ${prevRatio[0]}:${prevRatio[1]}`);
         lockCheckBox.value = true;
+
+        const updateRatio = (x: number, y: number) => {
+            prevRatio = ratio(x, y);
+            lockCheckBox.text = `Lock Aspect Ratio to ${prevRatio[0]}:${prevRatio[1]}`;
+        };
 
         widthText.onChange = () => {
             let newWidth = comp.width;
@@ -57,11 +69,11 @@
             }
             newWidth = clamp(newWidth, 1, 30000);
             if (lockCheckBox.value) {
-                let newHeight = clamp(~~(newWidth / prevRatio), 1, 30000);
+                let newHeight = clamp(~~(newWidth * prevRatio[1] / prevRatio[0]), 1, 30000);
                 prevHeight = newHeight;
                 heightText.text = `${prevHeight}`
             } else {
-                prevRatio = newWidth / prevHeight;
+                updateRatio(newWidth, prevHeight);
             }
             prevWidth = newWidth;
             widthText.text = `${prevWidth}`
@@ -77,28 +89,109 @@
             }
             newHeight = clamp(newHeight, 1, 30000);
             if (lockCheckBox.value) {
-                let newWidth = clamp(~~(newHeight * prevRatio), 1, 30000);
+                let newWidth = clamp(~~(newHeight * prevRatio[0] / prevRatio[1]), 1, 30000);
                 prevWidth = newWidth;
                 widthText.text = `${prevWidth}`;
             } else {
-                prevRatio = prevWidth / newHeight;
+                updateRatio(prevWidth, newHeight);
             }
             prevHeight = newHeight;
             heightText.text = `${prevHeight}`;
         };
 
-        lockCheckBox.onClick = () => {
-            if (lockCheckBox.value) {
-                prevRatio = prevWidth / prevHeight;
+        lockCheckBox.onClick = function (this: Checkbox) {
+            if (this.value) {
+                updateRatio(prevWidth, prevHeight);
             }
+        };
+
+        // color
+        let currentColor: Atarabi.Color = white;
+        const colorPanel = win.add('panel', undefined, 'Color');
+        colorPanel.orientation = 'column';
+        colorPanel.alignment = ['fill', 'top'];
+        colorPanel.spacing = 5;
+        type ColorButton = Button & { color: Atarabi.Color; };
+        const colorButtons: ColorButton[] = [];
+        let currentColorButton: Button = null;
+        function colorButtonOnDraw(this: ColorButton) {
+            const size = this.size;
+            const g = this.graphics;
+            g.rectPath(0, 0, size[0], size[1]);
+            g.fillPath(g.newBrush(g.BrushType.SOLID_COLOR, clampColor(this.color)));
+            if (currentColorButton === this) {
+                g.strokePath(g.newPen(g.PenType.SOLID_COLOR, black, 6));
+                g.strokePath(g.newPen(g.PenType.SOLID_COLOR, white, 2));
+            }
+        }
+        function updateColorButtons() {
+            for (const button of colorButtons) {
+                button.notify('onDraw');
+            }
+        }
+        // color picker
+        const colorPickerGroup = colorPanel.add('group');
+        colorPickerGroup.alignment = ['fill', 'top'];
+        colorPickerGroup.spacing = 7;
+        const colorPickerButton = colorPickerGroup.add('button') as ColorButton;
+        colorPickerButton.alignment = ['fill', 'top'];
+        colorPickerButton.preferredSize[1] = 20;
+        colorPickerButton.color = white;
+        colorPickerButton.helpTip = colorToHelpTip(white);
+        colorPickerButton.onDraw = colorButtonOnDraw;
+        colorPickerButton.onClick = function (this: ColorButton) {
+            const newColor = Atarabi.app.colorPicker(this.color);
+            if (newColor) {
+                this.helpTip = colorToHelpTip(newColor);
+                currentColor = this.color = newColor;
+                currentColorButton = this;
+            }
+            updateColorButtons();
+        };
+        currentColorButton = colorPickerButton;
+        colorButtons.push(colorPickerButton);
+        // separator
+        const colors = collectColors(solidItems);
+        if (colors.length) {
+            const separator = colorPanel.add('panel');
+            separator.alignment = ['fill', 'top'];
+            separator.preferredSize[1] = 2;
+        }
+        // colors
+        let colorGroup: Group = null;
+        for (let i = 0, l = colors.length; i < l; i++) {
+            if (i % 7 === 0) {
+                colorGroup = colorPanel.add('group');
+                colorGroup.orientation = 'row';
+                colorGroup.alignment = ['fill', 'top'];
+                colorGroup.spacing = 7;
+            }
+            const color = colors[i];
+            const colorButton = colorGroup.add('button') as ColorButton;
+            colorButton.preferredSize = [20, 20];
+            colorButton.color = color;
+            colorButton.helpTip = colorToHelpTip(color);
+            colorButton.onDraw = colorButtonOnDraw;
+            colorButton.onClick = function (this: ColorButton) {
+                currentColor = colorPickerButton.color = this.color;
+                currentColorButton = this;
+                updateColorButtons();
+            };
+            colorButtons.push(colorButton);
+        }
+
+        // options
+        const addFillEffectCheckbox = win.add('checkbox', undefined, 'Use Fill Effect');
+        addFillEffectCheckbox.alignment = ['left', 'top'];
+        addFillEffectCheckbox.value = settings.useFillEffect;
+        addFillEffectCheckbox.onClick = function(this: Checkbox) {
+            settings.useFillEffect = this.value;
         };
 
         // button
         const buttonGroup = win.add('group');
         buttonGroup.orientation = 'row';
         const okButton = buttonGroup.add('button', undefined, 'OK');
-        const cancelButton = buttonGroup.add('button', undefined, 'Cancel');
-
         okButton.onClick = () => {
             try {
                 app.beginUndoGroup('New: Solid');
@@ -121,30 +214,27 @@
                     if (!layers.length) {
                         return [null, false];
                     }
-
                     layers.sort((lhs, rhs) => {
-                        if (lhs.index < rhs.index) {
-                            return -1;
-                        } else if (lhs.index > rhs.index) {
-                            return 1;
-                        }
-                        return 0;
+                        return lhs.index - rhs.index;
                     });
-
                     return [layers[0], layers.length === 1];
                 })();
                 const solidLayer = (() => {
-                    const proj = app.project;
-                    const solidName = `Solid ${solidWidth}x${solidHeight}`;
-                    for (let i = 1, l = proj.numItems; i <= l; ++i) {
-                        const item = proj.item(i);
-                        if (item instanceof FootageItem && item.mainSource instanceof SolidSource && item.name === solidName && item.width === solidWidth && item.height == solidHeight) {
+                    const solidName = `Solid (${solidWidth}x${solidHeight})`;
+                    const color = settings.useFillEffect ? white : currentColor;
+                    const eps = 1e-3;
+                    for (const item of solidItems) {
+                        if (item.name.indexOf(solidName) === 0 && item.width === solidWidth && item.height === solidHeight && Math.abs(item.mainSource.color[0] - color[0]) < eps && Math.abs(item.mainSource.color[1] - color[1]) < eps && Math.abs(item.mainSource.color[2] - color[2]) < eps) {
                             return comp.layers.add(item);
                         }
                     }
-                    return comp.layers.addSolid([1, 1, 1], solidName, solidWidth, solidHeight, 1);
+                    return comp.layers.addSolid(color, solidName, solidWidth, solidHeight, 1);
                 })();
                 solidLayer.name = layerName;
+                if (settings.useFillEffect) {
+                    const fillEffect = solidLayer.effect.addProperty(ADOBE_FILL) as PropertyGroup;
+                    (fillEffect(ADOBE_FILL_COLOR) as Property).setValue(currentColor);
+                }
                 if (topLayer) {
                     solidLayer.moveBefore(topLayer);
                     if (single) {
@@ -157,9 +247,10 @@
             } finally {
                 app.endUndoGroup();
             }
+            saveSettings(settings);
             win.close();
         };
-
+        const cancelButton = buttonGroup.add('button', undefined, 'Cancel');
         cancelButton.onClick = () => {
             win.close();
         };
@@ -168,8 +259,108 @@
         win.show();
     }
 
+    const SCRIPT_NAME = '@hook_solid';
+
+    function gcd(x: number, y: number) {
+        if (!y) {
+            return x;
+        }
+        return gcd(y, x % y);
+    }
+
+    function ratio(x: number, y: number): [number, number] {
+        const d = gcd(x, y);
+        return [x / d, y / d];
+    }
+
     function clamp(v: number, mn: number, mx: number) {
         return Math.min(Math.max(v, mn), mx);
+    }
+
+    function clampColor(c: Atarabi.Color): Atarabi.Color {
+        return [clamp(c[0], 0, 1), clamp(c[1], 0, 1), clamp(c[2], 0, 1)];
+    }
+
+    function isWhite(c: Atarabi.Color) {
+        return c[0] === 1 && c[1] === 1 && c[2] === 1;
+    }
+
+    function colorToHelpTip(c: Atarabi.Color) {
+        const r = (v: number) => Math.round(v * 255);
+        return `(${r(c[0])},${r(c[1])},${r(c[2])})`;
+    }
+
+    function colorToStr(c: Atarabi.Color) {
+        return `${c[0]},${c[1]},${c[2]}`;
+    }
+
+    type SolidItem = Omit<FootageItem, 'mainSource'> & { mainSource: SolidSource };
+
+    function collectSolidItems(): SolidItem[] {
+        const proj = app.project;
+        const solidItems: SolidItem[] = [];
+        for (let i = 1, l = proj.numItems; i <= l; i++) {
+            const item = proj.item(i);
+            if (item instanceof FootageItem && item.mainSource instanceof SolidSource) {
+                solidItems.push(item as SolidItem);
+            }
+        }
+        return solidItems;
+    }
+
+    function collectColors(solidItems: SolidItem[]): Atarabi.Color[] {
+        const colors: Atarabi.Color[] = [];
+        const solidIds: { [key: string]: number } = {};
+        for (const item of solidItems) {
+            if (/^Solid \(\d+x\d+\)/.test(item.name)) {
+                const color = item.mainSource.color;
+                if (isWhite(color)) {
+                    continue;
+                }
+                const colorStr = colorToStr(color);
+                if (solidIds[colorStr] === void 0) {
+                    solidIds[colorStr] = item.id;
+                    colors.push(color);
+                } else {
+                    solidIds[colorStr] = Math.min(solidIds[colorStr], item.id);
+                }
+            }
+        }
+        colors.sort((lhs, rhs) => {
+            return solidIds[colorToStr(lhs)] - solidIds[colorToStr(rhs)];
+        });
+        return colors;
+    }
+
+    const SECTION_NAME = `@script/${SCRIPT_NAME}` as const;
+    const KEY_NAME = 'settings';
+
+    const ADOBE_FILL = 'ADBE Fill';
+    const ADOBE_FILL_COLOR = 'ADBE Fill-0002';
+
+    interface HookSolidSettings {
+        useFillEffect: boolean;
+    }
+
+    function loadSettings(): HookSolidSettings {
+        if (app.settings.haveSetting(SECTION_NAME, KEY_NAME)) {
+            try {
+                const settings = Atarabi.JSON.parse(app.settings.getSetting(SECTION_NAME, KEY_NAME)) as HookSolidSettings;
+                if (typeof settings.useFillEffect !== 'boolean') {
+                    settings.useFillEffect = false;
+                }
+                return settings;
+            } catch (e) {
+                // pass
+            }
+        }
+        return {
+            useFillEffect: false,
+        };
+    }
+
+    function saveSettings(settings: HookSolidSettings) {
+        app.settings.saveSetting(SECTION_NAME, KEY_NAME, Atarabi.JSON.stringify(settings));
     }
 
 })();

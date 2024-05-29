@@ -1,6 +1,7 @@
 /**
  * @hook_adjustment v1.0.1
  * 
+ *      v1.0.2(2024/05/29) Change solid's name
  *      v1.0.1(2024/02/13) Fix dynamic link bug
  *      v1.0.0(2023/08/28)
  */
@@ -15,7 +16,7 @@
     });
 
     function main() {
-        const comp = app.project.activeItem as CompItem;
+        const comp = app.project.activeItem;
         if (!(comp instanceof CompItem)) {
             return;
         }
@@ -65,10 +66,10 @@
             })('Adjustment Layer');
             const solidLayer = (() => {
                 const proj = app.project;
-                const solidName = `Solid ${solidWidth}x${solidHeight}`;
-                for (let i = 1, l = proj.numItems; i <= l; ++i) {
+                const solidName = `Solid (${solidWidth}x${solidHeight})`;
+                for (let i = 1, l = proj.numItems; i <= l; i++) {
                     const item = proj.item(i);
-                    if (item instanceof FootageItem && item.mainSource instanceof SolidSource && item.name === solidName && item.width === solidWidth && item.height == solidHeight) {
+                    if (item instanceof FootageItem && item.mainSource instanceof SolidSource && item.name.indexOf(solidName) === 0 && item.width === solidWidth && item.height === solidHeight && item.mainSource.color[0] === 1 && item.mainSource.color[1] === 1 && item.mainSource.color[2] === 1) {
                         return comp.layers.add(item);
                     }
                 }
