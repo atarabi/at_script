@@ -66,7 +66,7 @@ Register.insertCommand()
 Register.hookCommand()
 ------------------------
 
-``hookCommand(commandId: number, fn: HookCoomandFunc): Uuid;``
+``hookCommand(commandId: number, fn: HookCoomandFunc, options?: { order?: Register.HookOrder; }): Uuid;``
 
 既存のコマンドをフックする。
 
@@ -105,7 +105,7 @@ Register.unhookCommand()
 
 ``unhookCommand(commandId: number, uuid: Uuid): boolean;``
 
-**Register.hookCommand()** で実行したフックを解除する。
+**Register.hookCommand()** で追加したフックを解除する。
 
 .. tabs::
 
@@ -126,6 +126,44 @@ Register.unhookCommand()
             });
             Atarabi.register.unhookCommand(2080, uuid);
         })();
+
+Register.unhookCommandAll()
+---------------------------
+
+``unhookCommandAll(commandId: number): boolean;``
+
+**Register.hookCommand()** で追加したフックをすべて解除する。
+
+.. tabs::
+
+    .. code-tab:: TypeScript
+
+        (() => {
+            (() => {
+                for (let i = 0; i < 10; i++) {
+                    Atarabi.register.hookCommand(2080 /* Duplicate */, ctx => {
+                        // do nothing
+                    });
+                }
+                Atarabi.register.unhookCommandAll(2080);
+            })();
+        });
+
+    .. code-tab:: JavaScript
+        
+        (function () {
+            (function () {
+                for (var i = 0; i < 10; i++) {
+                    Atarabi.register.hookCommand(2080 /* Duplicate */, function (ctx) {
+                        // do nothing
+                    });
+                }
+                Atarabi.register.unhookCommandAll(2080);
+            })();
+        });
+
+.. versionadded:: 0.3.1
+
 
 Register.importFlavor()
 ------------------------

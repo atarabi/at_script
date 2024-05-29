@@ -50,6 +50,25 @@ Atarabi.version
 
 ``version: string;``
 
+v0.3.1(2024/05/29)
+^^^^^^^^^^^^^^^^^^^^
+
+Fix
+"""""""""""
+- ある環境下で、API実行時にPreferencesのウインドウが表示される問題の対処 (`#3 <https://github.com/atarabi/at_script/issues/3>`_)
+
+API
+"""""""""""
+- Register.hookCommand() の引数にoptionsを追加
+- Register.unhookCommandAll() の追加
+
+Script
+"""""""""""
+- @hook_solid の平面の命名規則の変更及びカラーパネルの追加 (`#4 <https://github.com/atarabi/at_script/issues/4>`_)
+- @hook_adjustment の平面の命名規則の変更
+- @hook_null のリファクタリング
+- @swatch にツールチップを追加
+
 v0.3.0(2024/02/13)
 ^^^^^^^^^^^^^^^^^^^^
 
