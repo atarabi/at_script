@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Effect &#8212; @script 0.3.1 documentation</title>
+    <title>Effect &#8212; @script 0.4.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
     <link rel="stylesheet" type="text/css" href="../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../_static/documentation_options.js?v=20ff79fe"></script>
+    <script src="../_static/documentation_options.js?v=0adc0c29"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/code-tabs.js?v=c983d12e"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="../Layer/index.html" title="Layer"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.3.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.4.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Effect</a></li> 
       </ul>
     </div>  
@@ -81,6 +81,199 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
 </pre></div>
 </div>
 </div></div></section>
+<section id="effect-adbe-curvescustom-getcurvesvalue">
+<h2>Effect['ADBE CurvesCustom'].getCurvesValue()<a class="headerlink" href="#effect-adbe-curvescustom-getcurvesvalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getCurvesValue(curvesProperty:</span> <span class="pre">Property,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">preExpression?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">Curves.CurvesValue;</span></code></p>
+<p>トーンカーブの値を取得する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">properties</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="p">.</span><span class="nx">matchName</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;ADBE CurvesCustom-0001&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">effect</span><span class="p">[</span><span class="s1">&#39;ADBE CurvesCustom&#39;</span><span class="p">].</span><span class="nx">getCurvesValue</span><span class="p">(</span><span class="nx">property</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">Property</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">alert</span><span class="p">(</span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">properties_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">properties_2</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties_2</span><span class="p">[</span><span class="nx">_i</span><span class="p">];</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="p">.</span><span class="nx">matchName</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;ADBE CurvesCustom-0001&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">effect</span><span class="p">[</span><span class="s1">&#39;ADBE CurvesCustom&#39;</span><span class="p">].</span><span class="nx">getCurvesValue</span><span class="p">(</span><span class="nx">property</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">alert</span><span class="p">(</span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.4.0.</span></p>
+</div>
+</section>
+<section id="effect-adbe-curvescustom-setcurvesvalue">
+<h2>Effect['ADBE CurvesCustom'].setCurvesValue()<a class="headerlink" href="#effect-adbe-curvescustom-setcurvesvalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setCurvesValue(curvesProperty:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">Curves.ParticalCurvesValue,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">key?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>トーンカーブの値を設定する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">Atarabi.Effect.Curves.ParticalCurvesValue</span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;curve&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">rgb</span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mf">0.15</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="mf">0.85</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">]],</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">properties</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="p">.</span><span class="nx">matchName</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;ADBE CurvesCustom-0001&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">effect</span><span class="p">[</span><span class="s1">&#39;ADBE CurvesCustom&#39;</span><span class="p">].</span><span class="nx">setCurvesValue</span><span class="p">(</span><span class="nx">property</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">Property</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;curve&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">rgb</span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mf">0.15</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="mf">0.85</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">]],</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">properties_3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">properties_3</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties_3</span><span class="p">[</span><span class="nx">_i</span><span class="p">];</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="p">.</span><span class="nx">matchName</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;ADBE CurvesCustom-0001&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">effect</span><span class="p">[</span><span class="s1">&#39;ADBE CurvesCustom&#39;</span><span class="p">].</span><span class="nx">setCurvesValue</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.4.0.</span></p>
+</div>
+</section>
+<section id="effect-apc-colorama-getoutputcyclevalue">
+<h2>Effect['APC Colorama'].getOutputCycleValue()<a class="headerlink" href="#effect-apc-colorama-getoutputcyclevalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getOutputCycleValue(outputCycleProperty:</span> <span class="pre">Property,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">preExpression?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">Colorama.OutputCycleValue;</span></code></p>
+<p>コロラマの出力サイクルの値を取得する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">properties</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="p">.</span><span class="nx">matchName</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;APC Colorama-0012&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">effect</span><span class="p">[</span><span class="s1">&#39;APC Colorama&#39;</span><span class="p">].</span><span class="nx">getOutputCycleValue</span><span class="p">(</span><span class="nx">property</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">Property</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">alert</span><span class="p">(</span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">properties_4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">properties_4</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties_4</span><span class="p">[</span><span class="nx">_i</span><span class="p">];</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="p">.</span><span class="nx">matchName</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;APC Colorama-0012&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">effect</span><span class="p">[</span><span class="s1">&#39;APC Colorama&#39;</span><span class="p">].</span><span class="nx">getOutputCycleValue</span><span class="p">(</span><span class="nx">property</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">alert</span><span class="p">(</span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.4.0.</span></p>
+</div>
+</section>
+<section id="effect-apc-colorama-setoutputcyclevalue">
+<h2>Effect['APC Colorama'].setOutputCycleValue()<a class="headerlink" href="#effect-apc-colorama-setoutputcyclevalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setOutputCycleValue(outputCycleProperty:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">Colorama.OutputCycleValue,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">key?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>コロラマの出力サイクルの値を設定する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">Atarabi.Effect.Colorama.OutputCycleValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">triangles</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">            </span><span class="nx">selected</span><span class="o">:</span><span class="w"> </span><span class="kt">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">64</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">value</span><span class="p">.</span><span class="nx">triangles</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">location</span><span class="o">:</span><span class="w"> </span><span class="kt">i</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">63</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">generateRandomNumber</span><span class="p">(),</span><span class="w"> </span><span class="nx">generateRandomNumber</span><span class="p">(),</span><span class="w"> </span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">properties</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="p">.</span><span class="nx">matchName</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;APC Colorama-0012&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">effect</span><span class="p">[</span><span class="s1">&#39;APC Colorama&#39;</span><span class="p">].</span><span class="nx">setOutputCycleValue</span><span class="p">(</span><span class="nx">property</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">Property</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">triangles</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">            </span><span class="nx">selected</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">64</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">value</span><span class="p">.</span><span class="nx">triangles</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">location</span><span class="o">:</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">63</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">generateRandomNumber</span><span class="p">(),</span><span class="w"> </span><span class="nx">generateRandomNumber</span><span class="p">(),</span><span class="w"> </span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">properties_5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">properties_5</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties_5</span><span class="p">[</span><span class="nx">_i</span><span class="p">];</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="p">.</span><span class="nx">matchName</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;APC Colorama-0012&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">effect</span><span class="p">[</span><span class="s1">&#39;APC Colorama&#39;</span><span class="p">].</span><span class="nx">setOutputCycleValue</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.4.0.</span></p>
+</div>
+</section>
 </section>
 
 
@@ -95,6 +288,10 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
     <ul>
 <li><a class="reference internal" href="#">Effect</a><ul>
 <li><a class="reference internal" href="#effect-updateparamui">Effect.updateParamUI()</a></li>
+<li><a class="reference internal" href="#effect-adbe-curvescustom-getcurvesvalue">Effect['ADBE CurvesCustom'].getCurvesValue()</a></li>
+<li><a class="reference internal" href="#effect-adbe-curvescustom-setcurvesvalue">Effect['ADBE CurvesCustom'].setCurvesValue()</a></li>
+<li><a class="reference internal" href="#effect-apc-colorama-getoutputcyclevalue">Effect['APC Colorama'].getOutputCycleValue()</a></li>
+<li><a class="reference internal" href="#effect-apc-colorama-setoutputcyclevalue">Effect['APC Colorama'].setOutputCycleValue()</a></li>
 </ul>
 </li>
 </ul>
@@ -136,7 +333,7 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
         <li class="right" >
           <a href="../Layer/index.html" title="Layer"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.3.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.4.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Effect</a></li> 
       </ul>
     </div>

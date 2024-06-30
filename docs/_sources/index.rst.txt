@@ -20,3 +20,4 @@
    Clipboard/index
    Keyboard/index
    Mouse/index
+   SVG/index

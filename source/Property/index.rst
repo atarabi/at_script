@@ -115,3 +115,51 @@ Property.clickButton()
 ``clickButton(property: Property): void;``
 
 内部的には、 **Property.userChangedParam()** に同じ。ボタンかどうか確認した後に発火させる。
+
+Property.saveCustomValue()
+-----------------------------------
+
+``saveCustomValue(property: Property, file: File, options?: { time?: number; preExpression?: boolean; }): void;``
+
+**PropertyValueType** が **CUSTOM_VALUE** のパラメータのデータをバイナリとしてファイルに保存する。
+
+.. tabs::
+
+    .. code-tab:: TypeScript
+        
+        (() => {
+            const comp = app.project.activeItem;
+            if (!(comp instanceof CompItem)) {
+                return;
+            }
+
+            const properties = comp.selectedProperties.slice();
+
+            for (const property of properties) {
+                if (property instanceof Property && property.propertyValueType === PropertyValueType.CUSTOM_VALUE) {
+                    const file = new File(`${Folder.desktop.absoluteURI}/${property.name}_${Date.now()}.dat`);
+                    Atarabi.property.saveCustomValue(property, file);
+                }
+            }
+        })();
+
+    .. code-tab:: JavaScript
+
+        (function () {
+            var comp = app.project.activeItem;
+            if (!(comp instanceof CompItem)) {
+                return;
+            }
+            var properties = comp.selectedProperties.slice();
+            for (var _i = 0, properties_1 = properties; _i < properties_1.length; _i++) {
+                var property = properties_1[_i];
+                if (property instanceof Property && property.propertyValueType === PropertyValueType.CUSTOM_VALUE) {
+                    var file = new File("".concat(Folder.desktop.absoluteURI, "/").concat(property.name, "_").concat(Date.now(), ".dat"));
+                    Atarabi.property.saveCustomValue(property, file);
+                }
+            }
+        })();
+
+
+.. versionadded:: 0.4.0
+

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SVG &#8212; @script 0.4.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
+    <link rel="stylesheet" type="text/css" href="../_static/code-tabs.css?v=1bc26e2f" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
+    
+    <script src="../_static/documentation_options.js?v=0adc0c29"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/code-tabs.js?v=c983d12e"></script>
+    
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Mouse" href="../Mouse/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Mouse/index.html" title="Mouse"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.4.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">SVG</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="svg">
+<h1>SVG<a class="headerlink" href="#svg" title="Link to this heading">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>&#64;svg(Startup script) is required</p>
+</div>
+<p><strong>&#64;svg.jsx</strong> 内でSVGの読み込みに関する処理を実装している（ただし、useタグなど未実装のものや、グラデーションなど実装自体が困難なものがあるので、完全には再現されない）。
+また、 拡張子が <strong>.svg</strong>　のファイルに対して <a class="reference external" href="../Register/index.html#register-importflavor">Register.importFlavor()</a> を用いて読み込めるようにしてあるので、ドラッグ&amp;ドロップで容易にsvgファイルをシェイプレイヤーに変換することが出来る。</p>
+<section id="svg-svgtoshapelayer">
+<h2>SVG.svgToShapeLayer()<a class="headerlink" href="#svg-svgtoshapelayer" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">svgToShapeLayer(svgFile:</span> <span class="pre">File,</span> <span class="pre">shapeLayer?:</span> <span class="pre">ShapeLayer):</span> <span class="pre">ShapeLayer;</span></code></p>
+<p>svgファイルを読み込み、シェイププレイヤーに変換する。shapeLayerを与えればそのシェイプレイヤー下に、与えなければ、アクティブなコンポに新たにシェイプレイヤーを作り、その下に構築する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.4.0.</span></p>
+</div>
+</section>
+<section id="svg-getcontext">
+<h2>SVG.getContext()<a class="headerlink" href="#svg-getcontext" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getContext(layer?:</span> <span class="pre">AVLayer):</span> <span class="pre">SVG.Context;</span></code></p>
+<p>htmlにおけるcanvasのgetContext()よろしく、SVGのコマンドを用いてシェイプやマスクのパスを構築できる。 <a class="reference external" href="https://github.com/atarabi/at_script/blob/main/script/types/%40script.svg.d.ts">&#64;script.svg.d.ts</a> や <a class="reference external" href="https://www.w3.org/TR/SVG11/paths.html">Paths – SVG 1.1 (Second Edition)</a> 参照のこと。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">comp</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">CompItem</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">layers</span><span class="p">.</span><span class="nx">addSolid</span><span class="p">([</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">],</span><span class="w"> </span><span class="s1">&#39;Solid&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">duration</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">SVG</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="nx">layer</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">style</span><span class="p">({</span><span class="w"> </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">],</span><span class="w"> </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="kt">10</span><span class="w"> </span><span class="p">});</span><span class="w"> </span><span class="c1">// スタイルの設定（マスクの場合は当然反映されない）</span>
+<span class="w">    </span><span class="c1">// 適当にコマンドを入力していく、大文字から始まるコマンドは絶対座標、小文字から始まるコマンドは相対座標</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">M</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// MoveTo</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Q</span><span class="p">(</span><span class="mf">300</span><span class="p">,</span><span class="w"> </span><span class="mf">400</span><span class="p">,</span><span class="w"> </span><span class="mf">500</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// QuadraticCurveTo</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">100</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">t</span><span class="p">(</span><span class="nx">generateRandomNumber</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="nx">generateRandomNumber</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// smoothQuadraticCurveTo</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">shape</span><span class="p">();</span><span class="w"> </span><span class="c1">// シェイプを生成、 ctx.mask(); にするとマスクを生成する</span>
+
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="c1">// SVG.getContext</span>
+<span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">comp</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">CompItem</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">layers</span><span class="p">.</span><span class="nx">addSolid</span><span class="p">([</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">],</span><span class="w"> </span><span class="s1">&#39;Solid&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">duration</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">SVG</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="nx">layer</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">style</span><span class="p">({</span><span class="w"> </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">],</span><span class="w"> </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="p">});</span><span class="w"> </span><span class="c1">// スタイルの設定（マスクの場合は当然反映されない）</span>
+<span class="w">    </span><span class="c1">// 適当にコマンドを入力していく、大文字から始まるコマンドは絶対座標、小文字から始まるコマンドは相対座標</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">M</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// MoveTo</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Q</span><span class="p">(</span><span class="mf">300</span><span class="p">,</span><span class="w"> </span><span class="mf">400</span><span class="p">,</span><span class="w"> </span><span class="mf">500</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// QuadraticCurveTo</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">100</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">t</span><span class="p">(</span><span class="nx">generateRandomNumber</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="nx">generateRandomNumber</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// smoothQuadraticCurveTo</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">shape</span><span class="p">();</span><span class="w"> </span><span class="c1">// シェイプを生成、 ctx.mask(); にするとマスクを生成する</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.4.0.</span></p>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">SVG</a><ul>
+<li><a class="reference internal" href="#svg-svgtoshapelayer">SVG.svgToShapeLayer()</a></li>
+<li><a class="reference internal" href="#svg-getcontext">SVG.getContext()</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../Mouse/index.html"
+                          title="previous chapter">Mouse</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Mouse/index.html" title="Mouse"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.4.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">SVG</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023-2024, Atarabi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

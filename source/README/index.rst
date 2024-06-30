@@ -50,6 +50,23 @@ Atarabi.version
 
 ``version: string;``
 
+v0.4.0(2024/06/xx)
+^^^^^^^^^^^^^^^^^^^^
+
+Fix
+"""""""""""
+- Register.importFlavor() で登録した拡張子のファイルを複数個同時に読み込んだ際に、モーダルダイアログに関するエラーが生じることに対する修正
+
+API
+"""""""""""
+- Property.saveCustomValue() の追加
+- Effect['ADBE CurvesCustom'] の追加
+- Effect['APC Colorama'] の追加
+
+Script
+"""""""""""
+- @svg の追加
+
 v0.3.1(2024/05/29)
 ^^^^^^^^^^^^^^^^^^^^
 
