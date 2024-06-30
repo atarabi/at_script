@@ -1,3 +1,4 @@
+// !@script_UI is required
 declare namespace Atarabi {
 
     interface UI {

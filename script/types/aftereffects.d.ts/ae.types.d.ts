@@ -16,6 +16,9 @@ declare var writeLn: (text: string) => void;
 /** When true, the specified object exists. */
 declare var isValid: (obj: Object) => boolean;
 
+/** 24.0- Returns the string value of an Enum. */
+declare var getEnumAsString: (Enum: number) => string;
+
 /** Provides access to objects and application settings within the After Effects application. The single global object is always available by its name, app. */
 declare class Application {
   /** The current After Effects project. */
@@ -74,6 +77,9 @@ declare class Application {
 
   /** CC2017- */
   availableGPUAccelTypes: GpuAccelType[];
+
+  /** 24.0- Returns an object to navigate and retreive all the fonts currently available on your system. */
+  readonly fonts: Fonts;
 
   /** Creates a new project in After Effects. */
   newProject(): Project | null;
@@ -140,6 +146,9 @@ declare class Application {
   cancelTimeout(id: number): void;
 
   objectToJSON(object: any): string;
+
+  /** CC 2022(22.0)-  Calling this function from a script will set the Multi-Frame Rendering configuration for the next render. After execution of the script is complete, these settings will be reset to what was previously set in the UI.*/
+  setMultiFrameRenderingConfig(mfr_on: boolean, max_cpu_perc: number): void;
 }
 
 declare class Preferences {
@@ -204,7 +213,7 @@ declare class AVItem extends Item {
   /** CC 2020(17.1)- The time set as the beginning of the composition, in seconds. This is the equivalent of the Start Timecode or Start Frame setting in the Composition Settings dialog box. */
   displayStartTime: number;
 
-  /** CC 2021()- Test whether the AVItem can be used as an alternate source when calling Property.setAlternateSource(). */
+  /** CC 2021(18.0)- Test whether the AVItem can be used as an alternate source when calling Property.setAlternateSource(). */
   readonly isMediaReplacementCompatible: boolean;
 
   /** Sets a proxy for the item. */
@@ -315,6 +324,9 @@ declare class AVLayer extends Layer {
   /** The layer sampling quality setting. */
   samplingQuality: LayerSamplingQuality;
 
+  /** 23.0-  Returns the track matte layer for this layer. Returns null if this layer has no track matte layer. */
+  readonly trackMatteLayer: AVLayer | null;
+
   /** Reports whether this layer's audio is active at a given time. */
   audioActiveAtTime(time: number): boolean;
 
@@ -345,6 +357,12 @@ declare class AVLayer extends Layer {
   /** CC 2021(18.0)- Test whether or not the layer can be added to the Essential Graphics Panel for the specified composition.*/
   canAddToMotionGraphicsTemplate(comp: CompItem): boolean;
 
+  /** 23.0-  Sets the track matte layer and type for this layer. Passing in null to trackMatteLayer parameter removes the track matte. See AVLayer.removeTrackMatte() for another way of removing track matte.*/
+  setTrackMatte(trackMatteLayer: AVLayer, trackMatteType: TrackMatteType): void;
+
+  /** 23.0- Removes the track matte for this layer while preserving the TrackMatteType. See AVLayer.setTrackMatte() for another way of removing track matte.*/
+  removeTrackMatte(): void;
+
   //Shortcuts
   readonly timeRemap: Property;
   readonly mask: PropertyGroup;
@@ -354,6 +372,7 @@ declare class AVLayer extends Layer {
   readonly materialOption: _MaterialOptionsGroup;
   readonly audio: _AudioGroup;
   readonly masterProperty: PropertyGroup;
+  readonly essentialProperty: PropertyGroup;
 }
 
 /** The CameraLayer object represents a camera layer within a composition. Create it using the LayerCollection object’s addCamera method */
@@ -408,6 +427,9 @@ declare class CompItem extends AVItem {
 
   /** The current active camera layer. */
   readonly activeCamera: CameraLayer | null;
+
+  /** CC 2020(17.1)- The frame value of the beginning of the composition.*/
+  displayStartFrame: number;
 
   /** Changes the display of the start time in the Timeline panel. */
   displayStartTime: number;
@@ -713,6 +735,9 @@ declare class Layer {
   /** The type of automatic orientation for the layer. */
   autoOrient: AutoOrientType;
 
+  /** CC2022(22.0)- Instance property on Layer which returns a unique and persistent identification number used internally to identify a Layer between sessions. The value of the ID remains the same when the project is saved to a file and later reloaded. However, when you import this project into another project, new IDs are assigned to all Layers in the imported project. The ID is not displayed anywhere in the user interface..*/
+  readonly id: number;
+
   /** Deletes the layer from the composition. */
   remove(): void;
 
@@ -742,6 +767,9 @@ declare class Layer {
 
   /** Applies a named collection of animation settings to the layer. */
   applyPreset(presetName: File): void;
+
+  /** CC 2022(22.3)-  Runs Scene Edit Detection on the layer that the method is called on and returns an array containing the times of any detected scenes. This is the same as selecting a layer in the Timeline and choosing “Layer > Scene Edit Detection” with the single argument determining whether the edits are applied as markers, layer splits, pre-comps, or are not applied to the layer. Just as in the UI, doSceneEditDetection will fail and error if called on a non-video layer or a video layer with Time Remapping enabled.*/
+  doSceneEditDetection(applyOptions: SceneEditDetectionMode): number[];
 
   //From PropertyGroup
   readonly matchName: string;
@@ -777,7 +805,13 @@ declare class LayerCollection extends Collection {
   addText(sourceText?: string | TextDocument): TextLayer;
 
   /** Creates a new paragraph (box) text layer and adds it to this collection. */
-  addBoxText(size: [number, number], sourceText?: string | TextDocument): TextLayer;
+  addBoxText([width, height]: [number, number], sourceText?: string | TextDocument): TextLayer;
+
+  /** 24.2-  Creates a new point text layer with TextDocument.lineOrientation set to LineOrientation.VERTICAL_RIGHT_TO_LEFT and adds the new TextLayer object to this collection. To create a paragraph (box) text layer, use the LayerCollection.addBoxText() or LayerCollection.addVerticalBoxText() methods.*/
+  addVerticalText(sourceText?: string | TextDocument): TextLayer;
+
+  /** 24.2- Creates a new paragraph (box) text layer with TextDocument.lineOrientation set to LineOrientation.VERTICAL_RIGHT_TO_LEFT and adds the new TextLayer object to this collection. To create a point text layer, use the LayerCollection.addText() or LayerCollection.addVerticalText() methods. */
+  addVerticalBoxText([width, height]: [number, number]): TextLayer;
 
   /** Creates a new camera layer and adds it to this collection. */
   addCamera(name: string, centerPoint: [number, number]): CameraLayer;
@@ -1015,6 +1049,9 @@ declare class Project {
   /** True if the project has been modified from the last save; otherwise false. (CC2020-) */
   readonly dirty: boolean;
 
+  /** 24.0- Returns an Array of Objects containing references to used fonts and the Text Layers and times on which they appear in the current Project. Each object is composed of font which is a Font object, and usedAt which is an Array of Objects, each composed of layerID, a Layer.id, and layerTimeD for when. See Project.layerByID() to retrieve the layers. */
+  readonly usedFonts: { font: Font; usedAt: { layerID: number; layerTimeD: number; }[] }[];
+
   /** Retrieves an item from the project. */
   item(index: number): Item;
 
@@ -1098,6 +1135,22 @@ declare class Project {
 
   /** CC2019(16.0)- */
   listColorProfiles(): string[];
+
+  /** CC2022(22.0)- Instance method on Project which, when given a valid ID value, returns the Layer object in the Project with that given ID.*/
+  layerByID(id: number): Layer | null;
+
+  /** 24.0-  
+    This function will replace all the usages of Font object fromFont with Font object toFont.
+
+    This operation exposes the same mechanism and policy used for automatic font replacement of missing or substituted fonts and is therefore a complete and precise replacement, even on TextDocuments which have mixed styling, preserving the character range the fromFont was applied to.
+
+    This operation is not undoable.
+
+    The optional parameter noFontLocking controls what happens when the toFont has no glyphs for the text it is applied to. By default a fallback font will be selected which will have the necessary glyphs, but if this parameter is set to true then this fallback will not take place and missing glyphs will result. There is no way at the current time to detect or report this.
+
+    Note that when fromFont is a substituted font and the toFont has the same font properties no fallback can occur and the parameter is ignored and treated as true.
+  */
+  replaceFont(fromFont: Font, toFont: Font, noFontLocking?: boolean /*= false*/): boolean;
 }
 
 declare type PropertyValue = void | boolean | number | [number, number] | [number, number, number] | [number, number, number, number] | MarkerValue | Shape | TextDocument;
@@ -1178,6 +1231,9 @@ declare class Property extends PropertyBase {
 
   /** CC 2021(18.0)- Test whether the property is an Essential Property that supports Media Replacement. */
   readonly canSetAlternateSource: boolean;
+
+  /** CC 2022(22.0)-  Instance property on an Essential Property object which returns the original source Property which was used to create the Essential Property.*/
+  essentialPropertySource: Property | AVLayer;
 
   /** CC 2018(15.0)- Add the property to the Essential Graphics panel for the specified composition. */
   addToMotionGraphicsTemplate(comp: CompItem): boolean;
@@ -1294,6 +1350,12 @@ declare class Property extends PropertyBase {
 
   /** CC 2021(18.0)- Set the alternate source for this property.*/
   setAlternateSource(newSource: AVItem): void;
+
+  /** 22.6- The label color for the keyframe. Colors are represented by their number (0 for None, or 1 to 16 for one of the preset colors in the Labels preferences). */
+  keyLabel(keyIndex: number): number;
+
+  /** 22.6- Set the label color for the keyframe. Colors are represented by their number (0 for None, or 1 to 16 for one of the preset colors in the Labels preferences). */
+  setLabelAtKey(keyIndex: number, labelIndex: number): void;
 }
 
 /** Properties are accessed by name through layers, using various kinds of expression syntax, as controlled by application preferences. */
@@ -1392,11 +1454,17 @@ declare class RenderQueue {
   /** The total number of items in the render queue. */
   readonly numItems: number;
 
-  /** CC 2017(14.0)- */
+  /** CC 2017(14.0)- indicates whether or not there are queued render items in the After Effects render queue. Only queued items can be added to the AME queue.*/
   readonly canQueueInAME: boolean;
 
   /** The collection of items in the render queue. */
   readonly items: RQItemCollection;
+
+  /** CC 2022(22.0)- Read or write the Notify property for the entire Render Queue. This is exposed in the UI as a checkbox in the lower right corner of the Render Queue panel.*/
+  queueNotify: boolean;
+
+  /** CC 2022(22.0)- Scripts can read and write the Notify checkbox for each individual item in the Render Queue. This is exposed in the UI as a checkbox next to each Render Queue item in the Notify column. This column is hidden by default and may need to be selected to be visible by right clicking on the Render Queue column headers and choosing Notify.*/
+  queueItemNotify: boolean;
 
   /** Show or hides the Render Queue panel. */
   showWindow(doShow: boolean): void;
@@ -1413,7 +1481,7 @@ declare class RenderQueue {
   /** Gets a render-queue item from the collection. */
   item(index: number): RenderQueueItem;
 
-  /** CC 2017(14.0)- */
+  /** CC 2017(14.0)- Calls the Queue In AME command. This method requires passing a boolean value, telling AME whether to only queue the render items (false) or if AME should also start processing its queue (true).*/
   queueInAME(render_immediately_in_AME: boolean): void;
 }
 
@@ -1661,11 +1729,11 @@ declare class TextDocument {
   /** For box text, the pixel dimensions for the text bounds. */
   boxTextSize: [number, number];
 
-  /** CC 2014.2(13.2)- */
-  readonly fauxBold: boolean;
+  /** CC 2014.2(13.2)- writable(24.0-) */
+  fauxBold: boolean;
 
-  /** CC 2014.2(13.2)- */
-  readonly fauxItalic: boolean;
+  /** CC 2014.2(13.2)- writable(24.0-) */
+  fauxItalic: boolean;
 
   /** CC 2014.2(13.2)- */
   readonly allCaps: boolean;
@@ -1700,11 +1768,368 @@ declare class TextDocument {
   /** CC 2017.2(14.2)- The text layer’s spacing between lines. */
   leading: number;
 
+  /** 24.0- The Text layer’s auto hyphenate paragraph option. If this attribute has a mixed value, it will be read as undefined. */
+  autoHyphenate: boolean;
+
+  /** 24.0- The Text layer’s auto kern type option. */
+  autoKernType: AutoKernType;
+
+  /** 24.0- The Text layer’s baseline direction option. This is significant for Japanese language in vertical texts. “BASELINE_VERTICAL_CROSS_STREAM” is also know as Tate-Chu-Yoko. */
+  baselineDirection: BaselineDirection;
+
+  /** 24.0-
+    The Text layer’s paragraph composer engine option. By default new Text layers will use the ComposerEngine.UNIVERSAL_TYPE_ENGINE; the other enum value will only be encountered in projects created before the Universal Type Engine engine (formerly known as the South Asian and Middle Eastern engine) became the default in After Effects 22.1.1.
+
+    If this attribute has a mixed value, it will be read as undefined.
+
+    This attrribute is read-write, but an exception will be thrown if any enum value other than ComposerEngine.UNIVERSAL_TYPE_ENGINE is written.
+
+    In effect, you can change an older document from ComposerEngine.LATIN_CJK_ENGINE to ComposerEngine.UNIVERSAL_TYPE_ENGINE, but not the reverse.
+  */
+  composerEngine: ComposerEngine;
+
+  /** 24.0- The Text layer’s digit set option. */
+  digitSet: DigitSet;
+
+  /** 24.0- The Text layer’s paragraph direction option. If this attribute has a mixed value, it will be read as undefined. */
+  direction: ParagraphDirection;
+
+  /** 24.0- The Text layer’s paragraph end indent option. If this attribute has a mixed value, it will be read as undefined. */
+  endIndent: number;
+
+  /** 24.0- The Text layer’s Every-Line Composer paragraph option. If set to false, the TextDocument will use the Single-Line Composer. If this attribute has a mixed value, it will be read as undefined. */
+  everyLineComposer: boolean;
+
+  /** 24.0- The Text layer’s paragraph first line indent option. If this attribute has a mixed value, it will be read as undefined. */
+  firstLineIndent: number;
+
+  /** 24.0- The Text layer’s font baseline option. This is for setting a textDocument to superscript or subscript. */
+  fontBaselineOption: FontBaselineOption;
+
+  /** 24.0- The Text layer’s font caps option. */
+  fontCapsOption: FontCapsOption;
+
+  /** 24.0- The Text layer’s Font object specified by its PostScript name. */
+  fontObject: Font;
+
+  /** 24.0- The Text layer’s Roman Hanging Punctuation paragraph option. This is only meaningful to box Text layers—it allows punctuation to fit outside the box rather than flow to the next line. If this attribute has a mixed value, it will be read as undefined. */
+  hangingRoman: boolean;
+
+  /** 24.0-
+    The Text layer’s kerning option.
+
+    Returns zero for AutoKernType.METRIC_KERN and AutoKernType.OPTICAL_KERN.
+
+    Setting this value will also set AutoKernType.NO_AUTO_KERN to true across the affected characters.
+  */
+  kerning: number;
+
+  /** 24.0- The Text layer’s paragraph leading type option. If this attribute has a mixed value, it will be read as undefined. */
+  leadingType: LeadingType;
+
+  /** 24.0- The Text layer’s ligature option. */
+  ligature: boolean;
+
+  /** 24.0- The Text layer’s line join type option for Stroke. */
+  lineJoinType: LineJoinType;
+
+  /** 24.0- The Text layer’s no break attribute. */
+  noBreak: boolean;
+
+  /** 24.0- The Text layer’s paragraph space after option. If this attribute has a mixed value, it will be read as undefined. */
+  spaceAfter: number;
+
+  /** 24.0- The Text layer’s paragraph space before option. If this attribute has a mixed value, it will be read as undefined. */
+  spaceBefore: number;
+
+  /** 24.0- The Text layer’s paragraph start indent option. If this attribute has a mixed value, it will be read as undefined. */
+  startIndent: number;
+
+  /** 24.2- The Text layer’s line orientation, in general horizontal vs vertical, which affects how all text in the layer is composed. */
+  lineOrientation: LineOrientation;
+
+  /** 24.3- 
+  Enables the automated change of the box height to fit the text content in the box. The box only grows down.
+
+  Defaults to BoxAutoFitPolicy.NONE.
+
+  Will be disabled if TextDocument.boxVerticalAlignment is anything other than boxVerticalAlignment.TOP.
+  */
+  boxAutoFitPolicy: BoxAutoFitPolicy;
+
+  /** 24.3-
+    Controls the position of the first line of composed text relative to the top of the box.
+
+    Disabled if TextDocument.boxFirstBaselineAlignmentMinimum is anything other than zero.
+
+    Defaults to BoxFirstBaselineAlignment.ASCENT.
+  */
+  boxFirstBaselineAlignment: BoxFirstBaselineAlignment;
+
+  /** 24.3-
+    Manually controls the position of the first line of composed text relative to the top of the box.
+
+    A value set here other than zero will override the effect of the TextDocument.boxFirstBaselineAlignment value.
+
+    Defaults to zero.
+  */
+  boxFirstBaselineAlignmentMinimum: number;
+
+  /** 24.3-
+    Controls the inner space between the box bounds and where the composable text box begins. The same value is applied to all four sides of the box.
+
+    Defaults to zero.
+  */
+  boxInsetSpacing: number;
+
+  /** 24.3- Returns true if some part of the text did not compose into the box. */
+  readonly boxOverflow: boolean;
+
+  /** 24.3-
+    Enables the automated vertical alignment of the composed text in the box.
+
+    Defaults to BoxVerticalAlignment.TOP
+  */
+  boxVerticalAlignment: BoxVerticalAlignment;
+
+  /** 24.3-
+    Returns the number of composed lines in the Text layer, may be zero if all text is overset.
+
+    The TextDocument object instance is initialized from the composed state and subsequent changes to the TextDocument object instance does not cause recomposition.
+
+    Even if you remove all the text from the TextDocument object instance, the value returned here remains unchanged.
+  */
+  readonly composedLineCount: number;
+
+  /** 24.3- Returns the number of paragraphs in the text layer, always greater than or equal to 1. */
+  readonly paragraphCount: number;
+
   /** Restores the default character settings in the Character panel. */
   resetCharStyle(): void;
 
   /** Restores the default paragraph settings in the Paragraph panel. */
   resetParagraphStyle(): void;
+
+  /** 24.3-
+    Returns an instance of the Text layer range accessor CharacterRange.
+
+    The instance will remember the parameters passed in the constructor - they remain constant and changes to the TextDocument length may cause the instance to throw exceptions on access until the TextDocument length is changed to a length which makes the range valid again.
+
+    Use toString() to find out what the constructed parameters were.
+  */
+  characterRange(characterStart: number, signedCharacterEnd?: number): CharacterRange;
+
+  /** 24.3- Returns the character index bounds of a ComposedLineRange object in the Text layer. */
+  composedLineCharacterIndexesAt(characterIndex: number): { start: number; end: number; };
+
+  /** 24.3-
+    Returns an instance of the Text layer range accessor ComposedLineRange object.
+
+    The instance will remember the parameters passed in the constructor - they remain constant and changes to the TextDocument contents may cause the instance to throw exceptions on access until the TextDocument contents are changed which makes the range valid again.
+
+    Use ComposedLineRange.toString() to find out what the constructed parameters were.
+  */
+  composedLineRange(composedLineIndexStart: number, signedComposedLineIndexEnd?: number): ComposedLineRange;
+
+  /** 24.3- Returns the character index bounds of a paragraph in the Text layer. */
+  paragraphCharacterIndexesAt(characterIndex: number): { start: number; end: number; };
+
+  /** 24.3-
+    Returns an instance of the Text layer range accessor ParagraphRange object.
+
+    The instance will remember the parameters passed in the constructor - they remain constant and changes to the TextDocument contents may cause the instance to throw exceptions on access until the TextDocument contents are changed which makes the range valid again.
+
+    Use ParagraphRange.toString() to find out what the constructed parameters were.
+  */
+  paragraphRange(paragraphIndexStart: number, signedParagraphIndexEnd?: number): ParagraphRange;
+}
+
+/** 24.3-
+  The CharacterRange object is an accessor to a character range of the TextDocument object instance it was created from.
+
+  Unlike the TextDocument object, which looks at only the first character when returning character attributes, here the character range can span zero or more characters. As a consequence, two or more characters may not have the same attribute value and this mixed state will be signaled by returning undefined.
+
+  The characterStart attribute is the first character index of the range.
+
+  The characterEnd attribue will report the (last + 1) character index of the range, such that (characterEnd - characterStart) represents the number of characters in the range.
+
+  It is acceptable for most attributes for the effective range to be zero - otherwise known as an insertion point.
+
+  When accessed, the CharacterRange object will check that characterStart and effective characterEnd of the range remains valid for the current span of the related TextDocument object. This is the same rule as applied when the CharacterRange was created, but because the length of the related TextDocument object can change through the addition or removal of characters, the characterStart and effective characterEnd may no longer be valid. In this situation an exception will be thrown on access, either read or write. The isRangeValid attribute will return false if the effective range is no longer valid.
+
+  Note that if the TextDocument object length changes, the CharacterRange object range could become valid again.
+*/
+declare class CharacterRange {
+  /**
+    The Text layer range calculated character end value.
+
+    Throws an exception on access if the effective value would exceed the bounds of the related TextDocument object.
+  */
+  readonly characterEnd: number;
+
+  /**
+    The Text layer range calculated character start value.
+
+    Throws an exception on access if the effective value would exceed the bounds of the related TextDocument object.
+  */
+  readonly characterStart: number;
+
+  /**
+    The Text layer range CharacterRange attribute Fill Color, as an array of [r, g, b] floating-point values.
+
+    For example, in an 8-bpc project, a red value of 255 would be 1.0, and in a 32-bpc project, an overbright blue value can be something like 3.2.
+
+    Setting this value will also set applyFill to true across the affected characters.
+
+    If this attribute has a mixed value for the range of characters, it will be read as undefined.
+  */
+  fillColor: [r: number, g: number, b: number];
+
+  /** Returns true if the current range is within the bounds of the related TextDocument object, false otherwise. */
+  readonly isRangeValid: boolean;
+
+  /**
+    The Text layer range character attribute kerning option.
+
+    This effectively reports the manual kerning value, and not the calculated kerning value from auto kerning.
+
+    If autoKernType in the range is set to AutoKernType.METRIC_KERN, AutoKernType.OPTICAL_KERN, or is mixed, then this attribute will be returned as undefined.
+
+    If autoKernType in the range is set to AutoKernType.NO_AUTO_KERN, and this attribute has a mixed value, it will be read as undefined.
+
+    Setting this value will also set AutoKernType.NO_AUTO_KERN to true across the affected characters.
+  */
+  kerning: AutoKernType;
+
+  /**
+    The Text layer CharacterRange stroke color character property, as an array of [r, g, b] floating-point values.
+
+    For example, in an 8-bpc project, a red value of 255 would be 1.0, and in a 32-bpc project, an overbright blue value can be something like 3.2.
+
+    If this attribute has a mixed value, it will be read as undefined.
+
+    Setting this value will also set applyStroke to true across the affected characters.
+  */
+  strokeColor: [r: number, g: number, b: number];
+
+  /**
+    The Text layer CharacterRange Stroke Over Fill character property.
+
+    Indicates the rendering order for the fill and stroke for characters in the range. When true, the stroke appears over the fill.
+
+    If this attribute has a mixed value, it will be read as undefined.
+  */
+  strokeOverFill: boolean;
+
+  /**
+    The text value for the Text layer range.
+
+    On read, the same number of characters as the span of the range will be returned. If the span is zero (an insertion point) it return an empty string.
+
+    On write, the characters in the range will be replaced with whatever string value is supplied. If an empty string, then the characters in the range will be effectively deleted.
+
+    To insert characters without deleting any existing, call TextDocument.characterRange() with the same value for start as end to get an insertion point range.
+  */
+  text: string;
+
+  /**
+    Returns a string with the parameters used to create the CharacterRange instance, e.g. "CharacterRange(0,-1)".
+
+    This may be safely called on an instance where isRangeValid returns false.
+  */
+  toString(): string;
+}
+
+/** 24.3-
+  The ParagraphRange object is an accessor to a paragraph range of the TextDocument object instance it was created from.
+
+  The characterStart attribute will report the first character index of the range.
+
+  The characterEnd attribute will report the (last + 1) character index of the range, such that (characterEnd - characterStart) represents the number of characters in the range.
+
+  The only time these two properties will equal will on an empty last paragraph of the TextDocument object.
+
+  When accessed, the ParagraphRange object will check that effective characterStart and effective characterEnd of the range remains valid for the current span of the related TextDocument object. This is the same rule as applied when the ParagraphRange was created, but because the length of the related TextDocument object can change through the addition or removal of characters, the effective characterStart and effective characterEnd may no longer be valid. In this situation an exception will be thrown on access, either read or write. The isRangeValid attribute will return false if the effective range is no longer valid.
+
+  Note that if the TextDocument object length changes, the character range could become valid again.
+
+  As a convenience, the function ParagraphRange.characterRange() can be invoked which will return a CharacterRange object instance initialized from characterStart and characterEnd. This instance becomes independent of the ParagraphRange instance it came from so subsequent changes to the ParagraphRange limits are not communicated to the CharacterRange object instance.
+
+  For performance reasons, when accessing multiple attributes it is adviseable to retrieve the CharacterRange object once and re-use it rather than create a new one each time.
+*/
+declare class ParagraphRange {
+  /**
+    The Text layer range calculated character end value.
+
+    Throws an exception on access if the effective value would exceed the bounds of the related TextDocument object.
+  */
+  readonly characterEnd: number;
+
+  /**
+    The Text layer range calculated character start value.
+
+    Throws an exception on access if the effective value would exceed the bounds of the related TextDocument object.
+  */
+  readonly characterStart: number;
+
+  /** Returns true if the current range is within the bounds of the related TextDocument object, false otherwise. */
+  readonly isRangeValid: boolean;
+
+  /**
+    Returns a CharacterRange object initialized from characterStart and characterEnd.
+
+    Will throw an exception if isRangeValid would return false.
+
+    The returned instance, once created, is independent of subsequent changes to the ParagraphRange it came from.
+  */
+  characterRange(): CharacterRange;
+}
+
+/** 24.3-
+   The ComposedLineRange object is an accessor to a composed line range of the TextDocument object instance it was created from.
+
+  Composed lines are initialized in the TextDocument object when it is created and remain unchanged while the TextDocument object is changed. It is important to note that the TextDocument object instance is not re-composed when changes are made to it - that only occurs when the instance is applied back to a TextLayer object. So if you delete all the text in the TextDocument object instance the number of composed lines will remain constant.
+
+  The characterStart attribute will report the first character index of the range.
+
+  The characterEnd attribute will report the (last + 1) character index of the range, such that (characterEnd - characterStart) represents the number of characters in the range.
+
+  A composed line always has some length.
+
+  When accessed, the ComposedLineRange object will check that effective characterStart and effective characterEnd of the range remains valid for the current span of the related TextDocument object. This is the same rule as applied when the ComposedLineRange was created, but because the length of the related TextDocument object can change through the addition or removal of characters, the effective characterStart and effective characterEnd may no longer be valid. In this situation an exception will be thrown on access, either read or write. The property isRangeValid will return false if the effective range is no longer valid.
+
+  Note that if the TextDocument object length changes, the character range could become valid again.
+
+  As a convenience, the function ComposedLineRange.characterRange() can be invoked which will return a CharacterRange object instance initialized from characterStart and characterEnd. This instance becomes independent of the ComposedLineRange instance it came from so subsequent changes to the ComposedLineRange limits are not communicated to the CharacterRange object instance.
+
+  For performance reasons, when accessing multiple attributes it is adviseable to retrieve the CharacterRange object once and re-use it rather than create a new one each time.
+*/
+declare class ComposedLineRange  {
+  /**
+    The Text layer range calculated character end value.
+
+    Throws an exception on access if the effective value would exceed the bounds of the related TextDocument object.
+  */
+  readonly characterEnd: number;
+
+  /**
+    The Text layer range calculated character start value.
+
+    Throws an exception on access if the effective value would exceed the bounds of the related TextDocument object.
+  */
+  readonly characterStart: number;
+
+  /** Returns true if the current range is within the bounds of the related TextDocument object, false otherwise. */
+  readonly isRangeValid: boolean;
+
+  /**
+    Returns a CharacterRange object initialized from characterStart and characterEnd.
+
+    Will throw an exception if isRangeValid would return false.
+
+    The returned instance, once created, is independent of subsequent changes to the ComposedLineRange it came from.
+  */
+  characterRange(): CharacterRange;
 }
 
 /** The TextLayer object represents a text layer within a composition. Create it using the LayerCollection object’s addText method. */
@@ -1763,6 +2188,152 @@ declare class ViewOptions {
 
   /** CC 2019(16.1)-*/
   rulers: boolean;
+}
+
+/** 24.0- 
+  The Fonts objects provides information about the current font ecosystem on your device.
+
+  After Effects maintains an internal font proxy to a real font which it has enumerated in the font ecosystem. As the fonts in the font ecosystem are added and removed these internal font proxies are kept in sync as well by being added and removed.
+
+  The properties we report via the proxy Font object are the data that is available to us from the font files themselves, which of course will vary according to technology and type of font. It is not possible here to describe all the possible interesting variations and troubles that this causes us and in general it is advisable to be careful with assuming that the behavior and properties for one font type or technology are common to all other font types and technology - the answer as always is “it depends”.
+
+  A Font object is a soft reference to one of these internal font proxies and as a consequence is not sufficient to keep the internal font proxy alive. As a result if the internal font proxy is removed, the referencing Font object will throw an invalid exception for any property reference.
+
+  On project open, and a few other situations, it may come to pass that the font which is being referenced in the persisted data cannot be found in the current font ecosystem. In these situations an internal font proxy will be created which will contain the desired properties, such as PostScript name, and will return true for isSubstitute. There will be an underlying real font which will be selected to support this internal font proxy, but we do not reveal what it is and there is no way to influence this selection.
+
+  Continuing the open process with created substitute fonts, an attempt will be made to sync matching fonts from Creative Cloud Adobe Fonts. This is an asynchronous activity and the project will usually finish opening and be ready for use before any fonts are brought down from Adobe Fonts. Depending on how many fonts are being synced, they may be installed at different times. There is no way to disable this attempt.
+
+  After any change to the font ecosystem from installing new real fonts, the outstanding list of substitute fonts will be evaluated to see if there now exists a real font which is a valid replacement for it - currently only requiring the PostScript name to match - and if one is found automatically all the references in the project to the substitute will be replaced with the newly installed font.
+*/
+declare class Fonts {
+  /**
+    The list of all the fonts currently available on your system.
+
+    They are grouped into what is named a family group which are Arrays of Font object.
+
+    The Family Name of the group is simply the familyName of any of the Font objects in the group.
+
+    The Family Name in one font group is not guaranteed to have unique name compared to different font groups - the grouping is determined by a number of factors including the returned value of FontObject.technology and FontObject.writingScripts.
+
+    In addition, it is perfectly acceptable to have multiple fonts with the same PostScript name, though only one will have the same (PostScript name, Technology, Primary Writing Script) tuple. In the case of true duplicates, it is undefined which will be returned and which will be suppressed.
+
+    The family groups and Font objects in the group are sorted according to the setting in the Character Panel dropdown “Show Font Names in English”. If set to true, the familyName and styleName property is used, otherwise the nativeFamilyName and nativeStyleName property is used.
+
+    Font object for which isSubstitute returns true are always sorted to the end as individual family groups.
+  */
+  readonly allFonts: Font[][];
+
+  /** Returns an array of variable Font objects, each using a unique font dictionary and with default values for their design axes. This API is a convenient way to quickly filter for a unique instance of each installed variable font.*/
+  readonly fontsWithDefaultDesignAxes: Font[];
+
+  /** The list of all the missing or substituted fonts of the current Project. */
+  readonly missingOrSubstitutedFonts: Font[];
+
+  /** 24.2-
+    Returns an unsigned number representing the current revision of the font environment.
+
+    The revision is advanced when anything happens to the font environment which would change the contents, properties, or order of Font objects returned from a call to FontsObject.allFonts.
+
+    Among these are: installing or removing fonts in the font environment, opening or closing a project with substituted fonts, causing a custom Variable font instance to be created, and changing the setting in the Character Panel dropdown “Show Font Names in English”.
+  */
+  readonly fontServerRevision: number;
+
+  /** This function will return an array of Font object based on the Family Name and Style Name of a font. If no suitable font is found, it will return an empty Array. */
+  getFontsByFamilyNameAndStyleName(familyName: string, styleName: number): Font[];
+
+  /**
+    This function will return an array of Font objects based on the PostScript name of previously found Fonts.
+
+    It is perfectly valid to have multiple Font objects which share the same PostScript name, the order of these is determined by the order in which they were enumerated in the font environment. The entry at [0] will be used when setting the TextDocument.fontObject property.
+
+    In addition, there is a special property of this API with regards to Variable fonts. If no Font object matching the requested PostScript exists, but we find that there exist a variable font which matches the requested PostScript name prefix, then this Variable font instance will be requested to create a matching Font object. This is the only way that we will return an instance which did not exist prior to invoking this method.
+
+    If no matching font is found, it will return an empty Array.
+  */
+  getFontsByPostScriptName(postscriptName: string): Font[];
+  
+  /** 24.2-
+    This function will return an instance of Font object based on the ID of a previously found font.
+
+    If no matching font is found, it will return undefined. This can occur with an unknown ID or if the original font has been removed from the font environment.
+  */
+  getFontByID(fontID: number): Font | undefined;
+}
+
+/** 24.0-
+    The Font object provides information about a specific font, along with the font technology used, helping disambiguate when multiple fonts sharing the same Postscript name are installed on the system.
+
+    Most of these APIs simply return information which is contained in the Font data file itself, seek more information there.
+*/
+declare class Font {
+  /** Returns an Array of Objects, containing the design axes data from the font. Each object is composed of the axis name, tag, min value and max value. */
+  readonly designAxesData: { name: string; tag: number; min: number; max: number; }[];
+
+  /** For Variable fonts will return an ordered array with a length matching the number of design axes defined by the font. */
+  readonly designVector: number[];
+
+  /** The family name of the font, in the ASCII character set. */
+  readonly familyName: string;
+
+  /** The family prefix of the variable font. For example, the family of the PostScript name “SFPro-Bold” is “SFPro”. */
+  readonly familyPrefix: string;
+
+  /** 24.2- 
+    A unique number assigned to the FontObject instance when it is created, value is greater than or equal to 1. It never changes during the application session but may be different in subsequent launches of the application.
+
+    Can be used to compare two FontObject instances to see if they refer to the same underlying native font instance.
+
+    FontObjects can be looked up by fontID with getFontByID .
+  */
+  readonly fontID: number;
+
+  /** The full name of the font, in the ASCII character set. Usually composed of the family name and the style name. */
+  readonly fullName: string;
+
+  /** Returns true if the font is a variable font. */
+  readonly hasDesignAxes: boolean;
+
+  /** Returns true if the font is from Adobe Fonts. */
+  readonly isFromAdobeFonts: boolean;
+
+  /** Returns true when this font instance represents a font reference which was missing on project open. */
+  readonly isSubstitute: boolean;
+
+  /** The location of the font file on your system. */
+  readonly location: string;
+
+  /** The native family name of the font in full 16 bit Unicode. Often different than what is returned by FontObject.familyName for non-Latin fonts. */
+  readonly nativeFamilyName: string;
+
+  /** The native full name of the font in full 16 bit Unicode. Often different than what is returned by FontObject.fullName for non-Latin fonts. */
+  readonly nativeFullName: string;
+
+  /** The native style name of the font in full 16 bit Unicode. Often different than what is returned by FontObject.styleName for non-Latin fonts. */
+  readonly nativeStyleName: string;
+
+  /** The postscript name of the font. */
+  readonly postScriptName: string;
+
+  /** The style name of the font, in the ASCII character set. */
+  readonly styleName: string;
+
+  /** The technology used by the font. */
+  readonly technology: CTFontTechnology;
+
+  /** The internal type of the font. */
+  readonly type: CTFontType;
+
+  /** The version number of the font. */
+  readonly version: string;
+
+  /** The supported character sets of the font. */
+  readonly writingScripts: CTScript[];
+
+  /** This function will true if the Font object passed as an argument shares the same variable font dictionnary as the Font object the function is called on. */
+  hasSameDict(fontObject: Font): boolean;
+
+  /** This function will return the postscript name of the variable font for the specific design vectors passed as the argument. */
+  postScriptNameForDesignVector(vectorValues: number[]): string;
 }
 
 /*
