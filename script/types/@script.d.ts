@@ -201,6 +201,84 @@ declare namespace Atarabi {
 
     interface Effect {
         updateParamUI(effect: PropertyGroup): void;
+
+        'ADBE CurvesCustom': Effect.Curves;
+
+        'APC Colorama': Effect.Colorama;
+    }
+
+    namespace Effect {
+
+        // Curves
+        interface Curves {
+            // 'ADBE CurvesCustom-0001' only
+            getCurvesValue(curvesProperty: Property, options?: { time?: number; preExpression?: boolean; }): Curves.CurvesValue;
+            
+            // 'ADBE CurvesCustom-0001' only
+            setCurvesValue(curvesProperty: Property, value: Curves.ParticalCurvesValue, options?: { time?: number; key?: boolean; }): void;
+        }
+
+        namespace Curves {
+            type CurvesValue = {
+                type: 'curve';
+                rgb: CurveValueType;
+                red: CurveValueType;
+                green: CurveValueType;
+                blue: CurveValueType;
+                alpha: CurveValueType;
+            } | {
+                type: 'map';
+                rgb: MapValueType;
+                red: MapValueType;
+                green: MapValueType;
+                blue: MapValueType;
+                alpha: MapValueType;
+            };
+    
+            type ParticalCurvesValue = {
+                type: 'curve';
+                rgb?: CurveValueType;
+                red?: CurveValueType;
+                green?: CurveValueType;
+                blue?: CurveValueType;
+                alpha?: CurveValueType;
+            } | {
+                type: 'map';
+                rgb?: MapValueType;
+                red?: MapValueType;
+                green?: MapValueType;
+                blue?: MapValueType;
+                alpha?: MapValueType;
+            };
+    
+            type CurveValueType = [x: number, y: number][]; // x,y: [0, 1], length <= 16
+    
+            type MapValueType = number[]; // length == 256
+        }
+
+        // Colorama
+        interface Colorama {
+            // 'APC Colorama-0012' only
+            getOutputCycleValue(outputCycleProperty: Property, options?: { time?: number; preExpression?: boolean; }): Colorama.OutputCycleValue;
+            
+            // 'APC Colorama-0012' only
+            setOutputCycleValue(outputCycleProperty: Property, value: Colorama.OutputCycleValue, options?: { time?: number; key?: boolean; }): void;
+        }
+
+        namespace Colorama {
+
+            type OutputCycleValue = {
+                triangles: OutputCycleTriangle[]; // length <= 64
+                selected?: number; // integer and [0, 63] 
+            };
+    
+            type OutputCycleTriangle = {
+                location: number; // [0, 1]
+                color: ColorA;
+            };
+
+        }
+    
     }
 
     interface Property_ {
@@ -241,6 +319,8 @@ declare namespace Atarabi {
         userChangedParam(property: Property): void;
 
         clickButton(property: Property): void;
+
+        saveCustomValue(property: Property, file: File, options?: { time?: number; preExpression?: boolean; }): void;
     }
 
     type ValueType = boolean | number | Vector2 | Vector3 | Color | ColorA | string | PathValue;
