@@ -50,7 +50,7 @@ Atarabi.version
 
 ``version: string;``
 
-v0.4.0(2024/06/xx)
+v0.4.0(2024/06/30)
 ^^^^^^^^^^^^^^^^^^^^
 
 Fix
