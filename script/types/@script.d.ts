@@ -321,6 +321,8 @@ declare namespace Atarabi {
         clickButton(property: Property): void;
 
         saveCustomValue(property: Property, file: File, options?: { time?: number; preExpression?: boolean; }): void;
+
+        loadCustomValue(property: Property, file: File, options?: { time?: number; key?: boolean; }): void;
     }
 
     type ValueType = boolean | number | Vector2 | Vector3 | Color | ColorA | string | PathValue;

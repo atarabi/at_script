@@ -1,6 +1,7 @@
 /**
- * @rpp_loader v1.0.1
+ * @rpp_loader v1.1.0
  * 
+ *      v1.1.0(2024/10/22)  Add undo group
  *      v1.0.1(2023/10/08)  Fix empty source
  *      v1.0.0(2023/08/28)
  */
@@ -348,6 +349,11 @@
             orderType: string;
         }) {
             layer.enabled = layer.audioEnabled = !this.isMute();
+            if (orderType === OorderType.ASC) {
+                layer.moveToEnd();
+            } else {
+                layer.moveToBeginning();
+            }
             if (this.name) {
                 layer.name = this.name;
             }
@@ -376,11 +382,6 @@
                     x = (outPoint - inPoint) / timeAtOutPoint * x + inPoint;
                     timeRemap.setValueAtTime(convert(x), clamp(y, minTime, maxTime));
                 }
-            }
-            if (orderType === OorderType.ASC) {
-                layer.moveToEnd();
-            } else {
-                layer.moveToBeginning();
             }
         }
     }
@@ -538,7 +539,7 @@
                 this.tempo = map(root.properties['TEMPO'][0], val => +val);
             }
 
-            // tempos
+            //tempos
             if (root.children['TEMPOENVEX']) {
                 const PTs = root.children['TEMPOENVEX'][0].properties['PT'];
                 if (isArray(PTs)) {
@@ -574,6 +575,9 @@
                 framerate: this.framerate,
                 size: this.size,
             };
+        }
+        valid(): boolean {
+            return this.file !== null;
         }
         execute({ target, sort, addMuteTracks }: {
             target: string;
@@ -638,7 +642,12 @@
                         break;
                 }
                 const layer = comp.layers.add(avItem);
-                item.arrange(layer, { orderType: sort.orderType });
+                try {
+                    item.arrange(layer, { orderType: sort.orderType });
+                } catch (e) {
+                    layer.label = 1;
+                    layer.marker.setValueAtTime(0, new MarkerValue(e.message));
+                }
             }
             //add render file
             if (this.renderFile) {
@@ -919,16 +928,26 @@
             ui.alignment = ['fill', 'top'];
             ui.helpTip = 'Execute';
             ui.onClick = () => {
-                const comp = loader.execute({
-                    target: builder.get(Param.Target),
-                    sort: {
-                        orderBy: builder.get(Param.OrderBy),
-                        orderType: builder.get(Param.OrderType),
-                    },
-                    addMuteTracks: builder.get(Param.AddMuteTracks),
-                });
-                if (comp) {
-                    comp.openInViewer();
+                if (!loader.valid()) {
+                    return;
+                }
+                try {
+                    app.beginUndoGroup(SCRIPT_NAME);
+                    const comp = loader.execute({
+                        target: builder.get(Param.Target),
+                        sort: {
+                            orderBy: builder.get(Param.OrderBy),
+                            orderType: builder.get(Param.OrderType),
+                        },
+                        addMuteTracks: builder.get(Param.AddMuteTracks),
+                    });
+                    if (comp) {
+                        comp.openInViewer();
+                    }
+                } catch (e) {
+                    alert (e);
+                } finally {
+                    app.endUndoGroup();
                 }
             };
         })
