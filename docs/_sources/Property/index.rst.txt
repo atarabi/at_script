@@ -163,3 +163,52 @@ Property.saveCustomValue()
 
 .. versionadded:: 0.4.0
 
+Property.loadCustomValue()
+-----------------------------------
+
+``loadCustomValue(property: Property, file: File, options?: { time?: number; key?: boolean; }): void;``
+
+**Property.saveCustomValue()** で保存したバイナリデータを適用する。
+
+.. tabs::
+
+    .. code-tab:: TypeScript
+        
+        (() => {
+
+            const comp = app.project.activeItem;
+            if (!(comp instanceof CompItem)) {
+                return;
+            }
+
+            const properties = comp.selectedProperties.slice();
+
+            for (const property of properties) {
+                if (property instanceof Property && property.propertyValueType === PropertyValueType.CUSTOM_VALUE) {
+                    const file = new File(`${Folder.desktop.absoluteURI}/${property.name}_${Date.now()}.dat`);
+                    Atarabi.property.saveCustomValue(property, file); // save
+                    Atarabi.property.loadCustomValue(property, file); // and load immediately
+                }
+            }
+
+        })();
+
+    .. code-tab:: JavaScript
+
+        (function () {
+            var comp = app.project.activeItem;
+            if (!(comp instanceof CompItem)) {
+                return;
+            }
+            var properties = comp.selectedProperties.slice();
+            for (var _i = 0, properties_2 = properties; _i < properties_2.length; _i++) {
+                var property = properties_2[_i];
+                if (property instanceof Property && property.propertyValueType === PropertyValueType.CUSTOM_VALUE) {
+                    var file = new File("".concat(Folder.desktop.absoluteURI, "/").concat(property.name, "_").concat(Date.now(), ".dat"));
+                    Atarabi.property.saveCustomValue(property, file); // save
+                    Atarabi.property.loadCustomValue(property, file); // and load immediately
+                }
+            }
+        })();
+
+.. versionadded:: 0.4.1

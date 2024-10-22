@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Property &#8212; @script 0.4.0 documentation</title>
+    <title>Property &#8212; @script 0.4.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=b19d4733" />
     <link rel="stylesheet" type="text/css" href="../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../_static/documentation_options.js?v=0adc0c29"></script>
+    <script src="../_static/documentation_options.js?v=aea48830"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/code-tabs.js?v=c983d12e"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="../Effect/index.html" title="Effect"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.4.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.4.1 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Property</a></li> 
       </ul>
     </div>  
@@ -178,6 +178,57 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
 <p><span class="versionmodified added">New in version 0.4.0.</span></p>
 </div>
 </section>
+<section id="property-loadcustomvalue">
+<h2>Property.loadCustomValue()<a class="headerlink" href="#property-loadcustomvalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">loadCustomValue(property:</span> <span class="pre">Property,</span> <span class="pre">file:</span> <span class="pre">File,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">key?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p><strong>Property.saveCustomValue()</strong> で保存したバイナリデータを適用する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">comp</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">CompItem</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">.</span><span class="nx">slice</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">properties</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">Property</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">property</span><span class="p">.</span><span class="nx">propertyValueType</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">PropertyValueType</span><span class="p">.</span><span class="nx">CUSTOM_VALUE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">property</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">_</span><span class="si">${</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="si">}</span><span class="sb">.dat`</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">property</span><span class="p">.</span><span class="nx">saveCustomValue</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span><span class="w"> </span><span class="c1">// save</span>
+<span class="w">            </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">property</span><span class="p">.</span><span class="nx">loadCustomValue</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span><span class="w"> </span><span class="c1">// and load immediately</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">comp</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">CompItem</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">.</span><span class="nx">slice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">properties_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">properties_2</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties_2</span><span class="p">[</span><span class="nx">_i</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">Property</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">property</span><span class="p">.</span><span class="nx">propertyValueType</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">PropertyValueType</span><span class="p">.</span><span class="nx">CUSTOM_VALUE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">property</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot;.dat&quot;</span><span class="p">));</span>
+<span class="w">            </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">property</span><span class="p">.</span><span class="nx">saveCustomValue</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span><span class="w"> </span><span class="c1">// save</span>
+<span class="w">            </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">property</span><span class="p">.</span><span class="nx">loadCustomValue</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span><span class="w"> </span><span class="c1">// and load immediately</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.4.1.</span></p>
+</div>
+</section>
 </section>
 
 
@@ -207,6 +258,7 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
 <li><a class="reference internal" href="#property-userchangedparam">Property.userChangedParam()</a></li>
 <li><a class="reference internal" href="#property-clickbutton">Property.clickButton()</a></li>
 <li><a class="reference internal" href="#property-savecustomvalue">Property.saveCustomValue()</a></li>
+<li><a class="reference internal" href="#property-loadcustomvalue">Property.loadCustomValue()</a></li>
 </ul>
 </li>
 </ul>
@@ -248,7 +300,7 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
         <li class="right" >
           <a href="../Effect/index.html" title="Effect"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.4.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.4.1 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Property</a></li> 
       </ul>
     </div>

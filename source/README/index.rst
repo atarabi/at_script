@@ -50,6 +50,22 @@ Atarabi.version
 
 ``version: string;``
 
+v0.4.1(2024/10/22)
+^^^^^^^^^^^^^^^^^^^^
+
+Fix
+"""""""""""
+- Compositing Options以下のプロパティの扱いでエラーが生じることに対する修正 (`#7 <https://github.com/atarabi/at_script/issues/7>`_)
+
+API
+"""""""""""
+- Property.loadCustomValue() の追加
+
+Script
+"""""""""""
+- @proxy_maker の追加
+- @rpp_loader にアンドゥ処理を追加
+
 v0.4.0(2024/06/30)
 ^^^^^^^^^^^^^^^^^^^^
 
