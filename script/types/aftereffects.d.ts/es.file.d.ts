@@ -1,111 +1,4 @@
-declare class File {
-    /*
-     * @param path string. The absolute or relative path to the file associated with
-     * this object, specified in platform-specific or URI format. The value stored
-     * in the object is the absolute path.
-     * The path need not refer to an existing file. If not supplied, a temporary
-     * name is generated.
-     */
-    constructor(path?: string)
-
-    /*
-     * The name of the file system. Read only. One of Windows, Macintosh, or
-     * Unix.
-     */
-    static fs: string
-
-    /*
-     * Decodes the specified string as required by RFC 2396.
-     *
-     * @param uri string The encoded string to decode.
-     * All special characters must be encoded in UTF-8 and stored as escaped
-     * characters starting with the percent sign followed by two hexadecimal
-     * digits.
-     *
-     * For example, the string "my%20file" is decoded as "my file".
-     *
-     * Special characters are those with a numeric value greater than 127,
-     * except the following:
-     *
-     * / - _ . ! ~ * ' ( )
-     *
-     * @return Returns the decoded string.
-     */
-    static decode(uri: string): string
-
-    /*
-     * Encodes the specified string as required by RFC 2396. All special
-     * characters are encoded in UTF-8 and stored as escaped characters starting
-     * with the percent sign followed by two hexadecimal digits.
-     *
-     * For example, the string "my file" is encoded as "my%20file".
-     *
-     * Special characters are those with a numeric value greater than 127,
-     * except the following:
-     *
-     * / - _ . ! ~ * ' ( )
-     *
-     * @param name string The string to encode.
-     *
-     * @return the encoded string.
-     */
-    static encode(name: string): string
-
-    /*
-     * Checks whether a given encoding is available.
-     *
-     * @param name string The encoding name. Typical values are “ASCII,”
-     * “binary,” or “UTF-8.”
-     *
-     * @return true if your system supports the specified encoding, false
-     * otherwise.
-     */
-    static isEncodingAvailable(name: string): boolean
-
-    /*
-     *
-     * Opens the built-in platform-specific file-browsing dialog in which a user
-     * can select an existing file or multiple files, and creates new File
-     * objects to represent the selected files.
-     *
-     * @param prompt string A string containing the prompt text, if the dialog
-     * allows a prompt.
-     *
-     * @param filter string A filter that limits the types of files displayed in
-     * the dialog.
-     * In Windows, a filter expression, such as "JavaScript:*.jsx;All files:*.*"
-     * In Mac OS, a filter function that takes a File instance and returns true
-     * if the file
-     * should be included in the display, false if it should not.
-     *
-     * @param multiSelect boolean. When true, the user can select multiple files
-     * and the return value is an array. Default is false.
-     *
-     * @returns a File object for the selected file if the user clicks OK, or an
-     * array of objects if multiple files are selected. If the user cancels,
-     * returns null.
-     *
-     * TODO: return `(File|File[])` in TSC 1.4
-     */
-    static openDialog(prompt_?: string, filter?: string | Function, multiSelect?: boolean): File|File[]
-
-    /*
-     * Opens the built-in platform-specific file-browsing dialog in which a user
-     * can select an existing file location to which to save information, and
-     * creates a new File object to represent the selected file location.
-     *
-     * @param prompt string A string containing the prompt text, if the dialog
-     * allows a prompt.
-     *
-     * @param filter string (Windows only). A filter that limits the types of
-     * files displayed in the dialog. A filter expression, such as
-     * "JavaScript:*.jsx;All files:*.*".
-     *
-     * @return a File object for the selected file location if the user clicks
-     * OK, or null otherwise.
-     */
-    static saveDialog (prompt_?: string, filter?: string | Function): File
-
+declare interface File {
     /*
      * The full path name for the referenced file in URI notation. Read only.
      */
@@ -370,7 +263,7 @@ declare class File {
      *
      * TODO: return `(File|File[])` in TSC 1.4
      */
-    openDlg(prompt_?: string, filter?: string | string[] | Function, multiSelect?: boolean): File|File[]
+    openDlg(prompt_?: string, filter?: string | string[] | Function, multiSelect?: boolean): File | File[]
 
     /*
      * Reads the contents of the file starting at the current position.
@@ -510,179 +403,122 @@ declare class File {
      *
      * @return true on success.
      */
-    writeln (text: string, ...texts: string[])
+    writeln(text: string, ...texts: string[])
 }
 
-declare class Folder {
+declare var File: {
 
     /*
-     * @param path string. The absolute or relative path to the folder
-     * associated with this object, specified in URI format. The path need not
-     * refer to an existing folder. If not supplied, a temporary name is
-     * generated.
+     * @param path string. The absolute or relative path to the file associated with
+     * this object, specified in platform-specific or URI format. The value stored
+     * in the object is the absolute path.
+     * The path need not refer to an existing file. If not supplied, a temporary
+     * name is generated.
      */
-    constructor(path?: string)
+    new(path?: string): File
+
+    (path?: string): File | Folder
 
     /*
-     * A Folder object for the folder that contains application data for all
-     * users. Read only.
-     *
-     * In Windows, the value of %APPDATA% (by default, C:\Documents and
-     * Settings\All Users\Application Data)
-     *
-     * In Mac OS, /Library/Application Support
-     */
-    static appData: Folder
-
-    /*
-     * In Mac OS, the Folder object for the folder that contains the bundle of
-     * the running application. Read only.
-     */
-    static appPackage
-
-    /*
-     * A Folder object for the folder that contains application data for the
-     * current user. Read only.
-     *
-     * In Windows, the value of %CommonProgramFiles% (by default,
-     * C:\Program Files\Common Files)
-     *
-     * * In Mac OS,/Library/Application Support
-     */
-    static commonFiles: Folder
-
-    /*
-     * A Folder object for the current folder. Assign either a Folder object or
-     * a string containing the new path name to set the current folder.
-     */
-    static current: Folder
-
-    /*
-     * A Folder object for the folder that contains the user’s desktop. Read
-     * only.
-     *
-     * In Windows, C:\Documents and Settings\username\Desktop
-     *
-     * In Mac OS, ~/Desktop
-     */
-    static desktop: Folder
-
-    /*
-     * The name of the file system. Read only. One of Windows, Macintosh, or
-     * Unix.
-     */
-    static fs: string
-
-    /*
-     * A Folder object for the user’s default document folder. Read only.
-     *
-     * In Windows, C:\Documents and Settings\username\My Documents
-     *
-     * In Mac OS, ~/Documents
-     */
-    static myDocuments: Folder
-
-    /*
-     * A Folder object for the folder containing the executable image of the
-     * running application. Read only.
-     */
-    static startup: Folder
-
-    /*
-     * A Folder object for the folder containing the operating system files.
-     * Read only.
-     *
-     * In Windows, the value of %windir% (by default, C:\Windows)
-     *
-     * In Mac OS, /System
-     */
-    static system: Folder
-
-    /*
-     * A Folder object for the default folder for temporary files. Read only.
-     */
-    static temp: Folder
-
-    /*
-     * In Mac OS, a Folder object for the folder containing deleted items.
-     *
-     * In Windows, where the Recycle Bin is a database rather than a folder,
-     * value is null.
-     *
-     * Read only.
-     */
-    static trash: Folder
-
-    /*
-     * In Mac OS, a Folder object for the folder containing deleted items.
-     *
-     * In Windows, where the Recycle Bin is a database rather than a folder,
-     * value is null.
-     */
-    static userData: Folder
+    * The name of the file system. Read only. One of Windows, Macintosh, or
+    * Unix.
+    */
+    fs: string
 
     /*
      * Decodes the specified string as required by RFC 2396.
      *
+     * @param uri string The encoded string to decode.
      * All special characters must be encoded in UTF-8 and stored as escaped
      * characters starting with the percent sign followed by two hexadecimal
-     * digits. For example, the string "my%20file" is decoded as "my file".
+     * digits.
      *
-     * Special characters are those with a numeric value greater than 127,
-     * except the following:
-     *
-     *  / - _ . ! ~ * ' ( )
-     *
-     * @param string uri The encoded string to decode.
-     *
-     * @return string the decoded string.
-     */
-    static decode(uri: string): string
-
-    /*
-     * Encodes the specified string as required by RFC 2396. All special
-     * characters are encoded in UTF-8 and stored as escaped characters starting
-     * with the percent sign followed by two hexadecimal digits.  For example,
-     * the string "my file" is encoded as "my%20file".
+     * For example, the string "my%20file" is decoded as "my file".
      *
      * Special characters are those with a numeric value greater than 127,
      * except the following:
      *
      * / - _ . ! ~ * ' ( )
      *
-     * @param string the string to encode.
-     *
-     * @return string the encoded string.
+     * @return Returns the decoded string.
      */
-    static encode(name: string): string
+    decode(uri: string): string
 
+    /*
+     * Encodes the specified string as required by RFC 2396. All special
+     * characters are encoded in UTF-8 and stored as escaped characters starting
+     * with the percent sign followed by two hexadecimal digits.
+     *
+     * For example, the string "my file" is encoded as "my%20file".
+     *
+     * Special characters are those with a numeric value greater than 127,
+     * except the following:
+     *
+     * / - _ . ! ~ * ' ( )
+     *
+     * @param name string The string to encode.
+     *
+     * @return the encoded string.
+     */
+    encode(name: string): string
 
     /*
      * Checks whether a given encoding is available.
      *
-     * @param string name  The encoding name. Typical values are “ASCII,”
-     * “binary,” or “UTF-8.
+     * @param name string The encoding name. Typical values are “ASCII,”
+     * “binary,” or “UTF-8.”
      *
-     * @return boolean Returns true if your system supports the specified
-     * encoding, false otherwise.
+     * @return true if your system supports the specified encoding, false
+     * otherwise.
      */
-    static isEncodingAvailable(name: string): boolean
+    isEncodingAvailable(name: string): boolean
 
     /*
-     * Opens the built-in platform-specific file-browsing dialog, and creates a
-     * new File or Folder object for the selected file or folder. Differs from
-     * the object method selectDlg() in that it does not preselect a folder.
      *
-     * @param [string] prompt A string containing the prompt text, if the
-     * dialog allows a prompt.
+     * Opens the built-in platform-specific file-browsing dialog in which a user
+     * can select an existing file or multiple files, and creates new File
+     * objects to represent the selected files.
      *
-     * @return If the user clicks OK, returns a File or Folder object for the
-     * selected file or folder. If the user cancels, returns null.
+     * @param prompt string A string containing the prompt text, if the dialog
+     * allows a prompt.
      *
-     * TODO: return `(File|Folder)` in TSC 1.4
+     * @param filter string A filter that limits the types of files displayed in
+     * the dialog.
+     * In Windows, a filter expression, such as "JavaScript:*.jsx;All files:*.*"
+     * In Mac OS, a filter function that takes a File instance and returns true
+     * if the file
+     * should be included in the display, false if it should not.
+     *
+     * @param multiSelect boolean. When true, the user can select multiple files
+     * and the return value is an array. Default is false.
+     *
+     * @returns a File object for the selected file if the user clicks OK, or an
+     * array of objects if multiple files are selected. If the user cancels,
+     * returns null.
+     *
+     * TODO: return `(File|File[])` in TSC 1.4
      */
-    static selectDialog(prompt?: string): File|Folder
+    openDialog(prompt_?: string, filter?: string | Function, multiSelect?: boolean): File | File[]
 
+    /*
+     * Opens the built-in platform-specific file-browsing dialog in which a user
+     * can select an existing file location to which to save information, and
+     * creates a new File object to represent the selected file location.
+     *
+     * @param prompt string A string containing the prompt text, if the dialog
+     * allows a prompt.
+     *
+     * @param filter string (Windows only). A filter that limits the types of
+     * files displayed in the dialog. A filter expression, such as
+     * "JavaScript:*.jsx;All files:*.*".
+     *
+     * @return a File object for the selected file location if the user clicks
+     * OK, or null otherwise.
+     */
+    saveDialog(prompt_?: string, filter?: string | Function): File
+}
+
+declare interface Folder {
     /*
      * The full path name for the referenced folder in URI notation. Read only.
      */
@@ -809,7 +645,7 @@ declare class Folder {
      *
      * TODO: return `(File|Folder)[]` in TSC 1.4
      */
-    getFiles(mask?: string | Function): (File|Folder)[]
+    getFiles(mask?: string | Function): (File | Folder)[]
 
     /*
      * Retrieves the path for this folder relative to the specified base path or
@@ -869,5 +705,174 @@ declare class Folder {
      *
      * TODO: return `(File|Folder)` in TSC 1.4
      */
-    selectDlg(prompt_?: string): File|Folder
+    selectDlg(prompt_?: string): File | Folder
+}
+
+declare var Folder: {
+    /*
+         * @param path string. The absolute or relative path to the folder
+         * associated with this object, specified in URI format. The path need not
+         * refer to an existing folder. If not supplied, a temporary name is
+         * generated.
+         */
+    new(path?: string): Folder
+    (path?: string): File | Folder
+
+    /*
+     * A Folder object for the folder that contains application data for all
+     * users. Read only.
+     *
+     * In Windows, the value of %APPDATA% (by default, C:\Documents and
+     * Settings\All Users\Application Data)
+     *
+     * In Mac OS, /Library/Application Support
+     */
+    appData: Folder
+
+    /*
+     * In Mac OS, the Folder object for the folder that contains the bundle of
+     * the running application. Read only.
+     */
+    appPackage
+
+    /*
+     * A Folder object for the folder that contains application data for the
+     * current user. Read only.
+     *
+     * In Windows, the value of %CommonProgramFiles% (by default,
+     * C:\Program Files\Common Files)
+     *
+     * * In Mac OS,/Library/Application Support
+     */
+    commonFiles: Folder
+
+    /*
+     * A Folder object for the current folder. Assign either a Folder object or
+     * a string containing the new path name to set the current folder.
+     */
+    current: Folder
+
+    /*
+     * A Folder object for the folder that contains the user’s desktop. Read
+     * only.
+     *
+     * In Windows, C:\Documents and Settings\username\Desktop
+     *
+     * In Mac OS, ~/Desktop
+     */
+    desktop: Folder
+
+    /*
+     * The name of the file system. Read only. One of Windows, Macintosh, or
+     * Unix.
+     */
+    fs: string
+
+    /*
+     * A Folder object for the user’s default document folder. Read only.
+     *
+     * In Windows, C:\Documents and Settings\username\My Documents
+     *
+     * In Mac OS, ~/Documents
+     */
+    myDocuments: Folder
+
+    /*
+     * A Folder object for the folder containing the executable image of the
+     * running application. Read only.
+     */
+    startup: Folder
+
+    /*
+     * A Folder object for the folder containing the operating system files.
+     * Read only.
+     *
+     * In Windows, the value of %windir% (by default, C:\Windows)
+     *
+     * In Mac OS, /System
+     */
+    system: Folder
+
+    /*
+     * A Folder object for the default folder for temporary files. Read only.
+     */
+    temp: Folder
+
+    /*
+     * In Mac OS, a Folder object for the folder containing deleted items.
+     *
+     * In Windows, where the Recycle Bin is a database rather than a folder,
+     * value is null.
+     *
+     * Read only.
+     */
+    trash: Folder
+
+    /*
+     * In Mac OS, a Folder object for the folder containing deleted items.
+     *
+     * In Windows, where the Recycle Bin is a database rather than a folder,
+     * value is null.
+     */
+    userData: Folder
+
+    /*
+     * Decodes the specified string as required by RFC 2396.
+     *
+     * All special characters must be encoded in UTF-8 and stored as escaped
+     * characters starting with the percent sign followed by two hexadecimal
+     * digits. For example, the string "my%20file" is decoded as "my file".
+     *
+     * Special characters are those with a numeric value greater than 127,
+     * except the following:
+     *
+     *  / - _ . ! ~ * ' ( )
+     *
+     * @param string uri The encoded string to decode.
+     *
+     * @return string the decoded string.
+     */
+    decode(uri: string): string
+
+    /*
+     * Encodes the specified string as required by RFC 2396. All special
+     * characters are encoded in UTF-8 and stored as escaped characters starting
+     * with the percent sign followed by two hexadecimal digits.  For example,
+     * the string "my file" is encoded as "my%20file".
+     *
+     * Special characters are those with a numeric value greater than 127,
+     * except the following:
+     *
+     * / - _ . ! ~ * ' ( )
+     *
+     * @param string the string to encode.
+     *
+     * @return string the encoded string.
+     */
+    encode(name: string): string
+
+
+    /*
+     * Checks whether a given encoding is available.
+     *
+     * @param string name  The encoding name. Typical values are “ASCII,”
+     * “binary,” or “UTF-8.
+     *
+     * @return boolean Returns true if your system supports the specified
+     * encoding, false otherwise.
+     */
+    isEncodingAvailable(name: string): boolean
+
+    /*
+     * Opens the built-in platform-specific file-browsing dialog, and creates a
+     * new File or Folder object for the selected file or folder. Differs from
+     * the object method selectDlg() in that it does not preselect a folder.
+     *
+     * @param [string] prompt A string containing the prompt text, if the
+     * dialog allows a prompt.
+     *
+     * @return If the user clicks OK, returns a File or Folder object for the
+     * selected file or folder. If the user cancels, returns null.
+     */
+    selectDialog(prompt?: string): File | Folder
 }

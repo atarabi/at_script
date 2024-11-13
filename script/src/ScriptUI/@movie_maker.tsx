@@ -1,5 +1,8 @@
 /**
- * @movie_maker v1.0.0
+ * @movie_maker v1.0.1
+ * 
+ *      v1.0.1(2024/11/14)  Improve behavior of browse button
+ *      v1.0.0(2023/08/28)
  */
 ((global: Panel | Global) => {
 
@@ -112,6 +115,24 @@
         return new File(`${file.parent.absoluteURI}/${displayName}`);
     }
 
+    function isWin() {
+        return /^win/i.test($.os);
+    }
+
+    function makeFileFilter(exts: string[]): string | Function {
+        if (isWin()) {
+            let arr: string[] = [];
+            for (const ext of exts) {
+                arr.push(`*.${ext}`);
+            }
+            return arr.join(';');
+        }
+        return function (f: File | Folder) {
+            const re = RegExp('\\.(' + exts.join('|') + ')$', 'i');
+            return f instanceof Folder || re.test(f.displayName);
+        };
+    }
+
     const builder = new Atarabi.UI.Builder(global instanceof Panel ? global : 'palette', SCRIPT_NAME, { resizeable: true }, win => {
         win.spacing = win.margins = 1;
     })
@@ -134,7 +155,8 @@
             ui.helpTip = 'Browse a image path';
             ui.onClick = () => {
                 const path = builder.get(Param.Path);
-                const file = path ? new File(path).openDlg('A image path', '*.gif;*.png') as File : File.openDialog('A image path', '*.gif;*.png') as File;
+                const fileFilter = makeFileFilter(['gif', 'png']);
+                const file = path && isWin() ? new File(path).openDlg('A image path', fileFilter) as File : File.openDialog('A image path', fileFilter) as File;
                 if (file) {
                     builder.set(Param.Path, file.fsName);
                     emitter.notify(Event.SaveSetting);

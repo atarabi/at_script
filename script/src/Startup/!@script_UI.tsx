@@ -1,6 +1,7 @@
 /**
- * @script_UI v0.2.0
+ * @script_UI v0.2.1
  * 
+ *      v0.2.1(2024/11/14)  Fix cache bug of FuzzySearch
  *      v0.2.0(2024/02/13)  Add custom
  *      v0.1.0(2023/08/28)
  */
@@ -479,12 +480,13 @@
     class Builder<Groups = {}, Controls = {}, Lists = {}, UIs = {}> implements Atarabi.UI.Builder<Groups, Controls, Lists, UIs> {
         private _values: { [key: string]: Value } = {};
         private _events: { [eventName: string]: { uuid: Atarabi.Uuid; callback: Function; }[] } = {};
+        private _win: Panel | Window;
         constructor(options: BuilderOptions<Groups, Controls, Lists, UIs, any>) {
             this._events = options.events;
             this.build(options);
         }
         private build(options: BuilderOptions<Groups, Controls, Lists, UIs, any>) {
-            const win = (options.win.win instanceof Panel || options.win.win instanceof Window) ? options.win.win : new Window(options.win.win, options.win.title, undefined, options.win.options);
+            const win = this._win = (options.win.win instanceof Panel || options.win.win instanceof Window) ? options.win.win : new Window(options.win.win, options.win.title, undefined, options.win.options);
             if (options.win.uiFn) {
                 options.win.uiFn(win, this);
             }
@@ -1017,6 +1019,12 @@
                 _value.ui.remove(index as any);
             }
         }
+        // Window
+        close() {
+            if (this._win instanceof Window) {
+                this._win.close();
+            }
+        }
         // Utility
         onInit(fn: (builder: this) => void) {
             fn(this);
@@ -1193,7 +1201,7 @@
             query = query.replace(/^\s+|\s+$/g, '');
             if (query === '') {
                 return this.haystack;
-            } else if (this.options.cache && this.cache[query]) {
+            } else if (this.options.cache && this.cache.hasOwnProperty(query)) {
                 return this.cache[query];
             }
             const results = [];

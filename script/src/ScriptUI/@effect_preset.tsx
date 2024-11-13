@@ -1,9 +1,14 @@
 /**
- * @effect_preset v1.0.0
+ * @effect_preset v1.1.0
+ * 
+ *      v1.1.0(2024/11/14)  Reduce debounce time
+ *      v1.0.0(2023/09/16)
  */
 ((global: Panel | Global) => {
 
     const SCRIPT_NAME = '@effect_preset';
+
+    const DEBOUNCE_TIME = 100; // ms
 
     enum Param {
         ToolGroup = 'Tool',
@@ -331,7 +336,7 @@
             ui.alignment = ['fill', 'top'];
             const refresh = Atarabi.app.debounce(() => {
                 emitter.notify(Event.Refresh);
-            }, 200);
+            }, DEBOUNCE_TIME);
             ui.onChanging = () => {
                 emitter.notify(Event.SearchChanging, ui.text ? true : false);
                 refresh();
