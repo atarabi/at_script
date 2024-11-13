@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Comp &#8212; @script 0.4.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=3e29d2c0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/code-tabs.css?v=1bc26e2f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b4c9a718" />
+    
+    <script src="../../_static/documentation_options.js?v=995c025a"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/code-tabs.js?v=c983d12e"></script>
+    
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Effect" href="../Effect/index.html" />
+    <link rel="prev" title="Clipboard" href="../Clipboard/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Effect/index.html" title="Effect"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Clipboard/index.html" title="Clipboard"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.4.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Comp</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="comp">
+<h1>Comp<a class="headerlink" href="#comp" title="Link to this heading">¶</a></h1>
+<section id="comp-getmostrecentlyusedcomp">
+<h2>Comp.getMostRecentlyUsedComp()<a class="headerlink" href="#comp-getmostrecentlyusedcomp" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getMostRecentlyUsedComp():</span> <span class="pre">CompItem</span> <span class="pre">|</span> <span class="pre">null;</span></code></p>
+<p>コンポの中で、直近にタイムラインを開いていたものを取得する。</p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetMostRecentlyUsedComp#aegp-compsuite11">AEGP_GetMostRecentlyUsedComp</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div></section>
+<section id="comp-getshowlayernameorsourcename">
+<h2>Comp.getShowLayerNameOrSourceName()<a class="headerlink" href="#comp-getshowlayernameorsourcename" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getShowLayerNameOrSourceName(comp:</span> <span class="pre">CompItem):</span> <span class="pre">boolean;</span></code></p>
+<p>あるコンポのタイムラインタブでレイヤー名が表示されているかソース名が表示されているかを調べる。</p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetShowLayerNameOrSourceName#aegp-compsuite11">AEGP_GetShowLayerNameOrSourceName</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">showLayerName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getShowLayerNameOrSourceName</span><span class="p">(</span><span class="nx">comp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">showLayerName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getShowLayerNameOrSourceName</span><span class="p">(</span><span class="nx">comp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div></section>
+<section id="comp-setshowlayernameorsourcename">
+<h2>Comp.setShowLayerNameOrSourceName()<a class="headerlink" href="#comp-setshowlayernameorsourcename" title="Link to this heading">¶</a></h2>
+<p>あるコンポのタイムラインタブでレイヤー名を表示させるかソース名を表示させるか決める。</p>
+<p><code class="docutils literal notranslate"><span class="pre">setShowLayerNameOrSourceName(comp:</span> <span class="pre">CompItem,</span> <span class="pre">set:</span> <span class="pre">boolean):</span> <span class="pre">void;</span></code></p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_SetShowLayerNameOrSourceName#aegp-compsuite11">AEGP_SetShowLayerNameOrSourceName</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">showLayerName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getShowLayerNameOrSourceName</span><span class="p">(</span><span class="nx">comp</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">setShowLayerNameOrSourceName</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nx">showLayerName</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">showLayerName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getShowLayerNameOrSourceName</span><span class="p">(</span><span class="nx">comp</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">setShowLayerNameOrSourceName</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nx">showLayerName</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div></section>
+<section id="comp-getshowblendmodes">
+<h2>Comp.getShowBlendModes()<a class="headerlink" href="#comp-getshowblendmodes" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getShowBlendModes(comp:</span> <span class="pre">CompItem):</span> <span class="pre">boolean;</span></code></p>
+<p>あるコンポのタイムラインタブでブレンドモードが表示されているかどうかを調べる。</p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetShowBlendModes#aegp-compsuite11">AEGP_GetShowBlendModes</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">showBlendModes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getShowBlendModes</span><span class="p">(</span><span class="nx">comp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">showBlendModes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getShowBlendModes</span><span class="p">(</span><span class="nx">comp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div></section>
+<section id="comp-setshowblendmodes">
+<h2>Comp.setShowBlendModes()<a class="headerlink" href="#comp-setshowblendmodes" title="Link to this heading">¶</a></h2>
+<p>あるコンポのタイムラインタブでブレンドモードを表示させるか決める。</p>
+<p><code class="docutils literal notranslate"><span class="pre">setShowBlendModes(comp:</span> <span class="pre">CompItem,</span> <span class="pre">set:</span> <span class="pre">boolean):</span> <span class="pre">void;</span></code></p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_SetShowBlendModes#aegp-compsuite11">AEGP_SetShowBlendModes</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">showBlendModes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getShowBlendModes</span><span class="p">(</span><span class="nx">comp</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">setShowBlendModes</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nx">showBlendModes</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">showBlendModes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getShowBlendModes</span><span class="p">(</span><span class="nx">comp</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">setShowBlendModes</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nx">showBlendModes</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div></section>
+<section id="comp-renderframe">
+<h2>Comp.renderFrame()<a class="headerlink" href="#comp-renderframe" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">renderFrame(comp:</span> <span class="pre">CompItem,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">downsample?:</span> <span class="pre">number;</span> <span class="pre">timestamp?:</span> <span class="pre">number</span> <span class="pre">}):</span> <span class="pre">{</span> <span class="pre">binary:</span> <span class="pre">string</span> <span class="pre">|</span> <span class="pre">null;</span> <span class="pre">timestamp:</span> <span class="pre">number;</span> <span class="pre">};</span></code></p>
+<p>コンポをレンダリングする。実行すると、pngのバイナリが文字列として、そしてタイムスタンプが返ってくる。時間とタイムスタンプによって、コンポが更新されたか検知しており、更新されていない場合は、バイナリとして <strong>null</strong> が返ってくる。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">timestampCache</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">[</span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">[</span><span class="nx">time</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">getTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="o">:</span><span class="w"> </span><span class="kt">CompItem</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timestampCache</span><span class="p">[</span><span class="nx">comp</span><span class="p">.</span><span class="nx">id</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timestampCache</span><span class="p">[</span><span class="nx">comp</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cache</span><span class="p">[</span><span class="nx">time</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">timestamp</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">timestamp</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">setTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="o">:</span><span class="w"> </span><span class="kt">CompItem</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">,</span><span class="w"> </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timestampCache</span><span class="p">[</span><span class="nx">comp</span><span class="p">.</span><span class="nx">id</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timestampCache</span><span class="p">[</span><span class="nx">comp</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">cache</span><span class="p">[</span><span class="nx">time</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timestamp</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">renderFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">comp</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="nx">binary</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">comp</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">CompItem</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">oldTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getTimestamp</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">time</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">binary</span><span class="p">,</span><span class="w"> </span><span class="nx">timestamp</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">renderFrame</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">time</span><span class="o">:</span><span class="w"> </span><span class="kt">comp.time</span><span class="p">,</span><span class="w"> </span><span class="nx">downsample</span><span class="o">:</span><span class="w"> </span><span class="kt">6</span><span class="p">,</span><span class="w"> </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">oldTimestamp</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">binary</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">setTimestamp</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">timestamp</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">comp</span><span class="o">:</span><span class="w"> </span><span class="kt">comp.name</span><span class="p">,</span><span class="w"> </span><span class="nx">binary</span><span class="p">,</span><span class="w"> </span><span class="nx">timestamp</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">win</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Window</span><span class="p">(</span><span class="s1">&#39;palette&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Render Frame Example&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">resizeable</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="nx">win</span><span class="p">.</span><span class="nx">preferredSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">600</span><span class="p">,</span><span class="w"> </span><span class="mf">300</span><span class="p">];</span>
+<span class="w">        </span><span class="nx">win</span><span class="p">.</span><span class="nx">spacing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">win</span><span class="p">.</span><span class="nx">margins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">win</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Add&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">add</span><span class="p">.</span><span class="nx">alignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;fill&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;top&#39;</span><span class="p">];</span>
+<span class="w">        </span><span class="nx">add</span><span class="p">.</span><span class="nx">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">renderFrame</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">binary</span><span class="p">,</span><span class="w"> </span><span class="nx">timestamp</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">result</span><span class="p">;</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">win</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">group</span><span class="p">.</span><span class="nx">alignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;fill&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;top&#39;</span><span class="p">];</span>
+<span class="w">            </span><span class="nx">group</span><span class="p">.</span><span class="nx">alignChildren</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;fill&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;top&#39;</span><span class="p">];</span>
+<span class="w">            </span><span class="nx">group</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;statictext&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">comp</span><span class="si">}</span><span class="sb"> (</span><span class="si">${</span><span class="nx">timestamp</span><span class="si">}</span><span class="sb">)`</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">group</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">binary</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">win</span><span class="p">.</span><span class="nx">layout</span><span class="p">.</span><span class="nx">layout</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="nx">win</span><span class="p">.</span><span class="nx">onResize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">win</span><span class="p">.</span><span class="nx">onResizing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">win</span><span class="p">.</span><span class="nx">layout</span><span class="p">.</span><span class="nx">resize</span><span class="p">();</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="nx">win</span><span class="p">.</span><span class="nx">center</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">win</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="nx">build</span><span class="p">();</span>
+
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">timestampCache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">getTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timestampCache</span><span class="p">[</span><span class="nx">comp</span><span class="p">.</span><span class="nx">id</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timestampCache</span><span class="p">[</span><span class="nx">comp</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cache</span><span class="p">[</span><span class="nx">time</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">timestamp</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">timestamp</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">setTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">timestamp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timestampCache</span><span class="p">[</span><span class="nx">comp</span><span class="p">.</span><span class="nx">id</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timestampCache</span><span class="p">[</span><span class="nx">comp</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">cache</span><span class="p">[</span><span class="nx">time</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timestamp</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">renderFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">comp</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">CompItem</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">oldTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getTimestamp</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">time</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">renderFrame</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">time</span><span class="o">:</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">downsample</span><span class="o">:</span><span class="w"> </span><span class="mf">6</span><span class="p">,</span><span class="w"> </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="nx">oldTimestamp</span><span class="w"> </span><span class="p">}),</span><span class="w"> </span><span class="nx">binary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_a</span><span class="p">.</span><span class="nx">binary</span><span class="p">,</span><span class="w"> </span><span class="nx">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_a</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">binary</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">setTimestamp</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">timestamp</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">comp</span><span class="o">:</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">binary</span><span class="o">:</span><span class="w"> </span><span class="nx">binary</span><span class="p">,</span><span class="w"> </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="nx">timestamp</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">win</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Window</span><span class="p">(</span><span class="s1">&#39;palette&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Render Frame Example&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">resizeable</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="nx">win</span><span class="p">.</span><span class="nx">preferredSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">600</span><span class="p">,</span><span class="w"> </span><span class="mf">300</span><span class="p">];</span>
+<span class="w">        </span><span class="nx">win</span><span class="p">.</span><span class="nx">spacing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">win</span><span class="p">.</span><span class="nx">margins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">win</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Add&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">add</span><span class="p">.</span><span class="nx">alignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;fill&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;top&#39;</span><span class="p">];</span>
+<span class="w">        </span><span class="nx">add</span><span class="p">.</span><span class="nx">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">renderFrame</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">binary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">binary</span><span class="p">,</span><span class="w"> </span><span class="nx">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">;</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">win</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">group</span><span class="p">.</span><span class="nx">alignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;fill&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;top&#39;</span><span class="p">];</span>
+<span class="w">            </span><span class="nx">group</span><span class="p">.</span><span class="nx">alignChildren</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;fill&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;top&#39;</span><span class="p">];</span>
+<span class="w">            </span><span class="nx">group</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;statictext&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; (&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">timestamp</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;)&quot;</span><span class="p">));</span>
+<span class="w">            </span><span class="nx">group</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">binary</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">win</span><span class="p">.</span><span class="nx">layout</span><span class="p">.</span><span class="nx">layout</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="nx">win</span><span class="p">.</span><span class="nx">onResize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">win</span><span class="p">.</span><span class="nx">onResizing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">win</span><span class="p">.</span><span class="nx">layout</span><span class="p">.</span><span class="nx">resize</span><span class="p">();</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="nx">win</span><span class="p">.</span><span class="nx">center</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">win</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">build</span><span class="p">();</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div></section>
+<section id="comp-saveframetopng">
+<h2>Comp.saveFrameToPng()<a class="headerlink" href="#comp-saveframetopng" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">saveFrameToPng(comp:</span> <span class="pre">CompItem,</span> <span class="pre">file:</span> <span class="pre">File,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">downsample?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>コンポの画をpngで保存する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">comp</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">_</span><span class="si">${</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="si">}</span><span class="sb">.png`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">saveFrameToPng</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">comp</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot;.png&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">saveFrameToPng</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div></section>
+<section id="comp-saveframetojpg">
+<h2>Comp.saveFrameToJpg()<a class="headerlink" href="#comp-saveframetojpg" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">saveFrameToJpg(comp:</span> <span class="pre">CompItem,</span> <span class="pre">file:</span> <span class="pre">File,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">downsample?:</span> <span class="pre">number;</span> <span class="pre">quality?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">comp</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">_</span><span class="si">${</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="si">}</span><span class="sb">.jpg`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">saveFrameToJpg</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">comp</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot;.jpg&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">saveFrameToJpg</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div><p>コンポの画をjpegで保存する。</p>
+</section>
+<section id="comp-saveframetohdr">
+<h2>Comp.saveFrameToHdr()<a class="headerlink" href="#comp-saveframetohdr" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">saveFrameToHdr(comp:</span> <span class="pre">CompItem,</span> <span class="pre">file:</span> <span class="pre">File,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">downsample?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>コンポの画をhdrで保存する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">comp</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">_</span><span class="si">${</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="si">}</span><span class="sb">.hdr`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">saveFrameToHdr</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">comp</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot;.hdr&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">saveFrameToHdr</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div></section>
+<section id="comp-saveframetoclipboard">
+<h2>Comp.saveFrameToClipboard()<a class="headerlink" href="#comp-saveframetoclipboard" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">saveFrameToClipboard(comp:</span> <span class="pre">CompItem,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">downsample?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>コンポの画をクリップボードに保存する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">saveFrameToClipboard</span><span class="p">(</span><span class="nx">comp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">saveFrameToClipboard</span><span class="p">(</span><span class="nx">comp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div></section>
+<section id="comp-saveframestogif">
+<h2>Comp.saveFramesToGif()<a class="headerlink" href="#comp-saveframestogif" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">saveFramesToGif(comp:</span> <span class="pre">CompItem,</span> <span class="pre">startTime:</span> <span class="pre">number,</span> <span class="pre">endTime:</span> <span class="pre">number,</span> <span class="pre">file:</span> <span class="pre">File,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">downsample?:</span> <span class="pre">number;</span> <span class="pre">skip?:</span> <span class="pre">number;</span> <span class="pre">speed?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>コンポのある範囲の画をアニメーションgifとして保存する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">comp</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">_</span><span class="si">${</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="si">}</span><span class="sb">.gif`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">saveFramesToGif</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaStart</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaStart</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaDuration</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">comp</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot;.gif&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">saveFramesToGif</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaStart</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaStart</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaDuration</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div></section>
+<section id="comp-saveframestoapng">
+<h2>Comp.saveFramesToApng()<a class="headerlink" href="#comp-saveframestoapng" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">saveFramesToApng(comp:</span> <span class="pre">CompItem,</span> <span class="pre">startTime:</span> <span class="pre">number,</span> <span class="pre">endTime:</span> <span class="pre">number,</span> <span class="pre">file:</span> <span class="pre">File,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">downsample?:</span> <span class="pre">number;</span> <span class="pre">skip?:</span> <span class="pre">number;</span> <span class="pre">speed?:</span> <span class="pre">number;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>コンポのある範囲の画をアニメーションpngとして保存する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">comp</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">_</span><span class="si">${</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="si">}</span><span class="sb">.png`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">saveFramesToApng</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaStart</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaStart</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaDuration</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">comp</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot;.png&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">saveFramesToApng</span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaStart</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaStart</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">workAreaDuration</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div></section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Comp</a><ul>
+<li><a class="reference internal" href="#comp-getmostrecentlyusedcomp">Comp.getMostRecentlyUsedComp()</a></li>
+<li><a class="reference internal" href="#comp-getshowlayernameorsourcename">Comp.getShowLayerNameOrSourceName()</a></li>
+<li><a class="reference internal" href="#comp-setshowlayernameorsourcename">Comp.setShowLayerNameOrSourceName()</a></li>
+<li><a class="reference internal" href="#comp-getshowblendmodes">Comp.getShowBlendModes()</a></li>
+<li><a class="reference internal" href="#comp-setshowblendmodes">Comp.setShowBlendModes()</a></li>
+<li><a class="reference internal" href="#comp-renderframe">Comp.renderFrame()</a></li>
+<li><a class="reference internal" href="#comp-saveframetopng">Comp.saveFrameToPng()</a></li>
+<li><a class="reference internal" href="#comp-saveframetojpg">Comp.saveFrameToJpg()</a></li>
+<li><a class="reference internal" href="#comp-saveframetohdr">Comp.saveFrameToHdr()</a></li>
+<li><a class="reference internal" href="#comp-saveframetoclipboard">Comp.saveFrameToClipboard()</a></li>
+<li><a class="reference internal" href="#comp-saveframestogif">Comp.saveFramesToGif()</a></li>
+<li><a class="reference internal" href="#comp-saveframestoapng">Comp.saveFramesToApng()</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../Clipboard/index.html"
+                          title="previous chapter">Clipboard</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../Effect/index.html"
+                          title="next chapter">Effect</a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Effect/index.html" title="Effect"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Clipboard/index.html" title="Clipboard"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.4.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Comp</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023-2024, Atarabi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>

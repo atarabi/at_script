@@ -3,16 +3,16 @@
 <html lang="jp" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>@script &#8212; @script 0.4.1 documentation</title>
+    <title>@script &#8212; @script 0.4.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
-    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=b19d4733" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=3e29d2c0" />
     <link rel="stylesheet" type="text/css" href="_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=b4c9a718" />
     
-    <script src="_static/documentation_options.js?v=aea48830"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/documentation_options.js?v=995c025a"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/code-tabs.js?v=c983d12e"></script>
     
@@ -30,7 +30,7 @@
         <li class="right" >
           <a href="README/index.html" title="README"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">@script 0.4.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="#">@script 0.4.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">&#64;script</a></li> 
       </ul>
     </div>  
@@ -49,144 +49,189 @@
 <li class="toctree-l2"><a class="reference internal" href="README/index.html#repository">リポジトリ</a></li>
 <li class="toctree-l2"><a class="reference internal" href="README/index.html#target">対象</a></li>
 <li class="toctree-l2"><a class="reference internal" href="README/index.html#how-to">導入方法</a></li>
-<li class="toctree-l2"><a class="reference internal" href="README/index.html#atarabi-version">Atarabi.version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README/index.html#atarabi-version">Atarabi.version</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="README/index.html#v0-4-2-2024-11-14">v0.4.2(2024/11/14)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="README/index.html#v0-4-1-2024-10-22">v0.4.1(2024/10/22)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="README/index.html#v0-4-0-2024-06-30">v0.4.0(2024/06/30)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="README/index.html#v0-3-1-2024-05-29">v0.3.1(2024/05/29)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="README/index.html#v0-3-0-2024-02-13">v0.3.0(2024/02/13)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="README/index.html#v0-2-0-2023-09-16">v0.2.0(2023/09/16)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="README/index.html#v0-1-0-2023-08-28">v0.1.0(2023/08/28)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="JSON/index.html">JSON</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="JSON/index.html#json-stringify">JSON.stringify()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="JSON/index.html#json-parse">JSON.parse()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="JSON/index.html#json-isvalid">JSON.isValid()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="JSON/index.html#json-isvalidfile">JSON.isValidFile()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="JSON/index.html#json-parsefast">JSON.parseFast()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="App/index.html">App</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="App/index.html#app-colorpicker">App.colorPicker()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="App/index.html#app-getcolor">App.getColor()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="App/index.html#app-getbackgroundcolor">App.getBackgroundColor()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="App/index.html#app-setprojectdirty">App.setProjectDirty()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="App/index.html#app-savebackgroundstate">App.saveBackgroundState()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="App/index.html#app-forceforeground">App.forceForeground()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="App/index.html#app-restorebackgroundstate">App.restoreBackgroundState()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="App/index.html#app-refreshallwindows">App.refreshAllWindows()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="App/index.html#app-getmainhwnd">App.getMainHWND()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="App/index.html#app-debounce">App.debounce()</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API/index.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="API/App/index.html">App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/App/index.html#app-colorpicker">App.colorPicker()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/App/index.html#app-getcolor">App.getColor()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/App/index.html#app-getbackgroundcolor">App.getBackgroundColor()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/App/index.html#app-setprojectdirty">App.setProjectDirty()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/App/index.html#app-savebackgroundstate">App.saveBackgroundState()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/App/index.html#app-forceforeground">App.forceForeground()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/App/index.html#app-restorebackgroundstate">App.restoreBackgroundState()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/App/index.html#app-refreshallwindows">App.refreshAllWindows()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/App/index.html#app-getmainhwnd">App.getMainHWND()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/App/index.html#app-debounce">App.debounce()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Label/index.html">Label</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Label/index.html#label-setcolor">Label.setColor()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Label/index.html#label-getcolor">Label.getColor()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API/Camera/index.html">Camera</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/Camera/index.html#camera-getdefaultcameradistancetoimageplane">Camera.getDefaultCameraDistanceToImagePlane()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Camera/index.html#camera-getfilmsize">Camera.getFilmSize()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Camera/index.html#camera-setfilmsize">Camera.setFilmSize()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Item/index.html">Item</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Item/index.html#item-getactiveitem">Item.getActiveItem()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Item/index.html#item-touchactiveitem">Item.touchActiveItem()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Item/index.html#item-movetimestepactiveitem">Item.moveTimeStepActiveItem()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Item/index.html#item-getfootagesounddataformat">Item.getFootageSoundDataFormat()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API/Clipboard/index.html">Clipboard</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/Clipboard/index.html#clipboard-gettext">Clipboard.getText()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Clipboard/index.html#clipboard-settext">Clipboard.setText()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Comp/index.html">Comp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Comp/index.html#comp-getmostrecentlyusedcomp">Comp.getMostRecentlyUsedComp()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Comp/index.html#comp-getshowlayernameorsourcename">Comp.getShowLayerNameOrSourceName()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Comp/index.html#comp-setshowlayernameorsourcename">Comp.setShowLayerNameOrSourceName()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Comp/index.html#comp-getshowblendmodes">Comp.getShowBlendModes()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Comp/index.html#comp-setshowblendmodes">Comp.setShowBlendModes()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Comp/index.html#comp-renderframe">Comp.renderFrame()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Comp/index.html#comp-saveframetopng">Comp.saveFrameToPng()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Comp/index.html#comp-saveframetojpg">Comp.saveFrameToJpg()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Comp/index.html#comp-saveframetohdr">Comp.saveFrameToHdr()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Comp/index.html#comp-saveframetoclipboard">Comp.saveFrameToClipboard()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Comp/index.html#comp-saveframestogif">Comp.saveFramesToGif()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Comp/index.html#comp-saveframestoapng">Comp.saveFramesToApng()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API/Comp/index.html">Comp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/Comp/index.html#comp-getmostrecentlyusedcomp">Comp.getMostRecentlyUsedComp()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Comp/index.html#comp-getshowlayernameorsourcename">Comp.getShowLayerNameOrSourceName()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Comp/index.html#comp-setshowlayernameorsourcename">Comp.setShowLayerNameOrSourceName()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Comp/index.html#comp-getshowblendmodes">Comp.getShowBlendModes()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Comp/index.html#comp-setshowblendmodes">Comp.setShowBlendModes()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Comp/index.html#comp-renderframe">Comp.renderFrame()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Comp/index.html#comp-saveframetopng">Comp.saveFrameToPng()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Comp/index.html#comp-saveframetojpg">Comp.saveFrameToJpg()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Comp/index.html#comp-saveframetohdr">Comp.saveFrameToHdr()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Comp/index.html#comp-saveframetoclipboard">Comp.saveFrameToClipboard()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Comp/index.html#comp-saveframestogif">Comp.saveFramesToGif()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Comp/index.html#comp-saveframestoapng">Comp.saveFramesToApng()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Camera/index.html">Camera</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Camera/index.html#camera-getdefaultcameradistancetoimageplane">Camera.getDefaultCameraDistanceToImagePlane()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Camera/index.html#camera-getfilmsize">Camera.getFilmSize()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Camera/index.html#camera-setfilmsize">Camera.setFilmSize()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API/Effect/index.html">Effect</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/Effect/index.html#effect-updateparamui">Effect.updateParamUI()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Effect/index.html#effect-adbe-curvescustom-getcurvesvalue">Effect['ADBE CurvesCustom'].getCurvesValue()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Effect/index.html#effect-adbe-curvescustom-setcurvesvalue">Effect['ADBE CurvesCustom'].setCurvesValue()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Effect/index.html#effect-apc-colorama-getoutputcyclevalue">Effect['APC Colorama'].getOutputCycleValue()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Effect/index.html#effect-apc-colorama-setoutputcyclevalue">Effect['APC Colorama'].setOutputCycleValue()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Layer/index.html">Layer</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Layer/index.html#layer-getactivelayer">Layer.getActiveLayer()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Layer/index.html#layer-getid">Layer.getID()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Layer/index.html#layer-getbounds">Layer.getBounds()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Layer/index.html#layer-getmaskbounds">Layer.getMaskBounds()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Layer/index.html#layer-getmoments">Layer.getMoments()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Layer/index.html#layer-saveframetopng">Layer.saveFrameToPng()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Layer/index.html#layer-saveframetojpg">Layer.saveFrameToJpg()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Layer/index.html#layer-saveframetohdr">Layer.saveFrameToHdr()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Layer/index.html#layer-saveframetoclipboard">Layer.saveFrameToClipboard()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Layer/index.html#layer-saveframestogif">Layer.saveFramesToGif()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Layer/index.html#layer-saveframestoapng">Layer.saveFramesToApng()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Layer/index.html#layer-sampleimage">Layer.sampleImage()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API/Item/index.html">Item</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/Item/index.html#item-getactiveitem">Item.getActiveItem()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Item/index.html#item-touchactiveitem">Item.touchActiveItem()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Item/index.html#item-movetimestepactiveitem">Item.moveTimeStepActiveItem()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Item/index.html#item-getfootagesounddataformat">Item.getFootageSoundDataFormat()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Effect/index.html">Effect</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Effect/index.html#effect-updateparamui">Effect.updateParamUI()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Effect/index.html#effect-adbe-curvescustom-getcurvesvalue">Effect['ADBE CurvesCustom'].getCurvesValue()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Effect/index.html#effect-adbe-curvescustom-setcurvesvalue">Effect['ADBE CurvesCustom'].setCurvesValue()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Effect/index.html#effect-apc-colorama-getoutputcyclevalue">Effect['APC Colorama'].getOutputCycleValue()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Effect/index.html#effect-apc-colorama-setoutputcyclevalue">Effect['APC Colorama'].setOutputCycleValue()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API/JSON/index.html">JSON</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/JSON/index.html#json-stringify">JSON.stringify()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/JSON/index.html#json-parse">JSON.parse()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/JSON/index.html#json-isvalid">JSON.isValid()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/JSON/index.html#json-isvalidfile">JSON.isValidFile()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/JSON/index.html#json-parsefast">JSON.parseFast()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Property/index.html">Property</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-getparamdef">Property.getParamDef()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-getpropertyparameters">Property.getPropertyParameters()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-getvalue">Property.getValue()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-setvalue">Property.setValue()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-getvalueatkey">Property.getValueAtKey()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-setvalueatkey">Property.setValueAtKey()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-getkeyparameters">Property.getKeyParameters()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-setkeyparameters">Property.setKeyParameters()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-ismodified">Property.isModified()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-ishidden">Property.isHidden()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-sethidden">Property.setHidden()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-getexpression">Property.getExpression()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-setexpression">Property.setExpression()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-userchangedparam">Property.userChangedParam()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-clickbutton">Property.clickButton()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-savecustomvalue">Property.saveCustomValue()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Property/index.html#property-loadcustomvalue">Property.loadCustomValue()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API/Keyboard/index.html">Keyboard</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/Keyboard/index.html#keyboard-hook">Keyboard.hook()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Keyboard/index.html#keyboard-unhook">Keyboard.unhook()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Keyboard/index.html#keyboard-enablehook">Keyboard.enableHook()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Keyboard/index.html#keyboard-enablehookbyuuid">Keyboard.enableHookByUuid()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Keyboard/index.html#keyboard-sendkeys">Keyboard.sendKeys()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Register/index.html">Register</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Register/index.html#register-insertcommand">Register.insertCommand()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Register/index.html#register-hookcommand">Register.hookCommand()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Register/index.html#register-unhookcommand">Register.unhookCommand()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Register/index.html#register-unhookcommandall">Register.unhookCommandAll()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Register/index.html#register-importflavor">Register.importFlavor()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API/Label/index.html">Label</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/Label/index.html#label-setcolor">Label.setColor()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Label/index.html#label-getcolor">Label.getColor()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="UI/index.html">UI</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="UI/index.html#ui-showcontextmenu">UI.showContextMenu()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="UI/index.html#ui-progress">UI.progress()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API/Layer/index.html">Layer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/Layer/index.html#layer-getactivelayer">Layer.getActiveLayer()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Layer/index.html#layer-getid">Layer.getID()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Layer/index.html#layer-getbounds">Layer.getBounds()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Layer/index.html#layer-getmaskbounds">Layer.getMaskBounds()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Layer/index.html#layer-getmoments">Layer.getMoments()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Layer/index.html#layer-saveframetopng">Layer.saveFrameToPng()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Layer/index.html#layer-saveframetojpg">Layer.saveFrameToJpg()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Layer/index.html#layer-saveframetohdr">Layer.saveFrameToHdr()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Layer/index.html#layer-saveframetoclipboard">Layer.saveFrameToClipboard()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Layer/index.html#layer-saveframestogif">Layer.saveFramesToGif()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Layer/index.html#layer-saveframestoapng">Layer.saveFramesToApng()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Layer/index.html#layer-sampleimage">Layer.sampleImage()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Clipboard/index.html">Clipboard</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Clipboard/index.html#clipboard-gettext">Clipboard.getText()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Clipboard/index.html#clipboard-settext">Clipboard.setText()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API/Mouse/index.html">Mouse</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/Mouse/index.html#mouse-getposition">Mouse.getPosition()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Mouse/index.html#mouse-hook">Mouse.hook()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Mouse/index.html#mouse-unhook">Mouse.unhook()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Mouse/index.html#mouse-enablehook">Mouse.enableHook()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Mouse/index.html#mouse-enablehookbyuuid">Mouse.enableHookByUuid()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Mouse/index.html#mouse-sendclick">Mouse.sendClick()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Keyboard/index.html">Keyboard</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Keyboard/index.html#keyboard-hook">Keyboard.hook()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Keyboard/index.html#keyboard-unhook">Keyboard.unhook()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Keyboard/index.html#keyboard-enablehook">Keyboard.enableHook()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Keyboard/index.html#keyboard-enablehookbyuuid">Keyboard.enableHookByUuid()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Keyboard/index.html#keyboard-sendkeys">Keyboard.sendKeys()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API/Property/index.html">Property</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-getparamdef">Property.getParamDef()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-getpropertyparameters">Property.getPropertyParameters()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-getvalue">Property.getValue()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-setvalue">Property.setValue()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-getvalueatkey">Property.getValueAtKey()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-setvalueatkey">Property.setValueAtKey()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-getkeyparameters">Property.getKeyParameters()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-setkeyparameters">Property.setKeyParameters()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-ismodified">Property.isModified()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-ishidden">Property.isHidden()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-sethidden">Property.setHidden()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-getexpression">Property.getExpression()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-setexpression">Property.setExpression()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-userchangedparam">Property.userChangedParam()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-clickbutton">Property.clickButton()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-savecustomvalue">Property.saveCustomValue()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Property/index.html#property-loadcustomvalue">Property.loadCustomValue()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Mouse/index.html">Mouse</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Mouse/index.html#mouse-getposition">Mouse.getPosition()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Mouse/index.html#mouse-hook">Mouse.hook()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Mouse/index.html#mouse-unhook">Mouse.unhook()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Mouse/index.html#mouse-enablehook">Mouse.enableHook()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Mouse/index.html#mouse-enablehookbyuuid">Mouse.enableHookByUuid()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Mouse/index.html#mouse-sendclick">Mouse.sendClick()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API/Register/index.html">Register</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/Register/index.html#register-insertcommand">Register.insertCommand()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Register/index.html#register-hookcommand">Register.hookCommand()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Register/index.html#register-unhookcommand">Register.unhookCommand()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Register/index.html#register-unhookcommandall">Register.unhookCommandAll()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/Register/index.html#register-importflavor">Register.importFlavor()</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="SVG/index.html">SVG</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="SVG/index.html#svg-svgtoshapelayer">SVG.svgToShapeLayer()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SVG/index.html#svg-getcontext">SVG.getContext()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="API/SVG/index.html">SVG</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/SVG/index.html#svg-svgtoshapelayer">SVG.svgToShapeLayer()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/SVG/index.html#svg-getcontext">SVG.getContext()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="API/UI/index.html">UI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/UI/index.html#ui-showcontextmenu">UI.showContextMenu()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API/UI/index.html#ui-progress">UI.progress()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Script/index.html">Script</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Script/Startup/index.html">Startup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Script/Startup/%21%40script_initializer.html">!&#64;script_initializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/Startup/%21%40script_UI.html">!&#64;script_UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/Startup/%40effect_launcher.html">&#64;effect_launcher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/Startup/%40command_set_null.html">&#64;command_set_null</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/Startup/%40toggle_mfr.html">&#64;toggle_mfr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/Startup/%40save_to_desktop.html">&#64;save_to_desktop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/Startup/%40fold_layers.html">&#64;fold_layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/Startup/%40hook_solid.html">&#64;hook_solid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/Startup/%40hook_null.html">&#64;hook_null</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/Startup/%40hook_adjustment.html">&#64;hook_adjustment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/Startup/%40hook_fit_to_comp.html">&#64;hook_fit_to_comp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/Startup/%40hook_%5D.html">&#64;hook_]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/Startup/%40svg.html">&#64;svg</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Script/ScriptUI/index.html">ScriptUI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Script/ScriptUI/%40effect_search.html">&#64;effect_search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/ScriptUI/%40effect_preset.html">&#64;effect_preset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/ScriptUI/%40effects_in_use.html">&#64;effects_in_use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/ScriptUI/%40dropdownlist_viewer.html">&#64;dropdownlist_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/ScriptUI/%40paramdefs_viewer.html">&#64;paramdefs_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/ScriptUI/%40still_maker.html">&#64;still_maker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/ScriptUI/%40movie_maker.html">&#64;movie_maker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/ScriptUI/%40rpp_loader.html">&#64;rpp_loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/ScriptUI/%40swatch.html">&#64;swatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/ScriptUI/%40proxy_maker.html">&#64;proxy_maker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Script/ScriptUI/%40script_panel.html">&#64;script_panel</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -205,7 +250,7 @@
     <p class="topless"><a href="README/index.html"
                           title="next chapter">README</a></p>
   </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -213,7 +258,7 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
@@ -228,13 +273,13 @@
         <li class="right" >
           <a href="README/index.html" title="README"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">@script 0.4.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="#">@script 0.4.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">&#64;script</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright 2023-2024, Atarabi.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
   </body>
 </html>

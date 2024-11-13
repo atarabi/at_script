@@ -31,7 +31,12 @@ CC2018-
 導入方法
 --------
 `Releases · atarabi/at_script <https://github.com/atarabi/at_script/releases>`_ から **@script.zip** をダウンロード。
-プラグインはプラグインのフォルダにコピー。Startup時にAPIを用いたい場合は、 **!@script_initializer.jsx** をスクリプトのStartupのフォルダにコピー。
+
+プラグインは、pluginフォルダにある@scriptプラグイン(Windowsの場合は **@script.aex** , Macの場合は **@script.plugin** )をAfter Effectsのプラグイン関係のフォルダ内にコピー。
+
+スクリプトは、script/Startupフォルダにある **!@script_initializer.jsx**、 **!@script_UI.jsx** をAfter EffectsのStartup向けスクリプトのフォルダ内にコピー(例えば、Windows、AE2025の場合、 **C:\Program Files\Adobe\Adobe After Effects 2025\Support Files\Scripts\Startup** )。
+
+後は各自使いたいスクリプトを各自script/Startupフォルダないしscript/ScriptUIフォルダからコピーする。
 
 自身でAPIを用いたスクリプトを開発したい場合は、リポジトリをクローンし、 **script** フォルダをコピーし作業フォルダにし、 **src** フォルダ内に適当にフォルダを作成し、その中でtsxという拡張子でスクリプトファイルを作っていけばよい。
 
@@ -49,6 +54,22 @@ Atarabi.version
 ---------------
 
 ``version: string;``
+
+v0.4.2(2024/11/14)
+^^^^^^^^^^^^^^^^^^^^
+
+Fix
+"""""""""""
+- Windows環境で、UI.showContextMenu()において、コンテクストメニューの文字列が正常に表示されない場合があることに対する修正
+- UI.FuzzySearch()においてキャッシュを有効にした状態である特定の文字列を与えた場合に、undefinedが返ってくる場合があることに対する修正（@effect_launcher, @effect_search, @effect_presetなどで使用しているので、使っている方は!@script_UI.jsxを更新してください）
+
+Script
+"""""""""""
+- @script_panel の追加
+- @effect_launcher にショートカット機能を追加
+- @effect_search で、スクリプト、プリセットを扱える機能を追加
+- @effect_launcher、@effect_search、@effect_preset で検索窓のデバウンスタイムを少なくした
+- @still_maker、 @movie_maker のブラウズボタンの挙動を改善した
 
 v0.4.1(2024/10/22)
 ^^^^^^^^^^^^^^^^^^^^

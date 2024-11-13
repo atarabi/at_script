@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Item &#8212; @script 0.4.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=3e29d2c0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/code-tabs.css?v=1bc26e2f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b4c9a718" />
+    
+    <script src="../../_static/documentation_options.js?v=995c025a"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/code-tabs.js?v=c983d12e"></script>
+    
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="JSON" href="../JSON/index.html" />
+    <link rel="prev" title="Effect" href="../Effect/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../JSON/index.html" title="JSON"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Effect/index.html" title="Effect"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.4.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Item</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="item">
+<h1>Item<a class="headerlink" href="#item" title="Link to this heading">¶</a></h1>
+<section id="item-getactiveitem">
+<h2>Item.getActiveItem()<a class="headerlink" href="#item-getactiveitem" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getActiveItem():</span> <span class="pre">Item</span> <span class="pre">|</span> <span class="pre">null;</span></code></p>
+<p><strong>app.project.activeItem</strong> に同じ。なぜ入れたのか分からないので、将来的に取り除くやも。</p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetActiveItem#aegp-itemsuite9">AEGP_GetActiveItem</a></p>
+</section>
+<section id="item-touchactiveitem">
+<h2>Item.touchActiveItem()<a class="headerlink" href="#item-touchactiveitem" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">touchActiveItem():</span> <span class="pre">void;</span></code></p>
+<p>アクティブなアイテムが更新されたとAEに通知する。</p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_TouchActiveItem#pf-advitemsuite1">PF_TouchActiveItem</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">item</span><span class="p">.</span><span class="nx">touchActiveItem</span><span class="p">();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">item</span><span class="p">.</span><span class="nx">touchActiveItem</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.2.0.</span></p>
+</div>
+</section>
+<section id="item-movetimestepactiveitem">
+<h2>Item.moveTimeStepActiveItem()<a class="headerlink" href="#item-movetimestepactiveitem" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">moveTimeStepActiveItem(steps:</span> <span class="pre">number):</span> <span class="pre">void;</span></code></p>
+<p>アクティブなアイテムの現在フレームを指定ステップ数だけ前後に移動させる。</p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_MoveTimeStepActiveItem#pf-advitemsuite1">PF_MoveTimeStepActiveItem</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">item</span><span class="p">.</span><span class="nx">moveTimeStepActiveItem</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">item</span><span class="p">.</span><span class="nx">moveTimeStepActiveItem</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.2.0.</span></p>
+</div>
+</section>
+<section id="item-getfootagesounddataformat">
+<h2>Item.getFootageSoundDataFormat()<a class="headerlink" href="#item-getfootagesounddataformat" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getFootageSoundDataFormat(item:</span> <span class="pre">FootageItem):</span> <span class="pre">SoundDataFormat;</span></code></p>
+<p>アイテムの音声のサンプルレート、モノラルorステレオなどを取得する。</p>
+<p>参照: <a class="reference external" href="https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetFootageSoundDataFormat#aegp-footagesuite5">AEGP_GetFootageSoundDataFormat</a></p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">item</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">FootageItem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">soundDataFormat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">item</span><span class="p">.</span><span class="nx">getFootageSoundDataFormat</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">item</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">FootageItem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">soundDataFormat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">item</span><span class="p">.</span><span class="nx">getFootageSoundDataFormat</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.2.0.</span></p>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Item</a><ul>
+<li><a class="reference internal" href="#item-getactiveitem">Item.getActiveItem()</a></li>
+<li><a class="reference internal" href="#item-touchactiveitem">Item.touchActiveItem()</a></li>
+<li><a class="reference internal" href="#item-movetimestepactiveitem">Item.moveTimeStepActiveItem()</a></li>
+<li><a class="reference internal" href="#item-getfootagesounddataformat">Item.getFootageSoundDataFormat()</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../Effect/index.html"
+                          title="previous chapter">Effect</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../JSON/index.html"
+                          title="next chapter">JSON</a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../JSON/index.html" title="JSON"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Effect/index.html" title="Effect"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.4.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Item</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023-2024, Atarabi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>
