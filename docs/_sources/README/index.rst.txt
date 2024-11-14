@@ -61,7 +61,7 @@ v0.4.2(2024/11/14)
 Fix
 """""""""""
 - Windows環境で、UI.showContextMenu()において、コンテクストメニューの文字列が正常に表示されない場合があることに対する修正
-- UI.FuzzySearch()においてキャッシュを有効にした状態である特定の文字列を与えた場合に、undefinedが返ってくる場合があることに対する修正（@effect_launcher, @effect_search, @effect_presetなどで使用しているので、使っている方は!@script_UI.jsxを更新してください）
+- UI.FuzzySearch()においてキャッシュを有効にした状態である特定の文字列を与えた場合に、配列以外が返ってくる場合があることに対する修正（@effect_launcher, @effect_search, @effect_presetなどで使用しているので、使っている方は!@script_UI.jsxを更新してください）
 
 Script
 """""""""""
