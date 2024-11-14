@@ -4,7 +4,7 @@
 
 .. image:: @effect_launcher-UI.png
 
-`Quick Menu <https://aescripts.com/quick-menu/>`_**、 `FX Console <https://www.videocopilot.net/blog/2018/05/fx-console-updated-to-v1-0-3/>`_ ライクのスクリプト。
+`Quick Menu <https://aescripts.com/quick-menu/>`_、 `FX Console <https://www.videocopilot.net/blog/2018/05/fx-console-updated-to-v1-0-3/>`_ ライクのスクリプト。
 
 
 使い方
