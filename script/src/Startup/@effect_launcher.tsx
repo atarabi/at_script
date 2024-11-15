@@ -70,7 +70,11 @@
     enum Type {
         Effect = 'effect',
         Script = 'script',
+        Scriptlet = 'scriptlet',
         Preset = 'preset',
+        Command = 'command',
+        Footage = 'footage',
+        Project = 'project',
         Unknown = 'unknown',
     }
 
@@ -98,10 +102,23 @@
     }
 
     function getShortcutTypeFromFile(file: File): Type {
+        if (!file.exists) {
+            return Type.Unknown;
+        }
         if (/\.(jsx|jsxbin)$/i.test(file.displayName)) {
             return Type.Script;
         } else if (/\.(ffx)$/i.test(file.displayName)) {
             return Type.Preset;
+        }
+        try {
+            const importOptions = new ImportOptions(file);
+            if (importOptions.canImportAs(ImportAsType.FOOTAGE) || importOptions.canImportAs(ImportAsType.COMP) || importOptions.canImportAs(ImportAsType.COMP_CROPPED_LAYERS)) {
+                return Type.Footage;
+            } else if (importOptions.canImportAs(ImportAsType.PROJECT)) {
+                return Type.Project;
+            }
+        } catch (e) {
+            alert(e);
         }
         return Type.Unknown;
     }
@@ -351,6 +368,12 @@
         }).call($.global);
     }
 
+    function applyScriptlet(code: string) {
+        (() => {
+            eval(code);
+        }).call($.global);
+    }
+
     function applyPreset(layers: Layer[], file: File) {
         if (!layers.length) {
             return;
@@ -384,6 +407,31 @@
         }
     }
 
+    function applyCommand(command: string) {
+        if (/^\d+$/.test(command)) {
+            app.executeCommand(parseInt(command, 10));
+        } else {
+            const commandID = app.findMenuCommandId(command);
+            if (!commandID) {
+                alert(`${command} is not found`);
+                return;
+            }
+            app.executeCommand(commandID);
+        }
+    }
+
+    function applyImport(file: File) {
+        if (!file.exists) {
+            return;
+        }
+        try {
+            const importOptions = new ImportOptions(file);
+            app.project.importFile(importOptions);
+        } catch (e) {
+            alert(e);
+        }
+    }
+
     function applyShortcutValue(layers: Layer[], shortcutValue: ShortcutValue) {
         switch (shortcutValue.type) {
             case Type.Effect:
@@ -392,8 +440,18 @@
             case Type.Script:
                 applyScript(new File(shortcutValue.value));
                 break;
+            case Type.Scriptlet:
+                applyScriptlet(shortcutValue.value);
+                break;
             case Type.Preset:
                 applyPreset(layers, new File(shortcutValue.value));
+                break;
+            case Type.Command:
+                applyCommand(shortcutValue.value);
+                break;
+            case Type.Footage:
+            case Type.Project:
+                applyImport(new File(shortcutValue.value));
                 break;
         }
     }
@@ -490,12 +548,16 @@
                     }
                 });
                 emitter.addEventListener(Event.NewShortcut, () => {
-                    const file = File.openDialog('Script/Preset File', makeFileFilter(['jsx', 'jsxbin', 'ffx'])) as File;
+                    const file = File.openDialog('File for shortcut') as File;
                     if (file) {
+                        const type = getShortcutTypeFromFile(file);
+                        if (type === Type.Unknown) {
+                            alert('Invalid file');
+                            return;
+                        }
                         const newKey = generateShortcutKey(newSettings, file.displayName);
                         if (newKey) {
                             const item = ui.add('item', newKey);
-                            const type = getShortcutTypeFromFile(file);
                             item.subItems[0].text = file.displayName;
                             item.subItems[1].text = type;
                             item.subItems[2].text = file.fsName;
