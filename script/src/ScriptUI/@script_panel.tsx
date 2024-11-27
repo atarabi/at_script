@@ -57,7 +57,7 @@
                 const files: File[] = [];
                 for (const file of SCRIPT_UI_FOLDER.getFiles()) {
                     if (file instanceof File) {
-                        if (/\.jsx$/i.test(file.displayName)) {
+                        if (/\.jsx(bin)?$/i.test(file.displayName)) {
                             files.push(file);
                         }
                     }
