@@ -55,6 +55,51 @@ Atarabi.version
 
 ``version: string;``
 
+v0.5.0(2025/02/01)
+^^^^^^^^^^^^^^^^^^^^
+
+Fix
+"""""""""""
+- Windows環境で、Clipboard.getText()において、CF_UNICODETEXTではなくCF_TEXTから読み込むようにした(CF_TEXTにUTF-8の文字列が設定されていて、かつCF_UNICODETEXTが設定されていない状態で、CF_UNICODETEXTを取得しようとすると、UTF-8文字列をANSIコードページ(日本語であればShift_JIS)として解釈、変換された文字列が渡されるので、それに対する暫定的措置)
+
+Improve
+"""""""""""
+- Keyboard.hook(), Mouse.hook()において、一つの状態に対して、一つしかフック出来なかったのを複数フック出来るようにした
+- SVG.svgToShapeLayer()をFileだけでなくstringも受け付けるようにした
+
+Plugin
+"""""""""""
+- @image(@image, @image_file, @images_in_folder) の追加
+
+API
+"""""""""""
+- Image の追加
+- RIFX の追加
+- Pseudo の追加
+- API の追加
+- Effect['ADBE MESH WARP'] の追加
+- Property.setGradientValue() の追加
+- Property.isGradientParameter() の追加
+- Clipboard.getTypes() の追加
+- Clipboard.getFiles() の追加
+- Clipboard.getImageInfo() の追加
+- At.isImageParameter() の追加
+- At.getImageInfo() の追加
+- At.setImageFromFile() の追加
+- At.setImageFromClipboard() の追加
+- At.getImageInfoAtKey() の追加
+- At.setImageFromFileAtKey() の追加
+- At.setImageFromClipboardAtKey() の追加
+
+Script
+"""""""""""
+- @paste_clipboard の追加
+- @script_panel において、jsxbinも取得するようにした
+- @effect_launcher のショートカット機能でフッテージの読み込みも出来るようにした
+- @toggle_mfr で、アイドル時のキャッシュのオンオフも出来るようにした
+- @svg でスタイルタグを用いたスタイル設定に一部対応した(単純なclass、idによる指定のみ)
+- @svg でグラデーションに一部対応した
+
 v0.4.2(2024/11/14)
 ^^^^^^^^^^^^^^^^^^^^
 

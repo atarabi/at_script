@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>RIFX &#8212; @script 0.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=3e29d2c0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/code-tabs.css?v=1bc26e2f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b4c9a718" />
+    
+    <script src="../../_static/documentation_options.js?v=7b094670"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/code-tabs.js?v=c983d12e"></script>
+    
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Register" href="../Register/index.html" />
+    <link rel="prev" title="Pseudo" href="../Pseudo/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Register/index.html" title="Register"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Pseudo/index.html" title="Pseudo"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RIFX</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="rifx">
+<h1>RIFX<a class="headerlink" href="#rifx" title="Link to this heading">¶</a></h1>
+<p>aep(プロジェクト)やffx(プリセット)で使用されているRIFXというフォーマットを扱う。
+ExtendScriptで実装しているので、大きなサイズのaepを扱うのには向いていない。</p>
+<section id="rifx-stringify">
+<h2>RIFX.stringify()<a class="headerlink" href="#rifx-stringify" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">stringify(rifx:</span> <span class="pre">Chunk):</span> <span class="pre">string;</span></code></p>
+<p>parseしたChunkを元のバイナリに変換する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s1">&#39;C:/adobe/my_preset.ffx&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">chunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">binary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s1">&#39;C:/adobe/my_preset.ffx&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">chunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">binary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="rifx-parse">
+<h2>RIFX.parse()<a class="headerlink" href="#rifx-parse" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">parse(file:</span> <span class="pre">File):</span> <span class="pre">Chunk;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">parse(text:</span> <span class="pre">string):</span> <span class="pre">Chunk;</span></code></p>
+<p>ファイルないしテキストをRIFXとして解析する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s1">&#39;C:/adobe/my_preset.ffx&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">chunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s1">&#39;C:/adobe/my_preset.ffx&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">chunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="rifx-parsewithxmp">
+<h2>RIFX.parseWithXMP()<a class="headerlink" href="#rifx-parsewithxmp" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">parseWithXMP(file:</span> <span class="pre">File):</span> <span class="pre">[Chunk,</span> <span class="pre">string];</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">parseWithXMP(text:</span> <span class="pre">string):</span> <span class="pre">[Chunk,</span> <span class="pre">string];</span></code></p>
+<p>ファイルないしテキストをRIFXとして解析することに加え、末尾についているXMPデータも返す。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s1">&#39;C:/adobe/my_preset.ffx&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">chunk</span><span class="p">,</span><span class="w"> </span><span class="nx">xmp</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">parseWithXMP</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s1">&#39;C:/adobe/my_preset.ffx&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">parseWithXMP</span><span class="p">(</span><span class="nx">file</span><span class="p">),</span><span class="w"> </span><span class="nx">chunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_a</span><span class="p">[</span><span class="mf">0</span><span class="p">],</span><span class="w"> </span><span class="nx">xmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_a</span><span class="p">[</span><span class="mf">1</span><span class="p">];</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="rifx-size">
+<h2>RIFX.size()<a class="headerlink" href="#rifx-size" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">size(chunk:</span> <span class="pre">RIFX.Chunk):</span> <span class="pre">number;</span></code></p>
+<p>チャンクのペイロードサイズを返す。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s1">&#39;C:/adobe/my_preset.ffx&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">chunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">size</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s1">&#39;C:/adobe/my_preset.ffx&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">chunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">size</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="rifx-walk">
+<h2>RIFX.walk()<a class="headerlink" href="#rifx-walk" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">walk&lt;C</span> <span class="pre">extends</span> <span class="pre">Chunk&gt;(chunk:</span> <span class="pre">C,</span> <span class="pre">fn:</span> <span class="pre">(chunk:</span> <span class="pre">C</span> <span class="pre">|</span> <span class="pre">null)</span> <span class="pre">=&gt;</span> <span class="pre">boolean):</span> <span class="pre">void;</span></code></p>
+<p>チャンクを深さ優先でトラバースする。各チャンクに対しfn(chunk)が呼ばれた後、fn(null)が呼ばれる(golangのast.Inspectを参考にした)。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s1">&#39;C:/adobe/my_preset.ffx&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">rifx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">walk</span><span class="p">(</span><span class="nx">rifx</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">chunk</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">chunk</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">space</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;  &#39;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">chunk</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;RIFX&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">chunk</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;LIST&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">$</span><span class="p">.</span><span class="nx">writeln</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">space</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">chunk</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">chunk</span><span class="p">.</span><span class="nx">data</span><span class="si">}</span><span class="sb"> (</span><span class="si">${</span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">size</span><span class="p">(</span><span class="nx">chunk</span><span class="p">)</span><span class="si">}</span><span class="sb">)`</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">$</span><span class="p">.</span><span class="nx">writeln</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">space</span><span class="si">}${</span><span class="nx">chunk</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb"> (</span><span class="si">${</span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">size</span><span class="p">(</span><span class="nx">chunk</span><span class="p">)</span><span class="si">}</span><span class="sb">)`</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">i</span><span class="o">--</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s1">&#39;C:/adobe/my_preset.ffx&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">rifx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">walk</span><span class="p">(</span><span class="nx">rifx</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">chunk</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">chunk</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">space</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;  &#39;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">chunk</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;RIFX&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">chunk</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;LIST&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">$</span><span class="p">.</span><span class="nx">writeln</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">space</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunk</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunk</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; (&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">size</span><span class="p">(</span><span class="nx">chunk</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;)&quot;</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">$</span><span class="p">.</span><span class="nx">writeln</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">space</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">chunk</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; (&quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">RIFX</span><span class="p">.</span><span class="nx">size</span><span class="p">(</span><span class="nx">chunk</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;)&quot;</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">i</span><span class="o">--</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="rifx-makegradientpreset">
+<h2>RIFX.makeGradientPreset()<a class="headerlink" href="#rifx-makegradientpreset" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">makeGradientPreset(value:</span> <span class="pre">Property.GradientValue,</span> <span class="pre">type:</span> <span class="pre">Property.GradientType,</span> <span class="pre">key?:</span> <span class="pre">boolean):</span> <span class="pre">string;</span></code></p>
+<p>シェイプレイヤーのグラデーションの塗り、線、レイヤースタイルのグラデーションオーバレイに付属するグラデーションパラメータに適用するプリセットのバイナリを生成する。
+実際に使用する際は、このバイナリをファイルとして保存し、Layer.applyPreset()で適用する。 <a class="reference external" href="../Property/index.html#property-setgradientvalue">Property.setGradientValue()</a> も参照のこと。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="rifx-makepseudoeffectpreset">
+<h2>RIFX.makePseudoEffectPreset()<a class="headerlink" href="#rifx-makepseudoeffectpreset" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">makePseudoEffectPreset(config:</span> <span class="pre">Pseudo.Config):</span> <span class="pre">string;</span></code></p>
+<p>Pseudo Effectのプリセットのバイナリを生成する。
+実際に使用する際は、このバイナリをファイルとして保存し、Layer.applyPreset()で適用する。 <a class="reference external" href="../Pseudo/index.html">Pseudo</a> も参照のこと。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">RIFX</a><ul>
+<li><a class="reference internal" href="#rifx-stringify">RIFX.stringify()</a></li>
+<li><a class="reference internal" href="#rifx-parse">RIFX.parse()</a></li>
+<li><a class="reference internal" href="#rifx-parsewithxmp">RIFX.parseWithXMP()</a></li>
+<li><a class="reference internal" href="#rifx-size">RIFX.size()</a></li>
+<li><a class="reference internal" href="#rifx-walk">RIFX.walk()</a></li>
+<li><a class="reference internal" href="#rifx-makegradientpreset">RIFX.makeGradientPreset()</a></li>
+<li><a class="reference internal" href="#rifx-makepseudoeffectpreset">RIFX.makePseudoEffectPreset()</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../Pseudo/index.html"
+                          title="previous chapter">Pseudo</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../Register/index.html"
+                          title="next chapter">Register</a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Register/index.html" title="Register"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Pseudo/index.html" title="Pseudo"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RIFX</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023-2025, Atarabi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>API &#8212; @script 0.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=3e29d2c0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/code-tabs.css?v=1bc26e2f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b4c9a718" />
+    
+    <script src="../../_static/documentation_options.js?v=7b094670"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/code-tabs.js?v=c983d12e"></script>
+    
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="App" href="../App/index.html" />
+    <link rel="prev" title="API" href="../index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../App/index.html" title="App"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="API"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">API</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="api">
+<h1>API<a class="headerlink" href="#api" title="Link to this heading">¶</a></h1>
+<p>スクリプト間での関数の呼び出しをやりやすくする。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="w"> </span><span class="nx">AddShapeFn</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="p">(</span><span class="nx">comp</span><span class="o">:</span><span class="w"> </span><span class="kt">CompItem</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// APIを追加する</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">API</span><span class="p">.</span><span class="nx">add</span><span class="o">&lt;</span><span class="nx">AddShapeFn</span><span class="o">&gt;</span><span class="p">(</span><span class="s1">&#39;My Namespace&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;addShape&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="o">:</span><span class="w"> </span><span class="kt">CompItem</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">shapeLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">layers</span><span class="p">.</span><span class="nx">addShape</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">shapeLayer</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">name</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">shapeLayer</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">CompItem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// APIが追加されているか確認する</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">API</span><span class="p">.</span><span class="nx">isAdded</span><span class="p">(</span><span class="s1">&#39;My Namespace&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;addShape&#39;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// APIを呼び出す</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">newShapeLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">API</span><span class="p">.</span><span class="nx">invoke</span><span class="o">&lt;</span><span class="nx">AddShapeFn</span><span class="o">&gt;</span><span class="p">(</span><span class="s1">&#39;My Namespace&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;addShape&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;New Shape!&#39;</span><span class="p">]);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// APIが追加されてない場合にフォールバックを呼び出すように設定して呼び出す（isAddedの確認が減らせる）</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">newerShapeLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">API</span><span class="p">.</span><span class="nx">invoke</span><span class="o">&lt;</span><span class="nx">AddShapeFn</span><span class="o">&gt;</span><span class="p">(</span><span class="s1">&#39;My Namespace&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;addShape&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Newer Shape!&#39;</span><span class="p">],</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">shapeLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">layers</span><span class="p">.</span><span class="nx">addShape</span><span class="p">();</span>
+<span class="w">            </span><span class="nx">shapeLayer</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">!?`</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">shapeLayer</span><span class="p">;</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// APIを追加する</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">API</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;My Namespace&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;addShape&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">shapeLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">layers</span><span class="p">.</span><span class="nx">addShape</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">shapeLayer</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">name</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">shapeLayer</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">CompItem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// APIが追加されているか確認する</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">API</span><span class="p">.</span><span class="nx">isAdded</span><span class="p">(</span><span class="s1">&#39;My Namespace&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;addShape&#39;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// APIを呼び出す</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">newShapeLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">API</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span><span class="s1">&#39;My Namespace&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;addShape&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;New Shape!&#39;</span><span class="p">]);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// APIが追加されてない場合にフォールバックを呼び出すように設定して呼び出す（isAddedの確認が減らせる）</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">newerShapeLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">API</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span><span class="s1">&#39;My Namespace&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;addShape&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Newer Shape!&#39;</span><span class="p">],</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">shapeLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">layers</span><span class="p">.</span><span class="nx">addShape</span><span class="p">();</span>
+<span class="w">            </span><span class="nx">shapeLayer</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;!?&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">shapeLayer</span><span class="p">;</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div></div><section id="api-add">
+<h2>API.add()<a class="headerlink" href="#api-add" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">add&lt;F</span> <span class="pre">extends</span> <span class="pre">(...args:</span> <span class="pre">any[])</span> <span class="pre">=&gt;</span> <span class="pre">any&gt;(name:</span> <span class="pre">string,</span> <span class="pre">method:</span> <span class="pre">string,</span> <span class="pre">callback:</span> <span class="pre">F,</span> <span class="pre">thisArg?:</span> <span class="pre">any):</span> <span class="pre">boolean;</span></code></p>
+<p>name, methodをキーとして関数を登録する。登録に成功すれば、trueが帰る。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="api-invoke">
+<h2>API.invoke()<a class="headerlink" href="#api-invoke" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">invoke&lt;F</span> <span class="pre">extends</span> <span class="pre">(...args:</span> <span class="pre">any[])</span> <span class="pre">=&gt;</span> <span class="pre">any&gt;(name:</span> <span class="pre">string,</span> <span class="pre">method:</span> <span class="pre">string,</span> <span class="pre">args?:</span> <span class="pre">Parameters&lt;F&gt;,</span> <span class="pre">fallback?:</span> <span class="pre">(...args:</span> <span class="pre">Parameters&lt;F&gt;)</span> <span class="pre">=&gt;</span> <span class="pre">ReturnType&lt;F&gt;):</span> <span class="pre">ReturnType&lt;F&gt;;</span></code></p>
+<p>登録した関数を呼び出す。登録されていなければ、フォールバックが呼ばれる。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="api-remove">
+<h2>API.remove()<a class="headerlink" href="#api-remove" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">remove(name:</span> <span class="pre">string,</span> <span class="pre">method:</span> <span class="pre">string):</span> <span class="pre">boolean;</span></code></p>
+<p>登録した関数を削除する。削除に成功すれば、trueが帰る。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="api-isadded">
+<h2>API.isAdded()<a class="headerlink" href="#api-isadded" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">isAdded(name:</span> <span class="pre">string,</span> <span class="pre">method:</span> <span class="pre">string):</span> <span class="pre">boolean;</span></code></p>
+<p>関数が登録されているか調べる。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">API</a><ul>
+<li><a class="reference internal" href="#api-add">API.add()</a></li>
+<li><a class="reference internal" href="#api-invoke">API.invoke()</a></li>
+<li><a class="reference internal" href="#api-remove">API.remove()</a></li>
+<li><a class="reference internal" href="#api-isadded">API.isAdded()</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../index.html"
+                          title="previous chapter">API</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../App/index.html"
+                          title="next chapter">App</a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../App/index.html" title="App"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="API"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">API</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023-2025, Atarabi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>

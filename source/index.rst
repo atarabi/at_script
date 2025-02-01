@@ -7,4 +7,5 @@
 
    README/index
    API/index
+   Plugin/index
    Script/index

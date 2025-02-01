@@ -7,9 +7,9 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = '@script'
-copyright = '2023-2024, Atarabi'
+copyright = '2023-2025, Atarabi'
 author = 'Atarabi'
-release = '0.4.2'
+release = '0.5.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

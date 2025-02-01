@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Property &#8212; @script 0.4.2 documentation</title>
+    <title>Property &#8212; @script 0.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=3e29d2c0" />
     <link rel="stylesheet" type="text/css" href="../../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../../_static/documentation_options.js?v=995c025a"></script>
+    <script src="../../_static/documentation_options.js?v=7b094670"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/code-tabs.js?v=c983d12e"></script>
@@ -19,7 +19,7 @@
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Register" href="../Register/index.html" />
+    <link rel="next" title="Pseudo" href="../Pseudo/index.html" />
     <link rel="prev" title="Mouse" href="../Mouse/index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -29,12 +29,12 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../Register/index.html" title="Register"
+          <a href="../Pseudo/index.html" title="Pseudo"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../Mouse/index.html" title="Mouse"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.4.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Property</a></li> 
       </ul>
@@ -230,6 +230,22 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
 <p><span class="versionmodified added">Added in version 0.4.1.</span></p>
 </div>
 </section>
+<section id="property-setgradientvalue">
+<h2>Property.setGradientValue()<a class="headerlink" href="#property-setgradientvalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setGradientValue(property:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">GradientValue,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">key?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>グラデーション(in Gradient Fill, Gradient Stroke,  Gradient Overlay)のパラメータに値を設定する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="property-isgradientparameter">
+<h2>Property.isGradientParameter()<a class="headerlink" href="#property-isgradientparameter" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">isGradientParameter(property:</span> <span class="pre">Property):</span> <span class="pre">boolean;</span></code></p>
+<p>プロパティがグラデーションのパラメータか調べる。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
 </section>
 
 
@@ -260,6 +276,8 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
 <li><a class="reference internal" href="#property-clickbutton">Property.clickButton()</a></li>
 <li><a class="reference internal" href="#property-savecustomvalue">Property.saveCustomValue()</a></li>
 <li><a class="reference internal" href="#property-loadcustomvalue">Property.loadCustomValue()</a></li>
+<li><a class="reference internal" href="#property-setgradientvalue">Property.setGradientValue()</a></li>
+<li><a class="reference internal" href="#property-isgradientparameter">Property.isGradientParameter()</a></li>
 </ul>
 </li>
 </ul>
@@ -272,8 +290,8 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="../Register/index.html"
-                          title="next chapter">Register</a></p>
+    <p class="topless"><a href="../Pseudo/index.html"
+                          title="next chapter">Pseudo</a></p>
   </div>
 <search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
@@ -296,18 +314,18 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../Register/index.html" title="Register"
+          <a href="../Pseudo/index.html" title="Pseudo"
              >next</a> |</li>
         <li class="right" >
           <a href="../Mouse/index.html" title="Mouse"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.4.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Property</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-    &#169; Copyright 2023-2024, Atarabi.
+    &#169; Copyright 2023-2025, Atarabi.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
   </body>

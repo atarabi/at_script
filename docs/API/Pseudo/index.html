@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Pseudo &#8212; @script 0.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=3e29d2c0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/code-tabs.css?v=1bc26e2f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b4c9a718" />
+    
+    <script src="../../_static/documentation_options.js?v=7b094670"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/code-tabs.js?v=c983d12e"></script>
+    
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="RIFX" href="../RIFX/index.html" />
+    <link rel="prev" title="Property" href="../Property/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../RIFX/index.html" title="RIFX"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Property/index.html" title="Property"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Pseudo</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="pseudo">
+<h1>Pseudo<a class="headerlink" href="#pseudo" title="Link to this heading">¶</a></h1>
+<p>Pseudo Effectを取り扱う。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">pseudo</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;Example&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">layer</span><span class="p">(</span><span class="s1">&#39;Layer&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">slider</span><span class="p">(</span><span class="s1">&#39;Slider&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">fixedSlider</span><span class="p">(</span><span class="s1">&#39;Fixed Slider&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">angle</span><span class="p">(</span><span class="s1">&#39;Angle&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">checkbox</span><span class="p">(</span><span class="s1">&#39;Checkbox&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;checked&#39;</span><span class="w"> </span><span class="p">})</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">color</span><span class="p">(</span><span class="s1">&#39;Color&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">red</span><span class="o">:</span><span class="w"> </span><span class="kt">255</span><span class="p">,</span><span class="w"> </span><span class="nx">green</span><span class="o">:</span><span class="w"> </span><span class="kt">128</span><span class="p">,</span><span class="w"> </span><span class="nx">blue</span><span class="o">:</span><span class="w"> </span><span class="kt">92</span><span class="w"> </span><span class="p">})</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">point</span><span class="p">(</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">popup</span><span class="p">(</span><span class="s1">&#39;Popup&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;AAA&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;BBB&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CCC&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;(-&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DDD&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;EEE&#39;</span><span class="p">])</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">floatSlider</span><span class="p">(</span><span class="s1">&#39;Float Slider&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">percent</span><span class="p">(</span><span class="s1">&#39;Percent&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">pixel</span><span class="p">(</span><span class="s1">&#39;Pixel&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;Path&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">groupStart</span><span class="p">(</span><span class="s1">&#39;Grpup Start&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">groupEnd</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">button</span><span class="p">(</span><span class="s1">&#39;Button&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Push&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">point3D</span><span class="p">(</span><span class="s1">&#39;Point 3D&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">config</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">CompItem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">layers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">filter</span><span class="p">(</span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedLayers</span><span class="p">,</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">pseudo</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">layers</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="o">:</span><span class="w"> </span><span class="kt">Layer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">filter</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">values</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">[],</span><span class="w"> </span><span class="nx">fn</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">T</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">arr</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">values</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fn</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">arr</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">pseudo</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;Example&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">layer</span><span class="p">(</span><span class="s1">&#39;Layer&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">slider</span><span class="p">(</span><span class="s1">&#39;Slider&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">fixedSlider</span><span class="p">(</span><span class="s1">&#39;Fixed Slider&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">angle</span><span class="p">(</span><span class="s1">&#39;Angle&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">checkbox</span><span class="p">(</span><span class="s1">&#39;Checkbox&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;checked&#39;</span><span class="w"> </span><span class="p">})</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">color</span><span class="p">(</span><span class="s1">&#39;Color&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">red</span><span class="o">:</span><span class="w"> </span><span class="mf">255</span><span class="p">,</span><span class="w"> </span><span class="nx">green</span><span class="o">:</span><span class="w"> </span><span class="mf">128</span><span class="p">,</span><span class="w"> </span><span class="nx">blue</span><span class="o">:</span><span class="w"> </span><span class="mf">92</span><span class="w"> </span><span class="p">})</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">point</span><span class="p">(</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">popup</span><span class="p">(</span><span class="s1">&#39;Popup&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;AAA&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;BBB&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CCC&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;(-&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DDD&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;EEE&#39;</span><span class="p">])</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">floatSlider</span><span class="p">(</span><span class="s1">&#39;Float Slider&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">percent</span><span class="p">(</span><span class="s1">&#39;Percent&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">pixel</span><span class="p">(</span><span class="s1">&#39;Pixel&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;Path&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">groupStart</span><span class="p">(</span><span class="s1">&#39;Grpup Start&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">groupEnd</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">button</span><span class="p">(</span><span class="s1">&#39;Button&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Push&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">point3D</span><span class="p">(</span><span class="s1">&#39;Point 3D&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">config</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">activeItem</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">CompItem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">layers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">filter</span><span class="p">(</span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedLayers</span><span class="p">,</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">pseudo</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">layers</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">isAVLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">AVLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ShapeLayer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">TextLayer</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">filter</span><span class="p">(</span><span class="nx">values</span><span class="p">,</span><span class="w"> </span><span class="nx">fn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">values_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">values</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">values_1</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">values_1</span><span class="p">[</span><span class="nx">_i</span><span class="p">];</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fn</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">arr</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><img alt="../../_images/pseudo.png" src="../../_images/pseudo.png" />
+<p>上のスクリプトを実行すると、画像のようなpseudo effectが適用される。</p>
+<p>流れとしては、</p>
+<ol class="arabic simple">
+<li><p><strong>Atarabi.pseudo.create()</strong> を用いて、設定オブジェクトを形成するBuilderを呼ぶ。</p></li>
+<li><p><strong>.floatSlider('Amount', 0, 0, 100, 0, 100)</strong> のようにメソッドチェーンを用いて、欲しいパラメータを連ねていく。</p></li>
+<li><p><strong>.config();</strong> パラメータを追加し終わったら、最後に <strong>config()</strong> を呼びだし、設定オブジェクトを生成する。</p></li>
+<li><p><strong>Atarabi.pseudo.apply(config, layers);</strong> その設定オブジェクトを、 <strong>apply()</strong> に渡してやれば適用される。</p></li>
+</ol>
+<p>適用せずに、プリセットとして出力したい場合は、以下のように代わりに <strong>write()</strong> を呼び出す。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">pseudo</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;Example&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">floatSlider</span><span class="p">(</span><span class="s1">&#39;Float Slider&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">precision</span><span class="o">:</span><span class="w"> </span><span class="kt">3</span><span class="p">,</span><span class="w"> </span><span class="nx">uiFlags</span><span class="o">:</span><span class="w"> </span><span class="kt">PF.ParamUIFlags.Disabled</span><span class="p">,</span><span class="w"> </span><span class="nx">flags</span><span class="o">:</span><span class="w"> </span><span class="kt">PF.ParamFlags.CannotTimeVary</span><span class="w"> </span><span class="p">})</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="si">}</span><span class="sb">/Example.ffx`</span><span class="p">),</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="si">}</span><span class="sb">/Example.json`</span><span class="p">));</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">pseudo</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;Example&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">floatSlider</span><span class="p">(</span><span class="s1">&#39;Float Slider&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">precision</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="nx">uiFlags</span><span class="o">:</span><span class="w"> </span><span class="mf">32</span><span class="w"> </span><span class="cm">/* PF.ParamUIFlags.Disabled */</span><span class="p">,</span><span class="w"> </span><span class="nx">flags</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="cm">/* PF.ParamFlags.CannotTimeVary */</span><span class="w"> </span><span class="p">})</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/Example.ffx&quot;</span><span class="p">)),</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">Folder</span><span class="p">.</span><span class="nx">desktop</span><span class="p">.</span><span class="nx">absoluteURI</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/Example.json&quot;</span><span class="p">)));</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><p>これを実行すると、デスクトップにプリセットファイルと(.ffx)、設定オブジェクトをJSONにしたもの(.json)が作られる。どちらかだけを作りたい場合は、 <strong>write(null, file)</strong> のように片方にだけFileオブジェクトを渡せば良い。</p>
+<div class="tab codetab" data-id="11">
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Example&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;matchName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pseudo/UbUn0C0/Example&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;floatSlider&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Float Slider&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;validMin&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;validMax&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;sliderMin&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;sliderMax&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;precision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;displayFlags&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;uiFlags&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><section id="pseudo-create">
+<h2>Pseudo.create()<a class="headerlink" href="#pseudo-create" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">create(name:</span> <span class="pre">string,</span> <span class="pre">matchName?:</span> <span class="pre">string):</span> <span class="pre">Builder;</span></code></p>
+<p>設定オブジェクトを作るBuilderを呼び出す。matchNameを指定する場合は、 <strong>Pseudo/</strong> から始める必要がある。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="pseudo-apply">
+<h2>Pseudo.apply()<a class="headerlink" href="#pseudo-apply" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">apply(config:</span> <span class="pre">Config,</span> <span class="pre">layers:</span> <span class="pre">AVLayer</span> <span class="pre">|</span> <span class="pre">AVLayer[]):</span> <span class="pre">void;</span></code></p>
+<p>設定オブジェクトを用いて、対象のレイヤーにPseudo Effectを適用する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Pseudo</a><ul>
+<li><a class="reference internal" href="#pseudo-create">Pseudo.create()</a></li>
+<li><a class="reference internal" href="#pseudo-apply">Pseudo.apply()</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../Property/index.html"
+                          title="previous chapter">Property</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../RIFX/index.html"
+                          title="next chapter">RIFX</a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../RIFX/index.html" title="RIFX"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Property/index.html" title="Property"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Pseudo</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023-2025, Atarabi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>At &#8212; @script 0.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=3e29d2c0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/code-tabs.css?v=1bc26e2f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b4c9a718" />
+    
+    <script src="../../_static/documentation_options.js?v=7b094670"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/code-tabs.js?v=c983d12e"></script>
+    
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Camera" href="../Camera/index.html" />
+    <link rel="prev" title="App" href="../App/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Camera/index.html" title="Camera"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../App/index.html" title="App"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">At</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="at">
+<h1>At<a class="headerlink" href="#at" title="Link to this heading">¶</a></h1>
+<p>Atarabiのエフェクトのカスタムパラメータをスクリプトから弄るようのAPI群。</p>
+<section id="at-isateffect">
+<h2>At.isAtEffect()<a class="headerlink" href="#at-isateffect" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">isAtEffect(effect:</span> <span class="pre">PropertyGroup):</span> <span class="pre">boolean;</span></code></p>
+<p>Atarabi製のエフェクトかを調べる。</p>
+</section>
+<section id="at-setcollapse">
+<h2>At.setCollapse()<a class="headerlink" href="#at-setcollapse" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setCollapse(property:</span> <span class="pre">Property,</span> <span class="pre">doCollapse:</span> <span class="pre">boolean):</span> <span class="pre">void;</span></code></p>
+<p>パラメータを開閉する。</p>
+</section>
+<section id="at-istextparameter">
+<h2>At.isTextParameter()<a class="headerlink" href="#at-istextparameter" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">isTextParameter(property:</span> <span class="pre">Property):</span> <span class="pre">boolean;</span></code></p>
+<p>テキストパラメータかを調べる。</p>
+</section>
+<section id="at-gettextvalue">
+<h2>At.getTextValue()<a class="headerlink" href="#at-gettextvalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getTextValue(property:</span> <span class="pre">Property,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">preExpression?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">TextValue;</span></code></p>
+<p>テキストパラメータの値を取得する。</p>
+</section>
+<section id="at-settextvalue">
+<h2>At.setTextValue()<a class="headerlink" href="#at-settextvalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setTextValue(property:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">TextValue,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">key?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>テキストパラメータの値を設定する。</p>
+</section>
+<section id="at-gettextvalueatkey">
+<h2>At.getTextValueAtKey()<a class="headerlink" href="#at-gettextvalueatkey" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getTextValueAtKey(property:</span> <span class="pre">Property,</span> <span class="pre">keyIndex:</span> <span class="pre">number):</span> <span class="pre">At.TextValue;</span></code></p>
+<p>あるキーにおけるテキストパラメータの値を取得する。</p>
+</section>
+<section id="at-settextvalueatkey">
+<h2>At.setTextValueAtKey()<a class="headerlink" href="#at-settextvalueatkey" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setTextValueAtKey(property:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">At.TextValue,</span> <span class="pre">keyIndex:</span> <span class="pre">number):</span> <span class="pre">void;</span></code></p>
+<p>あるキーに対してテキストパラメータの値を設定する。</p>
+</section>
+<section id="at-isimageparameter">
+<h2>At.isImageParameter()<a class="headerlink" href="#at-isimageparameter" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">isImageParameter(property:</span> <span class="pre">Property):</span> <span class="pre">boolean;</span></code></p>
+<p>イメージパラメータかを調べる。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="at-getimageinfo">
+<h2>At.getImageInfo()<a class="headerlink" href="#at-getimageinfo" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getImageInfo(property:</span> <span class="pre">Property,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">preExpression?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">Image.Info</span> <span class="pre">|</span> <span class="pre">null;</span></code></p>
+<p>イメージパラメータの画像データの情報を取得する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="at-setimagefromfile">
+<h2>At.setImageFromFile()<a class="headerlink" href="#at-setimagefromfile" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setImageFromFile(property:</span> <span class="pre">Property,</span> <span class="pre">file:</span> <span class="pre">File,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">key?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>イメージパラメータの画像データをファイルから設定する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="at-setimagefromclipboard">
+<h2>At.setImageFromClipboard()<a class="headerlink" href="#at-setimagefromclipboard" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setImageFromClipboard(property:</span> <span class="pre">Property,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">key?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>イメージパラメータの画像データをクリップボードから設定する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="at-getimageinfoatkey">
+<h2>At.getImageInfoAtKey()<a class="headerlink" href="#at-getimageinfoatkey" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getImageInfoAtKey(property:</span> <span class="pre">Property,</span> <span class="pre">keyIndex:</span> <span class="pre">number):</span> <span class="pre">Image_.Info;</span></code></p>
+<p>あるキーのイメージパラメータの画像データの情報を取得する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="at-setimagefromfileatkey">
+<h2>At.setImageFromFileAtKey()<a class="headerlink" href="#at-setimagefromfileatkey" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setImageFromFileAtKey(property:</span> <span class="pre">Property,</span> <span class="pre">file:</span> <span class="pre">File,</span> <span class="pre">keyIndex:</span> <span class="pre">number):</span> <span class="pre">void;</span></code></p>
+<p>あるキーのイメージパラメータの画像データをファイルから設定する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="at-setimagefromclipboardatkey">
+<h2>At.setImageFromClipboardAtKey()<a class="headerlink" href="#at-setimagefromclipboardatkey" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setImageFromClipboardAtKey(property:</span> <span class="pre">Property,</span> <span class="pre">keyIndex:</span> <span class="pre">number):</span> <span class="pre">void;</span></code></p>
+<p>あるキーのイメージパラメータの画像データをクリップボードから設定する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">At</a><ul>
+<li><a class="reference internal" href="#at-isateffect">At.isAtEffect()</a></li>
+<li><a class="reference internal" href="#at-setcollapse">At.setCollapse()</a></li>
+<li><a class="reference internal" href="#at-istextparameter">At.isTextParameter()</a></li>
+<li><a class="reference internal" href="#at-gettextvalue">At.getTextValue()</a></li>
+<li><a class="reference internal" href="#at-settextvalue">At.setTextValue()</a></li>
+<li><a class="reference internal" href="#at-gettextvalueatkey">At.getTextValueAtKey()</a></li>
+<li><a class="reference internal" href="#at-settextvalueatkey">At.setTextValueAtKey()</a></li>
+<li><a class="reference internal" href="#at-isimageparameter">At.isImageParameter()</a></li>
+<li><a class="reference internal" href="#at-getimageinfo">At.getImageInfo()</a></li>
+<li><a class="reference internal" href="#at-setimagefromfile">At.setImageFromFile()</a></li>
+<li><a class="reference internal" href="#at-setimagefromclipboard">At.setImageFromClipboard()</a></li>
+<li><a class="reference internal" href="#at-getimageinfoatkey">At.getImageInfoAtKey()</a></li>
+<li><a class="reference internal" href="#at-setimagefromfileatkey">At.setImageFromFileAtKey()</a></li>
+<li><a class="reference internal" href="#at-setimagefromclipboardatkey">At.setImageFromClipboardAtKey()</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../App/index.html"
+                          title="previous chapter">App</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../Camera/index.html"
+                          title="next chapter">Camera</a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Camera/index.html" title="Camera"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../App/index.html" title="App"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">At</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023-2025, Atarabi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>

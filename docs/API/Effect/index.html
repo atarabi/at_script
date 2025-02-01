@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Effect &#8212; @script 0.4.2 documentation</title>
+    <title>Effect &#8212; @script 0.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=3e29d2c0" />
     <link rel="stylesheet" type="text/css" href="../../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../../_static/documentation_options.js?v=995c025a"></script>
+    <script src="../../_static/documentation_options.js?v=7b094670"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/code-tabs.js?v=c983d12e"></script>
@@ -19,7 +19,7 @@
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Item" href="../Item/index.html" />
+    <link rel="next" title="Image" href="../Image/index.html" />
     <link rel="prev" title="Comp" href="../Comp/index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -29,12 +29,12 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../Item/index.html" title="Item"
+          <a href="../Image/index.html" title="Image"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../Comp/index.html" title="Comp"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.4.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Effect</a></li> 
       </ul>
@@ -275,6 +275,133 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
 <p><span class="versionmodified added">Added in version 0.4.0.</span></p>
 </div>
 </section>
+<section id="effect-adbe-mesh-warp-getdistortionmeshvalue">
+<h2>Effect['ADBE MESH WARP'].getDistortionMeshValue()<a class="headerlink" href="#effect-adbe-mesh-warp-getdistortionmeshvalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getDistortionMeshValue(distortionMeshProperty:</span> <span class="pre">Property,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">preExpression?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">MeshWarp.DistortionMeshValue;</span></code></p>
+<p>メッシュワープのディストーションメッシュの値を取得する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">properties</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="p">.</span><span class="nx">matchName</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;ADBE MESH WARP-0004&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">effect</span><span class="p">[</span><span class="s1">&#39;ADBE MESH WARP&#39;</span><span class="p">].</span><span class="nx">getDistortionMeshValue</span><span class="p">(</span><span class="nx">property</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">Property</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">alert</span><span class="p">(</span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">properties_6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">properties_6</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties_6</span><span class="p">[</span><span class="nx">_i</span><span class="p">];</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="p">.</span><span class="nx">matchName</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;ADBE MESH WARP-0004&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">effect</span><span class="p">[</span><span class="s1">&#39;ADBE MESH WARP&#39;</span><span class="p">].</span><span class="nx">getDistortionMeshValue</span><span class="p">(</span><span class="nx">property</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">alert</span><span class="p">(</span><span class="nx">Atarabi</span><span class="p">.</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="effect-adbe-mesh-warp-setdistortionmeshvalue">
+<h2>Effect['ADBE MESH WARP'].setDistortionMeshValue()<a class="headerlink" href="#effect-adbe-mesh-warp-setdistortionmeshvalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setDistortionMeshValue(distortionMeshProperty:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">MeshWarp.DistortionMeshValue,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">key?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>メッシュワープのディストーションメッシュの値を設定する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">Atarabi.Effect.MeshWarp.DistortionMeshValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">rows</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">columns</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">vertices</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">rand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">from</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">,</span><span class="w"> </span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">to</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="kr">from</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">generateRandomNumber</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">rows</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">columns</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nx">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">columns</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">),</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">rows</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)]</span><span class="w"> </span><span class="nx">satisfies</span><span class="w"> </span><span class="p">[</span><span class="kt">number</span><span class="p">,</span><span class="w"> </span><span class="kt">number</span><span class="p">];</span>
+<span class="w">            </span><span class="nx">value</span><span class="p">.</span><span class="nx">vertices</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+<span class="w">                </span><span class="nx">pos</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">up</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">pos</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">),</span><span class="w"> </span><span class="nx">pos</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">)],</span>
+<span class="w">                </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">pos</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">),</span><span class="w"> </span><span class="nx">pos</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">)],</span>
+<span class="w">                </span><span class="nx">down</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">pos</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">),</span><span class="w"> </span><span class="nx">pos</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">)],</span>
+<span class="w">                </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">pos</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">),</span><span class="w"> </span><span class="nx">pos</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">)],</span>
+<span class="w">            </span><span class="p">});</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">properties</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="p">.</span><span class="nx">matchName</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;ADBE MESH WARP-0004&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">effect</span><span class="p">[</span><span class="s1">&#39;ADBE MESH WARP&#39;</span><span class="p">].</span><span class="nx">setDistortionMeshValue</span><span class="p">(</span><span class="nx">property</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">Property</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">rows</span><span class="o">:</span><span class="w"> </span><span class="nx">rows</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">columns</span><span class="o">:</span><span class="w"> </span><span class="nx">columns</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">vertices</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">rand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="kr">from</span><span class="p">,</span><span class="w"> </span><span class="nx">to</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">to</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="kr">from</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">generateRandomNumber</span><span class="p">();</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">rows</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">columns</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nx">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">columns</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">),</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">rows</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)];</span>
+<span class="w">            </span><span class="nx">value</span><span class="p">.</span><span class="nx">vertices</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+<span class="w">                </span><span class="nx">pos</span><span class="o">:</span><span class="w"> </span><span class="nx">pos</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">up</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">pos</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">),</span><span class="w"> </span><span class="nx">pos</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">)],</span>
+<span class="w">                </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">pos</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">),</span><span class="w"> </span><span class="nx">pos</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">)],</span>
+<span class="w">                </span><span class="nx">down</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">pos</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">),</span><span class="w"> </span><span class="nx">pos</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">)],</span>
+<span class="w">                </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">pos</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">),</span><span class="w"> </span><span class="nx">pos</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rand</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">)],</span>
+<span class="w">            </span><span class="p">});</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">comp</span><span class="p">.</span><span class="nx">getMostRecentlyUsedComp</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comp</span><span class="p">.</span><span class="nx">selectedProperties</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">properties_7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">properties_7</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">_i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">properties_7</span><span class="p">[</span><span class="nx">_i</span><span class="p">];</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">property</span><span class="p">.</span><span class="nx">matchName</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;ADBE MESH WARP-0004&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">effect</span><span class="p">[</span><span class="s1">&#39;ADBE MESH WARP&#39;</span><span class="p">].</span><span class="nx">setDistortionMeshValue</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
 </section>
 
 
@@ -293,6 +420,8 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
 <li><a class="reference internal" href="#effect-adbe-curvescustom-setcurvesvalue">Effect['ADBE CurvesCustom'].setCurvesValue()</a></li>
 <li><a class="reference internal" href="#effect-apc-colorama-getoutputcyclevalue">Effect['APC Colorama'].getOutputCycleValue()</a></li>
 <li><a class="reference internal" href="#effect-apc-colorama-setoutputcyclevalue">Effect['APC Colorama'].setOutputCycleValue()</a></li>
+<li><a class="reference internal" href="#effect-adbe-mesh-warp-getdistortionmeshvalue">Effect['ADBE MESH WARP'].getDistortionMeshValue()</a></li>
+<li><a class="reference internal" href="#effect-adbe-mesh-warp-setdistortionmeshvalue">Effect['ADBE MESH WARP'].setDistortionMeshValue()</a></li>
 </ul>
 </li>
 </ul>
@@ -305,8 +434,8 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="../Item/index.html"
-                          title="next chapter">Item</a></p>
+    <p class="topless"><a href="../Image/index.html"
+                          title="next chapter">Image</a></p>
   </div>
 <search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
@@ -329,18 +458,18 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../Item/index.html" title="Item"
+          <a href="../Image/index.html" title="Image"
              >next</a> |</li>
         <li class="right" >
           <a href="../Comp/index.html" title="Comp"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.4.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Effect</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-    &#169; Copyright 2023-2024, Atarabi.
+    &#169; Copyright 2023-2025, Atarabi.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
   </body>

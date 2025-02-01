@@ -2,6 +2,10 @@
 SVG
 ===============
 
+.. warning::
+    Atarabi.APIの追加にともない、導入が任意のスクリプトによって提供されるAPIに関しては、 ``Atarabi.API.invoke('@svg', 'svgToShapeLayer', [svgFile, shapeLayer])``` のようにAtarabi.API経由で呼び出すようにしてください。
+    `@svg API <../../Script/Startup/@svg.html#api>`_ も参照のこと。
+
 .. note::
     @svg(Startup script) is required
 
@@ -16,6 +20,12 @@ SVG.svgToShapeLayer()
 svgファイルを読み込み、シェイププレイヤーに変換する。shapeLayerを与えればそのシェイプレイヤー下に、与えなければ、アクティブなコンポに新たにシェイプレイヤーを作り、その下に構築する。
 
 .. versionadded:: 0.4.0
+
+``svgToShapeLayer(svgText: string, shapeLayer?: ShapeLayer): ShapeLayer;``
+
+svgのテキストデータを読み込み、シェイププレイヤーに変換する。shapeLayerを与えればそのシェイプレイヤー下に、与えなければ、アクティブなコンポに新たにシェイプレイヤーを作り、その下に構築する。
+
+.. versionadded:: 0.5.0
 
 SVG.getContext()
 -----------------------------------

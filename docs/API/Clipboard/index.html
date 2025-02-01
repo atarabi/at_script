@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Clipboard &#8212; @script 0.4.2 documentation</title>
+    <title>Clipboard &#8212; @script 0.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=3e29d2c0" />
     <link rel="stylesheet" type="text/css" href="../../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../../_static/documentation_options.js?v=995c025a"></script>
+    <script src="../../_static/documentation_options.js?v=7b094670"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/code-tabs.js?v=c983d12e"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="../Camera/index.html" title="Camera"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.4.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Clipboard</a></li> 
       </ul>
@@ -47,6 +47,46 @@
             
   <section id="clipboard">
 <h1>Clipboard<a class="headerlink" href="#clipboard" title="Link to this heading">¶</a></h1>
+<section id="clipboard-gettypes">
+<h2>Clipboard.getTypes()<a class="headerlink" href="#clipboard-gettypes" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getTypes():</span> <span class="pre">string[];</span></code></p>
+<p>クリップボードのデータのフォーマットを取得する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">getTypes</span><span class="p">();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">getTypes</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
+<section id="clipboard-getfiles">
+<h2>Clipboard.getFiles()<a class="headerlink" href="#clipboard-getfiles" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getFiles():</span> <span class="pre">(File</span> <span class="pre">|</span> <span class="pre">Folder)[];</span></code></p>
+<p>クリップボードにあるファイルの一覧を取得する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">getFiles</span><span class="p">();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">getFiles</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
 <section id="clipboard-gettext">
 <h2>Clipboard.getText()<a class="headerlink" href="#clipboard-gettext" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">getText():</span> <span class="pre">string;</span></code></p>
@@ -81,6 +121,26 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
 </pre></div>
 </div>
 </div></div></section>
+<section id="clipboard-getimageinfo">
+<h2>Clipboard.getImageInfo()<a class="headerlink" href="#clipboard-getimageinfo" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getImageInfo():</span> <span class="pre">Image_.Info</span> <span class="pre">|</span> <span class="pre">null;</span></code></p>
+<p>クリップボードに画像が登録されていれば、その画像の情報を取得する。</p>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">getImageInfo</span><span class="p">();</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">getImageInfo</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div><div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.5.0.</span></p>
+</div>
+</section>
 </section>
 
 
@@ -94,8 +154,11 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
     <h3><a href="../../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Clipboard</a><ul>
+<li><a class="reference internal" href="#clipboard-gettypes">Clipboard.getTypes()</a></li>
+<li><a class="reference internal" href="#clipboard-getfiles">Clipboard.getFiles()</a></li>
 <li><a class="reference internal" href="#clipboard-gettext">Clipboard.getText()</a></li>
 <li><a class="reference internal" href="#clipboard-settext">Clipboard.setText()</a></li>
+<li><a class="reference internal" href="#clipboard-getimageinfo">Clipboard.getImageInfo()</a></li>
 </ul>
 </li>
 </ul>
@@ -137,13 +200,13 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
         <li class="right" >
           <a href="../Camera/index.html" title="Camera"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.4.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Clipboard</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-    &#169; Copyright 2023-2024, Atarabi.
+    &#169; Copyright 2023-2025, Atarabi.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
   </body>

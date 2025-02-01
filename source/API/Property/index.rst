@@ -212,3 +212,21 @@ Property.loadCustomValue()
         })();
 
 .. versionadded:: 0.4.1
+
+Property.setGradientValue()
+-----------------------------------
+
+``setGradientValue(property: Property, value: GradientValue, options?: { time?: number; key?: boolean; }): void;``
+
+グラデーション(in Gradient Fill, Gradient Stroke,  Gradient Overlay)のパラメータに値を設定する。
+
+.. versionadded:: 0.5.0
+
+Property.isGradientParameter()
+-----------------------------------
+
+``isGradientParameter(property: Property): boolean;``
+
+プロパティがグラデーションのパラメータか調べる。
+
+.. versionadded:: 0.5.0

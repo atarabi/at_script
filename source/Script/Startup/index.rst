@@ -18,3 +18,4 @@ Startup
    @hook_fit_to_comp
    @hook_]
    @svg
+   @paste_clipboard
