@@ -1,6 +1,7 @@
 /**
- * @toggle_mfr v1.0.1
+ * @toggle_mfr v1.1.0
  * 
+ *      v1.1.0(2025/02/01) Support "Cache Frames When Idle"
  *      v1.0.1(2024/02/13) Fix dynamic link bug
  *      v1.0.0(2023/09/16)
  */

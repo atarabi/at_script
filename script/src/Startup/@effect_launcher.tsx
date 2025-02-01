@@ -1,6 +1,7 @@
 /**
- * @effect_launcher v2.0.0
+ * @effect_launcher v2.1.0
  * 
+ *      v2.1.0(2025/02/01)  Support footage shortcut
  *      v2.0.0(2024/11/14)  Support shortcut and reduce debounce time
  *      v1.0.3(2024/02/13)  Fix dynamic link bug
  *      v1.0.2(2023/12/05)  Fix lock bug

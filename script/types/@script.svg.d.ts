@@ -1,3 +1,5 @@
+// deprecated: use Atarabi.API instead
+// 
 // @svg is required
 declare interface Atarabi {
     SVG: Atarabi.SVG;
@@ -7,6 +9,7 @@ declare namespace Atarabi {
 
     interface SVG {
         svgToShapeLayer(svgFile: File, shapeLayer?: ShapeLayer): ShapeLayer;
+        svgToShapeLayer(svgText: string, shapeLayer?: ShapeLayer): ShapeLayer;
 
         getContext(layer?: AVLayer): SVG.Context;
     }

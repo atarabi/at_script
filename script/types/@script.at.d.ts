@@ -36,6 +36,14 @@ declare namespace Atarabi {
         setMemoValue(property: Property, value: At.MemoValue, options?: { time?: number; key?: boolean; }): void;
         getMemoValueAtKey(property: Property, keyIndex: number): At.MemoValue;
         setMemoValueAtKey(property: Property, value: At.MemoValue, keyIndex: number): void;
+        // image
+        isImageParameter(property: Property): boolean;
+        getImageInfo(property: Property, options?: { time?: number; preExpression?: boolean; }): Image_.Info | null;
+        setImageFromFile(property: Property, file: File, options?: { time?: number; key?: boolean; }): void;
+        setImageFromClipboard(property: Property, options?: { time?: number; key?: boolean; }): void;
+        getImageInfoAtKey(property: Property, keyIndex: number): Image_.Info;
+        setImageFromFileAtKey(property: Property, file: File, keyIndex: number): void;
+        setImageFromClipboardAtKey(property: Property, keyIndex: number): void;
         // for @script_effect
         effect: At.Effect;
     }

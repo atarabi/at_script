@@ -4,6 +4,7 @@ declare interface Atarabi {
     version: string;
     isDynamicLink(): boolean; // defined in !@script_initializer
     JSON: Atarabi.JSON;
+    RIFX: Atarabi.RIFX;
     app: Atarabi.App;
     label: Atarabi.Label;
     item: Atarabi.Item_;
@@ -11,15 +12,20 @@ declare interface Atarabi {
     camera: Atarabi.Camera;
     layer: Atarabi.Layer_;
     effect: Atarabi.Effect;
+    pseudo: Atarabi.Pseudo;
     property: Atarabi.Property_;
     register: Atarabi.Register;
     UI: Atarabi.UI;
     clipboard: Atarabi.Clipboard;
     keyboard: Atarabi.Keyboard;
     mouse: Atarabi.Mouse;
+    image: Atarabi.Image_;
+    API: Atarabi.API;
 }
 
 declare namespace Atarabi {
+
+    type Integer = number;
 
     // R,G,B: [0, 1]
     type Color = [number, number, number];
@@ -43,9 +49,9 @@ declare namespace Atarabi {
 
     type Ratio = { num: number; den: number; };
 
-    type Brand<T extends string> = string & { __brand: T };
+    type Brand<K, T extends string> = K & { __brand: T };
 
-    type Uuid = Brand<'Uuid'>;
+    type Uuid = Brand<string, 'Uuid'>;
 
     interface JSON {
         // by json2.js
@@ -59,6 +65,31 @@ declare namespace Atarabi {
         isValidFile(file: File): boolean;
 
         parseFast(text: string): any;
+    }
+
+    interface RIFX {
+        stringify(rifx: RIFX.Chunk): string;
+
+        parse(file: File): RIFX.Chunk;
+
+        parseWithXMP(file: File): [RIFX.Chunk, string];
+
+        size(chunk: RIFX.Chunk): number;
+
+        walk<C extends RIFX.Chunk>(chunk: C, fn: (chunk: C | null) => boolean): void;
+
+        makeGradientPreset(value: Property.GradientValue, type: Property.GradientType, key?: boolean): string;
+
+        makePseudoEffectPreset(config: Pseudo.Config): string;
+    }
+
+    namespace RIFX {
+        interface Chunk {
+            id: string;
+            data: string; // id if RIFX or LIST chunk; otherwise payload
+            list?: Chunk[]; // for RIFX or LIST chunk
+            cosList?: string; // for LIST btdk(ref: https://lottiefiles.github.io/lottie-docs/aep/#list-btdk)
+        }
     }
 
     interface App {
@@ -89,9 +120,9 @@ declare namespace Atarabi {
     }
 
     interface Label {
-        setColor(index: number, color: Color): void;
+        setColor(index: Integer, color: Color): void;
 
-        getColor(index: number): Color;
+        getColor(index: Integer): Color;
     }
 
     interface Item_ {
@@ -100,7 +131,7 @@ declare namespace Atarabi {
         touchActiveItem(): void;
 
         // steps must be integer
-        moveTimeStepActiveItem(steps: number): void;
+        moveTimeStepActiveItem(steps: Integer): void;
 
         getFootageSoundDataFormat(item: FootageItem): SoundDataFormat;
     }
@@ -108,8 +139,8 @@ declare namespace Atarabi {
     type SoundDataFormat = {
         sampleRate: number;
         encoding: 'UnsignedPCM' | 'SignedPCM' | 'Float';
-        bytesPerSample: number; // 1, 2 or 4
-        channels: number; // 1 for mono, 2 for stereo
+        bytesPerSample: 1 | 2 | 4;
+        channels: 1 | 2; // 1 for mono, 2 for stereo
     };
 
     interface Comp {
@@ -124,25 +155,25 @@ declare namespace Atarabi {
 
         setShowBlendModes(comp: CompItem, set: boolean): void;
 
-        renderFrame(comp: CompItem, options?: { time?: number; downsample?: number; timestamp?: number }): { binary: string | null; timestamp: number; };
+        renderFrame(comp: CompItem, options?: { time?: number; downsample?: Integer; timestamp?: number }): { binary: string | null; timestamp: number; };
 
         // 8, 16bpc, default: downsample=1
-        saveFrameToPng(comp: CompItem, file: File, options?: { time?: number; downsample?: number; }): void;
+        saveFrameToPng(comp: CompItem, file: File, options?: { time?: number; downsample?: Integer; }): void;
 
         // 8bpc, default: downsample=1, quality=80
-        saveFrameToJpg(comp: CompItem, file: File, options?: { time?: number; downsample?: number; quality?: number; }): void;
+        saveFrameToJpg(comp: CompItem, file: File, options?: { time?: number; downsample?: Integer; quality?: number; }): void;
 
         // 8, 16, 32bpc, default: downsample=1
-        saveFrameToHdr(comp: CompItem, file: File, options?: { time?: number; downsample?: number; }): void;
+        saveFrameToHdr(comp: CompItem, file: File, options?: { time?: number; downsample?: Integer; }): void;
 
         // 8bpc, default: downsample=1
-        saveFrameToClipboard(comp: CompItem, options?: { time?: number; downsample?: number; }): void;
+        saveFrameToClipboard(comp: CompItem, options?: { time?: number; downsample?: Integer; }): void;
 
         // 8bpc, default: downsample=1, skip=0, speed=1
-        saveFramesToGif(comp: CompItem, startTime: number, endTime: number, file: File, options?: { downsample?: number; skip?: number; speed?: number; }): void;
+        saveFramesToGif(comp: CompItem, startTime: number, endTime: number, file: File, options?: { downsample?: Integer; skip?: number; speed?: number; }): void;
 
         // 8pbc, default: downsample=1, skip=0, speed=1
-        saveFramesToApng(comp: CompItem, startTime: number, endTime: number, file: File, options?: { downsample?: number; skip?: number; speed?: number; }): void;
+        saveFramesToApng(comp: CompItem, startTime: number, endTime: number, file: File, options?: { downsample?: Integer; skip?: number; speed?: number; }): void;
     }
 
     interface Camera {
@@ -174,22 +205,22 @@ declare namespace Atarabi {
         getMoments(layer: AVLayer, options?: { time?: number; binary?: boolean; }): Moments;
 
         // 8, 16bpc, default: downsample=1
-        saveFrameToPng(layer: AVLayer, file: File, options?: { time?: number; downsample?: number; }): void;
+        saveFrameToPng(layer: AVLayer, file: File, options?: { time?: number; downsample?: Integer; }): void;
 
         // 8bpc, default: downsample=1, quality=80
-        saveFrameToJpg(layer: AVLayer, file: File, options?: { time?: number; downsample?: number; quality?: number; }): void;
+        saveFrameToJpg(layer: AVLayer, file: File, options?: { time?: number; downsample?: Integer; quality?: number; }): void;
 
         // 8, 16, 32bpc, default: downsample=1
-        saveFrameToHdr(layer: AVLayer, file: File, options?: { time?: number; downsample?: number; }): void;
+        saveFrameToHdr(layer: AVLayer, file: File, options?: { time?: number; downsample?: Integer; }): void;
 
         // 8bpc, default: downsample=1
-        saveFrameToClipboard(layer: AVLayer, options?: { time?: number; downsample?: number; }): void;
+        saveFrameToClipboard(layer: AVLayer, options?: { time?: number; downsample?: Integer; }): void;
 
         // 8bpc, default: downsample=1, skip=0, speed=1
-        saveFramesToGif(layer: AVLayer, startTime: number, endTime: number, file: File, options?: { downsample?: number; skip?: number; speed?: number; }): void;
+        saveFramesToGif(layer: AVLayer, startTime: number, endTime: number, file: File, options?: { downsample?: Integer; skip?: number; speed?: number; }): void;
 
         // 8bpc, default: downsample=1, skip=0, speed=1
-        saveFramesToApng(layer: AVLayer, startTime: number, endTime: number, file: File, options?: { downsample?: number; skip?: number; speed?: number; }): void;
+        saveFramesToApng(layer: AVLayer, startTime: number, endTime: number, file: File, options?: { downsample?: Integer; skip?: number; speed?: number; }): void;
 
         sampleImage(layer: AVLayer, points: readonly Readonly<Vector2>[], options?: { time?: number; }): ColorA[];
     }
@@ -205,6 +236,8 @@ declare namespace Atarabi {
         'ADBE CurvesCustom': Effect.Curves;
 
         'APC Colorama': Effect.Colorama;
+
+        'ADBE MESH WARP': Effect.MeshWarp;
     }
 
     namespace Effect {
@@ -213,7 +246,7 @@ declare namespace Atarabi {
         interface Curves {
             // 'ADBE CurvesCustom-0001' only
             getCurvesValue(curvesProperty: Property, options?: { time?: number; preExpression?: boolean; }): Curves.CurvesValue;
-            
+
             // 'ADBE CurvesCustom-0001' only
             setCurvesValue(curvesProperty: Property, value: Curves.ParticalCurvesValue, options?: { time?: number; key?: boolean; }): void;
         }
@@ -234,7 +267,7 @@ declare namespace Atarabi {
                 blue: MapValueType;
                 alpha: MapValueType;
             };
-    
+
             type ParticalCurvesValue = {
                 type: 'curve';
                 rgb?: CurveValueType;
@@ -250,9 +283,9 @@ declare namespace Atarabi {
                 blue?: MapValueType;
                 alpha?: MapValueType;
             };
-    
+
             type CurveValueType = [x: number, y: number][]; // x,y: [0, 1], length <= 16
-    
+
             type MapValueType = number[]; // length == 256
         }
 
@@ -260,25 +293,267 @@ declare namespace Atarabi {
         interface Colorama {
             // 'APC Colorama-0012' only
             getOutputCycleValue(outputCycleProperty: Property, options?: { time?: number; preExpression?: boolean; }): Colorama.OutputCycleValue;
-            
+
             // 'APC Colorama-0012' only
             setOutputCycleValue(outputCycleProperty: Property, value: Colorama.OutputCycleValue, options?: { time?: number; key?: boolean; }): void;
         }
 
         namespace Colorama {
-
             type OutputCycleValue = {
                 triangles: OutputCycleTriangle[]; // length <= 64
-                selected?: number; // integer and [0, 63] 
+                selected?: Integer; // integer and [0, 63] 
             };
-    
+
             type OutputCycleTriangle = {
                 location: number; // [0, 1]
                 color: ColorA;
             };
-
         }
-    
+
+        // MeshWarp
+        interface MeshWarp {
+            // 'ADBE MESH WARP-0004' only
+            getDistortionMeshValue(distortionMeshProperty: Property, options?: { time?: number; preExpression?: boolean; }): MeshWarp.DistortionMeshValue;
+
+            // 'ADBE MESH WARP-0004' only
+            setDistortionMeshValue(distortionMeshProperty: Property, value: MeshWarp.DistortionMeshValue, options?: { time?: number; key?: boolean; }): void;
+        }
+
+        namespace MeshWarp {
+            //    ↑
+            //  ← P →
+            //    ↓
+            type DistortionMeshVertex = {
+                pos: Vector2;
+                up: Vector2; // ↑
+                right: Vector2; // →
+                down: Vector2; // ↓
+                left: Vector2; // ←
+            };
+
+            type DistortionMeshValue = {
+                rows: Integer; // [2, 32], number of parameter "Rows" + 1
+                columns: Integer; // [2, 32], number of parameter "Columns" + 1
+                vertices: DistortionMeshVertex[]; // length = rows * columns
+            };
+        }
+    }
+
+    interface Pseudo {
+        // matcnName must start with "Pseudo/" (ex. "Pseudo/Atarabi/Controls")
+        create(name: string, matchName?: string): Pseudo.Builder;
+
+        apply(config: Pseudo.Config, layers: AVLayer | AVLayer[]): void;
+    }
+
+    namespace Pseudo {
+
+        interface Builder {
+            /**
+             * Add parameters
+             */
+            layer(name: string, dephault: PF.LayerDefault, options?: { uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; }): Builder;
+
+            // use FloatSlider instead
+            slider(name: string, value: Integer, validMin: Integer, validMax: Integer, sliderMin: Integer, sliderMax: Integer, options?: { uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; expression?: string; }): Builder;
+
+            // use FloatSlider instead
+            fixedSlider(name: string, value: number, validMin: number, validMax: number, sliderMin: number, sliderMax: number, options?: { precision?: Integer; displayFlags?: PF.ValueDisplayFlags; uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; expression?: string; }): Builder;
+
+            angle(name: string, value: number, options?: { uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; expression?: string; }): Builder;
+
+            checkbox(name: string, value: boolean, options?: { text?: string; uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; expression?: string; }): Builder;
+
+            color(name: string, value: Color, options?: { uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; expression?: string; }): Builder;
+
+            point(name: string, xValue: number, yValue: number, options?: { uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; expression?: string; }): Builder;
+
+            popup(name: string, value: Integer, items: string[], options?: { uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; expression?: string; }): Builder;
+
+            floatSlider(name: string, value: number, validMin: number, validMax: number, sliderMin: number, sliderMax: number, options?: { precision?: Integer; displayFlags?: PF.ValueDisplayFlags; uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; expression?: string; }): Builder;
+            percent(name: string, value: number, validMin: number, validMax: number, sliderMin: number, sliderMax: number, options?: { precision?: Integer; uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; expression?: string; }): Builder;
+            pixel(name: string, value: number, validMin: number, validMax: number, sliderMin: number, sliderMax: number, options?: { precision?: Integer; uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; expression?: string; }): Builder;
+
+            path(name: string, dephault?: Integer, options?: { uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; }): Builder;
+
+            groupStart(name: string, options?: { uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; }): Builder;
+
+            groupEnd(options?: { id?: Integer; }): Builder;
+
+            // useless
+            button(name: string, buttonName: string, options?: { uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; }): Builder;
+
+            point3D(name: string, xValue: number, yValue: number, zValue: number, options?: { uiFlags?: PF.ParamUIFlags; flags?: PF.ParamFlags; id?: Integer; expression?: string; }): Builder;
+
+            /*
+             * Output
+             */
+            config(): Config;
+
+            // output preset file(.ffx) and config file(.json) 
+            write(ffxFile?: File, configFile?: File): void;
+        }
+
+        interface Config {
+            matchName: string;
+            name: string;
+            parameters: Parameter[];
+        }
+
+        type Parameter = LayerParameter | SliderParameter | FiexedSliderParameter | AngleParameter | CheckboxParameter | ColorParameter | PointParameter | PopupParameter | FloatSliderParameter | PathParameter | GroupStartParameter | GroupEndParameter | ButtonParameter | Point3DParameter;
+
+        type LayerParameter = {
+            type: 'layer';
+            name: string;
+            dephault: PF.LayerDefault;
+            uiFlags: PF.ParamUIFlags;
+            flags: PF.ParamFlags;
+            id: Integer; // must be positive and unique
+        };
+
+        type SliderParameter = {
+            type: 'slider';
+            name: string;
+            uiFlags: PF.ParamUIFlags;
+            flags: PF.ParamFlags;
+            value: Integer;
+            validMin: Integer;
+            validMax: Integer;
+            sliderMin: Integer;
+            sliderMax: Integer;
+            id: Integer; // must be positive and unique
+            expression?: string;
+        };
+
+        type FiexedSliderParameter = {
+            type: 'fixedSlider';
+            name: string;
+            uiFlags: PF.ParamUIFlags;
+            flags: PF.ParamFlags;
+            value: number;
+            validMin: number;
+            validMax: number;
+            sliderMin: number;
+            sliderMax: number;
+            precision: Integer;
+            displayFlags: PF.ValueDisplayFlags;
+            id: Integer; // must be positive and unique
+            expression?: string;
+        };
+
+        type AngleParameter = {
+            type: 'angle';
+            name: string;
+            uiFlags: PF.ParamUIFlags;
+            flags: PF.ParamFlags;
+            value: number;
+            id: Integer; // must be positive and unique
+            expression?: string;
+        };
+
+        type CheckboxParameter = {
+            type: 'checkbox';
+            name: string;
+            uiFlags: PF.ParamUIFlags;
+            flags: PF.ParamFlags;
+            value: boolean;
+            text?: string;
+            id: Integer; // must be positive and unique
+            expression?: string;
+        };
+
+        type Color = { red: number; green: number; blue: number; }; // [0, 255]
+
+        type ColorParameter = {
+            type: 'color';
+            name: string;
+            uiFlags: PF.ParamUIFlags;
+            flags: PF.ParamFlags;
+            value: Color;
+            id: Integer; // must be positive and unique
+            expression?: string;
+        };
+
+        type PointParameter = {
+            type: 'point';
+            name: string;
+            uiFlags: PF.ParamUIFlags;
+            flags: PF.ParamFlags;
+            xValue: number;
+            yValue: number;
+            id: Integer; // must be positive and unique
+            expression?: string;
+        };
+
+        type PopupParameter = {
+            type: 'popup';
+            name: string;
+            uiFlags: PF.ParamUIFlags;
+            flags: PF.ParamFlags;
+            value: Integer; // 1-indexed
+            items: string[];
+            id: Integer; // must be positive and unique
+            expression?: string;
+        };
+
+        type FloatSliderParameter = {
+            type: 'floatSlider';
+            name: string;
+            uiFlags: PF.ParamUIFlags;
+            flags: PF.ParamFlags;
+            value: number;
+            validMin: number;
+            validMax: number;
+            sliderMin: number;
+            sliderMax: number;
+            precision: Integer;
+            displayFlags: PF.ValueDisplayFlags;
+            id: Integer; // must be positive and unique
+            expression?: string;
+        };
+
+        type PathParameter = {
+            type: 'path';
+            name: string;
+            uiFlags: PF.ParamUIFlags;
+            flags: PF.ParamFlags;
+            dephault: Integer;
+            id: Integer; // must be positive and unique
+        };
+
+        type GroupStartParameter = {
+            type: 'groupStart';
+            name: string;
+            uiFlags: PF.ParamUIFlags;
+            flags: PF.ParamFlags;
+            id: Integer; // must be positive and unique
+        };
+
+        type GroupEndParameter = {
+            type: 'groupEnd';
+            id: Integer; // must be positive and unique
+        };
+
+        type ButtonParameter = {
+            type: 'button';
+            name: string;
+            uiFlags: PF.ParamUIFlags;
+            flags: PF.ParamFlags;
+            buttonName: string;
+            id: Integer; // must be positive and unique
+        };
+
+        type Point3DParameter = {
+            type: 'point3D';
+            name: string;
+            uiFlags: PF.ParamUIFlags;
+            flags: PF.ParamFlags;
+            xValue: number;
+            yValue: number;
+            zValue: number;
+            id: Integer; // must be positive and unique
+            expression?: string;
+        };
     }
 
     interface Property_ {
@@ -323,6 +598,11 @@ declare namespace Atarabi {
         saveCustomValue(property: Property, file: File, options?: { time?: number; preExpression?: boolean; }): void;
 
         loadCustomValue(property: Property, file: File, options?: { time?: number; key?: boolean; }): void;
+
+        // 'ADBE Vector Grad Colors'(Gradient Stroke/Fill of Shape Layer) and 'gradientFill/gradient'(Gradient Overlay of Layer Styles) only
+        setGradientValue(property: Property, value: Property.GradientValue, options?: { time?: number; key?: boolean; }): void;
+
+        isGradientParameter(property: Property): boolean;
     }
 
     type ValueType = boolean | number | Vector2 | Vector3 | Color | ColorA | string | PathValue;
@@ -352,6 +632,25 @@ declare namespace Atarabi {
     type KeyInterpolationType = 'LINEAR' | 'BEZIER' | 'HOLD';
 
     type KeyEase = { speed: number; influence: number; };
+
+    namespace Property {
+
+        interface AlphaStop {
+            location: number; // [0, 1]
+            midpoint?: number; // [0.05, 0.95]
+            opacity: number; // [0, 1]
+        }
+
+        interface ColorStop {
+            location: number; // [0, 1]
+            midpoint?: number; // [0.05, 0.95]
+            color: Color; // [red: number, green: number, blue: number]
+        }
+
+        type GradientValue = { alphaStops: AlphaStop[]; colorStops: ColorStop[]; }; // length of stops must be 2 or greater
+
+        type GradientType = 'Gradient Stroke' | 'Gradient Fill' | 'Gradient Overlay'; // Gradient Stroke/Fill for shape layer, Gradient Overlay for layer styles
+    }
 
     interface Register {
         insertCommand(menu: Register.Menu, order: Register.Order, name: string, fn: Register.CommandFunc, enabledWhen?: Register.EnabledWhen): Uuid;
@@ -405,9 +704,15 @@ declare namespace Atarabi {
     }
 
     interface Clipboard {
+        getTypes(): string[];
+
+        getFiles(): (File | Folder)[];
+
         getText(): string;
-        
+
         setText(text: string): void;
+
+        getImageInfo(): Image_.Info | null;
     }
 
     interface Keyboard {
@@ -475,6 +780,21 @@ declare namespace Atarabi {
         }
 
         type HookFunc = (context: Keyboard.HookContext) => boolean;
+    }
+
+    interface Image_ {
+        getInfo(file: File): Image_.Info | null;
+    }
+
+    namespace Image_ {
+        type Info = { width: number; height: number; };
+    }
+
+    interface API {
+        add<F extends (...args: any[]) => any>(name: string, method: string, callback: F, thisArg?: any): boolean;
+        invoke<F extends (...args: any[]) => any>(name: string, method: string, args?: Parameters<F>, fallback?: (...args: Parameters<F>) => ReturnType<F>): ReturnType<F>;
+        remove(name: string, method: string): boolean;
+        isAdded(name: string, method: string): boolean;
     }
 
     /*

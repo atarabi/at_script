@@ -1,7 +1,11 @@
 /**
- * @svg v1.0.0
+ * @svg v1.1.0
+ * 
+ *      v1.1.0(2025/02/01) Partial support for style tags and gradients
  */
 (() => {
+
+    const SCRIPT_NAME = '@svg';
 
     /**
      *  Utility
@@ -21,6 +25,10 @@
 
     function trim(s: string) {
         return s.replace(/^\s+|\s+$/g, '');
+    }
+
+    function removeCComment(s: string) {
+        return s.replace(/\/\*[\s\S]*?\*\//g, '');
     }
 
     function isArray(value: any): value is any[] {
@@ -1100,6 +1108,10 @@
         return [parseFloat(arr[0]), arr[1]] satisfies [number, '%'];
     });
 
+    const lengthOrPercentage: Parser<Percentage|number> = or<Percentage|number>([percentage, length]);
+
+    const numberOrPercentage: Parser<number> = or([map(percentage, percent => percent[0] / 100), map(number, n => parseFloat(n))]);
+
     /**
      * Style
      */
@@ -1207,9 +1219,100 @@
         str('inherit'),
     ]);
 
+    type Gradient = LinearGradient | RadialGradient;
+
+    type LinearGradient = {
+        type: 'linear';
+        x1: number;
+        y1: number;
+        x2: number;
+        y2: number;
+        stops: GradientStop[];
+    };
+
+    type RadialGradient = {
+        type: 'radial';
+        cx: number;
+        cy: number;
+        r: number;
+        fx: number;
+        fy: number;
+        stops: GradientStop[];
+    };
+
+    type GradientStop = {
+        offset: number;
+        color: Atarabi.ColorA;
+    };
+
+    const gradientTagToGradient = (tag: GradientTag, bb: [number, number, number, number] ): Gradient => {
+        let m : Mat3x3 = null;
+        if (isArray(tag.gradientTransform)) {
+            m = Mat3x3.identity();
+            for (const transform of tag.gradientTransform) {
+                m = m.mult(transformToMat3x3(transform));
+            }
+        }
+        if (tag._tag === 'linearGradient') {
+            let x1 = typeof tag.x1 === 'number' ? tag.x1 : 0;
+            let y1 = typeof tag.y1 === 'number' ? tag.y1 : 0;
+            let x2 = typeof tag.x2 === 'number' ? tag.x2 : bb[2];
+            let y2 = typeof tag.y2 === 'number' ? tag.y2 : 0;
+            if (m) {
+                [x1, y1] = m.mult([x1, y1]);
+                [x2, y2] = m.mult([x2, y2]);
+            }
+            let stops: GradientStop[] = [];
+            if (isArray(tag._children)) {
+                for (const child of tag._children) {
+                    if (child._tag === 'stop') {
+                        const offset = typeof child.offset === 'number' ? child.offset : 0;
+                        const stopColor = isArray(child["stop-color"]) ? child['stop-color'] : [0, 0, 0, 1];
+                        const stopOpacity = isArray(child["stop-opacity"]) ? child['stop-opacity'] : 1;
+                        if (stopColor.length === 4) {
+                            stopColor[3] *= stopOpacity;
+                        } else {
+                            stopColor[3] = stopOpacity;
+                        }
+                        stops.push({ offset, color: stopColor as Atarabi.ColorA });
+                    }
+                }
+            }
+            return { type: 'linear', x1, y1, x2, y2, stops };
+        } else if (tag._tag === 'radialGradient') {
+            let cx = typeof tag.cx === 'number' ? tag.cx : 0.5 * bb[2];
+            let cy = typeof tag.cy === 'number' ? tag.cy : 0.5 * bb[3];
+            let r = typeof tag.r === 'number' ? tag.r : Math.sqrt(bb[2] * bb[2] + bb[3] * bb[3]) / Math.SQRT2;
+            let fx = typeof tag.fx === 'number' ? tag.fx : cx;
+            let fy = typeof tag.fy === 'number' ? tag.fy : cy;
+            if (m) {
+                [cx, cy] = m.mult([cx, cy]);
+                [fx, fy] = m.mult([fx, fy]);
+            }
+            let stops: GradientStop[] = [];
+            if (isArray(tag._children)) {
+                for (const child of tag._children) {
+                    if (child._tag === 'stop') {
+                        const offset = typeof child.offset === 'number' ? child.offset : 0;
+                        const stopColor = isArray(child["stop-color"]) ? child['stop-color'] : [0, 0, 0, 1];
+                        const stopOpacity = isArray(child["stop-opacity"]) ? child['stop-opacity'] : 1;
+                        if (stopColor.length === 4) {
+                            stopColor[3] *= stopOpacity;
+                        } else {
+                            stopColor[3] = stopOpacity;
+                        }
+                        stops.push({ offset, color: stopColor as Atarabi.ColorA });
+                    }
+                }
+            }
+            return { type: 'radial', cx, cy, r, fx, fy, stops };
+        }
+    };
+
     type StyleMap = { [property: string]: any };
 
     const styleMap = (text: string): StyleMap => {
+        text = removeCComment(text);
         const s: StyleMap = {};
         const ms = text.match(/\s*([^:;]+)\s*:\s*((?:[^;"]|"(?:\\.|[^"])*")*)\s*;?/gm);
         if (!ms) {
@@ -1241,12 +1344,15 @@
         visibility?: 'hidden' | 'collapse' | string; // visible
     };
 
+    type StyleSheet = { [selector: string]: Style; };
+
     const STYLE_ATTRIBUTES: (keyof Style)[] = ['fill', 'fill-opacity', 'fill-rule', 'stroke', 'stroke-opacity', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'stroke-dasharray', 'stroke-dashoffset', 'display', 'visibility'] as const;
 
     const convertStyle = (obj: any, attribute: string) => {
         switch (attribute) {
             case 'fill':
             case 'stroke':
+            case 'stop-color':
                 obj[attribute] = paint([trim(obj[attribute]), 0])[2];
                 break;
             case 'opacity':
@@ -1281,6 +1387,16 @@
         return true;
     };
 
+    const parseStyle = (text: string): Style => {
+        const style = styleMap(text);
+        for (const attribute in style) {
+            if (!convertStyle(style, attribute)) {
+                style[attribute] = typeof style[attribute] === 'string' ? trim(style[attribute]) : style[attribute];
+            }
+        }
+        return style;
+    };
+
     const style = (element: Element): Style | null => {
         const style: Style = {};
         // attribute
@@ -1307,17 +1423,83 @@
         return null;
     };
 
-    const mergeStyle = (parent: Style, child: Style): Style => {
-        const style: Style = {};
-        return { ...(parent ? parent : {}), ...(child ? child : {}) };
+    const mergeStyle = (...styles: Style[]): Style => {
+        let base: Style = {};
+        for (const style of styles) {
+            if (!style) {
+                continue;
+            }
+            for (const key in style) {
+                if (style.hasOwnProperty(key)) {
+                    base[key] = style[key];
+                }
+            }
+        }
+        return base;
     };
 
     /**
      * SVG
      */
+    class SVGContext {
+        private _styleSheet: StyleSheet = {};
+        pushStyleTag( styleTag: StyleTag ) {
+            if (styleTag.styleSheet) {
+                const src = styleTag.styleSheet;
+                const dst = this._styleSheet;
+                for (let selector in src) {
+                    if (!src.hasOwnProperty(selector)) {
+                        continue;
+                    }
+                    if (dst.hasOwnProperty(selector)) {
+                        dst[selector] = mergeStyle(dst[selector], src[selector]);
+                    } else {
+                        dst[selector] = src[selector];
+                    }
+                }
+            }
+        }
+        inquireStyle(element: Element): Style {
+            let style: Style = {};
+            if (element.class) {
+                const klasses = trim(element.class).split(/\s+/);
+                for (const klass of klasses) {
+                    const key = `.${klass}`;
+                    if (this._styleSheet.hasOwnProperty(key)) {
+                        style = mergeStyle(style, this._styleSheet[key]);
+                    }
+                }
+            }
+            if (element.id) {
+                const id = trim(element.id);
+                if (id) {
+                    const key = `#${id}`;
+                    if (this._styleSheet.hasOwnProperty(key)) {
+                        style = mergeStyle(style, this._styleSheet[key]);
+                    }
+                }
+            }
+            return style;
+        }
+        private _gradientTags: { [id: string]: GradientTag } = {};
+        pushGradientTag( gradientTag: GradientTag, bb: [number, number, number, number] ) {
+            if (gradientTag.id) {
+                this._gradientTags[gradientTag.id] = gradientTag;
+                gradientTag._gradient = gradientTagToGradient(gradientTag, bb);
+            }
+        }
+        inquireGradient(id: string) {
+            if (this._gradientTags.hasOwnProperty(id) && this._gradientTags[id]._gradient) {
+                return this._gradientTags[id]._gradient;
+            }
+            return null;
+        }
+    }
+
     interface CoreAttirbutes {
         [attribute: string]: any;
         id?: string;
+        class?: string;
         _children?: Element[];
         _text?: string;
         _style?: Style;
@@ -1338,11 +1520,12 @@
         opacity?: Opacity;
     }
 
-    type Element = SVG | G | Title | Desc | Path | Rect | Circle | Ellipse | Line | Polyline | Polygon;
+    type Element = SVG | G | Title | Desc | StyleTag | LinearGradientTag | RadialGradientTag | StopTag | Path | Rect | Circle | Ellipse | Line | Polyline | Polygon;
 
     // Group
     interface SVG extends CoreAttirbutes, PresentationAttributes {
         _tag: 'svg';
+        _ctx: SVGContext;
         width?: number;
         height?: number;
         viewBox?: [number, number, number, number];
@@ -1361,6 +1544,42 @@
 
     interface Desc extends CoreAttirbutes {
         _tag: 'desc';
+    }
+
+    // Style
+    interface StyleTag extends CoreAttirbutes {
+        _tag: 'style';
+        styleSheet?: StyleSheet;
+    }
+
+    type GradientTag = LinearGradientTag | RadialGradientTag;
+
+    interface LinearGradientTag extends CoreAttirbutes {
+        _tag: 'linearGradient';
+        _gradient?: LinearGradient;
+        x1?: number;
+        y1?: number;
+        x2?: number;
+        y2?: number;
+        gradientTransform?: Transform[];
+    }
+
+    interface RadialGradientTag extends CoreAttirbutes {
+        _tag: 'radialGradient';
+        _gradient?: RadialGradient;
+        cx?: number;
+        cy?: number;
+        r?: number;
+        fx?: number;
+        fy?: number;
+        gradientTransform?: Transform[];
+    }
+
+    interface StopTag extends CoreAttirbutes {
+        _tag: 'stop';
+        offset?: number;
+        'stop-color'?: Paint;
+        'stop-opacity'?: number;
     }
 
     // Shape
@@ -1426,6 +1645,15 @@
         points?: Vector2[];
     }
 
+    const doReverse = (element: Element) => {
+        switch (element._tag) {
+            case 'linearGradient':
+            case 'radialGradient':
+                return false;
+        }
+        return true;
+    };
+
     const getElementName = (element: Element): string => {
         let name = element._tag;
         if (element.id) {
@@ -1441,16 +1669,21 @@
         return [parseFloat(arr[1]), parseFloat(arr[3]), parseFloat(arr[5]), parseFloat(arr[7])] satisfies [number, number, number, number];
     });
 
-    function readSVG(file: File): XML {
-        file.encoding = 'utf-8';
-        if (!file.open('r')) {
-            return;
-        }
-        let text = file.read();
-        file.close();
+    function textToXML(text: string): XML {
         // remove xmlns (ref: https://community.adobe.com/t5/indesign-discussions/namespace-in-xml/m-p/3586814)
         text = text.replace(/xmlns?=\"(.*?)\"/g, '');
         return new XML(text);
+    }
+
+    function fileToXML(file: File): XML {
+        const newFile = new File(file.absoluteURI);
+        newFile.encoding = 'utf-8';
+        if (!newFile.open('r')) {
+            return;
+        }
+        let text = newFile.read();
+        newFile.close();
+        return textToXML(text);
     }
 
     const extractAttributes = (element: Element, xml: XML) => {
@@ -1467,7 +1700,43 @@
         }
     };
 
-    const convertAttribute = (element: Element) => {
+    const parseSelector = (text: string): string[] => {
+        const texts = text.split(',');
+        const selectors: string[] = [];
+        for (const text of texts ) {
+            const selector = trim(text).replace(/\s+/g, '');
+            if (selector) {
+                selectors.push(selector);
+            }
+        }
+        return selectors;
+    };
+
+    const percentToNumber = (attribute: string, percent: Percentage, bb: [number, number, number, number]): number => {
+        switch (attribute) {
+            case 'x':
+            case 'x1':
+            case 'x2':
+            case 'cx':
+            case 'rx':
+            case 'fx':
+            case 'width':
+                return bb[2] * percent[0] / 100;
+            case 'y':
+            case 'y1':
+            case 'y2':
+            case 'cy':
+            case 'ry':
+            case 'fy':
+            case 'height':
+                return bb[3] * percent[0] / 100;
+            case 'r':
+                return Math.sqrt(bb[2] * bb[2] + bb[3] * bb[3]) / Math.SQRT2 * percent[0] / 100;
+        }
+        return percent[0];
+    };
+
+    const convertAttribute = (element: Element, bb?: [number, number, number, number]) => {
         for (const attribute in element) {
             switch (attribute) {
                 case 'viewBox':
@@ -1487,18 +1756,34 @@
                 case 'r':
                 case 'rx':
                 case 'ry':
+                case 'fx':
+                case 'fy':
                 case 'width':
                 case 'height':
-                    element[attribute] = length([trim(element[attribute]), 0])[2];
+                    if (bb) {
+                        const len = lengthOrPercentage([trim(element[attribute]), 0])[2];
+                        if (isArray(len)) {
+                            element[attribute] = percentToNumber(attribute, len, bb);
+                        } else {
+                            element[attribute] = len;
+                        }
+                    } else {
+                        element[attribute] = length([trim(element[attribute]), 0])[2];
+                    }
                     break;
                 case 'points':
                     element[attribute] = listOfPoints([element[attribute], 0])[2];
                     break;
                 case 'transform':
+                case 'gradientTransform':
                     element[attribute] = transformList([element[attribute], 0])[2];
                     break;
                 case 'style':
-                    element[attribute] = styleMap(element[attribute]);
+                    element[attribute] = parseStyle(element[attribute]);
+                    break;
+                case 'offset':
+                case 'stop-opacity':
+                    element[attribute] = numberOrPercentage([element[attribute], 0])[2];
                     break;
                 // style
                 default:
@@ -1510,22 +1795,44 @@
         }
 
         // style
-        if (element.style) {
-            const style = element.style;
-            for (const attribute in style) {
-                if (!convertStyle(style, attribute)) {
-                    style[attribute] = typeof style[attribute] === 'string' ? trim(style[attribute]) : style[attribute];
-                }
-            }
-        }
-
         const _style = style(element);
         if (_style) {
             element._style = _style;
         }
+
+        // tag specific
+        if (element._tag === 'style') {
+            if (element._text) {
+                const styleSheet: StyleSheet = {};
+                let text = removeCComment(element._text);
+                while (true) {
+                    const start = text.indexOf('{');
+                    if (start === -1) {
+                        break;
+                    }
+                    const end = text.indexOf('}', start + 1);
+                    if (end === -1) {
+                        break;
+                    }
+                    const selectorText = text.substring(0, start);
+                    const styleText = text.substring(start + 1, end);
+                    const selectors = parseSelector(selectorText);
+                    const style = parseStyle(styleText);
+                    for (const selector of selectors) {
+                        if (styleSheet.hasOwnProperty(selector)) {
+                            styleSheet[selector] = mergeStyle(styleSheet[selector], style);
+                        } else {
+                            styleSheet[selector] = style;
+                        }
+                    }
+                    text = text.substr(end + 1);
+                }
+                element.styleSheet = styleSheet;
+            }
+        }
     };
 
-    const traverseContainer = (parent: Element, xml: XML) => {
+    const traverseContainer = (svg: SVG, parent: Element, xml: XML) => {
         if (!parent._children) {
             parent._children = [];
         }
@@ -1534,28 +1841,34 @@
             const childXML = children[i];
             const child: Element = { _tag: childXML.localName() } as any;
             extractAttributes(child, childXML);
-            convertAttribute(child);
+            convertAttribute(child, svg.viewBox);
             parent._children.push(child);
             if (childXML.children().length() > 0) {
-                traverseContainer(child, childXML);
+                traverseContainer(svg, child, childXML);
+            }
+            if (child._tag === 'style') {
+                svg._ctx.pushStyleTag(child);
+            } else if (child._tag === 'linearGradient' || child._tag === 'radialGradient') {
+                svg._ctx.pushGradientTag(child, svg.viewBox);
             }
         }
-        parent._children.reverse(); // drawing order is reversed
+        if (doReverse(parent)) {
+            parent._children.reverse(); // drawing order is reversed
+        }
     };
 
     const traverseSVG = (xml: XML): SVG => {
         if (xml.localName() !== 'svg') return null;
-        const svg: SVG = { _tag: 'svg' };
+        const svg: SVG = { _tag: 'svg', _ctx: new SVGContext };
         extractAttributes(svg, xml);
         convertAttribute(svg);
-        if (xml.children().length) {
-            traverseContainer(svg, xml);
-        }
-        // viewBox
         if (!svg.viewBox) {
-            const width = typeof svg.width === 'number' ? svg.width : 1000;
-            const height = typeof svg.height === 'number' ? svg.height : 1000;
+            const width = typeof svg.width === 'number' ? svg.width : 300;
+            const height = typeof svg.height === 'number' ? svg.height : 150;
             svg.viewBox = [0, 0, width, height];
+        }
+        if (xml.children().length) {
+            traverseContainer(svg, svg, xml);
         }
         return svg;
     };
@@ -1588,6 +1901,9 @@
         }
         L() {
             return this.layer;
+        }
+        C() {
+            return this.layer.containingComp;
         }
     }
 
@@ -1633,6 +1949,20 @@
         addStroke() {
             const group = this.content().addProperty('ADBE Vector Graphic - Stroke') as PropertyGroup;
             return new StrokeGroup(this.layer(), group);
+        }
+        addGradientFill(id?: string) {
+            const group = this.content().addProperty('ADBE Vector Graphic - G-Fill') as PropertyGroup;
+            if (id) {
+                group.name = `#${id}`;
+            }
+            return new GradientFillGroup(this.layer(), group);
+        }
+        addGradientStroke(id?: string) {
+            const group = this.content().addProperty('ADBE Vector Graphic - G-Stroke') as PropertyGroup;
+            if (id) {
+                group.name = `#${id}`;
+            }
+            return new GradientStrokeGroup(this.layer(), group);
         }
     }
 
@@ -1730,6 +2060,123 @@
         }
         color(col: Atarabi.Color) {
             (this.property()('ADBE Vector Stroke Color') as Property).setValue(col);
+            return this;
+        }
+        opacity(op: number) {
+            (this.property()('ADBE Vector Stroke Opacity') as Property).setValue(op);
+            return this;
+        }
+        strokeWidth(sw: number) {
+            (this.property()('ADBE Vector Stroke Width') as Property).setValue(sw);
+            return this;
+        }
+        lineCap(cp: number) {
+            (this.property()('ADBE Vector Stroke Line Cap') as Property).setValue(cp);
+            return this;
+        }
+        lineJoin(join: number) {
+            (this.property()('ADBE Vector Stroke Line Join') as Property).setValue(join);
+            return this;
+        }
+        miterLimit(limit: number) {
+            (this.property()('ADBE Vector Stroke Miter Limit') as Property).setValue(Math.max(limit, 1));
+            return this;
+        }
+        dashes(dashes: number[]) {
+            const ds = (this.property())('ADBE Vector Stroke Dashes') as PropertyGroup;
+            for (let i = 0, len = Math.min(DASH_MATCH_NAMES.length, dashes.length); i < len; i++) {
+                const dash = ds.addProperty(DASH_MATCH_NAMES[i]) as Property;
+                dash.setValue(dashes[i]);
+            }
+            return this;
+        }
+        dashOffset(offset: number) {
+            const ds = (this.property())('ADBE Vector Stroke Dashes') as PropertyGroup;
+            const dashOFfset = ds.addProperty('ADBE Vector Stroke Offset') as Property;
+            dashOFfset.setValue(offset);
+            return this;
+        }
+    }
+
+    const enum GradientType {
+        Linear = 1,
+        Radial = 2,
+    }
+
+    class GradientFillGroup {
+        private propertyGroup: ValidPropertyGroup;
+        constructor(layer: Layer, propertyGroup: PropertyGroup) {
+            this.propertyGroup = new ValidPropertyGroup(layer, propertyGroup);
+        }
+        property() {
+            return this.propertyGroup.P();
+        }
+        fillRule(rule: number) {
+            (this.property()('ADBE Vector Fill Rule') as Property).setValue(rule);
+            return this;
+        }
+        type(type: GradientType) {
+            (this.property()('ADBE Vector Grad Type') as Property).setValue(type);
+            return this;
+        }
+        startPoint(p: Atarabi.Vector2) {
+            (this.property()('ADBE Vector Grad Start Pt') as Property).setValue(p);
+            return this;
+        }
+        endPoint(p: Atarabi.Vector2) {
+            (this.property()('ADBE Vector Grad End Pt') as Property).setValue(p);
+            return this;
+        }
+        highlightLength(v: number) {
+            (this.property()('ADBE Vector Grad HiLite Length') as Property).setValue(v);
+            return this;
+        }
+        highlightAngle(v: number) {
+            (this.property()('ADBE Vector Grad HiLite Angle') as Property).setValue(v);
+            return this;
+        }
+        colors(v: Atarabi.Property.GradientValue) {
+            const property = this.property()('ADBE Vector Grad Colors') as Property;
+            Atarabi.property.setGradientValue(property, v);
+            return this;
+        }
+        opacity(op: number) {
+            (this.property()('ADBE Vector Fill Opacity') as Property).setValue(op);
+            return this;
+        }
+    }
+
+    class GradientStrokeGroup {
+        private propertyGroup: ValidPropertyGroup;
+        constructor(Layer: Layer, propertyGroup: PropertyGroup) {
+            this.propertyGroup = new ValidPropertyGroup(Layer, propertyGroup);
+        }
+        property() {
+            return this.propertyGroup.P();
+        }
+        type(type: GradientType) {
+            (this.property()('ADBE Vector Grad Type') as Property).setValue(type);
+            return this;
+        }
+        startPoint(p: Atarabi.Vector2) {
+            (this.property()('ADBE Vector Grad Start Pt') as Property).setValue(p);
+            return this;
+        }
+        endPoint(p: Atarabi.Vector2) {
+            (this.property()('ADBE Vector Grad End Pt') as Property).setValue(p);
+            return this;
+        }
+        highlightLength(v: number) {
+            (this.property()('ADBE Vector Grad HiLite Length') as Property).setValue(v);
+            return this;
+        }
+        highlightAngle(v: number) {
+            (this.property()('ADBE Vector Grad HiLite Angle') as Property).setValue(v);
+            return this;
+        }
+        colors(v: Atarabi.Property.GradientValue) {
+            const property = this.property()('ADBE Vector Grad Colors') as Property;
+            Atarabi.property.setGradientValue(property, v);
             return this;
         }
         opacity(op: number) {
@@ -2225,31 +2672,101 @@
         return pointsToPathCommands(polygon.points, true);
     };
 
-    const applyStyle = (group: ShapeGroup, style: Style) => {
+    const stopsToValue = (stops: GradientStop[]): Atarabi.Property.GradientValue => {
+        const value = { alphaStops: [], colorStops: [] } as Atarabi.Property.GradientValue;
+        for (const {offset, color} of stops) {
+            value.alphaStops.push({ location: offset, opacity: color[3] });
+            value.colorStops.push({ location: offset, color: color.slice(0, 3) as Atarabi.Color });
+        }
+        return value;
+    };
+
+    const applyGradient = (group: GradientFillGroup | GradientStrokeGroup, gradient: Gradient) => {
+        if (gradient.type === 'linear') {
+            group.type(GradientType.Linear).startPoint([gradient.x1, gradient.y1]).endPoint([gradient.x2, gradient.y2]);
+        } else {
+            group.type(GradientType.Radial).startPoint([gradient.cx, gradient.cy]).endPoint([gradient.cx + gradient.r, gradient.cy]);
+            const dx = gradient.fx - gradient.cx;
+            const dy = gradient.fy - gradient.cy;
+            const rr = Math.sqrt(dx * dx + dy * dy);
+            if (rr > 0) {
+                const length = Math.min(1, rr / Math.max(1e-6, gradient.r)) * 100;
+                const degree = Math.atan2(dy, dx) * (180.0 / Math.PI);
+                group.highlightLength(length);
+                group.highlightAngle(degree);
+            }
+        }
+        group.colors(stopsToValue(gradient.stops));
+    };
+
+    const applyStyle = (group: ShapeGroup, style: Style, ctx: SVGContext) => {
         if (style.display === 'none' || style.visibility === 'hidden' || style.visibility === 'collapse') {
             group.property().enabled = false;
         }
         if (!(style.fill === 'none' || style.fill === 'transparent')) {
-            const fill = group.addFill();
-            const color: Atarabi.Color = isArray(style.fill) ? style.fill.slice(0, 3) as Atarabi.Color : [0, 0, 0];
-            let opacity = isArray(style.fill) && style.fill.length === 4 ? style.fill[3] : 1;
-            if (typeof style['fill-opacity'] === 'number') {
-                opacity *= style['fill-opacity'];
+            let fill: FillGroup | GradientFillGroup = null;
+            if (typeof style.fill === 'string') {
+                let m = trim(style.fill).match(/^url\(#(.+)\)$/);
+                if (m) {
+                    const id = m[1];
+                    const gradient = ctx.inquireGradient(id);
+                    if (gradient) {
+                        if (gradient.stops.length < 2) {
+                            fill = group.addFill();
+                            const color: Atarabi.Color = gradient.stops.length ? gradient.stops[0].color.slice(0, 3) as Atarabi.Color : [0, 0, 0];
+                            const opacity = gradient.stops.length && gradient.stops[0].color.length === 4 ? gradient.stops[0].color[3] : 1;
+                            fill.color(color).opacity(100 * opacity);
+                        } else {
+                            fill = group.addGradientFill(id);
+                            applyGradient(fill, gradient);
+                        }
+                    }
+                }
             }
-            fill.color(color).opacity(100 * opacity);
+            if (!fill) {
+                fill = group.addFill();
+                const color: Atarabi.Color = isArray(style.fill) ? style.fill.slice(0, 3) as Atarabi.Color : [0, 0, 0];
+                let opacity = isArray(style.fill) && style.fill.length === 4 ? style.fill[3] : 1;
+                if (typeof style['fill-opacity'] === 'number') {
+                    opacity *= style['fill-opacity'];
+                }
+                fill.color(color).opacity(100 * opacity);
+            }
             if (typeof style['fill-rule'] === 'string') {
                 fill.fillRule(fillRuleToValue(style['fill-rule']));
             }
         }
         if (!(style.stroke === void 0 || style.stroke === 'none' || style.stroke === 'transparent')) {
-            const stroke = group.addStroke();
-            const color: Atarabi.Color = isArray(style.stroke) ? style.stroke.slice(0, 3) as Atarabi.Color : [0, 0, 0];
-            let opacity = isArray(style.stroke) && style.stroke.length === 4 ? style.stroke[3] : 1;
-            if (typeof style['stroke-opacity'] === 'number') {
-                opacity *= style['stroke-opacity'];
+            let stroke: StrokeGroup | GradientStrokeGroup = null;
+            if (typeof style.stroke === 'string') {
+                let m = trim(style.stroke).match(/^url\(#(.+)\)$/);
+                if (m) {
+                    const id = m[1];
+                    const gradient = ctx.inquireGradient(id);
+                    if (gradient) {
+                        if (gradient.stops.length < 2) {
+                            stroke = group.addStroke();
+                            const color: Atarabi.Color = gradient.stops.length ? gradient.stops[0].color.slice(0, 3) as Atarabi.Color : [0, 0, 0];
+                            const opacity = gradient.stops.length && gradient.stops[0].color.length === 4 ? gradient.stops[0].color[3] : 1;
+                            stroke.color(color).opacity(100 * opacity);
+                        } else {
+                            stroke = group.addGradientStroke(id);
+                            applyGradient(stroke, gradient);
+                        }
+                    }
+                }
+            }
+            if (!stroke) {
+                stroke = group.addStroke();
+                const color: Atarabi.Color = isArray(style.stroke) ? style.stroke.slice(0, 3) as Atarabi.Color : [0, 0, 0];
+                let opacity = isArray(style.stroke) && style.stroke.length === 4 ? style.stroke[3] : 1;
+                if (typeof style['stroke-opacity'] === 'number') {
+                    opacity *= style['stroke-opacity'];
+                }
+                stroke.color(color).opacity(100 * opacity)
             }
             const strokeWidth = typeof style['stroke-width'] === 'number' ? style['stroke-width'] : 1;
-            stroke.color(color).opacity(100 * opacity).strokeWidth(strokeWidth);
+            stroke.strokeWidth(strokeWidth);
             if (typeof style['stroke-linecap'] === 'string') {
                 stroke.lineCap(strokeLineCapToValue(style['stroke-linecap']));
             }
@@ -2280,7 +2797,7 @@
             case 'translate':
                 return Mat3x3.translate(transform.tx, typeof transform.ty === 'number' ? transform.ty : 0);
             case 'scale':
-                return Mat3x3.scale(transform.sx, typeof transform.sy === 'number' ? transform.sy : 1);
+                return Mat3x3.scale(transform.sx, typeof transform.sy === 'number' ? transform.sy : transform.sx);
             case 'rotate':
                 if (typeof transform.cx === 'number') {
                     return Mat3x3.translate(transform.cx, transform.cy).mult(Mat3x3.rotate(transform.angle)).mult(Mat3x3.translate(-transform.cx, -transform.cy));
@@ -2366,7 +2883,7 @@
             const { element, group } = queue.shift();
             if (isArray(element._children)) {
                 for (const child of element._children) {
-                    const style = child._style = mergeStyle(element._style, child._style);
+                    const style = child._style = mergeStyle(svg._ctx.inquireStyle(element), element._style, svg._ctx.inquireStyle(child), child._style);
                     switch (child._tag) {
                         case 'title':
                             if (element._tag === 'svg' && child._text) {
@@ -2397,7 +2914,7 @@
                                         origin = newOrigin;
                                     }
                                 }
-                                applyStyle(pathGroup, style);
+                                applyStyle(pathGroup, style, svg._ctx);
                                 applyTransform(pathGroup, child.transform);
                             }
                             break;
@@ -2412,7 +2929,7 @@
                                 } else {
                                     rectGroup.property().name += ': Error';
                                 }
-                                applyStyle(rectGroup, style);
+                                applyStyle(rectGroup, style, svg._ctx);
                                 applyTransform(rectGroup, child.transform);
                             }
                             break;
@@ -2427,7 +2944,7 @@
                                     ellipse.position([cx, cy]);
                                     ellipse.size([2 * r, 2 * r])
                                 }
-                                applyStyle(circleGroup, style);
+                                applyStyle(circleGroup, style, svg._ctx);
                                 applyTransform(circleGroup, child.transform);
                             }
                             break;
@@ -2443,7 +2960,7 @@
                                     ellipse.position([cx, cy]);
                                     ellipse.size([2 * rx, 2 * ry])
                                 }
-                                applyStyle(ellipseGroup, style);
+                                applyStyle(ellipseGroup, style, svg._ctx);
                                 applyTransform(ellipseGroup, child.transform);
                             }
                             break;
@@ -2454,7 +2971,7 @@
                                 const [shape,] = pathCommandsToShape(commands);
                                 const path = lineGroup.addPath();
                                 path.path(shape);
-                                applyStyle(lineGroup, style);
+                                applyStyle(lineGroup, style, svg._ctx);
                                 applyTransform(lineGroup, child.transform);
                             }
                             break;
@@ -2467,7 +2984,7 @@
                                     const path = polylineGroup.addPath();
                                     path.path(shape);
                                 }
-                                applyStyle(polylineGroup, style);
+                                applyStyle(polylineGroup, style, svg._ctx);
                                 applyTransform(polylineGroup, child.transform);
                             }
                             break;
@@ -2480,7 +2997,7 @@
                                     const path = polygonGroup.addPath();
                                     path.path(shape);
                                 }
-                                applyStyle(polygonGroup, style);
+                                applyStyle(polygonGroup, style, svg._ctx);
                                 applyTransform(polygonGroup, child.transform);
                             }
                             break;
@@ -2490,14 +3007,10 @@
         }
     }
 
-    /**
-     * API
-     */
-    const svgToShapeLayer = (svgFile: File, shapeLayer?: ShapeLayer) => {
-        const svgXML = readSVG(svgFile);
+    const xlmToShapeLayer = (svgXML: XML, layerName: string, shapeLayer?: ShapeLayer): ShapeLayer => {
         const svg = traverseSVG(svgXML);
         if (!svg) {
-            throw new Error('unable to load svg file');
+            throw new Error('unable to parse as svg');
         }
 
         let layer: ShapeLayer = null;
@@ -2509,14 +3022,27 @@
                 throw new Error('activate a comp')
             }
             layer = comp.layers.addShape();
-            layer.name = svgFile.displayName;
+            layer.name = layerName;
             layer.transform.anchorPoint.setValue([0.5 * svg.viewBox[2], 0.5 * svg.viewBox[3]]);
             layer.transform.position.setValue([0.5 * comp.width, 0.5 * comp.height]);
         }
 
         bakeSVG(svg, layer);
-
         return layer;
+    };
+
+    /**
+     * API
+     */
+    const svgToShapeLayer = (fileOrText: File | string, shapeLayer?: ShapeLayer): ShapeLayer => {
+        if (fileOrText instanceof File) {
+            const svgXML = fileToXML(fileOrText);
+            return xlmToShapeLayer(svgXML, fileOrText.displayName, shapeLayer);
+        } else if (typeof fileOrText === 'string') {
+            const svgXML = textToXML(fileOrText);
+            return xlmToShapeLayer(svgXML, 'SVG from text', shapeLayer);
+        }
+        throw new Error('argument must be File or string');
     };
 
     interface ContextState {
@@ -3044,20 +3570,27 @@
         }
     }
 
+    const getContext = (layer?: AVLayer) => {
+        return new Context(layer);
+    };
+
     $.global.Atarabi = $.global.Atarabi || {};
     var Atarabi: Atarabi = $.global.Atarabi; Atarabi.SVG = (Atarabi.SVG || {}) as any;
 
     Atarabi.SVG.svgToShapeLayer = svgToShapeLayer;
 
-    Atarabi.SVG.getContext = (layer?: AVLayer) => {
-        return new Context(layer);
-    };
+    Atarabi.SVG.getContext = getContext;
+
+    if (Atarabi.API) {
+        Atarabi.API.add(SCRIPT_NAME, 'svgToShapeLayer', svgToShapeLayer);
+        Atarabi.API.add(SCRIPT_NAME, 'getContext', getContext);
+    }
 
     /**
      * Entry Point
      */
     const main = (file: File) => {
-        const svgXML = readSVG(file);
+        const svgXML = fileToXML(file);
         const svg = traverseSVG(svgXML);
         if (!svg) {
             return;

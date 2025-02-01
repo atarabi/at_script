@@ -1,6 +1,7 @@
 /**
- * @script_panel v1.0.0
+ * @script_panel v1.1.0
  * 
+ *      v1.1.0(2025/02/01) support jsxbin
  *      v1.0.0(2024/11/14)
  */
 ((global: Panel | Global) => {
