@@ -1,4 +1,3 @@
-
 // embeded in @script
 (() => {
     /** START **/
@@ -116,6 +115,7 @@
         }
     }
 
+    // for "binary" string
     class StringReader implements Reader {
         private pos = 0;
         constructor(private str: string) { }
@@ -369,7 +369,6 @@
     class ChunkCodec {
         static STORE: { [id: string]: { decoder: (chunk: Chunk) => DecodedChunk; encoder: (decoded: DecodedChunk) => Chunk; } } = {};
         static register<Decoded extends { id: string; data: any; }>(ids: string | string[], decoder: (chunk: Chunk) => Decoded, encoder: (decoded: Decoded) => Chunk) {
-
             if (typeof ids === 'string') {
                 ids = [ids];
             }
@@ -474,7 +473,6 @@
 
     function decodeParamDef(str: string): Atarabi.RIFX.ParamDef {
         if (str.length !== 148) {
-            $.writeln(str.length);
             return { type: -1, data: str };
         }
         const parser = new Parser(new StringReader(str));
@@ -553,7 +551,6 @@
                     };
                     return { type: 'color', name, value, dephault, uiFlags, flags };
                 }
-
             case PF.ParamType.Point:
                 {
                     const xValue = parser.fixed32();
@@ -1342,6 +1339,13 @@
         return s;
     }
 
+    function getDynStreamFlag(parameter: Atarabi.Pseudo.Parameter): 1 | 3 {
+        if (parameter.type === 'groupEnd') {
+            return 1;
+        }
+        return parameter.uiFlags & PF.ParamUIFlags.Invisible ? 3 : 1;
+    }
+
     function makePseudoEffectChunk({ matchName, name, parameters }: Atarabi.Pseudo.Config) {
         if (matchName.indexOf('Pseudo/') !== 0) {
             throw new Error(`matchName must start with 'Pseudo/`);
@@ -1377,7 +1381,7 @@
         // params
         for (const parameter of parameters) {
             streamValuesList.push(encode(makeTdmn(`${matchName}-${zfill(parameter.id)}`)));
-            streamValuesList.push(encode(makeTdbs(parameter, 1)));
+            streamValuesList.push(encode(makeTdbs(parameter, getDynStreamFlag(parameter))));
         }
         // sentinel
         streamValuesList.push(encode(makeTdmn('ADBE Group End')));
