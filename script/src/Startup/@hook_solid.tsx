@@ -1,6 +1,7 @@
 /**
- * @hook_solid v1.1.0
+ * @hook_solid v1.2.0
  * 
+ *      v1.2.0(2025/02/04) Support API
  *      v1.1.0(2024/05/29) Add color panel
  *      v1.0.1(2024/02/13) Fix dynamic link bug
  *      v1.0.0(2023/08/28)
@@ -197,18 +198,6 @@
                 app.beginUndoGroup('New: Solid');
                 const solidWidth = ~~widthText.text;
                 const solidHeight = ~~heightText.text;
-                const layerName = ((name: string): string => {
-                    const layerNames: { [name: string]: boolean; } = {};
-                    for (let i = 1; i <= comp.numLayers; i++) {
-                        layerNames[comp.layer(i).name] = true;
-                    }
-                    for (let j = 1; ; j++) {
-                        const newName = `${name} ${j}`;
-                        if (!layerNames[newName]) {
-                            return newName;
-                        }
-                    }
-                })('Solid');
                 const [topLayer, single] = ((): [Layer, boolean] => {
                     const layers = comp.selectedLayers.slice();
                     if (!layers.length) {
@@ -219,18 +208,7 @@
                     });
                     return [layers[0], layers.length === 1];
                 })();
-                const solidLayer = (() => {
-                    const solidName = `Solid (${solidWidth}x${solidHeight})`;
-                    const color = settings.useFillEffect ? white : currentColor;
-                    const eps = 1e-3;
-                    for (const item of solidItems) {
-                        if (item.name.indexOf(solidName) === 0 && item.width === solidWidth && item.height === solidHeight && Math.abs(item.mainSource.color[0] - color[0]) < eps && Math.abs(item.mainSource.color[1] - color[1]) < eps && Math.abs(item.mainSource.color[2] - color[2]) < eps) {
-                            return comp.layers.add(item);
-                        }
-                    }
-                    return comp.layers.addSolid(color, solidName, solidWidth, solidHeight, 1);
-                })();
-                solidLayer.name = layerName;
+                const solidLayer = addSolid(comp, solidWidth, solidHeight, settings.useFillEffect ? white : currentColor);
                 if (settings.useFillEffect) {
                     const fillEffect = solidLayer.effect.addProperty(ADOBE_FILL) as PropertyGroup;
                     (fillEffect(ADOBE_FILL_COLOR) as Property).setValue(currentColor);
@@ -330,6 +308,48 @@
             return solidIds[colorToStr(lhs)] - solidIds[colorToStr(rhs)];
         });
         return colors;
+    }
+
+    function addSolid(comp: CompItem, width: number, height: number, color: Atarabi.Color = [1, 1, 1]) {
+        const layerName = ((name: string): string => {
+            const layerNames: { [name: string]: boolean; } = {};
+            for (let i = 1; i <= comp.numLayers; i++) {
+                layerNames[comp.layer(i).name] = true;
+            }
+            for (let j = 1; ; j++) {
+                const newName = `${name} ${j}`;
+                if (!layerNames[newName]) {
+                    return newName;
+                }
+            }
+        })('Solid');
+        const [topLayer, single] = ((): [Layer, boolean] => {
+            const layers = comp.selectedLayers.slice();
+            if (!layers.length) {
+                return [null, false];
+            }
+            layers.sort((lhs, rhs) => {
+                return lhs.index - rhs.index;
+            });
+            return [layers[0], layers.length === 1];
+        })();
+        const solidLayer = (() => {
+            const solidName = `Solid (${width}x${height})`;
+            const eps = 1e-3;
+            const solidItems = collectSolidItems();
+            for (const item of solidItems) {
+                if (item.name.indexOf(solidName) === 0 && item.width === width && item.height === height && Math.abs(item.mainSource.color[0] - color[0]) < eps && Math.abs(item.mainSource.color[1] - color[1]) < eps && Math.abs(item.mainSource.color[2] - color[2]) < eps) {
+                    return comp.layers.add(item);
+                }
+            }
+            return comp.layers.addSolid(color, solidName, width, height, 1);
+        })();
+        solidLayer.name = layerName;
+        return solidLayer;
+    }
+
+    if (Atarabi.API) {
+        Atarabi.API.add(SCRIPT_NAME, 'addSolid', addSolid);
     }
 
     const SECTION_NAME = `@script/${SCRIPT_NAME}` as const;
