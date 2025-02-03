@@ -55,6 +55,22 @@ Atarabi.version
 
 ``version: string;``
 
+v0.5.1(2025/02/04)
+^^^^^^^^^^^^^^^^^^^^
+
+Fix
+"""""""""""
+- Mac環境で、Clipboard.getText()でテキストがクリップボードに無い時に取得しようとするとクラッシュする問題の修正
+
+Improve
+"""""""""""
+- Pseudo においてInvisibleの対応
+
+Script
+"""""""""""
+- @hook_solid がAtarabi.APIに対応
+- @hook_null がAtarabi.APIに対応
+
 v0.5.0(2025/02/01)
 ^^^^^^^^^^^^^^^^^^^^
 
