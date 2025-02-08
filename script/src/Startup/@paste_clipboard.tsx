@@ -1,5 +1,7 @@
 /**
- * @paste_clipboard v1.0.0
+ * @paste_clipboard v1.0.1
+ * 
+ *      v1.0.1(2025/02/08) Fix importing sequence files
  */
 (() => {
 
@@ -295,6 +297,8 @@
                     if (store.hasOwnProperty(key)) {
                         if (index < store[key].index) {
                             store[key] = { file, index, count: store[key].count + 1 };
+                        } else {
+                            store[key].count++;
                         }
                     } else {
                         store[key] = { file, index, count: 1 };
