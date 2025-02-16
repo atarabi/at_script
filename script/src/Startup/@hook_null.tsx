@@ -1,6 +1,7 @@
 /**
  * @hook_null v1.1.0
  * 
+ *      v1.1.1(2025/02/16) Fix minor bug
  *      v1.1.0(2025/02/04) Support API
  *      v1.0.2(2024/05/29) Refactor
  *      v1.0.1(2024/02/13) Fix dynamic link bug
@@ -31,7 +32,6 @@
 
         try {
             app.beginUndoGroup('New: Null');
-            const nullLayer = addNull(comp);
             const [topLayer, single] = ((): [Layer, boolean] => {
                 const layers = comp.selectedLayers.slice();
                 if (!layers.length) {
@@ -42,6 +42,7 @@
                 });
                 return [layers[0], layers.length === 1];
             })();
+            const nullLayer = addNull(comp);
             if (topLayer) {
                 nullLayer.moveBefore(topLayer);
                 if (single) {
