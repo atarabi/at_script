@@ -1,6 +1,7 @@
 /**
- * @effect_launcher v2.1.0
+ * @effect_launcher v2.2.0
  * 
+ *      v2.2.0(2025/03/08)  Support script and preset
  *      v2.1.0(2025/02/01)  Support footage shortcut
  *      v2.0.0(2024/11/14)  Support shortcut and reduce debounce time
  *      v1.0.3(2024/02/13)  Fix dynamic link bug
@@ -67,7 +68,7 @@
         };
     }
 
-    // shortcut
+    // settings
     enum Type {
         Effect = 'effect',
         Script = 'script',
@@ -79,10 +80,26 @@
         Unknown = 'unknown',
     }
 
-    interface ISettings {
+    const CURRENT_SETTINGS_VERSION = 2;
+
+    interface ISettings_V1 {
         type: '@scripts/@effect_launcher';
         version: 1;
         shortcuts: { [key: string]: ShortcutValue; };
+    }
+
+    interface ISettings {
+        type: '@scripts/@effect_launcher';
+        version: typeof CURRENT_SETTINGS_VERSION;
+        shortcuts: { [key: string]: ShortcutValue; };
+        script: {
+            folders: { path: string; recursive: boolean; }[];
+            files: { path: string; }[];
+        };
+        preset: {
+            folders: { path: string; recursive: boolean; }[];
+            files: { path: string; }[];
+        };
     }
 
     const SETTINGS_FILE = new File(`${Folder.userData.absoluteURI}/Atarabi/@scripts/${SCRIPT_NAME}/settings.json`);
@@ -90,6 +107,7 @@
     let SETTINGS = loadSettings();
     const SETTINGS_COMMAND = '\\\\';
 
+    // shortcut
     type ShortcutValue = { type: Type; value: string; };
 
     type ShortcutValueWithKey = ShortcutValue & { key: string; };
@@ -137,11 +155,104 @@
         return values;
     }
 
+    // script, preset
+    function scanFiles(setting: { folders: { path: string; recursive: boolean; }[]; files: { path: string; }[]; }, re: RegExp, fn: (root: Folder, file: File) => void) {
+        const doneFolder: { [path: string]: boolean; } = {};
+        const doneFile: { [path: string]: boolean; } = {};
+
+        const push = (root: Folder, file: File) => {
+            if (!doneFile.hasOwnProperty(file.absoluteURI)) {
+                doneFile[file.absoluteURI] = true;
+                fn(root, file);
+            }
+        };
+
+        // folder
+        const MAX_DEPTH = 3;
+        const scanFolder = (root: Folder, folder: Folder, rescursive: boolean, depth: number) => {
+            if (doneFolder.hasOwnProperty(folder.absoluteURI)) {
+                return;
+            }
+            doneFolder[folder.absoluteURI] = true;
+
+            for (const file of folder.getFiles()) {
+                if (file instanceof Folder) {
+                    if (rescursive && depth < MAX_DEPTH) {
+                        scanFolder(root, file, rescursive, depth + 1);
+                    }
+                } else if (file instanceof File && re.test(file.displayName)) {
+                    push(root, file);
+                }
+            }
+        };
+
+        for (const { path, recursive } of setting.folders) {
+            const folder = Folder(path);
+            if (folder instanceof Folder && folder.exists) {
+                scanFolder(folder.parent, folder, recursive, 0);
+            }
+        }
+
+        // file
+        for (const { path } of setting.files) {
+            const file = File(path);
+            if (file instanceof File && file.exists && re.test(file.displayName)) {
+                push(null, file);
+            }
+        }
+    }
+
+    // script
+    let SCRIPT_LIST: IItem[] = [];
+    const SCRIPT_RE = /\.jsx(bin)?$/i;
+
+    function initScript() {
+        SCRIPT_LIST = [];
+        if (SETTINGS && SETTINGS.script) {
+            scanFiles(SETTINGS.script, SCRIPT_RE, (root, file) => {
+                if (root) {
+                    SCRIPT_LIST.push({ type: Type.Script, name: file.displayName, category: 'Script', detail: file.fsName.substr(root.fsName.length + 1), path: file.fsName });
+                } else {
+                    SCRIPT_LIST.push({ type: Type.Script, name: file.displayName, category: 'Script', detail: file.displayName, path: file.fsName });
+                }
+            });
+        }
+    }
+
+    initScript();
+
+    // preset
+    let PRESET_LIST: IItem[] = [];
+    const PRESET_RE = /\.ffx$/i;
+
+    function initPreset() {
+        PRESET_LIST = [];
+        if (SETTINGS && SETTINGS.preset) {
+            scanFiles(SETTINGS.preset, PRESET_RE, (root, file) => {
+                if (root) {
+                    SCRIPT_LIST.push({ type: Type.Preset, name: file.displayName, category: 'Preset', detail: file.fsName.substr(root.fsName.length + 1), path: file.fsName });
+                } else {
+                    SCRIPT_LIST.push({ type: Type.Preset, name: file.displayName, category: 'Preset', detail: file.displayName, path: file.fsName });
+                }
+            });
+        }
+    }
+
+    initPreset();
+
     function loadSettings(): ISettings {
         let settings: ISettings = {
             type: '@scripts/@effect_launcher',
-            version: 1,
+            version: CURRENT_SETTINGS_VERSION,
             shortcuts: {},
+            script: {
+                folders: [],
+                files: [],
+            },
+            preset: {
+                folders: [],
+                files: []
+            },
         };
         if (!SETTINGS_FILE.exists) {
             return settings;
@@ -154,8 +265,27 @@
             SETTINGS_FILE.close();
             settings = Atarabi.JSON.parse(data);
             // simple check
+            settings.version = CURRENT_SETTINGS_VERSION;
             if (!settings.shortcuts) {
                 settings.shortcuts = {};
+            }
+            if (!settings.script) {
+                settings.script = {} as any;
+            }
+            if (!settings.script.folders) {
+                settings.script.folders = [];
+            }
+            if (!settings.script.files) {
+                settings.script.files = [];
+            }
+            if (!settings.preset) {
+                settings.preset = {} as any;
+            }
+            if (!settings.preset.folders) {
+                settings.preset.folders = [];
+            }
+            if (!settings.preset.files) {
+                settings.preset.files = [];
             }
         } catch (e) {
             alert(e);
@@ -176,6 +306,8 @@
     function updateSettings(newSettings: ISettings) {
         SETTINGS = newSettings;
         saveSettings();
+        initScript();
+        initPreset();
     }
 
     function generateShortcutKey(settings: ISettings, name: string, defaultKey: string = ''): string {
@@ -275,16 +407,14 @@
     }
 
     // effect
-    type EffectItem = { displayName: string; matchName: string; category: string; };
-    const EFFECT_LIST: EffectItem[] = [];
+    type IItem = { name: string; detail: string; path?: string; category: string; type: Type; };
+    const EFFECT_LIST: IItem[] = [];
     const EFFECT_NAME_MAP: { [matchName: string]: string } = {};
-    const RECENT_NUM = 50;
-    const RECENT_EFFECT_LIST: EffectItem[] = [];
 
     function initEffect() {
         for (let { displayName, matchName, category } of app.effects) {
             if (displayName && matchName && category) {
-                const item = { displayName, matchName, category };
+                const item = { type: Type.Effect, name: displayName, category, detail: matchName } satisfies IItem;
                 EFFECT_LIST.push(item);
                 EFFECT_NAME_MAP[matchName] = displayName;
             }
@@ -305,12 +435,22 @@
 
     initEffect();
 
+    // recent
+    const RECENT_NUM = 50;
+    const RECENT_ITEM_LIST: IItem[] = [];
+
     // searcher
-    const searcher = Atarabi.UI.FuzzySearch(EFFECT_LIST, ['displayName', 'category', 'matchName'], {
-        caseSensitive: false,
-        sort: true,
-        cache: true,
-    });
+    let searcher: Atarabi.UI.FuzzySearch<IItem> = null;
+
+    function initSearcher() {
+        searcher = Atarabi.UI.FuzzySearch([].concat(EFFECT_LIST, SCRIPT_LIST, PRESET_LIST), ['name', 'detail', 'category'], {
+            caseSensitive: false,
+            sort: true,
+            cache: true,
+        });
+    }
+
+    initSearcher();
 
     // apply
     function isAVLayer(layer: Layer): layer is AVLayer {
@@ -457,18 +597,27 @@
         }
     }
 
+    function applyItem(layers: Layer[], iItem: IItem) {
+        switch (iItem.type) {
+            case Type.Effect:
+                applyEffect(filter(layers, isAVLayer), iItem.detail);
+                break;
+            case Type.Preset:
+                applyPreset(layers, new File(iItem.path));
+                break;
+        }
+    }
+
     function createNameFromShortcutValue(value: ShortcutValue) {
         switch (value.type) {
             case Type.Effect:
                 const name = EFFECT_NAME_MAP[value.value];
                 return name ? name : 'not found';
-                return;
             default:
                 const file = new File(value.value);
                 return file.displayName;
         }
     }
-
 
     function mod(x: number, y: number) {
         const z = x % y;
@@ -491,12 +640,40 @@
 
     function buildSettingsUI() {
         enum Param {
+            Container = 'Container',
+
             ShortcutPanel = 'ShortcutPanel',
             ShortcutList = 'ShortcutList',
             ShortcutButtonGroup = 'ShortcutButtonGroup',
             ShortcutNew = 'ShortcutNew',
             ShortcutEdit = 'ShortcutEdit',
             ShortcutDelete = 'ShortcutDelete',
+
+            ScriptPanel = 'ScriptPanel',
+            ScriptFoldersText = 'ScriptFoldersText',
+            ScriptFoldersList = 'ScriptFoldersList',
+            ScriptFoldersButtonGroup = 'ScriptFoldersButtonGroup',
+            ScriptFoldersNew = 'ScriptFoldersNew',
+            ScriptFoldersDelete = 'ScriptFoldersDelete',
+            ScriptSeparator = 'ScriptSeparator',
+            ScriptFilesText = 'ScriptFilesText',
+            ScriptFilesList = 'ScriptFilesList',
+            ScriptFilesButtonGroup = 'ScriptFilesButtonGroup',
+            ScriptFilesNew = 'ScriptFilesNew',
+            ScriptFilesDelete = 'ScriptFilesDelete',
+
+            PresetPanel = 'PresetPanel',
+            PresetFoldersText = 'PresetFoldersText',
+            PresetFoldersList = 'PresetFoldersList',
+            PresetFoldersButtonGroup = 'PresetFoldersButtonGroup',
+            PresetFoldersNew = 'PresetFoldersNew',
+            PresetFoldersDelete = 'PresetFoldersDelete',
+            PresetSeparator = 'PresetSeparator',
+            PresetFilesText = 'PresetFilesText',
+            PresetFilesList = 'PresetFilesList',
+            PresetFilesButtonGroup = 'PresetFilesButtonGroup',
+            PresetFilesNew = 'PresetFilesNew',
+            PresetFilesDelete = 'PresetFilesDelete',
 
             ButtonGroup = 'ButtonGroup',
             OK = 'OK',
@@ -507,23 +684,47 @@
             NewShortcut = 'NewShortcut',
             EditShortcut = 'EditShortcut',
             DeleteShortcut = 'DeleteShortcut',
+
+            NewScriptFolder = 'NewScriptFolder',
+            DeleteScriptFolder = 'DeleteScriptFolder',
+            EditScriptFolder = 'EditScriptFolder',
+            RecursiveScriptFolder = 'RecursiveScriptFolder',
+            NewScriptFile = 'NewScriptFile',
+            EditScriptFile = 'EditScriptFile',
+            DeleteScriptFile = 'DeleteScriptFile',
+
+            NewPresetFolder = 'NewPresetFolder',
+            DeletePresetFolder = 'DeletePresetFolder',
+            EditPresetFolder = 'EditPresetFolder',
+            RecursivePresetFolder = 'RecursivePresetFolder',
+            NewPresetFile = 'NewPresetFile',
+            EditPresetFile = 'EditPresetFile',
+            DeletePresetFile = 'DeletePresetFile',
         }
 
         let newSettings: ISettings = clone(SETTINGS);
 
-        const builder = new Atarabi.UI.Builder('dialog', 'Settings', { resizeable: true }, win => {
+        let update = false;
+
+        const builder = new Atarabi.UI.Builder('dialog', 'Settings', undefined, win => {
             win.spacing = 8;
             win.margins = 10;
         })
+            .addGroup(Param.Container, undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'fill'];
+                ui.orientation = 'row';
+                ui.spacing = 3;
+                ui.margins = 3;
+            })
             .addPanel(Param.ShortcutPanel, 'Shortcuts', undefined, (ui, emitter) => {
                 ui.alignment = ['fill', 'fill'];
-                ui.preferredSize[0] = 450;
+                ui.preferredSize[0] = 350;
                 ui.spacing = 3;
                 ui.margins = 10;
             })
-            .addListBox(Param.ShortcutList, undefined, { numberOfColumns: 4, columnWidths: [50, 150, 100, 150] }, (ui, emitter) => {
+            .addListBox(Param.ShortcutList, undefined, { numberOfColumns: 4, columnWidths: [50, 100, 100, 100] }, (ui, emitter) => {
                 ui.alignment = ['fill', 'fill'];
-                ui.preferredSize[1] = 100;
+                ui.preferredSize[1] = 300;
                 for (const key in newSettings.shortcuts) {
                     if (newSettings.shortcuts.hasOwnProperty(key)) {
                         const item = ui.add('item', key);
@@ -594,50 +795,392 @@
                 });
             })
             .addGroup(Param.ShortcutButtonGroup, undefined, (ui, emitter) => {
-                ui.alignment = ['fill', 'top'];
+                ui.alignment = ['fill', 'bottom'];
                 ui.spacing = ui.margins = 1;
                 ui.orientation = 'row';
             })
             .addButton(Param.ShortcutNew, 'New', undefined, (ui, emitter) => {
-                ui.alignment = ['fill', 'top'];
+                ui.alignment = ['fill', 'bottom'];
                 ui.onClick = () => {
                     emitter.notify(Event.NewShortcut);
                 };
             })
             .addButton(Param.ShortcutEdit, 'Edit', undefined, (ui, emitter) => {
-                ui.alignment = ['fill', 'top'];
+                ui.alignment = ['fill', 'bottom'];
                 ui.onClick = () => {
                     emitter.notify(Event.EditShortcut);
                 };
             })
             .addButton(Param.ShortcutDelete, 'Delete', undefined, (ui, emitter) => {
-                ui.alignment = ['fill', 'top'];
+                ui.alignment = ['fill', 'bottom'];
                 ui.onClick = () => {
                     emitter.notify(Event.DeleteShortcut);
                 };
             })
             .addGroupEnd()
             .addPanelEnd()
-            .addGroup(Param.ButtonGroup, undefined, (ui, emitter) => {
+            .addPanel(Param.ScriptPanel, 'Script', undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'fill'];
+                ui.preferredSize[0] = 350;
+                ui.spacing = 3;
+                ui.margins = 10;
+            })
+            .addStaticText(Param.ScriptFoldersText, 'Folders', undefined, (ui, emitter) => {
+                ui.alignment = ['left', 'top'];
+            })
+            .addListBox(Param.ScriptFoldersList, undefined, { numberOfColumns: 2, columnWidths: [150, 200] }, (ui, emitter) => {
+                ui.alignment = ['fill', 'fill'];
+                ui.preferredSize[1] = 150;
+                for (const { path, recursive } of newSettings.script.folders) {
+                    const folder = new Folder(path);
+                    const item = ui.add('item', folder.displayName);
+                    item.subItems[0].text = path;
+                    item.checked = recursive;
+                }
+                ui.addEventListener('mousedown', (e: MouseEvent) => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    // right click
+                    if (e.button === 2) {
+                        const index = Atarabi.UI.showContextMenu([{ text: 'Edit' },{ text: 'Recursive', checked: selection.checked }, { text: 'Delete' }]);
+                        if (index === 0) {
+                            emitter.notify(Event.EditScriptFolder);
+                        } if (index === 1) {
+                            emitter.notify(Event.RecursiveScriptFolder);
+                        } else if (index === 2) {
+                            emitter.notify(Event.DeleteScriptFolder);
+                        }
+                    }
+                });
+                emitter.addEventListener(Event.NewScriptFolder, () => {
+                    const folder = Folder.selectDialog('Script Folder');
+                    if (folder) {
+                        const newItem = ui.add('item', folder.displayName);
+                        newItem.subItems[0].text = folder.fsName;
+                        newSettings.script.folders.push({ path: folder.fsName, recursive: false });
+                    }
+                });
+                emitter.addEventListener(Event.EditScriptFolder, () => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    const folder = new Folder(newSettings.script.folders[selection.index].path).selectDlg('Script Folder');
+                    if (folder) {
+                        selection.text = folder.displayName;
+                        newSettings.script.folders[selection.index].path = selection.subItems[0].text = folder.fsName;
+                    }
+                });
+                emitter.addEventListener(Event.RecursiveScriptFolder, () => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    newSettings.script.folders[selection.index].recursive = selection.checked = !selection.checked;
+                });
+                emitter.addEventListener(Event.DeleteScriptFolder, () => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    if (confirm(`Delete "${selection.text}"?`)) {
+                        newSettings.script.folders.splice(selection.index, 1);
+                        ui.remove(selection);
+                    }
+                });
+            })
+            .addGroup(Param.ScriptFoldersButtonGroup, undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'bottom'];
+                ui.spacing = ui.margins = 1;
+                ui.orientation = 'row';
+            })
+            .addButton(Param.ScriptFoldersNew, 'New', undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'bottom'];
+                ui.onClick = () => {
+                    emitter.notify(Event.NewScriptFolder);
+                };
+            })
+            .addButton(Param.ScriptFoldersDelete, 'Delete', undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'bottom'];
+                ui.onClick = () => {
+                    emitter.notify(Event.DeleteScriptFolder);
+                };
+            })
+            .addGroupEnd()
+            .addPanel(Param.ScriptSeparator, '', undefined, (ui, emitter) => {
                 ui.alignment = ['fill', 'top'];
+                ui.preferredSize[1] = 1;
+            })
+            .addPanelEnd()
+            .addStaticText(Param.ScriptFilesText, 'Files', undefined, (ui, emitter) => {
+                ui.alignment = ['left', 'top'];
+            })
+            .addListBox(Param.ScriptFilesList, undefined, { numberOfColumns: 2, columnWidths: [150, 200] }, (ui, emitter) => {
+                ui.alignment = ['fill', 'fill'];
+                ui.preferredSize[1] = 150;
+                for (const { path } of newSettings.script.files) {
+                    const folder = new Folder(path);
+                    const item = ui.add('item', folder.displayName);
+                    item.subItems[0].text = path;
+                }
+                ui.addEventListener('mousedown', (e: MouseEvent) => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    // right click
+                    if (e.button === 2) {
+                        const index = Atarabi.UI.showContextMenu([{ text: 'Edit' }, { text: 'Delete' }]);
+                        if (index === 0) {
+                            emitter.notify(Event.EditScriptFile);
+                        } else if (index === 1) {
+                            emitter.notify(Event.DeleteScriptFile);
+                        }
+                    }
+                });
+                emitter.addEventListener(Event.NewScriptFile, () => {
+                    const file = File.openDialog('Script File', makeFileFilter(['jsx', 'jsxbin'])) as File;
+                    if (file) {
+                        const newItem = ui.add('item', file.displayName);
+                        newItem.subItems[0].text = file.fsName;
+                        newSettings.script.files.push({ path: file.fsName });
+                    }
+                });
+                emitter.addEventListener(Event.EditScriptFile, () => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    const file = new File(newSettings.script.files[selection.index].path).openDlg('Script File', makeFileFilter(['jsx', 'jsxbin'])) as File;
+                    if (file) {
+                        selection.text = file.displayName;
+                        newSettings.script.files[selection.index].path = selection.subItems[0].text = file.fsName;
+                    }
+                });
+                emitter.addEventListener(Event.DeleteScriptFile, () => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    if (confirm(`Delete "${selection.text}"?`)) {
+                        newSettings.script.files.splice(selection.index, 1);
+                        ui.remove(selection);
+                    }
+                });
+            })
+            .addGroup(Param.ScriptFilesButtonGroup, undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'bottom'];
+                ui.orientation = 'row';
+            })
+            .addButton(Param.ScriptFilesNew, 'New', undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'bottom'];
+                ui.onClick = () => {
+                    emitter.notify(Event.NewScriptFile);
+                };
+            })
+            .addButton(Param.ScriptFilesDelete, 'Delete', undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'bottom'];
+                ui.onClick = () => {
+                    emitter.notify(Event.DeleteScriptFile);
+                };
+            })
+            .addGroupEnd()
+            .addPanelEnd()
+            .addPanel(Param.PresetPanel, 'Preset', undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'fill'];
+                ui.preferredSize[0] = 350;
+                ui.spacing = 3;
+                ui.margins = 10;
+            })
+            .addStaticText(Param.PresetFoldersText, 'Folders', undefined, (ui, emitter) => {
+                ui.alignment = ['left', 'top'];
+            })
+            .addListBox(Param.PresetFoldersList, undefined, { numberOfColumns: 2, columnWidths: [150, 200] }, (ui, emitter) => {
+                ui.alignment = ['fill', 'fill'];
+                ui.preferredSize[1] = 150;
+                for (const { path, recursive } of newSettings.preset.folders) {
+                    const folder = new Folder(path);
+                    const item = ui.add('item', folder.displayName);
+                    item.subItems[0].text = path;
+                    item.checked = recursive;
+                }
+                ui.addEventListener('mousedown', (e: MouseEvent) => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    // right click
+                    if (e.button === 2) {
+                        const index = Atarabi.UI.showContextMenu([{ text: 'Edit' }, { text: 'Recursive', checked: selection.checked }, { text: 'Delete' }]);
+                        if (index === 0) {
+                            emitter.notify(Event.EditPresetFolder);
+                        } else if (index === 1) {
+                            emitter.notify(Event.RecursivePresetFolder);
+                        } else if (index === 2) {
+                            emitter.notify(Event.DeletePresetFolder);
+                        }
+                    }
+                });
+                emitter.addEventListener(Event.NewPresetFolder, () => {
+                    const folder = Folder.selectDialog('Preset Folder');
+                    if (folder) {
+                        const newItem = ui.add('item', folder.displayName);
+                        newItem.subItems[0].text = folder.fsName;
+                        newSettings.preset.folders.push({ path: folder.fsName, recursive: false });
+                    }
+                });
+                emitter.addEventListener(Event.EditPresetFolder, () => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    const folder = new Folder(newSettings.preset.folders[selection.index].path).selectDlg('Preset Folder');
+                    if (folder) {
+                        selection.text = folder.displayName;
+                        newSettings.preset.folders[selection.index].path = selection.subItems[0].text = folder.fsName;
+                    }
+                });
+                emitter.addEventListener(Event.RecursivePresetFolder, () => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    newSettings.preset.folders[selection.index].recursive = selection.checked = !selection.checked;
+                });
+                emitter.addEventListener(Event.DeletePresetFolder, () => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    if (confirm(`Delete "${selection.text}"?`)) {
+                        newSettings.preset.folders.splice(selection.index, 1);
+                        ui.remove(selection);
+                    }
+                });
+            })
+            .addGroup(Param.PresetFoldersButtonGroup, undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'bottom'];
+                ui.spacing = ui.margins = 1;
+                ui.orientation = 'row';
+            })
+            .addButton(Param.PresetFoldersNew, 'New', undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'bottom'];
+                ui.onClick = () => {
+                    emitter.notify(Event.NewPresetFolder);
+                };
+            })
+            .addButton(Param.PresetFoldersDelete, 'Delete', undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'bottom'];
+                ui.onClick = () => {
+                    emitter.notify(Event.DeletePresetFolder);
+                };
+            })
+            .addGroupEnd()
+            .addPanel(Param.PresetSeparator, '', undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'top'];
+                ui.preferredSize[1] = 1;
+            })
+            .addPanelEnd()
+            .addStaticText(Param.PresetFilesText, 'Files', undefined, (ui, emitter) => {
+                ui.alignment = ['left', 'top'];
+            })
+            .addListBox(Param.PresetFilesList, undefined, { numberOfColumns: 2, columnWidths: [150, 200] }, (ui, emitter) => {
+                ui.alignment = ['fill', 'fill'];
+                ui.preferredSize[1] = 150;
+                for (const { path } of newSettings.preset.files) {
+                    const folder = new Folder(path);
+                    const item = ui.add('item', folder.displayName);
+                    item.subItems[0].text = path;
+                }
+                ui.addEventListener('mousedown', (e: MouseEvent) => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    // right click
+                    if (e.button === 2) {
+                        const index = Atarabi.UI.showContextMenu([{ text: 'Edit' }, { text: 'Delete' }]);
+                        if (index === 0) {
+                            emitter.notify(Event.EditPresetFile);
+                        } else if (index === 1) {
+                            emitter.notify(Event.DeletePresetFile);
+                        }
+                    }
+                });
+                emitter.addEventListener(Event.NewPresetFile, () => {
+                    const file = File.openDialog('Preset File', makeFileFilter(['ffx'])) as File;
+                    if (file) {
+                        const newItem = ui.add('item', file.displayName);
+                        newItem.subItems[0].text = file.fsName;
+                        newSettings.preset.files.push({ path: file.fsName });
+                    }
+                });
+                emitter.addEventListener(Event.EditPresetFile, () => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    const file = new File(newSettings.preset.files[selection.index].path).openDlg('Preset File', makeFileFilter(['ffx'])) as File;
+                    if (file) {
+                        selection.text = file.displayName;
+                        newSettings.preset.files[selection.index].path = selection.subItems[0].text = file.fsName;
+                    }
+                });
+                emitter.addEventListener(Event.DeletePresetFile, () => {
+                    const selection = ui.selection as ListItem;
+                    if (!selection) {
+                        return;
+                    }
+                    if (confirm(`Delete "${selection.text}"?`)) {
+                        newSettings.preset.files.splice(selection.index, 1);
+                        ui.remove(selection);
+                    }
+                });
+            })
+            .addGroup(Param.PresetFilesButtonGroup, undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'bottom'];
+                ui.orientation = 'row';
+            })
+            .addButton(Param.PresetFilesNew, 'New', undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'bottom'];
+                ui.onClick = () => {
+                    emitter.notify(Event.NewPresetFile);
+                };
+            })
+            .addButton(Param.PresetFilesDelete, 'Delete', undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'bottom'];
+                ui.onClick = () => {
+                    emitter.notify(Event.DeletePresetFile);
+                };
+            })
+            .addGroupEnd()
+            .addPanelEnd()
+            .addGroupEnd()
+            .addGroup(Param.ButtonGroup, undefined, (ui, emitter) => {
+                ui.alignment = ['fill', 'bottom'];
                 ui.orientation = 'row';
                 ui.spacing = ui.margins = 1;
             })
             .addButton(Param.OK, undefined, undefined, (ui, emitter) => {
-                ui.alignment = ['fill', 'top'];
+                ui.alignment = ['fill', 'bottom'];
                 ui.onClick = () => {
+                    update = true;
                     updateSettings(newSettings);
                     ui.window.close();
                 };
             })
             .addButton(Param.Cancel, undefined, undefined, (ui, emitter) => {
-                ui.alignment = ['fill', 'top'];
+                ui.alignment = ['fill', 'bottom'];
                 ui.onClick = () => {
                     ui.window.close();
                 };
             })
             .addGroupEnd()
             .build();
+
+        return update;
     }
 
     const WIN_PREFERRED_SIZE = [350, 200] satisfies [number, number];
@@ -671,14 +1214,14 @@
             }
         });
 
-        type EffectListBoxItem = ListItem & { item: EffectItem };
-        const effectList = win.add('listbox', undefined, undefined, { numberOfColumns: 3, columnWidths: [150, 100, 100] });
-        effectList.alignment = ['fill', 'fill'];
-        effectList.onDoubleClick = () => {
+        type ItemListBoxItem = ListItem & { item: IItem };
+        const itemList = win.add('listbox', undefined, undefined, { numberOfColumns: 3, columnWidths: [150, 100, 100] });
+        itemList.alignment = ['fill', 'fill'];
+        itemList.onDoubleClick = () => {
             apply();
         }
-        effectList.addEventListener('mousedown', (e: MouseEvent) => {
-            const selection = effectList.selection as ListItem;
+        itemList.addEventListener('mousedown', (e: MouseEvent) => {
+            const selection = itemList.selection as ListItem;
             if (!selection) {
                 return;
             }
@@ -693,26 +1236,28 @@
                 }
             }
         });
-        if (RECENT_EFFECT_LIST.length) {
+        if (RECENT_ITEM_LIST.length) {
             updateList('');
         }
 
         function moveList(offset: number) {
-            const selection = effectList.selection as ListItem;
+            const selection = itemList.selection as ListItem;
             if (!selection) {
-                if (effectList.items.length) {
-                    effectList.selection = 0;
+                if (itemList.items.length) {
+                    itemList.selection = 0;
                 }
                 return;
             }
-            effectList.selection = mod(selection.index + offset, effectList.items.length);
+            itemList.selection = mod(selection.index + offset, itemList.items.length);
         }
 
         function updateList(needle: string) {
             if (needle === SETTINGS_COMMAND) {
                 win.close();
                 app.setTimeout(() => {
-                    buildSettingsUI();
+                    if (buildSettingsUI()) {
+                        initSearcher();
+                    }
                 }, 10);
                 return;
             }
@@ -724,53 +1269,52 @@
                 return;
             }
 
-            const effectItems = needle ? searcher.search(needle).slice(0, 50) : RECENT_EFFECT_LIST;
-            effectList.removeAll();
-            for (const effectItem of effectItems) {
-                const item = effectList.add('item', effectItem.displayName) as EffectListBoxItem;
-                item.subItems[0].text = effectItem.category;
-                item.subItems[1].text = effectItem.matchName;
-                item.item = effectItem;
+            const iItems = needle ? searcher.search(needle).slice(0, 50) : RECENT_ITEM_LIST;
+            itemList.removeAll();
+            for (const iItem of iItems) {
+                const item = itemList.add('item', iItem.name) as ItemListBoxItem;
+                item.subItems[0].text = iItem.category;
+                item.subItems[1].text = iItem.detail;
+                item.item = iItem;
             }
-            if (effectList.items.length) {
-                effectList.selection = 0;
+            if (itemList.items.length) {
+                itemList.selection = 0;
             }
         }
 
-        function updateRecent(item: EffectItem) {
+        function updateRecent(item: IItem) {
             let found = false;
-            for (let i = 0, total = RECENT_EFFECT_LIST.length; i < total; i++) {
-                const it = RECENT_EFFECT_LIST[i];
-                if (it.matchName === item.matchName) {
+            for (let i = 0, total = RECENT_ITEM_LIST.length; i < total; i++) {
+                const it = RECENT_ITEM_LIST[i];
+                if (it.detail === item.detail) {
                     found = true;
                     if (i != 0) {
-                        RECENT_EFFECT_LIST.splice(i, 1);
-                        RECENT_EFFECT_LIST.unshift(item);
+                        RECENT_ITEM_LIST.splice(i, 1);
+                        RECENT_ITEM_LIST.unshift(item);
                     }
                     break;
                 }
             }
             if (!found) {
-                RECENT_EFFECT_LIST.unshift(item);
+                RECENT_ITEM_LIST.unshift(item);
             }
-            if (RECENT_EFFECT_LIST.length > RECENT_NUM) {
-                RECENT_EFFECT_LIST.length = RECENT_NUM;
+            if (RECENT_ITEM_LIST.length > RECENT_NUM) {
+                RECENT_ITEM_LIST.length = RECENT_NUM;
             }
         }
 
         function apply() {
-            let selection = effectList.selection as EffectListBoxItem;
-            if (!selection && effectList.items.length === 1) {
-                selection = effectList.items[0] as EffectListBoxItem;
+            let selection = itemList.selection as ItemListBoxItem;
+            if (!selection && itemList.items.length === 1) {
+                selection = itemList.items[0] as ItemListBoxItem;
             }
             if (!selection) {
                 win.close();
                 return;
             }
-            const item = selection.item;
-            updateRecent(item);
-            const matchName = item.matchName;
-            applyEffect(filter(layers, isAVLayer), matchName);
+            const iItem = selection.item;
+            updateRecent(iItem);
+            applyItem(layers, iItem);
             win.close();
         }
 
