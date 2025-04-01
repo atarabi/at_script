@@ -139,6 +139,10 @@ declare class MouseEvent extends UIEvent {
     initMouseEvent(eventName: string, bubble: boolean, isCancelable: boolean, view: any, detail: number, screenX: number, screenY: number, clientX: number, clientY: number, ctrlKey: boolean, altKey: boolean, shiftKey: boolean, metaKey: boolean, button: number, relatedTarget?: any): void;
 }
 
+interface ShapeLayer {
+    readonly content: PropertyGroup;
+}
+
 declare type PropertyValue = void | boolean | number | [number, number] | [number, number, number] | [number, number, number, number] | MarkerValue | Shape | TextDocument;
 
 /**
