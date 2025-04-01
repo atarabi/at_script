@@ -2,10 +2,12 @@
 	"compilerOptions": {
 		"jsx": "preserve",
 		"rootDir": "./src",
-		"outDir": "./dst"
+		"outDir": "./dst",
+		"noLib": true
 	},
 	"include": [
-		"./types/aftereffects.d.ts/ae.d.ts",
+		"./node_modules/types-for-adobe/AfterEffects/23.0/index.d.ts",
+		"./types/ae.extra.d.ts",
 		"./types/pf.constants.d.ts",
 		"./types/@script.d.ts",
 		"./types/@script.ui.d.ts",

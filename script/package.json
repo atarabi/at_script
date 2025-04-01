@@ -1,0 +1,13 @@
+{
+    "name": "at_script",
+    "version": "0.6.0",
+    "scripts": {
+      "build": "tsc",
+      "watch": "tsc --watch"
+    },
+    "author": "Atarabi",
+    "devDependencies": {
+      "types-for-adobe": "^7.2.2"
+    }
+  }
+  

@@ -1,6 +1,7 @@
 /**
- * @svg v1.1.0
+ * @svg v1.1.1
  * 
+ *      v1.1.1(2025/04/02) Switch to Types-for-Adobe
  *      v1.1.0(2025/02/01) Partial support for style tags and gradients
  */
 (() => {
@@ -3522,7 +3523,7 @@
             const layer = this._layer;
             const shapes = this.toShape(true);
             for (const shape of shapes) {
-                const mask = layer.mask.addProperty('ADBE Mask Atom');
+                const mask = layer.mask.addProperty('ADBE Mask Atom') as PropertyGroup;
                 (mask('ADBE Mask Shape') as Property).setValue(shape);
             }
             return this;

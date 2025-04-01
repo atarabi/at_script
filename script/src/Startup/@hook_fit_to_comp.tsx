@@ -1,6 +1,7 @@
 /**
- * @hook_null v1.0.1
+ * @hook_null v1.0.2
  * 
+ *      v1.0.2(2025/04/02) Switch to Types-for-Adobe
  *      v1.0.1(2024/02/13) Fix dynamic link bug
  *      v1.0.0(2023/08/28)
  */
@@ -10,7 +11,7 @@
         return;
     }
 
-    Atarabi.register.hookCommand(CommandID.FitToComp, () => {
+    Atarabi.register.hookCommand(_CommandID.FitToComp, () => {
         main();
     });
 
@@ -43,9 +44,9 @@
                     layer.selected = true;
                     const rect = layer.sourceRectAtTime(comp.time, true);
                     if (rect.width / comp.width > rect.height / comp.height) {
-                        app.executeCommand(CommandID.FitToCompWidth);
+                        app.executeCommand(_CommandID.FitToCompWidth);
                     } else {
-                        app.executeCommand(CommandID.FitToCompHeight);
+                        app.executeCommand(_CommandID.FitToCompHeight);
                     }
                     layer.selected = false;
                 }

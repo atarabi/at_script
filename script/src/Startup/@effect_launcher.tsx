@@ -1,6 +1,7 @@
 /**
- * @effect_launcher v2.2.0
+ * @effect_launcher v2.2.1
  * 
+ *      v2.2.1(2025/04/02)  Switch to Types-for-Adobe
  *      v2.2.0(2025/03/08)  Support script and preset
  *      v2.1.0(2025/02/01)  Support footage shortcut
  *      v2.0.0(2024/11/14)  Support shortcut and reduce debounce time
@@ -1321,7 +1322,7 @@
         win.onShow = () => {
             searchbox.active = true;
         };
-        win.location = [ctx.mousePosition.x, ctx.mousePosition.y];
+        win.location = [ctx.mousePosition.x, ctx.mousePosition.y] as Point;
         win.show();
     }
 
@@ -1429,7 +1430,7 @@
         win.onShow = () => {
             searchbox.active = true;
         };
-        win.location = [ctx.mousePosition.x, ctx.mousePosition.y];
+        win.location = [ctx.mousePosition.x, ctx.mousePosition.y] as Point;
         win.show();
 
         return true;

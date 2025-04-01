@@ -1,6 +1,7 @@
 /**
- * @hook_solid v1.2.0
+ * @hook_solid v1.2.1
  * 
+ *      v1.2.1(2025/04/02) Switch to Types-for-Adobe
  *      v1.2.0(2025/02/04) Support API
  *      v1.1.0(2024/05/29) Add color panel
  *      v1.0.1(2024/02/13) Fix dynamic link bug
@@ -12,7 +13,7 @@
         return;
     }
 
-    Atarabi.register.hookCommand(CommandID.NewSolid, () => {
+    Atarabi.register.hookCommand(_CommandID.NewSolid, () => {
         main();
     });
 

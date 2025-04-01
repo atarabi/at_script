@@ -1,6 +1,7 @@
 /**
- * @hook_null v1.1.0
+ * @hook_null v1.1.2
  * 
+ *      v1.1.2(2025/04/02) Switch to Types-for-Adobe
  *      v1.1.1(2025/02/16) Fix minor bug
  *      v1.1.0(2025/02/04) Support API
  *      v1.0.2(2024/05/29) Refactor
@@ -20,7 +21,7 @@
 
     const ANCHOR_POINT = AnchorPoint.LeftTop;
 
-    Atarabi.register.hookCommand(CommandID.NewNullObject, () => {
+    Atarabi.register.hookCommand(_CommandID.NewNullObject, () => {
         main();
     });
 
