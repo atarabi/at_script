@@ -1,6 +1,7 @@
 /**
- * @swatch v1.0.1
+ * @swatch v1.0.2
  * 
+ *      v1.0.2(2025/04/02) Switch to Types-for-Adobe
  *      v1.0.1(2024/05/29) Add helptip
  *      v1.0.0(2024/02/13)
  */
@@ -180,7 +181,7 @@
         }
 
         function colorButtonOnDoubleClick(this: ColorButton, ev: MouseEvent) {
-            const parent = this.parent;
+            const parent = this.parent as Window | Panel | Group;
             for (let i = 0, len = parent.children.length; i < len; i++) {
                 if (parent.children[i] === this) {
                     parent.remove(i);
@@ -233,7 +234,7 @@
         win.onResize = () => {
             win.layout.resize();
         };
-
+      
         if (win instanceof Panel) {
             win.layout.layout(true);
         } else {

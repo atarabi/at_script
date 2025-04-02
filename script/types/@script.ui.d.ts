@@ -50,7 +50,7 @@ declare namespace Atarabi {
             name?: string;
             multiline?: boolean;
             scrolling?: boolean;
-            truncate?: string;
+            truncate?: _Truncate;
         }
 
         interface EditTextOptions {
@@ -106,7 +106,7 @@ declare namespace Atarabi {
 
         type ColorUI = Omit<Button, 'onClick' | 'onDraw'> & { onChange: Function; };
 
-        type GroupUI = Panel | Group | TabbedPanel | Tab;
+        type GroupUI = Panel | Group | Tab;
 
         type ControUI = Checkbox | RadioButton | StaticText | EditText | NumberUI | Slider | ColorUI | Button;
 
@@ -173,6 +173,9 @@ declare namespace Atarabi {
             // Groups / Lists
             remove<K extends keyof Groups>(key: K, index: number | string): void;
             remove<K extends keyof Lists>(key: K, index: number | string): void;
+
+            // Window
+            close(): void;
 
             // Utility
             onInit(fn: (builder: this) => void): void;

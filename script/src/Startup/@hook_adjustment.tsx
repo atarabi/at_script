@@ -1,6 +1,7 @@
 /**
- * @hook_adjustment v1.0.1
+ * @hook_adjustment v1.0.3
  * 
+ *      v1.0.3(2025/04/02) Switch to Types-for-Adobe
  *      v1.0.2(2024/05/29) Change solid's name
  *      v1.0.1(2024/02/13) Fix dynamic link bug
  *      v1.0.0(2023/08/28)
@@ -11,7 +12,7 @@
         return;
     }
 
-    Atarabi.register.hookCommand(CommandID.NewAdjustmentLayer, () => {
+    Atarabi.register.hookCommand(_CommandID.NewAdjustmentLayer, () => {
         main();
     });
 

@@ -1,6 +1,7 @@
 /**
- * @effects_in_use v1.0.0
+ * @effects_in_use v1.0.1
  * 
+ *      v1.0.1(2025/04/02)  Switch to Types-for-Adobe
  *      v1.0.0(2023/12/05)
  */
 ((global: Panel | Global) => {
@@ -132,7 +133,7 @@
                     item.subItems[1].text = instance.name;
                     item.item = instance;
                 }
-                ui.columns.preferredWidths = [100, 100, 100];
+                (ui.columns as { titles: string[], preferredWidths: number[] }).preferredWidths = [100, 100, 100];
             });
 
             ui.onDoubleClick = () => {

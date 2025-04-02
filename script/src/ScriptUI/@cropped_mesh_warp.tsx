@@ -1,5 +1,8 @@
 /**
- * @cropped_mesh_warp v1.0.0
+ * @cropped_mesh_warp v1.0.1
+ * 
+ *      v1.0.1(2025/04/02) Switch to Types-for-Adobe
+ *      v1.0.0(2025/02/09)
  */
 ((global: Panel | Global) => {
 
@@ -108,14 +111,14 @@
                     return ([x, y]: [number, number]): [number, number] => [left + x * width, top + y * height];
                 })();
 
-                const ccPowerPin = layer.effect.addProperty(CC_POWER_PIN);
+                const ccPowerPin = layer.effect.addProperty(CC_POWER_PIN) as PropertyGroup;
                 (ccPowerPin(PowerPin.TopLeft) as Property).setValue([bound.left, bound.top]);
                 (ccPowerPin(PowerPin.TopRight) as Property).setValue([bound.left + bound.width, bound.top]);
                 (ccPowerPin(PowerPin.BottomLeft) as Property).setValue([bound.left, bound.top + bound.height]);
                 (ccPowerPin(PowerPin.BottomRight) as Property).setValue([bound.left + bound.width, bound.top + bound.height]);
                 (ccPowerPin(PowerPin.Unstretch) as Property).setValue(true);
 
-                const meshWarp = layer.effect.addProperty(MESH_WARP);
+                const meshWarp = layer.effect.addProperty(MESH_WARP) as PropertyGroup;
                 (meshWarp(MeshWarp.Rows) as Property).setValue(rows);
                 (meshWarp(MeshWarp.Columns) as Property).setValue(columns);
                 const distortionMeshValue: Atarabi.Effect.MeshWarp.DistortionMeshValue = { rows: rows + 1, columns: columns + 1, vertices: [] };

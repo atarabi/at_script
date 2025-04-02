@@ -1,6 +1,7 @@
 /**
- * @script_UI v0.2.1
+ * @script_UI v0.2.2
  * 
+ *      v0.2.2(2025/04/02)  Switch to Types-for-Adobe
  *      v0.2.1(2024/11/14)  Fix cache bug of FuzzySearch
  *      v0.2.0(2024/02/13)  Add custom
  *      v0.1.0(2023/08/28)
@@ -20,7 +21,6 @@
     const isBoolean = (value: any): value is boolean => typeof value === 'boolean';
 
     const isFunction = (value: any): value is Function => typeof value === 'function';
-
 
     /*
         UI BUilder
@@ -538,7 +538,8 @@
                         break;
                     case 'tabbedpanel':
                         {
-                            const ui = container = value.ui = container.add('tabbedpanel', undefined, isString(value.text) ? value.text : value.key, value.options);
+                            const ui = value.ui = container.add('tabbedpanel', undefined, isString(value.text) ? value.text : value.key, value.options);
+                            container = ui as any as Panel;
                             if (value.uiFn) {
                                 value.uiFn(ui, this);
                             }
@@ -557,7 +558,7 @@
                         break;
                     case 'tab':
                         {
-                            const ui = container = value.ui = container.add('tab', undefined, isString(value.text) ? value.text : value.key, value.options);
+                            const ui = container = value.ui = (container as any as TabbedPanel).add('tab', undefined, isString(value.text) ? value.text : value.key, value.options);
                             if (value.uiFn) {
                                 value.uiFn(ui, this);
                             }
