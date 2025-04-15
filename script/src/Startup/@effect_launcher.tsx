@@ -1,6 +1,7 @@
 /**
- * @effect_launcher v2.2.1
+ * @effect_launcher v2.2.2
  * 
+ *      v2.2.2(2025/04/16)  Fix a bug where a script wasn’t executed
  *      v2.2.1(2025/04/02)  Switch to Types-for-Adobe
  *      v2.2.0(2025/03/08)  Support script and preset
  *      v2.1.0(2025/02/01)  Support footage shortcut
@@ -602,6 +603,9 @@
         switch (iItem.type) {
             case Type.Effect:
                 applyEffect(filter(layers, isAVLayer), iItem.detail);
+                break;
+            case Type.Script:
+                applyScript(new File(iItem.path));
                 break;
             case Type.Preset:
                 applyPreset(layers, new File(iItem.path));
