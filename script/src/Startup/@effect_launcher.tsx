@@ -460,9 +460,8 @@
     }
 
     function getActiveLayers(): Layer[] {
-        const activeLayer = Atarabi.layer.getActiveLayer();
-        const comp = activeLayer ? activeLayer.containingComp : Atarabi.comp.getMostRecentlyUsedComp();
-        if (comp) {
+        const comp = app.project.activeItem;
+        if (comp instanceof CompItem) {
             return comp.selectedLayers.slice();
         }
         return [];
