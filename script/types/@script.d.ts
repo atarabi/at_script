@@ -779,7 +779,7 @@ declare namespace Atarabi {
             mousePosition: Position;
         }
 
-        type HookFunc = (context: Keyboard.HookContext) => boolean;
+        type HookFunc = (context: Mouse.HookContext) => boolean;
     }
 
     interface Image_ {
