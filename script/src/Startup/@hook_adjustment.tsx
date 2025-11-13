@@ -93,6 +93,9 @@
                 solidLayer.outPoint = outPoint;
                 solidLayer.moveBefore(topLayer);
             }
+            app.setTimeout(() => {
+                solidLayer.selected = true;
+            }, 0);
         } catch (e) {
             alert(e);
         } finally {

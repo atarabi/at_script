@@ -51,7 +51,10 @@
                     nullLayer.outPoint = topLayer.outPoint;
                 }
             }
-        } catch(e) {
+            app.setTimeout(() => {
+                nullLayer.selected = true;
+            }, 0);
+        } catch (e) {
             alert(e);
         } finally {
             app.endUndoGroup();
