@@ -29,6 +29,8 @@ Keyboard.hook()
 
 .. versionadded:: 0.2.0
 
+.. versionchanged:: 0.6.0
+
 Keyboard.unhook()
 -----------------
 

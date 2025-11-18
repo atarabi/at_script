@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Mouse &#8212; @script 0.5.1 documentation</title>
+    <title>Mouse &#8212; @script 0.6.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=3e29d2c0" />
     <link rel="stylesheet" type="text/css" href="../../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../../_static/documentation_options.js?v=df71c269"></script>
+    <script src="../../_static/documentation_options.js?v=e976989b"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/code-tabs.js?v=c983d12e"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="../Layer/index.html" title="Layer"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.6.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Mouse</a></li> 
       </ul>
@@ -95,6 +95,27 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
 </div>
 </div></div><div class="versionadded">
 <p><span class="versionmodified added">Added in version 0.3.0.</span></p>
+</div>
+<div class="tabs docutils container" data-tabgroup="">
+<ul class="tabbar">
+<li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
+TypeScript</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
+JavaScript</li></ul><div class="tab codetab selected" data-id="0">
+<div class="highlight-TypeScript notranslate"><div class="highlight"><pre><span></span><span class="c1">// 左クリックを押して離すととコンポをつくる。</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">uuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">mouse</span><span class="p">.</span><span class="nx">hook</span><span class="p">({</span><span class="w"> </span><span class="nx">button</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Left&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">eventType</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Up&#39;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">ctx</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">addComp</span><span class="p">(</span><span class="s1">&#39;Comp&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div><div class="tab codetab" data-id="1">
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="c1">// 左クリックを押して離すととコンポをつくる。</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">uuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Atarabi</span><span class="p">.</span><span class="nx">mouse</span><span class="p">.</span><span class="nx">hook</span><span class="p">({</span><span class="w"> </span><span class="nx">button</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Left&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">eventType</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Up&#39;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">app</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">addComp</span><span class="p">(</span><span class="s1">&#39;Comp&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div></div><div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.6.0.</span></p>
 </div>
 </section>
 <section id="mouse-unhook">
@@ -257,7 +278,7 @@ JavaScript</li></ul><div class="tab codetab selected" data-id="0">
         <li class="right" >
           <a href="../Layer/index.html" title="Layer"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.5.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.6.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Mouse</a></li> 
       </ul>

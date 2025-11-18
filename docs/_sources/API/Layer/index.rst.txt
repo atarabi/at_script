@@ -36,14 +36,14 @@ Layer.getID()
 
         const layer = Atarabi.layer.getActiveLayer();
         if (layer) {
-            alert(Atarabi.layer.getID(layer));
+            alert(Atarabi.layer.getID(layer).toString());
         }
 
     .. code-tab:: JavaScript
 
         var layer = Atarabi.layer.getActiveLayer();
         if (layer) {
-            alert(Atarabi.layer.getID(layer));
+            alert(Atarabi.layer.getID(layer).toString());
         }
 
 Layer.getBounds()

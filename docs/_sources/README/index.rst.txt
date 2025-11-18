@@ -63,6 +63,26 @@ Atarabi.version
 
 ``version: string;``
 
+v0.6.0(2025/11/18)
+^^^^^^^^^^^^^^^^^^^^
+
+Breaking Changes
+"""""""""""""""""
+- 型定義を独自のものからTypes-for-Adobeのものに変更
+
+Improve
+"""""""""""
+- Mouse.hook()において、Mouse Downだけでなく、Mouse Upにもhook出来るようにした
+- Keyboard.hook(), Mouse.hook()において、何も返さなければデフォルトの処理を実行するようにした
+  
+Script
+"""""""""""
+- @cropped_mesh_warpの追加
+- @paste_clipboardで連番ファイル読み込み時の問題を修正
+- @effect_searchの設定ダイアログで、各項目を修正出来るようにした
+- @effect_launcherでスクリプトとプリセットを扱えるようにした
+- @hook_null, @hook_solid, @hook_adjustmentでレイヤーを追加した場合にプロパティパネルが更新されない問題の修正
+
 v0.5.1(2025/02/04)
 ^^^^^^^^^^^^^^^^^^^^
 

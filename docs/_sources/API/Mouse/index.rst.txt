@@ -50,6 +50,24 @@ Mouse.hook()
 
 .. versionadded:: 0.3.0
 
+.. tabs::
+
+    .. code-tab:: TypeScript
+
+        // 左クリックを押して離すととコンポをつくる。
+        const uuid = Atarabi.mouse.hook({ button: 'Left', eventType: 'Up' }, ctx => {
+            app.project.items.addComp('Comp', 1000, 1000, 1, 100, 30);
+        });
+
+    .. code-tab:: JavaScript
+        
+        // 左クリックを押して離すととコンポをつくる。
+        var uuid = Atarabi.mouse.hook({ button: 'Left', eventType: 'Up' }, function (ctx) {
+            app.project.items.addComp('Comp', 1000, 1000, 1, 100, 30);
+        });
+
+.. versionchanged:: 0.6.0
+
 Mouse.unhook()
 -----------------
 

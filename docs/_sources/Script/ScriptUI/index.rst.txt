@@ -16,3 +16,4 @@ ScriptUI
    @swatch
    @proxy_maker
    @script_panel
+   @cropped_mesh_warp
