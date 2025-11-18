@@ -1,6 +1,7 @@
 /**
- * @hook_solid v1.2.1
+ * @hook_solid v1.2.2
  * 
+ *      v1.2.2(2025/11/18) Fix Property Panel activation issue
  *      v1.2.1(2025/04/02) Switch to Types-for-Adobe
  *      v1.2.0(2025/02/04) Support API
  *      v1.1.0(2024/05/29) Add color panel

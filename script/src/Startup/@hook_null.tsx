@@ -1,6 +1,7 @@
 /**
- * @hook_null v1.1.2
+ * @hook_null v1.1.3
  * 
+ *      v1.1.3(2025/11/18) Fix Property Panel activation issue
  *      v1.1.2(2025/04/02) Switch to Types-for-Adobe
  *      v1.1.1(2025/02/16) Fix minor bug
  *      v1.1.0(2025/02/04) Support API
