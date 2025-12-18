@@ -117,8 +117,8 @@ interface TabbedPanel {
 }
 
 interface ScriptUIGraphics {
-    BrushType: { SOLID_COLOR: number; THEME_COLOR: number; };
-    PenType: { SOLID_COLOR: number; THEME_COLOR: number; };
+    BrushType: { SOLID_COLOR: _BrushOrPenType; THEME_COLOR: _BrushOrPenType; };
+    PenType: { SOLID_COLOR: _BrushOrPenType; THEME_COLOR: _BrushOrPenType; };
 }
 
 declare class MouseEvent extends UIEvent {

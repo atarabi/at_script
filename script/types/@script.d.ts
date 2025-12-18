@@ -201,6 +201,9 @@ declare namespace Atarabi {
 
         getMaskBounds(layer: AVLayer, options?: { time?: number; }): Rect;
 
+        // threshold: [0, 1]
+        getConnectedBounds(layer: AVLayer, options?: { time?: number; connectivity?: 4 | 8; threshold?: number; }): Rect[];
+
         // default: binary=false
         getMoments(layer: AVLayer, options?: { time?: number; binary?: boolean; }): Moments;
 
@@ -743,7 +746,7 @@ declare namespace Atarabi {
             mousePosition: { x: number; y: number; };
         }
 
-        type HookFunc = (context: Keyboard.HookContext) => boolean;
+        type HookFunc = (context: Keyboard.HookContext) => boolean | void; // when true is returned, the default handling will be suppressed
     }
 
     interface Mouse {
@@ -765,9 +768,12 @@ declare namespace Atarabi {
 
         type Button = 'Left' | 'Middle' | 'Right';
 
+        type EventType = 'Down' | 'Up';
+
         type Click = {
             button: Button;
-            count: 1 | 2;
+            count?: 1 | 2; // default: 1
+            eventType?: EventType; // default: Down
             altKey?: boolean;
             ctrlKey?: boolean;
             cmdKey?: boolean;
@@ -779,7 +785,7 @@ declare namespace Atarabi {
             mousePosition: Position;
         }
 
-        type HookFunc = (context: Mouse.HookContext) => boolean;
+        type HookFunc = (context: Mouse.HookContext) => boolean | void; // when true is returned, the default handling will be suppressed
     }
 
     interface Image_ {
