@@ -9,7 +9,7 @@ App.colorPicker()
 
 カラーピッカーを呼び出します。キャンセルされた場合は **null** が返ります。
 
-参照: `PF_AppColorPickerDialog <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_AppColorPickerDialog#pf-appsuite>`_
+参照: `PF_AppColorPickerDialog <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions/?h=PF_AppColorPickerDialog#pf_appsuite>`_
 
 .. tabs::
 
@@ -29,7 +29,7 @@ App.getColor()
 
 AEのUIの各要素の色を取得する。
 
-参照: `PF_AppGetColor <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_AppGetColor#pf-appsuite>`_
+参照: `PF_AppGetColor <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions/?h=PF_AppGetColor#pf_appsuite>`_
 
 .. tabs::
 
@@ -49,7 +49,7 @@ App.getBackgroundColor()
 
 AEの背景色を取得する。
 
-参照: `PF_AppGetBgColor <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_AppGetBgColor#pf-appsuite>`_
+参照: `PF_AppGetBgColor <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions/?h=PF_AppGetBgColor#pf_appsuite>`_
 
 .. tabs::
 
@@ -68,7 +68,7 @@ App.setProjectDirty()
 
 プロジェクトを **dirty** (プロジェクトが最後に保存したときから変更されている)に設定する。
 
-参照: `PF_SetProjectDirty <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_SetProjectDirty#pf-advappsuite2>`_
+参照: `PF_SetProjectDirty <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions/?h=PF_SetProjectDirty#pf_advappsuite2>`_
 
 .. tabs::
 
@@ -87,7 +87,7 @@ App.saveBackgroundState()
 
 ``saveBackgroundState(): void;``
 
-参照: `PF_SaveBackgroundState <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_SaveBackgroundState#pf-advappsuite2>`_
+参照: `PF_SaveBackgroundState <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions/?h=PF_SaveBackgroundState#pf_advappsuite2>`_
 
 .. tabs::
 
@@ -106,7 +106,7 @@ App.forceForeground()
 
 ``forceForeground(): void;``
 
-参照: `PF_ForceForeground <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_ForceForeground#pf-advappsuite2>`_
+参照: `PF_ForceForeground <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions/?h=PF_ForceForeground#pf_advappsuite2>`_
 
 .. tabs::
 
@@ -125,7 +125,7 @@ App.restoreBackgroundState()
 
 ``restoreBackgroundState(): void;``
 
-参照: `PF_RestoreBackgroundState <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_RestoreBackgroundState#pf-advappsuite2>`_
+参照: `PF_RestoreBackgroundState <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions/?h=PF_RestoreBackgroundState#pf_advappsuite2>`_
 
 .. tabs::
 
@@ -144,7 +144,7 @@ App.refreshAllWindows()
 
 ``refreshAllWindows(): void;``
 
-参照: `PF_RefreshAllWindows <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_RefreshAllWindows#pf-advappsuite2>`_
+参照: `PF_RefreshAllWindows <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions/?h=PF_RefreshAllWindows#pf_advappsuite2>`_
 
 .. tabs::
 
@@ -165,7 +165,7 @@ App.getMainHWND()
 
 AEのHWNDを取得する(Windowsのみ)。
 
-参照: `AEGP_GetMainHWND <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetMainHWND#aegp-utilitysuite6>`_
+参照: `AEGP_GetMainHWND <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites/?h=AEGP_GetMainHWND#aegp_utilitysuite6>`_
 
 .. tabs::
 

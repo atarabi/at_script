@@ -28,7 +28,7 @@ UI.progress()
 
 PF_CreateNewAppProgressDialog(CC2014.1で追加されている)を用いて、プログレスバーを表示する。
 
-参照: `PF_CreateNewAppProgressDialog <https://ae-plugins.docsforadobe.dev/intro/whats-new.html?highlight=PF_CreateNewAppProgressDialog#what-s-new-in-cc-2014-1-13-1>`_
+参照: `PF_CreateNewAppProgressDialog <https://ae-plugins.docsforadobe.dev/intro/whats-new/?h=PF_CreateNewAppProgressDialog#whats-new-in-cc-20141-131>`_
 参照: `PF_CreateNewAppProgressDialog - how to use it? <https://community.adobe.com/t5/after-effects-discussions/pf-createnewappprogressdialog-how-to-use-it/td-p/7987142>`_
 
 .. tabs::

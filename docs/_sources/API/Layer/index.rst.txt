@@ -9,7 +9,7 @@ Layer.getActiveLayer()
 
 タイムラインが表示されているコンポの中で選択されているレイヤーを返す。
 
-参照: `AEGP_GetActiveLayer <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetActiveLayer#aegp-layersuite9>`_
+参照: `AEGP_GetActiveLayer <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites/?h=AEGP_GetActiveLayer#aegp_layersuite9>`_
 
 .. tabs::
 
@@ -28,7 +28,7 @@ Layer.getID()
 
 レイヤーのIDを取得する。スクリプトでもCC2022からサポートされた。
 
-参照: `Layer.id <https://ae-scripting.docsforadobe.dev/layers/layer.html#layer-id>`_
+参照: `Layer.id <https://ae-scripting.docsforadobe.dev/layer/layer/#layerid>`_
 
 .. tabs::
 
@@ -82,7 +82,7 @@ Layer.getMaskBounds()
 
 マスクによって囲まれた範囲を取得する。
 
-参照: `AEGP_GetLayerMaskedBounds <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetLayerMaskedBounds#aegp-layersuite9>`_
+参照: `AEGP_GetLayerMaskedBounds <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites/?h=AEGP_GetLayerMaskedBounds#aegp_layersuite9>`_
 
 .. tabs::
 

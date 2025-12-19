@@ -104,8 +104,8 @@ Property.userChangedParam()
 
 対象のエフェクトのあるパラメータに対して、 **PF_Cmd_USER_CHANGED_PARAM** コマンドを発火させる。パラメータには **PF_ParamFlag_SUPERVISE** フラグが付されているものがあり（よくあるのはボタンやドロップダウンリストでプリセットを選択させる形式のもの [#uCP1]_ ）、このパラメータが変動した際に、イベントが発火するようになっている。そういったパラメータに対して、能動的に発火させる。
 
-参照: `PF_Cmd_USER_CHANGED_PARAM <https://ae-plugins.docsforadobe.dev/effect-details/parameter-supervision.html?highlight=PF_Cmd_USER_CHANGED_PARAM#parameter-supervision>`_
-参照: `PF_ParamFlag_SUPERVISE <https://ae-plugins.docsforadobe.dev/effect-basics/PF_ParamDef.html?highlight=PF_ParamFlag_SUPERVISE#parameter-flags>`_
+参照: `PF_Cmd_USER_CHANGED_PARAM <https://ae-plugins.docsforadobe.dev/effect-details/parameter-supervision/?h=PF_Cmd_USER_CHANGED_PARAM#parameter-supervision>`_
+参照: `PF_ParamFlag_SUPERVISE <https://ae-plugins.docsforadobe.dev/effect-basics/PF_ParamDef/?h=PF_ParamFlag_SUPERVISE#parameter-flags>`_
 
 .. [#uCP1] 標準プラグインの **Gradient Ramp**, **Tint**, **Detail-preserving Upscale** などのボタンに対しては発火しなかった。
 

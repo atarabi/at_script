@@ -9,7 +9,7 @@ Register.insertCommand()
 
 新たなコマンドを作る。
 
-参照: `AEGP_InsertMenuCommand <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_InsertMenuCommand#aegp-commandsuite1>`_
+参照: `AEGP_InsertMenuCommand <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites/?h=AEGP_InsertMenuCommand#aegp_commandsuite1>`_
 
 .. tabs::
 
@@ -70,7 +70,7 @@ Register.hookCommand()
 
 既存のコマンドをフックする。
 
-参照: `AEGP_RegisterCommandHook <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_RegisterCommandHook#aegp-registersuites5>`_
+参照: `AEGP_RegisterCommandHook <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites/?h=AEGP_RegisterCommandHook#aegp_registersuite5>`_
 
 .. tabs::
 
@@ -172,7 +172,7 @@ Register.importFlavor()
 
 拡張子を登録し、その拡張子のファイルを読み込むと、そのファイルの内容に基づいて、例えばコンポを構築するみたいなことが出来る機能がある。あまり使い道は思いつかない。AEにドラッグ・アンド・ドロップして実行できるのが利点か。
 
-参照: `File Import Manager Suite <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_FIMSuite3#aegp-fimsuite3>`_
+参照: `File Import Manager Suite <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites/?h=AEGP_FIMSuite3#aegp_fimsuite3>`_
 
 適当にzjfという拡張子をもつ以下のような仕様を持つファイルを考える。
 

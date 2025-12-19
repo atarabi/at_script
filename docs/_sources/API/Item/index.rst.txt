@@ -9,7 +9,7 @@ Item.getActiveItem()
 
 **app.project.activeItem** に同じ。なぜ入れたのか分からないので、将来的に取り除くやも。
 
-参照: `AEGP_GetActiveItem <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetActiveItem#aegp-itemsuite9>`_
+参照: `AEGP_GetActiveItem <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites/?h=AEGP_GetActiveItem#aegp_itemsuite9>`_
 
 Item.touchActiveItem()
 -----------------------
@@ -18,7 +18,7 @@ Item.touchActiveItem()
 
 アクティブなアイテムが更新されたとAEに通知する。
 
-参照: `PF_TouchActiveItem <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_TouchActiveItem#pf-advitemsuite1>`_
+参照: `PF_TouchActiveItem <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions/?h=PF_TouchActiveItem#pf_advitemsuite1>`_
 
 .. tabs::
 
@@ -39,7 +39,7 @@ Item.moveTimeStepActiveItem()
 
 アクティブなアイテムの現在フレームを指定ステップ数だけ前後に移動させる。
 
-参照: `PF_MoveTimeStepActiveItem <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions.html?highlight=PF_MoveTimeStepActiveItem#pf-advitemsuite1>`_
+参照: `PF_MoveTimeStepActiveItem <https://ae-plugins.docsforadobe.dev/effect-details/useful-utility-functions/?h=PF_MoveTimeStepActiveItem#pf_advitemsuite1>`_
 
 .. tabs::
 
@@ -60,7 +60,7 @@ Item.getFootageSoundDataFormat()
 
 アイテムの音声のサンプルレート、モノラルorステレオなどを取得する。
 
-参照: `AEGP_GetFootageSoundDataFormat <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetFootageSoundDataFormat#aegp-footagesuite5>`_
+参照: `AEGP_GetFootageSoundDataFormat <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites/?h=AEGP_GetFootageSoundDataFormat#aegp_footagesuite5>`_
 
 .. tabs::
 

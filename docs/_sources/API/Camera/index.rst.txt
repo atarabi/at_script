@@ -9,7 +9,7 @@ Camera.getDefaultCameraDistanceToImagePlane()
 
 コンポのデフォルトのカメラの位置からイメージプレーンまでの距離を取得する。
 
-参照: `AEGP_GetDefaultCameraDistanceToImagePlane <https://ae-plugins.docsforadobe.dev/artisans/artisan-data-types.html?highlight=AEGP_GetDefaultCameraDistanceToImagePlane#aegp-camerasuite2>`_
+参照: `AEGP_GetDefaultCameraDistanceToImagePlane <https://ae-plugins.docsforadobe.dev/artisans/artisan-data-types/?h=AEGP_GetDefaultCameraDistanceToImagePlane#aegp_camerasuite2>`_
 
 .. tabs::
 
@@ -36,7 +36,7 @@ Camera.getFilmSize()
 
 カメラのフィルムサイズを取得する。
 
-参照: `AEGP_GetCameraFilmSize <https://ae-plugins.docsforadobe.dev/artisans/artisan-data-types.html?highlight=AEGP_GetCameraFilmSize#aegp-camerasuite2>`_
+参照: `AEGP_GetCameraFilmSize <https://ae-plugins.docsforadobe.dev/artisans/artisan-data-types/?h=AEGP_GetCameraFilmSize#aegp_camerasuite2>`_
 
 .. tabs::
 
@@ -69,7 +69,7 @@ Camera.setFilmSize()
 
 カメラのフィルムサイズを設定する。
 
-参照: `AEGP_SetCameraFilmSize <https://ae-plugins.docsforadobe.dev/artisans/artisan-data-types.html?highlight=AEGP_SetCameraFilmSize#aegp-camerasuite2>`_
+参照: `AEGP_SetCameraFilmSize <https://ae-plugins.docsforadobe.dev/artisans/artisan-data-types/?h=AEGP_SetCameraFilmSize#aegp_camerasuite2>`_
 
 .. tabs::
 

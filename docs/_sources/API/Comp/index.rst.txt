@@ -9,7 +9,7 @@ Comp.getMostRecentlyUsedComp()
 
 コンポの中で、直近にタイムラインを開いていたものを取得する。
 
-参照: `AEGP_GetMostRecentlyUsedComp <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetMostRecentlyUsedComp#aegp-compsuite11>`_
+参照: `AEGP_GetMostRecentlyUsedComp <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites/?h=AEGP_GetMostRecentlyUsedComp#aegp_compsuite11>`_
 
 .. tabs::
 
@@ -28,7 +28,7 @@ Comp.getShowLayerNameOrSourceName()
 
 あるコンポのタイムラインタブでレイヤー名が表示されているかソース名が表示されているかを調べる。
 
-参照: `AEGP_GetShowLayerNameOrSourceName <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetShowLayerNameOrSourceName#aegp-compsuite11>`_
+参照: `AEGP_GetShowLayerNameOrSourceName <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites/?h=AEGP_GetShowLayerNameOrSourceName#aegp_compsuite11>`_
 
 .. tabs::
 
@@ -53,7 +53,7 @@ Comp.setShowLayerNameOrSourceName()
 
 ``setShowLayerNameOrSourceName(comp: CompItem, set: boolean): void;``
 
-参照: `AEGP_SetShowLayerNameOrSourceName <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_SetShowLayerNameOrSourceName#aegp-compsuite11>`_
+参照: `AEGP_SetShowLayerNameOrSourceName <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites/?h=AEGP_SetShowLayerNameOrSourceName#aegp_compsuite11>`_
 
 .. tabs::
 
@@ -80,7 +80,7 @@ Comp.getShowBlendModes()
 
 あるコンポのタイムラインタブでブレンドモードが表示されているかどうかを調べる。
 
-参照: `AEGP_GetShowBlendModes <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_GetShowBlendModes#aegp-compsuite11>`_
+参照: `AEGP_GetShowBlendModes <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites/?h=AEGP_GetShowBlendModes#aegp_compsuite11>`_
 
 .. tabs::
 
@@ -105,7 +105,7 @@ Comp.setShowBlendModes()
 
 ``setShowBlendModes(comp: CompItem, set: boolean): void;``
 
-参照: `AEGP_SetShowBlendModes <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites.html?highlight=AEGP_SetShowBlendModes#aegp-compsuite11>`_
+参照: `AEGP_SetShowBlendModes <https://ae-plugins.docsforadobe.dev/aegps/aegp-suites/?h=AEGP_SetShowBlendModes#aegp_compsuite11>`_
 
 .. tabs::
 
