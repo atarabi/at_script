@@ -560,6 +560,8 @@ declare namespace Atarabi {
     }
 
     interface Property_ {
+        getLayer(property: Property): Layer;
+
         // effect's property only
         getParamDef(property: Property): ParamDef;
 
