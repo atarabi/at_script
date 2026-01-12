@@ -121,10 +121,10 @@
             const size = this.size;
             const g = this.graphics;
             g.rectPath(0, 0, size[0], size[1]);
-            g.fillPath(g.newBrush(g.BrushType.SOLID_COLOR, clampColor(this.color)));
+            g.fillPath(g.newBrush(g.BrushType.SOLID_COLOR as any, clampColor(this.color)));
             if (currentColorButton === this) {
-                g.strokePath(g.newPen(g.PenType.SOLID_COLOR, black, 6));
-                g.strokePath(g.newPen(g.PenType.SOLID_COLOR, white, 2));
+                g.strokePath(g.newPen(g.PenType.SOLID_COLOR as any, black, 6));
+                g.strokePath(g.newPen(g.PenType.SOLID_COLOR as any, white, 2));
             }
         }
         function updateColorButtons() {

@@ -6,15 +6,8 @@
 		"noLib": true
 	},
 	"include": [
-		"./node_modules/types-for-adobe/AfterEffects/23.0/index.d.ts",
-		"./types/ae.extra.d.ts",
-		"./types/pf.constants.d.ts",
-		"./types/@script.d.ts",
-		"./types/@script.ui.d.ts",
-		"./types/@script.svg.d.ts",
-		"./types/@script.at.d.ts",
-		"./types/@script.api.d.ts",
-		"./types/@script.rifx.d.ts",
+		"./node_modules/types-for-adobe/AfterEffects/24.6/index.d.ts",
+		"./types/**/*.d.ts",
 		"./src/**/*.tsx"
 	]
 }

@@ -708,7 +708,7 @@
                                     color[1] *= 0.1;
                                     color[2] *= 0.1;
                                 }
-                                const brush = graphics.newBrush(graphics.BrushType.SOLID_COLOR, color);
+                                const brush = graphics.newBrush(graphics.BrushType.SOLID_COLOR as any, color);
                                 graphics.rectPath(0, 0, size[0], size[1]);
                                 graphics.fillPath(brush);
                             };

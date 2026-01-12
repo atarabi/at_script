@@ -177,7 +177,7 @@
             const size = this.size;
             const g = this.graphics;
             g.rectPath(0, 0, size[0], size[1]);
-            g.fillPath(g.newBrush(g.BrushType.SOLID_COLOR, [this.color[0] / 255, this.color[1] / 255, this.color[2] / 255]));
+            g.fillPath(g.newBrush(g.BrushType.SOLID_COLOR as any, [this.color[0] / 255, this.color[1] / 255, this.color[2] / 255]));
         }
 
         function colorButtonOnDoubleClick(this: ColorButton, ev: MouseEvent) {
