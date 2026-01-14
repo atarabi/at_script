@@ -29,23 +29,23 @@
             if (!expressionError) {
                 continue;
             }
-
+            let message = null;
             try {
-                const message = Atarabi.JSON.parse(extractMessage(expressionError));
-                interpretMessage(prop, message);
+                message = Atarabi.JSON.parse(extractMessage(expressionError));
             } catch (e) {
-                //pass
+                continue;
             }
+            interpretMessage(prop, message);
         }
     }
 
     type DispatchFunc = (prop: Property, message: Atarabi.Expression.Action) => void;
-    type HandlerMap = Record<string, DispatchFunc>;
+    type HandlerMap<Key extends string = string> = Record<Key, DispatchFunc>;
     type ScopedHandlers = Record<string, HandlerMap>;
 
     const REGISTERED_HANDLERS: ScopedHandlers = {};
 
-    function register(scope: string, handlers: HandlerMap) {
+    function register<Actions extends { scope: string; action: string; }>(scope: Actions["scope"], handlers: HandlerMap<Actions["action"]>) {
         const target = REGISTERED_HANDLERS[scope];
         if (!target) {
             REGISTERED_HANDLERS[scope] = handlers;
@@ -106,8 +106,39 @@
         }
     }
 
-    register('@control', {
-        'create': (prop: Property, message: Atarabi.Expression.Control.CreateAction) => {
+    register<Atarabi.Expression.Effect.Actions>('@effect', {
+        'createEffect': (prop: Property, message: Atarabi.Expression.Effect.CreateEffectAction) => {
+            const layer = getLayerOf(prop);
+            if (!isAVLayer(layer)) {
+                return;
+            }
+            const settings = message.payload;
+            if (!layer.effect.canAddProperty(settings.matchName)) {
+                throw new Error(`Unable to add "${settings.matchName}"`);
+            }
+
+            try {
+                app.beginUndoGroup(`${SCRIPT_NAME}: ${message.scope}::${message.action}`);
+                const effect = layer.effect.addProperty(settings.matchName) as PropertyGroup;
+                effect.name = settings.name;
+                if (settings.parameters != null) {
+                    for (const key in settings.parameters) {
+                        const param = settings.parameters[key];
+                        if (param.value != null) {
+                            (effect(key) as Property).setValue(param.value);
+                        }
+                        if (typeof param.expression === 'string') {
+                            (effect(key) as Property).expression = param.expression;
+                        }
+                    }
+                }
+            } catch (e) {
+                alert(e);
+            } finally {
+                app.endUndoGroup();
+            }
+        },
+        'createExpressionControl': (prop: Property, message: Atarabi.Expression.Effect.CreateExpressionControlAction) => {
             const layer = getLayerOf(prop);
             if (!isAVLayer(layer)) {
                 return;
@@ -214,11 +245,7 @@
                 app.endUndoGroup();
             }
         },
-
-    });
-
-    register('@pseudo', {
-        'create': (prop: Property, message: Atarabi.Expression.Pseudo.CreateAction) => {
+        'createPseudo': (prop: Property, message: Atarabi.Expression.Effect.CreatePseudoAction) => {
             const layer = getLayerOf(prop);
             if (!isAVLayer(layer)) {
                 return;
@@ -233,6 +260,181 @@
                 app.endUndoGroup();
             }
         },
-    })
+    });
+
+    function findCallStart(src: string, pos: number): number {
+        let i = pos;
+        let lastValid = pos;
+
+        type Prev = 1 | 2; // 1=ident, 2=dot
+        let prev: Prev = 1;
+        let inSpace = false;
+
+        while (i > 0) {
+            const c = src[i - 1];
+            if (c === ' ' || c === '\t' || c === '\n' || c === '\r') {
+                inSpace = true;
+                i--;
+                continue;
+            }
+            if (/[A-Za-z0-9_$]/.test(c)) {
+                if (inSpace && prev === 1) break; // ident space ident
+                prev = 1;
+                inSpace = false;
+                lastValid = i - 1;
+                i--;
+                continue;
+            }
+            if (c === '.') {
+                if (inSpace && prev === 2) break; // dot space dot
+                prev = 2;
+                inSpace = false;
+                lastValid = i - 1;
+                i--;
+                continue;
+            }
+            break;
+        }
+
+        return lastValid;
+    }
+
+    function findCallEnd(src: string, pos: number): number | null {
+        let i = pos;
+        while (i < src.length && src[i] !== '(') i++;
+        if (src[i] !== '(') return null;
+        let depth = 0;
+        for (; i < src.length; i++) {
+            if (src[i] === '(') depth++;
+            else if (src[i] === ')') {
+                depth--;
+                if (depth === 0) return i + 1;
+            }
+        }
+        return null;
+    }
+
+    function findCallOffset(src: string, line: number, column: number): number {
+        let i = 0;
+        let l = 0;
+        while (i < src.length && l < line) {
+            const c = src[i++];
+            if (c === '\n') {
+                l++;
+            } else if (c === '\r') {
+                l++;
+                if (src[i] === '\n') i++;
+            }
+        }
+        return i + column;
+    }
+
+    function replaceCall(src: string, position: [number, number], replacement: string) {
+        const [line, column] = position;
+        const offset = findCallOffset(src, line, column);
+        const start = findCallStart(src, offset);
+        const end = findCallEnd(src, offset);
+        return src.slice(0, start) + replacement + `/*${src.slice(start, end)}*/` + src.slice(end);
+    }
+
+    function getFavoriteFontFamilyList() {
+        const list = app.fonts.favoriteFontFamilyList;
+        if (list == null) {
+            return [];
+        }
+        return list;
+    }
+
+    function getAllFonts() {
+        const fontFamilies: string[] = [];
+        const done: Record<string, boolean> = {};
+        for (const font of app.fonts.allFonts) {
+            const familyName = font[0].familyName;
+            if (done[familyName]) {
+                continue;
+            }
+            done[familyName] = true;
+            fontFamilies.push(font[0].familyName);
+        }
+        return fontFamilies;
+    }
+
+    register<Atarabi.Expression.Font.Actions>('@font', {
+        'bakeFavorites': (prop: Property, message: Atarabi.Expression.Font.BakeFavoritesAction) => {
+            try {
+                app.beginUndoGroup(`${SCRIPT_NAME}: ${message.scope}::${message.action}`);
+                const expression = prop.expression;
+                prop.expression = replaceCall(expression, message.payload, Atarabi.JSON.stringify(getFavoriteFontFamilyList()));
+            } catch (e) {
+                alert(e);
+            } finally {
+                app.endUndoGroup();
+            }
+        },
+        'bakeAll': (prop: Property, message: Atarabi.Expression.Font.BakeAllAction) => {
+            try {
+                app.beginUndoGroup(`${SCRIPT_NAME}: ${message.scope}::${message.action}`);
+                const expression = prop.expression;
+                prop.expression = replaceCall(expression, message.payload, Atarabi.JSON.stringify(getAllFonts()));
+            } catch (e) {
+                alert(e);
+            } finally {
+                app.endUndoGroup();
+            }
+        },
+    });
+
+    function getPropertyFromIndices(comp: CompItem, indices: number[]): Property | PropertyGroup {
+        let property: Property | PropertyGroup = comp.layer(indices[0]);
+        for (let i = 1; i < indices.length; i++) {
+            property = (property as PropertyGroup)(indices[i]);
+        }
+        return property;
+    }
+
+    function getValue(prop: Property | PropertyGroup, time: number, preExpression: boolean) {
+        if (prop instanceof PropertyGroup || prop instanceof MaskPropertyGroup) {
+            return prop.name;
+        }
+        switch (prop.propertyValueType) {
+            case PropertyValueType.COLOR:
+            case PropertyValueType.LAYER_INDEX:
+            case PropertyValueType.MASK_INDEX:
+            case PropertyValueType.OneD:
+            case PropertyValueType.ThreeD:
+            case PropertyValueType.ThreeD_SPATIAL:
+            case PropertyValueType.TwoD:
+            case PropertyValueType.TwoD_SPATIAL:
+                return prop.valueAtTime(time, preExpression);
+            case PropertyValueType.CUSTOM_VALUE:
+                return 'custom';
+            case PropertyValueType.NO_VALUE:
+                return 'no value';
+            case PropertyValueType.SHAPE: {
+                let { closed, vertices, inTangents, outTangents } = prop.valueAtTime(time, preExpression) as Shape;
+                return { closed, vertices, inTangents, outTangents };
+            }
+            case PropertyValueType.TEXT_DOCUMENT: {
+                let textDocument = prop.valueAtTime(time, preExpression) as TextDocument;
+                return textDocument.text;
+            }
+        }
+    }
+
+    register<Atarabi.Expression.Property.Actions>('@property', {
+        'bakeValue': (prop: Property, message: Atarabi.Expression.Property.BakeValueAction) => {
+            const comp = getLayerOf(prop).containingComp;
+            const targetProp = getPropertyFromIndices(comp, message.payload.indices);
+            try {
+                app.beginUndoGroup(`${SCRIPT_NAME}: ${message.scope}::${message.action}`);
+                const expression = prop.expression;
+                prop.expression = replaceCall(expression, message.payload.position, Atarabi.JSON.stringify(getValue(targetProp, message.payload.time, message.payload.preExpression)));
+            } catch (e) {
+                alert(e);
+            } finally {
+                app.endUndoGroup();
+            }
+        },
+    });
 
 })();
