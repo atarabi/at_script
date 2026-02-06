@@ -1,15 +1,16 @@
 /**
- * @effect_launcher v2.2.2
+ * @effect_launcher v2.3.0
  * 
- *      v2.2.2(2025/04/16)  Fix a bug where a script wasn’t executed
- *      v2.2.1(2025/04/02)  Switch to Types-for-Adobe
- *      v2.2.0(2025/03/08)  Support script and preset
- *      v2.1.0(2025/02/01)  Support footage shortcut
- *      v2.0.0(2024/11/14)  Support shortcut and reduce debounce time
- *      v1.0.3(2024/02/13)  Fix dynamic link bug
- *      v1.0.2(2023/12/05)  Fix lock bug
- *      v1.0.1(2023/09/23)  Fix strange behavior
- *      v1.0.0(2023/09/16)
+ *      v2.3.0(2026/02/07)  Added support for showing recent items
+ *      v2.2.2(2025/04/16)  Fixed a bug where a script wasn’t executed
+ *      v2.2.1(2025/04/02)  Switched to Types-for-Adobe
+ *      v2.2.0(2025/03/08)  Added support for scripts and presets
+ *      v2.1.0(2025/02/01)  Added support for footage shortcuts
+ *      v2.0.0(2024/11/14)  Added support for shortcuts and reduce debounce time
+ *      v1.0.3(2024/02/13)  Fixed dynamic link bug
+ *      v1.0.2(2023/12/05)  Fixed lock bug
+ *      v1.0.1(2023/09/23)  Fixed strange behavior
+ *      v1.0.0(2023/09/16)  Initial release
  */
 (() => {
 
@@ -438,8 +439,42 @@
     initEffect();
 
     // recent
-    const RECENT_NUM = 50;
-    const RECENT_ITEM_LIST: IItem[] = [];
+    const SECTION_NAME = `@script/${SCRIPT_NAME}` as const;
+    const RECENT_KEY_NAME = 'recent items';
+    const RECENT_ITEM_LIST: IItem[] = loadRecentItems();
+    const MAX_RECENT_ITEM = 20;
+
+    function getRecentItems(clone = false) {
+        return clone ? RECENT_ITEM_LIST.slice() : RECENT_ITEM_LIST;
+    }
+
+    function loadRecentItems() {
+        let items: IItem[] = [];
+        if (app.settings.haveSetting(SECTION_NAME, RECENT_KEY_NAME)) {
+            try {
+                items = Atarabi.JSON.parse(app.settings.getSetting(SECTION_NAME, RECENT_KEY_NAME)) as IItem[];
+            } catch (e) {
+                // pass
+            }
+        }
+        return items;
+    }
+
+    function saveRecentItems() {
+        app.settings.saveSetting(SECTION_NAME, RECENT_KEY_NAME, Atarabi.JSON.stringify(RECENT_ITEM_LIST));
+    }
+
+    function appendRecentItem(item: IItem) {
+        for (let i = 0; i < RECENT_ITEM_LIST.length; i++) {
+            if (RECENT_ITEM_LIST[i].detail === item.detail) {
+                RECENT_ITEM_LIST.splice(i, 1);
+                break;
+            }
+        }
+        RECENT_ITEM_LIST.unshift(item);
+        RECENT_ITEM_LIST.splice(MAX_RECENT_ITEM);
+        saveRecentItems();
+    }
 
     // searcher
     let searcher: Atarabi.UI.FuzzySearch<IItem> = null;
@@ -467,12 +502,12 @@
         return [];
     }
 
-    function applyEffect(avLayers: AVLayer[], effectMatchName: string) {
+    function applyEffect(avLayers: AVLayer[], effectMatchName: string): boolean {
         if (!avLayers.length) {
-            return;
+            return false;
         }
         if (!avLayers[0].effect.canAddProperty(effectMatchName)) {
-            return;
+            return false;
         }
         try {
             app.beginUndoGroup(`Apply: ${effectMatchName}`)
@@ -499,15 +534,17 @@
         } finally {
             app.endUndoGroup();
         }
+        return true;
     }
 
-    function applyScript(file: File) {
+    function applyScript(file: File): boolean {
         if (!(file instanceof File && file.exists)) {
             return false;
         }
         (() => {
             $.evalFile(file.absoluteURI);
         }).call($.global);
+        return true;
     }
 
     function applyScriptlet(code: string) {
@@ -516,12 +553,12 @@
         }).call($.global);
     }
 
-    function applyPreset(layers: Layer[], file: File) {
+    function applyPreset(layers: Layer[], file: File): boolean {
         if (!layers.length) {
-            return;
+            return false;
         }
         if (!(file instanceof File && file.exists)) {
-            return;
+            return false;
         }
 
         try {
@@ -547,6 +584,7 @@
         } finally {
             app.endUndoGroup();
         }
+        return true;
     }
 
     function applyCommand(command: string) {
@@ -601,13 +639,19 @@
     function applyItem(layers: Layer[], iItem: IItem) {
         switch (iItem.type) {
             case Type.Effect:
-                applyEffect(filter(layers, isAVLayer), iItem.detail);
+                if (applyEffect(filter(layers, isAVLayer), iItem.detail)) {
+                    appendRecentItem(iItem);
+                }
                 break;
             case Type.Script:
-                applyScript(new File(iItem.path));
+                if (applyScript(new File(iItem.path))) {
+                    appendRecentItem(iItem);
+                }
                 break;
             case Type.Preset:
-                applyPreset(layers, new File(iItem.path));
+                if (applyPreset(layers, new File(iItem.path))) {
+                    appendRecentItem(iItem);
+                }
                 break;
         }
     }
@@ -848,7 +892,7 @@
                     }
                     // right click
                     if (e.button === 2) {
-                        const index = Atarabi.UI.showContextMenu([{ text: 'Edit' },{ text: 'Recursive', checked: selection.checked }, { text: 'Delete' }]);
+                        const index = Atarabi.UI.showContextMenu([{ text: 'Edit' }, { text: 'Recursive', checked: selection.checked }, { text: 'Delete' }]);
                         if (index === 0) {
                             emitter.notify(Event.EditScriptFolder);
                         } if (index === 1) {
@@ -1188,12 +1232,14 @@
     }
 
     const WIN_PREFERRED_SIZE = [350, 200] satisfies [number, number];
+    const WIN_MAX_HEIGHT = 300;
 
     function buildDefaultUI(ctx: Atarabi.Keyboard.HookContext, layers: Layer[]) {
         const win = new Window('dialog', undefined, undefined, { borderless: true });
         win.spacing = 0;
         win.margins = 0;
         win.preferredSize = WIN_PREFERRED_SIZE;
+        win.maximumSize[1] = WIN_MAX_HEIGHT;
 
         const searchbox = win.add('edittext');
         searchbox.alignment = ['fill', 'top'];
@@ -1273,7 +1319,7 @@
                 return;
             }
 
-            const iItems = needle ? searcher.search(needle).slice(0, 50) : RECENT_ITEM_LIST;
+            const iItems = needle ? searcher.search(needle).slice(0, 50) : getRecentItems();
             itemList.removeAll();
             for (const iItem of iItems) {
                 const item = itemList.add('item', iItem.name) as ItemListBoxItem;
@@ -1302,8 +1348,8 @@
             if (!found) {
                 RECENT_ITEM_LIST.unshift(item);
             }
-            if (RECENT_ITEM_LIST.length > RECENT_NUM) {
-                RECENT_ITEM_LIST.length = RECENT_NUM;
+            if (RECENT_ITEM_LIST.length > MAX_RECENT_ITEM) {
+                RECENT_ITEM_LIST.length = MAX_RECENT_ITEM;
             }
         }
 
@@ -1344,6 +1390,7 @@
         win.spacing = 0;
         win.margins = 0;
         win.preferredSize = WIN_PREFERRED_SIZE;
+        win.maximumSize[1] = WIN_MAX_HEIGHT;
 
         const searchbox = win.add('edittext');
         searchbox.alignment = ['fill', 'top'];
