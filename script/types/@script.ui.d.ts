@@ -4,7 +4,7 @@ declare namespace Atarabi {
     interface UI {
         Builder: UI.BuilderOptions;
 
-        FuzzySearch<T>(haystack: T[], keys: string[], options?: {caseSensitive?: boolean; sort?: boolean; cache?: boolean;}): UI.FuzzySearch<T>;
+        FuzzySearch<T>(haystack: T[], keys: (string | UI.KeyWithWeight)[], options?: { caseSensitive?: boolean; sort?: boolean; cache?: boolean; maxCacheSize?: number; }): UI.FuzzySearch<T>;
     }
 
     /*
@@ -184,6 +184,11 @@ declare namespace Atarabi {
             saveToFile<K extends keyof (Controls & Lists)>(file: File, include?: K[]): void;
             saveToSetting<K extends keyof (Controls & Lists)>(section: string, key: string, include?: K[]): void;
             toJSON<K extends keyof (Controls & Lists)>(): { [P in K]: { type: string; value: (Controls & Lists)[K]; items?: string[]; } };
+        }
+
+        interface KeyWithWeight {
+            key: string;
+            weight: number;
         }
 
         interface FuzzySearch<T> {

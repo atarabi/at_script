@@ -1,9 +1,10 @@
 /**
- * @script_UI v0.2.2
+ * @script_UI v0.3.0
  * 
- *      v0.2.2(2025/04/02)  Switch to Types-for-Adobe
- *      v0.2.1(2024/11/14)  Fix cache bug of FuzzySearch
- *      v0.2.0(2024/02/13)  Add custom
+ *      v0.3.0(2026/02/06)  Switched to a custom fuzzy search
+ *      v0.2.2(2025/04/02)  Switched to Types-for-Adobe
+ *      v0.2.1(2024/11/14)  Fixed cache bug of FuzzySearch
+ *      v0.2.0(2024/02/13)  Added custom
  *      v0.1.0(2023/08/28)
  */
 (() => {
@@ -1161,14 +1162,6 @@
     /*
         Fuzzy Search
     */
-    /*!
-     *   Fuzzy search (https://github.com/wouter2203/fuzzy-search)
-     *   ISC License
-     *
-     *   Copyright (c) 2016, Wouter Rutgers
-     *   Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
-     *   THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-     */
     function assign(t: any, ...args: any[]) {
         for (let arg of args) {
             for (var p in arg) if (Object.prototype.hasOwnProperty.call(arg, p))
@@ -1181,205 +1174,142 @@
         caseSensitive?: boolean;
         sort?: boolean;
         cache?: boolean;
+        maxCacheSize?: number;
     }
 
     class FuzzySearch<T> {
-        haystack: T[];
-        keys: string[];
-        options: FuzzySearchOptions;
-        cache: { [query: string]: T[] } = {};
-        constructor(haystack: T[] = [], keys: string[] = [], options: FuzzySearchOptions = {}) {
-            this.haystack = haystack;
-            this.keys = keys;
+        private items: T[];
+        private keyWeights: { key: keyof T; weight: number }[];
+        private options: {
+            caseSensitive: boolean;
+            cache: boolean;
+            sort: boolean;
+            maxCacheSize: number;
+        };
+        private _cache: { [key: string]: T[] } = {};
+        private _cacheKeys: string[] = [];
+        constructor(items: T[], keys: ((keyof T) | { key: keyof T; weight: number; })[], options: FuzzySearchOptions = {}) {
+            this.items = items;
+            this.keyWeights = [];
+            if (keys != null) {
+                for (const k of keys) {
+                    if (typeof k === "object" && k !== null && "key" in k) {
+                        this.keyWeights.push({ key: k.key, weight: k.weight });
+                    } else {
+                        this.keyWeights.push({ key: k as keyof T, weight: 1 });
+                    }
+                }
+            }
             this.options = assign({
                 caseSensitive: false,
                 sort: false,
                 cache: false,
+                maxCacheSize: 100,
             }, options);
         }
+        public search(query: string = ''): T[] {
+            query = query.replace(/^\s+|\s+$/g, "");
+            if (!query) return this.items;
 
-        search(query: string = ''): T[] {
-            query = query.replace(/^\s+|\s+$/g, '');
-            if (query === '') {
-                return this.haystack;
-            } else if (this.options.cache && this.cache.hasOwnProperty(query)) {
-                return this.cache[query];
+            const { caseSensitive, cache, sort, maxCacheSize } = this.options;
+            query = caseSensitive ? query : query.toLowerCase();
+
+            if (cache && Object.prototype.hasOwnProperty.call(this._cache, query)) {
+                this.refreshCacheKey(query);
+                return this._cache[query];
             }
-            const results = [];
-            for (let i = 0; i < this.haystack.length; i++) {
-                const item = this.haystack[i];
-                if (this.keys.length === 0) {
-                    const score = FuzzySearch.isMatch(item, query, this.options.caseSensitive);
-                    if (score) {
-                        results.push({ item, score });
-                    }
+
+            const matchedItems: { item: T; score: number; }[] = [];
+            for (const item of this.items) {
+                let bestScore = -1;
+                if (this.keyWeights.length === 0) {
+                    if (typeof item !== "string") continue;
+                    const targetText = caseSensitive ? item : item.toLowerCase();
+                    bestScore = this.calculateScore(targetText, query);
                 } else {
-                    for (let y = 0; y < this.keys.length; y++) {
-                        const propertyValues = getDescendantProperty(item, this.keys[y]);
-                        let found = false;
-                        for (let z = 0; z < propertyValues.length; z++) {
-                            const score = FuzzySearch.isMatch(propertyValues[z], query, this.options.caseSensitive);
-                            if (score) {
-                                found = true;
-                                results.push({ item, score });
-                                break;
-                            }
-                        }
-                        if (found) {
-                            break;
+                    for (const kw of this.keyWeights) {
+                        const value = item[kw.key];
+                        if (typeof value !== "string") continue;
+                        const targetText = caseSensitive ? value : value.toLowerCase();
+                        let score = this.calculateScore(targetText, query);
+                        if (score > -1) {
+                            score *= kw.weight;
+                            if (score > bestScore) bestScore = score;
                         }
                     }
                 }
+                if (bestScore > -1) matchedItems.push({ item, score: bestScore });
             }
 
-            if (this.options.sort) {
-                results.sort((a, b) => a.score - b.score);
+            if (sort) {
+                matchedItems.sort((a, b) => b.score - a.score);
             }
 
-            const items = [];
-            for (let result of results) {
-                items.push(result.item);
+            const result: T[] = [];
+            for (const item of matchedItems) {
+                result.push(item.item);
             }
 
-            if (this.options.cache) {
-                this.cache[query] = items;
+            if (cache) {
+                if (this._cacheKeys.length >= maxCacheSize) {
+                    const oldestKey = this._cacheKeys.shift();
+                    if (oldestKey != null) delete this._cache[oldestKey];
+                }
+                this._cache[query] = result;
+                this._cacheKeys.push(query);
             }
 
-            return items;
+            return result;
         }
-
-        static isMatch(item, query, caseSensitive) {
-            item = String(item);
-            query = String(query);
-
-            if (!caseSensitive) {
-                item = item.toLocaleLowerCase();
-                query = query.toLocaleLowerCase();
+        private refreshCacheKey(key: string): void {
+            let foundIndex = -1;
+            for (let i = 0; i < this._cacheKeys.length; i++) {
+                if (this._cacheKeys[i] === key) {
+                    foundIndex = i;
+                    break;
+                }
             }
-
-            const indexes = FuzzySearch.nearestIndexesFor(item, query);
-
-            if (!indexes) {
-                return false;
+            if (foundIndex !== -1) {
+                this._cacheKeys.splice(foundIndex, 1);
+                this._cacheKeys.push(key);
             }
-
-            if (item === query) {
-                return 1;
-            }
-
-            if (indexes.length > 1) {
-                return 2 + (indexes[indexes.length - 1] - indexes[0]);
-            }
-
-            return 2 + indexes[0];
         }
+        private calculateScore(text: string, query: string): number {
+            let score = 0;
+            let textIdx = 0;
+            let lastFoundIdx = -1;
+            let firstFoundIdx = -1;
+            let consecutiveCount = 0;
 
-        static nearestIndexesFor(item, query) {
-            const letters = query.split('');
+            if (text === query) return 100000;
+            if (text.indexOf(query) === 0) return 10000;
 
-            let tempIndexes = [];
-
-            const indexesOfFirstLetter = FuzzySearch.indexesOfFirstLetter(item, query);
-
-            for (let loopingIndex = 0; loopingIndex < indexesOfFirstLetter.length; loopingIndex++) {
-                const startingIndex = indexesOfFirstLetter[loopingIndex];
-                let index = startingIndex + 1;
-
-                tempIndexes[loopingIndex] = [startingIndex];
-
-                for (let i = 1; i < letters.length; i++) {
-                    const letter = letters[i];
-
-                    index = item.indexOf(letter, index);
-
-                    if (index === -1) {
-                        tempIndexes[loopingIndex] = false;
-
-                        break;
-                    }
-
-                    tempIndexes[loopingIndex].push(index);
-
-                    index++;
+            for (let i = 0; i < query.length; i++) {
+                const ch = query[i];
+                const foundIdx = text.indexOf(ch, textIdx);
+                if (foundIdx === -1) return -1;
+                if (i === 0) {
+                    firstFoundIdx = foundIdx;
+                    if (foundIdx === 0) score += 500;
                 }
-            }
-
-            let indexes = [];
-            for (let letterIndexes of tempIndexes) {
-                if (letterIndexes !== false) {
-                    indexes.push(letterIndexes);
+                score += Math.max(0, 100 - foundIdx);
+                if (lastFoundIdx !== -1 && foundIdx === lastFoundIdx + 1) {
+                    consecutiveCount++;
+                    score += 200 * consecutiveCount;
+                } else {
+                    consecutiveCount = 0;
                 }
+                lastFoundIdx = foundIdx;
+                textIdx = foundIdx + 1;
             }
-
-            if (!indexes.length) {
-                return false;
-            }
-
-            return indexes.sort((a, b) => {
-                if (a.length === 1) {
-                    return a[0] - b[0];
-                }
-
-                a = a[a.length - 1] - a[0];
-                b = b[b.length - 1] - b[0];
-
-                return a - b;
-            })[0];
-        }
-
-        static indexesOfFirstLetter(item, query) {
-            const match = query[0];
-
-            const results = [];
-            const items = item.split('');
-            for (let index = 0; index < items.length; index++) {
-                const letter = items[index];
-                if (letter === match) {
-                    results.push(index);
-                }
-            }
-            return results;
+            const span = lastFoundIdx - firstFoundIdx + 1;
+            score += Math.max(0, 100 - span);
+            return score;
         }
     }
 
-    function getDescendantProperty(object, path, list = []) {
-        let firstSegment;
-        let remaining;
-        let dotIndex;
-        let value;
-        let index;
-        let length;
-
-        if (path) {
-            dotIndex = path.indexOf('.');
-
-            if (dotIndex === -1) {
-                firstSegment = path;
-            } else {
-                firstSegment = path.slice(0, dotIndex);
-                remaining = path.slice(dotIndex + 1);
-            }
-
-            value = object[firstSegment];
-            if (value !== null && typeof value !== 'undefined') {
-                if (!remaining && (typeof value === 'string' || typeof value === 'number')) {
-                    list.push(value);
-                } else if (Object.prototype.toString.call(value) === '[object Array]') {
-                    for (index = 0, length = value.length; index < length; index++) {
-                        getDescendantProperty(value[index], remaining, list);
-                    }
-                } else if (remaining) {
-                    getDescendantProperty(value, remaining, list);
-                }
-            }
-        } else {
-            list.push(object);
-        }
-        return list;
-    }
-
-    Atarabi.UI.FuzzySearch = <T extends any>(haystack: T[], keys: string[], options: FuzzySearchOptions = {}) => {
-        return new FuzzySearch<T>(haystack, keys, options);
+    Atarabi.UI.FuzzySearch = <T extends any>(haystack: T[], keys: (string | Atarabi.UI.KeyWithWeight)[], options: FuzzySearchOptions = {}) => {
+        return new FuzzySearch<T>(haystack, keys as any, options);
     };
 
 })();
