@@ -30,12 +30,12 @@ declare namespace Atarabi {
         setTextValue(property: Property, value: At.TextValue, options?: { time?: number; key?: boolean; }): void;
         getTextValueAtKey(property: Property, keyIndex: number): At.TextValue;
         setTextValueAtKey(property: Property, value: At.TextValue, keyIndex: number): void;
-        // memo
-        isMemoParameter(property: Property): boolean;
-        getMemoValue(property: Property, options?: { time?: number; preExpression?: boolean; }): At.MemoValue;
-        setMemoValue(property: Property, value: At.MemoValue, options?: { time?: number; key?: boolean; }): void;
-        getMemoValueAtKey(property: Property, keyIndex: number): At.MemoValue;
-        setMemoValueAtKey(property: Property, value: At.MemoValue, keyIndex: number): void;
+        // note
+        isNoteParameter(property: Property): boolean;
+        getNoteValue(property: Property, options?: { time?: number; preExpression?: boolean; }): At.NoteValue;
+        setNoteValue(property: Property, value: At.NoteValue, options?: { time?: number; key?: boolean; }): void;
+        getNoteValueAtKey(property: Property, keyIndex: number): At.NoteValue;
+        setNoteValueAtKey(property: Property, value: At.NoteValue, keyIndex: number): void;
         // image
         isImageParameter(property: Property): boolean;
         getImageInfo(property: Property, options?: { time?: number; preExpression?: boolean; }): Image_.Info | null;
@@ -72,7 +72,7 @@ declare namespace Atarabi {
             text: string;
         }
 
-        interface MemoValue {
+        interface NoteValue {
             subject: string;
             body: string;
             checked: boolean;
