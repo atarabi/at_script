@@ -126,7 +126,7 @@ At.setTextValueAtKey()
 
 .. versionadded:: 0.7.0
 
-At.isTextParameter()
+At.isNoteParameter()
 --------------------
 
 ``isNoteParameter(property: Property): boolean;``
@@ -135,7 +135,7 @@ At.isTextParameter()
 
 .. versionadded:: 0.7.0
 
-At.getTextValue()
+At.getNoteValue()
 --------------------
 
 ``getNoteValue(property: Property, options?: { time?: number; preExpression?: boolean; }): At.NoteValue;``
