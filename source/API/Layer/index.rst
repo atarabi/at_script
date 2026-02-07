@@ -51,7 +51,7 @@ Layer.getBounds()
 
 ``getBounds(layer: AVLayer, options?: { time?: number }): Rect;``
 
-不透明の範囲を取得する。クロップしたいときに用いる。
+不透明の範囲を取得する。クロップしたいときなどに用いる。
 
 .. tabs::
 
@@ -105,6 +105,37 @@ Layer.getMaskBounds()
         if (layer && isAVLayer(layer)) {
             var bounds = Atarabi.layer.getMaskBounds(layer);
         }
+
+Layer.getConnectedBounds()
+---------------------------
+
+``getConnectedBounds(layer: AVLayer, options?: { time?: number; connectivity?: 4 | 8; threshold?: number; }): Rect[];``
+
+透明によって分離された不透明な箇所のそれぞれのバウンディングボックスを取得する。
+
+.. tabs::
+
+    .. code-tab:: TypeScript
+
+        const layer = Atarabi.layer.getActiveLayer();
+        const isAVLayer = (layer: Layer): layer is AVLayer => {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            const moments = Atarabi.layer.getConnectedBounds(layer);
+        }
+
+    .. code-tab:: JavaScript
+	
+        var layer = Atarabi.layer.getActiveLayer();
+        var isAVLayer = function (layer) {
+            return layer instanceof TextLayer || layer instanceof ShapeLayer || layer instanceof AVLayer;
+        };
+        if (layer && isAVLayer(layer)) {
+            var moments = Atarabi.layer.getConnectedBounds(layer);
+        }
+
+.. versionadded:: 0.7.0
 
 Layer.getMoments()
 -----------------------

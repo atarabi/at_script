@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>At &#8212; @script 0.6.0 documentation</title>
+    <title>At &#8212; @script 0.7.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=3e29d2c0" />
     <link rel="stylesheet" type="text/css" href="../../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../../_static/documentation_options.js?v=e976989b"></script>
+    <script src="../../_static/documentation_options.js?v=98a3d2c2"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/code-tabs.js?v=c983d12e"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="../App/index.html" title="App"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">At</a></li> 
       </ul>
@@ -57,31 +57,6 @@
 <h2>At.setCollapse()<a class="headerlink" href="#at-setcollapse" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">setCollapse(property:</span> <span class="pre">Property,</span> <span class="pre">doCollapse:</span> <span class="pre">boolean):</span> <span class="pre">void;</span></code></p>
 <p>パラメータを開閉する。</p>
-</section>
-<section id="at-istextparameter">
-<h2>At.isTextParameter()<a class="headerlink" href="#at-istextparameter" title="Link to this heading">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">isTextParameter(property:</span> <span class="pre">Property):</span> <span class="pre">boolean;</span></code></p>
-<p>テキストパラメータかを調べる。</p>
-</section>
-<section id="at-gettextvalue">
-<h2>At.getTextValue()<a class="headerlink" href="#at-gettextvalue" title="Link to this heading">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">getTextValue(property:</span> <span class="pre">Property,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">preExpression?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">TextValue;</span></code></p>
-<p>テキストパラメータの値を取得する。</p>
-</section>
-<section id="at-settextvalue">
-<h2>At.setTextValue()<a class="headerlink" href="#at-settextvalue" title="Link to this heading">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">setTextValue(property:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">TextValue,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">key?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
-<p>テキストパラメータの値を設定する。</p>
-</section>
-<section id="at-gettextvalueatkey">
-<h2>At.getTextValueAtKey()<a class="headerlink" href="#at-gettextvalueatkey" title="Link to this heading">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">getTextValueAtKey(property:</span> <span class="pre">Property,</span> <span class="pre">keyIndex:</span> <span class="pre">number):</span> <span class="pre">At.TextValue;</span></code></p>
-<p>あるキーにおけるテキストパラメータの値を取得する。</p>
-</section>
-<section id="at-settextvalueatkey">
-<h2>At.setTextValueAtKey()<a class="headerlink" href="#at-settextvalueatkey" title="Link to this heading">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">setTextValueAtKey(property:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">At.TextValue,</span> <span class="pre">keyIndex:</span> <span class="pre">number):</span> <span class="pre">void;</span></code></p>
-<p>あるキーに対してテキストパラメータの値を設定する。</p>
 </section>
 <section id="at-isimageparameter">
 <h2>At.isImageParameter()<a class="headerlink" href="#at-isimageparameter" title="Link to this heading">¶</a></h2>
@@ -139,6 +114,86 @@
 <p><span class="versionmodified added">Added in version 0.5.0.</span></p>
 </div>
 </section>
+<section id="at-istextparameter">
+<h2>At.isTextParameter()<a class="headerlink" href="#at-istextparameter" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">isTextParameter(property:</span> <span class="pre">Property):</span> <span class="pre">boolean;</span></code></p>
+<p>テキストパラメータかを調べる。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.7.0.</span></p>
+</div>
+</section>
+<section id="at-gettextvalue">
+<h2>At.getTextValue()<a class="headerlink" href="#at-gettextvalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getTextValue(property:</span> <span class="pre">Property,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">preExpression?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">At.TextValue;</span></code></p>
+<p>テキストパラメータの値を取得する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.7.0.</span></p>
+</div>
+</section>
+<section id="at-settextvalue">
+<h2>At.setTextValue()<a class="headerlink" href="#at-settextvalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setTextValue(property:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">At.TextValue,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">key?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>テキストパラメータの値を設定する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.7.0.</span></p>
+</div>
+</section>
+<section id="at-gettextvalueatkey">
+<h2>At.getTextValueAtKey()<a class="headerlink" href="#at-gettextvalueatkey" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getTextValueAtKey(property:</span> <span class="pre">Property,</span> <span class="pre">keyIndex:</span> <span class="pre">number):</span> <span class="pre">At.TextValue;</span></code></p>
+<p>あるキーにおけるテキストパラメータの値を取得する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.7.0.</span></p>
+</div>
+</section>
+<section id="at-settextvalueatkey">
+<h2>At.setTextValueAtKey()<a class="headerlink" href="#at-settextvalueatkey" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setTextValueAtKey(property:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">At.TextValue,</span> <span class="pre">keyIndex:</span> <span class="pre">number):</span> <span class="pre">void;</span></code></p>
+<p>あるキーに対してテキストパラメータの値を設定する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.7.0.</span></p>
+</div>
+</section>
+<section id="id1">
+<h2>At.isTextParameter()<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">isNoteParameter(property:</span> <span class="pre">Property):</span> <span class="pre">boolean;</span></code></p>
+<p>ノートパラメータかを調べる。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.7.0.</span></p>
+</div>
+</section>
+<section id="id2">
+<h2>At.getTextValue()<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getNoteValue(property:</span> <span class="pre">Property,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">preExpression?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">At.NoteValue;</span></code></p>
+<p>ノートパラメータの値を取得する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.7.0.</span></p>
+</div>
+</section>
+<section id="at-setnotevalue">
+<h2>At.setNoteValue()<a class="headerlink" href="#at-setnotevalue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setNoteValue(property:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">At.NoteValue,</span> <span class="pre">options?:</span> <span class="pre">{</span> <span class="pre">time?:</span> <span class="pre">number;</span> <span class="pre">key?:</span> <span class="pre">boolean;</span> <span class="pre">}):</span> <span class="pre">void;</span></code></p>
+<p>ノートパラメータの値を設定する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.7.0.</span></p>
+</div>
+</section>
+<section id="at-getnotevalueatkey">
+<h2>At.getNoteValueAtKey()<a class="headerlink" href="#at-getnotevalueatkey" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">getNoteValueAtKey(property:</span> <span class="pre">Property,</span> <span class="pre">keyIndex:</span> <span class="pre">number):</span> <span class="pre">At.NoteValue;</span></code></p>
+<p>あるキーにおけるノートパラメータの値を取得する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.7.0.</span></p>
+</div>
+</section>
+<section id="at-setnotevalueatkey">
+<h2>At.setNoteValueAtKey()<a class="headerlink" href="#at-setnotevalueatkey" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">setNoteValueAtKey(property:</span> <span class="pre">Property,</span> <span class="pre">value:</span> <span class="pre">At.NoteValue,</span> <span class="pre">keyIndex:</span> <span class="pre">number):</span> <span class="pre">void;</span></code></p>
+<p>あるキーに対してノートパラメータの値を設定する。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.7.0.</span></p>
+</div>
+</section>
 </section>
 
 
@@ -154,11 +209,6 @@
 <li><a class="reference internal" href="#">At</a><ul>
 <li><a class="reference internal" href="#at-isateffect">At.isAtEffect()</a></li>
 <li><a class="reference internal" href="#at-setcollapse">At.setCollapse()</a></li>
-<li><a class="reference internal" href="#at-istextparameter">At.isTextParameter()</a></li>
-<li><a class="reference internal" href="#at-gettextvalue">At.getTextValue()</a></li>
-<li><a class="reference internal" href="#at-settextvalue">At.setTextValue()</a></li>
-<li><a class="reference internal" href="#at-gettextvalueatkey">At.getTextValueAtKey()</a></li>
-<li><a class="reference internal" href="#at-settextvalueatkey">At.setTextValueAtKey()</a></li>
 <li><a class="reference internal" href="#at-isimageparameter">At.isImageParameter()</a></li>
 <li><a class="reference internal" href="#at-getimageinfo">At.getImageInfo()</a></li>
 <li><a class="reference internal" href="#at-setimagefromfile">At.setImageFromFile()</a></li>
@@ -166,6 +216,16 @@
 <li><a class="reference internal" href="#at-getimageinfoatkey">At.getImageInfoAtKey()</a></li>
 <li><a class="reference internal" href="#at-setimagefromfileatkey">At.setImageFromFileAtKey()</a></li>
 <li><a class="reference internal" href="#at-setimagefromclipboardatkey">At.setImageFromClipboardAtKey()</a></li>
+<li><a class="reference internal" href="#at-istextparameter">At.isTextParameter()</a></li>
+<li><a class="reference internal" href="#at-gettextvalue">At.getTextValue()</a></li>
+<li><a class="reference internal" href="#at-settextvalue">At.setTextValue()</a></li>
+<li><a class="reference internal" href="#at-gettextvalueatkey">At.getTextValueAtKey()</a></li>
+<li><a class="reference internal" href="#at-settextvalueatkey">At.setTextValueAtKey()</a></li>
+<li><a class="reference internal" href="#id1">At.isTextParameter()</a></li>
+<li><a class="reference internal" href="#id2">At.getTextValue()</a></li>
+<li><a class="reference internal" href="#at-setnotevalue">At.setNoteValue()</a></li>
+<li><a class="reference internal" href="#at-getnotevalueatkey">At.getNoteValueAtKey()</a></li>
+<li><a class="reference internal" href="#at-setnotevalueatkey">At.setNoteValueAtKey()</a></li>
 </ul>
 </li>
 </ul>
@@ -207,7 +267,7 @@
         <li class="right" >
           <a href="../App/index.html" title="App"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">@script 0.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">At</a></li> 
       </ul>

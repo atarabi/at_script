@@ -4,6 +4,15 @@ Property
 
 多くがスクリプトにすでにあるメソッドの再実装となっているが、こちらを使用する場合、パラメータが **hidden** かどうかは気にしなくなくてもよい。
 
+Property.getLayer()
+------------------------
+
+``getLayer(property: Property): Layer;``
+
+プロパティが所属するレイヤーを取得する。
+
+.. versionadded:: 0.7.0
+
 Property.getParamDef()
 ------------------------
 

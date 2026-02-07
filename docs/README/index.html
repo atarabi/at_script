@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>README &#8212; @script 0.6.0 documentation</title>
+    <title>README &#8212; @script 0.7.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=3e29d2c0" />
     <link rel="stylesheet" type="text/css" href="../_static/code-tabs.css?v=1bc26e2f" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b4c9a718" />
     
-    <script src="../_static/documentation_options.js?v=e976989b"></script>
+    <script src="../_static/documentation_options.js?v=98a3d2c2"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/code-tabs.js?v=c983d12e"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="../index.html" title="@script"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.7.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">README</a></li> 
       </ul>
     </div>  
@@ -88,6 +88,53 @@
 <section id="atarabi-version">
 <h2>Atarabi.version<a class="headerlink" href="#atarabi-version" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">version:</span> <span class="pre">string;</span></code></p>
+<section id="v0-7-0-2026-02-07">
+<h3>v0.7.0(2026/02/07)<a class="headerlink" href="#v0-7-0-2026-02-07" title="Link to this heading">¶</a></h3>
+<section id="fix">
+<h4>Fix<a class="headerlink" href="#fix" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>&#64;imageでサムネイルがきちんと表示されない場合がある問題の修正</p></li>
+<li><p>&#64;save_to_desktopで、ファイル名に使用できない文字が含まれている場合に正しく動作しない問題の修正</p></li>
+</ul>
+</section>
+<section id="improve">
+<h4>Improve<a class="headerlink" href="#improve" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>!&#64;script_UIのFuzzy Searchを独自の実装に変更</p></li>
+<li><p>&#64;effect_launcherで最近使用したエフェクトを表示する機能を追加</p></li>
+</ul>
+</section>
+<section id="plugin">
+<h4>Plugin<a class="headerlink" href="#plugin" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>&#64;note(&#64;note, &#64;quick_note) の追加</p></li>
+</ul>
+</section>
+<section id="id5">
+<h4>Script<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>&#64;expression_bakerの追加</p></li>
+<li><p>&#64;note_managerの追加</p></li>
+</ul>
+</section>
+<section id="api">
+<h4>API<a class="headerlink" href="#api" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Property.getLayer() の追加</p></li>
+<li><p>Layer.getConnectedBounds() の追加</p></li>
+<li><p>At.isNoteParameter() の追加</p></li>
+<li><p>At.getNoteValue() の追加</p></li>
+<li><p>At.setNoteValue() の追加</p></li>
+<li><p>At.getNoteValueAtKey() の追加</p></li>
+<li><p>At.setNoteValueAtKey() の追加</p></li>
+<li><p>At.isTextParameter() の追加</p></li>
+<li><p>At.getTextValue() の追加</p></li>
+<li><p>At.setTextValue() の追加</p></li>
+<li><p>At.getTextValueAtKey() の追加</p></li>
+<li><p>At.setTextValueAtKey() の追加</p></li>
+</ul>
+</section>
+</section>
 <section id="v0-6-0-2025-11-18">
 <h3>v0.6.0(2025/11/18)<a class="headerlink" href="#v0-6-0-2025-11-18" title="Link to this heading">¶</a></h3>
 <section id="breaking-changes">
@@ -96,15 +143,15 @@
 <li><p>型定義を独自のものからTypes-for-Adobeのものに変更</p></li>
 </ul>
 </section>
-<section id="improve">
-<h4>Improve<a class="headerlink" href="#improve" title="Link to this heading">¶</a></h4>
+<section id="id6">
+<h4>Improve<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Mouse.hook()において、Mouse Downだけでなく、Mouse Upにもhook出来るようにした</p></li>
 <li><p>Keyboard.hook(), Mouse.hook()において、何も返さなければデフォルトの処理を実行するようにした</p></li>
 </ul>
 </section>
-<section id="id5">
-<h4>Script<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h4>
+<section id="id7">
+<h4>Script<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>&#64;cropped_mesh_warpの追加</p></li>
 <li><p>&#64;paste_clipboardで連番ファイル読み込み時の問題を修正</p></li>
@@ -116,20 +163,20 @@
 </section>
 <section id="v0-5-1-2025-02-04">
 <h3>v0.5.1(2025/02/04)<a class="headerlink" href="#v0-5-1-2025-02-04" title="Link to this heading">¶</a></h3>
-<section id="fix">
-<h4>Fix<a class="headerlink" href="#fix" title="Link to this heading">¶</a></h4>
+<section id="id8">
+<h4>Fix<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Mac環境で、Clipboard.getText()でテキストがクリップボードに無い時に取得しようとするとクラッシュする問題の修正</p></li>
 </ul>
 </section>
-<section id="id6">
-<h4>Improve<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
+<section id="id9">
+<h4>Improve<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Pseudo においてInvisibleの対応</p></li>
 </ul>
 </section>
-<section id="id7">
-<h4>Script<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
+<section id="id10">
+<h4>Script<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>&#64;hook_solid がAtarabi.APIに対応</p></li>
 <li><p>&#64;hook_null がAtarabi.APIに対応</p></li>
@@ -138,27 +185,27 @@
 </section>
 <section id="v0-5-0-2025-02-01">
 <h3>v0.5.0(2025/02/01)<a class="headerlink" href="#v0-5-0-2025-02-01" title="Link to this heading">¶</a></h3>
-<section id="id8">
-<h4>Fix<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h4>
+<section id="id11">
+<h4>Fix<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Windows環境で、Clipboard.getText()において、CF_UNICODETEXTではなくCF_TEXTから読み込むようにした(CF_TEXTにUTF-8の文字列が設定されていて、かつCF_UNICODETEXTが設定されていない状態で、CF_UNICODETEXTを取得しようとすると、UTF-8文字列をANSIコードページ(日本語であればShift_JIS)として解釈、変換された文字列が渡されるので、それに対する暫定的措置)</p></li>
 </ul>
 </section>
-<section id="id9">
-<h4>Improve<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h4>
+<section id="id12">
+<h4>Improve<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Keyboard.hook(), Mouse.hook()において、一つの状態に対して、一つしかフック出来なかったのを複数フック出来るようにした</p></li>
 <li><p>SVG.svgToShapeLayer()をFileだけでなくstringも受け付けるようにした</p></li>
 </ul>
 </section>
-<section id="plugin">
-<h4>Plugin<a class="headerlink" href="#plugin" title="Link to this heading">¶</a></h4>
+<section id="id13">
+<h4>Plugin<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>&#64;image(&#64;image, &#64;image_file, &#64;images_in_folder) の追加</p></li>
 </ul>
 </section>
-<section id="api">
-<h4>API<a class="headerlink" href="#api" title="Link to this heading">¶</a></h4>
+<section id="id14">
+<h4>API<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Image の追加</p></li>
 <li><p>RIFX の追加</p></li>
@@ -179,8 +226,8 @@
 <li><p>At.setImageFromClipboardAtKey() の追加</p></li>
 </ul>
 </section>
-<section id="id10">
-<h4>Script<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h4>
+<section id="id15">
+<h4>Script<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>&#64;paste_clipboard の追加</p></li>
 <li><p>&#64;script_panel において、jsxbinも取得するようにした</p></li>
@@ -193,15 +240,15 @@
 </section>
 <section id="v0-4-2-2024-11-14">
 <h3>v0.4.2(2024/11/14)<a class="headerlink" href="#v0-4-2-2024-11-14" title="Link to this heading">¶</a></h3>
-<section id="id11">
-<h4>Fix<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h4>
+<section id="id16">
+<h4>Fix<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Windows環境で、UI.showContextMenu()において、コンテクストメニューの文字列が正常に表示されない場合があることに対する修正</p></li>
 <li><p>UI.FuzzySearch()においてキャッシュを有効にした状態である特定の文字列を与えた場合に、配列以外が返ってくる場合があることに対する修正（&#64;effect_launcher, &#64;effect_search, &#64;effect_presetなどで使用しているので、使っている方は!&#64;script_UI.jsxを更新してください）</p></li>
 </ul>
 </section>
-<section id="id12">
-<h4>Script<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h4>
+<section id="id17">
+<h4>Script<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>&#64;script_panel の追加</p></li>
 <li><p>&#64;effect_launcher にショートカット機能を追加</p></li>
@@ -213,20 +260,20 @@
 </section>
 <section id="v0-4-1-2024-10-22">
 <h3>v0.4.1(2024/10/22)<a class="headerlink" href="#v0-4-1-2024-10-22" title="Link to this heading">¶</a></h3>
-<section id="id13">
-<h4>Fix<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h4>
+<section id="id18">
+<h4>Fix<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Compositing Options以下のプロパティの扱いでエラーが生じることに対する修正 (<a class="reference external" href="https://github.com/atarabi/at_script/issues/7">#7</a>)</p></li>
 </ul>
 </section>
-<section id="id15">
-<h4>API<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h4>
+<section id="id20">
+<h4>API<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Property.loadCustomValue() の追加</p></li>
 </ul>
 </section>
-<section id="id16">
-<h4>Script<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h4>
+<section id="id21">
+<h4>Script<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>&#64;proxy_maker の追加</p></li>
 <li><p>&#64;rpp_loader にアンドゥ処理を追加</p></li>
@@ -235,22 +282,22 @@
 </section>
 <section id="v0-4-0-2024-06-30">
 <h3>v0.4.0(2024/06/30)<a class="headerlink" href="#v0-4-0-2024-06-30" title="Link to this heading">¶</a></h3>
-<section id="id17">
-<h4>Fix<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h4>
+<section id="id22">
+<h4>Fix<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Register.importFlavor() で登録した拡張子のファイルを複数個同時に読み込んだ際に、モーダルダイアログに関するエラーが生じることに対する修正</p></li>
 </ul>
 </section>
-<section id="id18">
-<h4>API<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h4>
+<section id="id23">
+<h4>API<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Property.saveCustomValue() の追加</p></li>
 <li><p>Effect['ADBE CurvesCustom'] の追加</p></li>
 <li><p>Effect['APC Colorama'] の追加</p></li>
 </ul>
 </section>
-<section id="id19">
-<h4>Script<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h4>
+<section id="id24">
+<h4>Script<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>&#64;svg の追加</p></li>
 </ul>
@@ -258,21 +305,21 @@
 </section>
 <section id="v0-3-1-2024-05-29">
 <h3>v0.3.1(2024/05/29)<a class="headerlink" href="#v0-3-1-2024-05-29" title="Link to this heading">¶</a></h3>
-<section id="id20">
-<h4>Fix<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h4>
+<section id="id25">
+<h4>Fix<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>ある環境下で、API実行時にPreferencesのウインドウが表示される問題の対処 (<a class="reference external" href="https://github.com/atarabi/at_script/issues/3">#3</a>)</p></li>
 </ul>
 </section>
-<section id="id22">
-<h4>API<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h4>
+<section id="id27">
+<h4>API<a class="headerlink" href="#id27" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Register.hookCommand() の引数にoptionsを追加</p></li>
 <li><p>Register.unhookCommandAll() の追加</p></li>
 </ul>
 </section>
-<section id="id23">
-<h4>Script<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h4>
+<section id="id28">
+<h4>Script<a class="headerlink" href="#id28" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>&#64;hook_solid の平面の命名規則の変更及びカラーパネルの追加 (<a class="reference external" href="https://github.com/atarabi/at_script/issues/4">#4</a>)</p></li>
 <li><p>&#64;hook_adjustment の平面の命名規則の変更</p></li>
@@ -283,14 +330,14 @@
 </section>
 <section id="v0-3-0-2024-02-13">
 <h3>v0.3.0(2024/02/13)<a class="headerlink" href="#v0-3-0-2024-02-13" title="Link to this heading">¶</a></h3>
-<section id="id25">
-<h4>Fix<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h4>
+<section id="id30">
+<h4>Fix<a class="headerlink" href="#id30" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Windows環境で、AME起動時などDynamic Link経由でAfterFXが起動する際にStartupのスクリプトがAfterFXをクラッシュさせる問題の対処 (<a class="reference external" href="https://github.com/atarabi/at_script/issues/1">#1</a>)</p></li>
 </ul>
 </section>
-<section id="id27">
-<h4>API<a class="headerlink" href="#id27" title="Link to this heading">¶</a></h4>
+<section id="id32">
+<h4>API<a class="headerlink" href="#id32" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Atarabi.isDynamicLink() の追加</p></li>
 <li><p>Mouse.getPosition() の追加</p></li>
@@ -301,8 +348,8 @@
 <li><p>Mouse.sendClick() の追加</p></li>
 </ul>
 </section>
-<section id="id28">
-<h4>Script<a class="headerlink" href="#id28" title="Link to this heading">¶</a></h4>
+<section id="id33">
+<h4>Script<a class="headerlink" href="#id33" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Dynamic Linkに関するバグに伴う、Startup系のスクリプトの修正</p></li>
 <li><p>&#64;effect_launcher が表示されなくなることがある問題の修正</p></li>
@@ -315,8 +362,8 @@
 </section>
 <section id="v0-2-0-2023-09-16">
 <h3>v0.2.0(2023/09/16)<a class="headerlink" href="#v0-2-0-2023-09-16" title="Link to this heading">¶</a></h3>
-<section id="id29">
-<h4>API<a class="headerlink" href="#id29" title="Link to this heading">¶</a></h4>
+<section id="id34">
+<h4>API<a class="headerlink" href="#id34" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>App.setProjectDirty() の追加</p></li>
 <li><p>App.saveBackgroundState() の追加</p></li>
@@ -337,8 +384,8 @@
 <li><p>Keyboard.sendKeys() の追加</p></li>
 </ul>
 </section>
-<section id="id30">
-<h4>Script<a class="headerlink" href="#id30" title="Link to this heading">¶</a></h4>
+<section id="id35">
+<h4>Script<a class="headerlink" href="#id35" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>&#64;script_UI を !&#64;script_UI にリネーム</p></li>
 <li><p>&#64;effect_launcher の追加</p></li>
@@ -370,58 +417,66 @@
 <li><a class="reference internal" href="#target">対象</a></li>
 <li><a class="reference internal" href="#how-to">導入方法</a></li>
 <li><a class="reference internal" href="#atarabi-version">Atarabi.version</a><ul>
-<li><a class="reference internal" href="#v0-6-0-2025-11-18">v0.6.0(2025/11/18)</a><ul>
-<li><a class="reference internal" href="#breaking-changes">Breaking Changes</a></li>
+<li><a class="reference internal" href="#v0-7-0-2026-02-07">v0.7.0(2026/02/07)</a><ul>
+<li><a class="reference internal" href="#fix">Fix</a></li>
 <li><a class="reference internal" href="#improve">Improve</a></li>
+<li><a class="reference internal" href="#plugin">Plugin</a></li>
 <li><a class="reference internal" href="#id5">Script</a></li>
+<li><a class="reference internal" href="#api">API</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#v0-5-1-2025-02-04">v0.5.1(2025/02/04)</a><ul>
-<li><a class="reference internal" href="#fix">Fix</a></li>
+<li><a class="reference internal" href="#v0-6-0-2025-11-18">v0.6.0(2025/11/18)</a><ul>
+<li><a class="reference internal" href="#breaking-changes">Breaking Changes</a></li>
 <li><a class="reference internal" href="#id6">Improve</a></li>
 <li><a class="reference internal" href="#id7">Script</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#v0-5-0-2025-02-01">v0.5.0(2025/02/01)</a><ul>
+<li><a class="reference internal" href="#v0-5-1-2025-02-04">v0.5.1(2025/02/04)</a><ul>
 <li><a class="reference internal" href="#id8">Fix</a></li>
 <li><a class="reference internal" href="#id9">Improve</a></li>
-<li><a class="reference internal" href="#plugin">Plugin</a></li>
-<li><a class="reference internal" href="#api">API</a></li>
 <li><a class="reference internal" href="#id10">Script</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#v0-4-2-2024-11-14">v0.4.2(2024/11/14)</a><ul>
+<li><a class="reference internal" href="#v0-5-0-2025-02-01">v0.5.0(2025/02/01)</a><ul>
 <li><a class="reference internal" href="#id11">Fix</a></li>
-<li><a class="reference internal" href="#id12">Script</a></li>
+<li><a class="reference internal" href="#id12">Improve</a></li>
+<li><a class="reference internal" href="#id13">Plugin</a></li>
+<li><a class="reference internal" href="#id14">API</a></li>
+<li><a class="reference internal" href="#id15">Script</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v0-4-2-2024-11-14">v0.4.2(2024/11/14)</a><ul>
+<li><a class="reference internal" href="#id16">Fix</a></li>
+<li><a class="reference internal" href="#id17">Script</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#v0-4-1-2024-10-22">v0.4.1(2024/10/22)</a><ul>
-<li><a class="reference internal" href="#id13">Fix</a></li>
-<li><a class="reference internal" href="#id15">API</a></li>
-<li><a class="reference internal" href="#id16">Script</a></li>
+<li><a class="reference internal" href="#id18">Fix</a></li>
+<li><a class="reference internal" href="#id20">API</a></li>
+<li><a class="reference internal" href="#id21">Script</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#v0-4-0-2024-06-30">v0.4.0(2024/06/30)</a><ul>
-<li><a class="reference internal" href="#id17">Fix</a></li>
-<li><a class="reference internal" href="#id18">API</a></li>
-<li><a class="reference internal" href="#id19">Script</a></li>
+<li><a class="reference internal" href="#id22">Fix</a></li>
+<li><a class="reference internal" href="#id23">API</a></li>
+<li><a class="reference internal" href="#id24">Script</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#v0-3-1-2024-05-29">v0.3.1(2024/05/29)</a><ul>
-<li><a class="reference internal" href="#id20">Fix</a></li>
-<li><a class="reference internal" href="#id22">API</a></li>
-<li><a class="reference internal" href="#id23">Script</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#v0-3-0-2024-02-13">v0.3.0(2024/02/13)</a><ul>
 <li><a class="reference internal" href="#id25">Fix</a></li>
 <li><a class="reference internal" href="#id27">API</a></li>
 <li><a class="reference internal" href="#id28">Script</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#v0-3-0-2024-02-13">v0.3.0(2024/02/13)</a><ul>
+<li><a class="reference internal" href="#id30">Fix</a></li>
+<li><a class="reference internal" href="#id32">API</a></li>
+<li><a class="reference internal" href="#id33">Script</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#v0-2-0-2023-09-16">v0.2.0(2023/09/16)</a><ul>
-<li><a class="reference internal" href="#id29">API</a></li>
-<li><a class="reference internal" href="#id30">Script</a></li>
+<li><a class="reference internal" href="#id34">API</a></li>
+<li><a class="reference internal" href="#id35">Script</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#v0-1-0-2023-08-28">v0.1.0(2023/08/28)</a></li>
@@ -468,7 +523,7 @@
         <li class="right" >
           <a href="../index.html" title="@script"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">@script 0.7.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">README</a></li> 
       </ul>
     </div>

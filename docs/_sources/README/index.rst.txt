@@ -63,6 +63,43 @@ Atarabi.version
 
 ``version: string;``
 
+v0.7.0(2026/02/07)
+^^^^^^^^^^^^^^^^^^^^
+
+Fix
+"""""""""""
+- @imageでサムネイルがきちんと表示されない場合がある問題の修正
+- @save_to_desktopで、ファイル名に使用できない文字が含まれている場合に正しく動作しない問題の修正
+  
+Improve
+"""""""""""
+- !@script_UIのFuzzy Searchを独自の実装に変更
+- @effect_launcherで最近使用したエフェクトを表示する機能を追加
+  
+Plugin
+"""""""""""
+- @note(@note, @quick_note) の追加
+
+Script
+"""""""""""
+- @expression_bakerの追加
+- @note_managerの追加
+
+API
+"""""""""""
+- Property.getLayer() の追加
+- Layer.getConnectedBounds() の追加
+- At.isNoteParameter() の追加
+- At.getNoteValue() の追加
+- At.setNoteValue() の追加
+- At.getNoteValueAtKey() の追加
+- At.setNoteValueAtKey() の追加
+- At.isTextParameter() の追加
+- At.getTextValue() の追加
+- At.setTextValue() の追加
+- At.getTextValueAtKey() の追加
+- At.setTextValueAtKey() の追加
+
 v0.6.0(2025/11/18)
 ^^^^^^^^^^^^^^^^^^^^
 

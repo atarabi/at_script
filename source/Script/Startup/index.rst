@@ -19,3 +19,4 @@ Startup
    @hook_]
    @svg
    @paste_clipboard
+   @expression_baker

@@ -17,3 +17,4 @@ ScriptUI
    @proxy_maker
    @script_panel
    @cropped_mesh_warp
+   @note_manager
