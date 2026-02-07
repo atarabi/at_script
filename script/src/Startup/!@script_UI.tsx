@@ -1282,7 +1282,7 @@
             let consecutiveCount = 0;
 
             if (text === query) return 100000;
-            if (text.indexOf(query) === 0) return 10000;
+            if (text.indexOf(query) === 0) score += 10000;
 
             for (let i = 0; i < query.length; i++) {
                 const ch = query[i];
@@ -1291,6 +1291,12 @@
                 if (i === 0) {
                     firstFoundIdx = foundIdx;
                     if (foundIdx === 0) score += 500;
+                }
+                if (foundIdx > 0) {
+                    const prevCh = text.charAt(foundIdx - 1);
+                    if (prevCh === '_' || prevCh === '-' || prevCh === ' ') {
+                        score += 250;
+                    }
                 }
                 score += Math.max(0, 100 - foundIdx);
                 if (lastFoundIdx !== -1 && foundIdx === lastFoundIdx + 1) {
@@ -1304,6 +1310,7 @@
             }
             const span = lastFoundIdx - firstFoundIdx + 1;
             score += Math.max(0, 100 - span);
+            score -= text.length; // length penalty
             return score;
         }
     }
