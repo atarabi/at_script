@@ -1,3 +1,8 @@
+/**
+ * @note_manager v1.0.0
+ * 
+ *      v1.0.0(2026/02/07) Initial release
+ */
 ((global: Panel | Global) => {
 
     const SCRIPT_NAME = '@note_manager';
