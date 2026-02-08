@@ -1225,13 +1225,13 @@
                 if (this.keyWeights.length === 0) {
                     if (typeof item !== "string") continue;
                     const targetText = caseSensitive ? item : item.toLowerCase();
-                    bestScore = this.calculateScore(targetText, query);
+                    bestScore = this.calculateScore(targetText, query, item);
                 } else {
                     for (const kw of this.keyWeights) {
                         const value = item[kw.key];
                         if (typeof value !== "string") continue;
                         const targetText = caseSensitive ? value : value.toLowerCase();
-                        let score = this.calculateScore(targetText, query);
+                        let score = this.calculateScore(targetText, query, value);
                         if (score > -1) {
                             score *= kw.weight;
                             if (score > bestScore) bestScore = score;
@@ -1274,7 +1274,7 @@
                 this._cacheKeys.push(key);
             }
         }
-        private calculateScore(text: string, query: string): number {
+        private calculateScore(text: string, query: string, original: string): number {
             let score = 0;
             let textIdx = 0;
             let lastFoundIdx = -1;
@@ -1296,6 +1296,9 @@
                     const prevCh = text.charAt(foundIdx - 1);
                     if (prevCh === '_' || prevCh === '-' || prevCh === ' ') {
                         score += 250;
+                    } else  {
+                        const code = original.charCodeAt(foundIdx);
+                        if (code >= 65 && code <= 90) score += 250;
                     }
                 }
                 score += Math.max(0, 100 - foundIdx);
