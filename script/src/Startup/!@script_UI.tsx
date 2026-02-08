@@ -1220,18 +1220,19 @@
             }
 
             const matchedItems: { item: T; score: number; }[] = [];
+            const qChars = query.split('');
             for (const item of this.items) {
                 let bestScore = -1;
                 if (this.keyWeights.length === 0) {
                     if (typeof item !== "string") continue;
                     const targetText = caseSensitive ? item : item.toLowerCase();
-                    bestScore = this.calculateScore(targetText, query, item);
+                    bestScore = this.calculateScore(targetText, query, qChars, item);
                 } else {
                     for (const kw of this.keyWeights) {
                         const value = item[kw.key];
                         if (typeof value !== "string") continue;
                         const targetText = caseSensitive ? value : value.toLowerCase();
-                        let score = this.calculateScore(targetText, query, value);
+                        let score = this.calculateScore(targetText, query, qChars, value);
                         if (score > -1) {
                             score *= kw.weight;
                             if (score > bestScore) bestScore = score;
@@ -1274,34 +1275,34 @@
                 this._cacheKeys.push(key);
             }
         }
-        private calculateScore(text: string, query: string, original: string): number {
-            let score = 0;
-            let textIdx = 0;
-            let lastFoundIdx = -1;
-            let firstFoundIdx = -1;
-            let consecutiveCount = 0;
-
+        private calculateScore(text: string, query: string, qChars: string[], original: string): number {
+            const firstFoundIdx = text.indexOf(qChars[0]);
+            if (firstFoundIdx === -1) return -1;
             if (text === query) return 100000;
-            if (text.indexOf(query) === 0) score += 10000;
 
-            for (let i = 0; i < query.length; i++) {
-                const ch = query[i];
+            let score = 0;
+            let textIdx = firstFoundIdx + 1;
+            let lastFoundIdx = firstFoundIdx;
+            let consecutiveCount = 0;
+            if (firstFoundIdx === 0) {
+                score += 500;
+                if (text.indexOf(query) === 0) score += 10000;
+            }
+
+            score += 100 - firstFoundIdx;
+
+            for (let i = 1; i < qChars.length; i++) {
+                const ch = qChars[i];
                 const foundIdx = text.indexOf(ch, textIdx);
                 if (foundIdx === -1) return -1;
-                if (i === 0) {
-                    firstFoundIdx = foundIdx;
-                    if (foundIdx === 0) score += 500;
+                const prevCh = text[foundIdx - 1];
+                if (prevCh === ' ' || prevCh === '_' || prevCh === '.' || prevCh === '-') {
+                    score += 250;
+                } else  {
+                    const code = original.charCodeAt(foundIdx);
+                    if (code >= 65 && code <= 90) score += 250;
                 }
-                if (foundIdx > 0) {
-                    const prevCh = text.charAt(foundIdx - 1);
-                    if (prevCh === '_' || prevCh === '-' || prevCh === ' ') {
-                        score += 250;
-                    } else  {
-                        const code = original.charCodeAt(foundIdx);
-                        if (code >= 65 && code <= 90) score += 250;
-                    }
-                }
-                score += Math.max(0, 100 - foundIdx);
+                score += 100 - foundIdx;
                 if (lastFoundIdx !== -1 && foundIdx === lastFoundIdx + 1) {
                     consecutiveCount++;
                     score += 200 * consecutiveCount;
@@ -1311,8 +1312,7 @@
                 lastFoundIdx = foundIdx;
                 textIdx = foundIdx + 1;
             }
-            const span = lastFoundIdx - firstFoundIdx + 1;
-            score += Math.max(0, 100 - span);
+            score += 100 - (lastFoundIdx - firstFoundIdx);
             score -= text.length; // length penalty
             return score;
         }
