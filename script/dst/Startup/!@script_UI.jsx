@@ -1034,20 +1034,20 @@
             if (options === void 0) { options = {}; }
             this._cache = {};
             this._cacheKeys = [];
-            this.items = items;
-            this.keyWeights = [];
+            this._items = items;
+            this._keyWeights = [];
             if (keys != null) {
                 for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
                     var k = keys_1[_i];
                     if (typeof k === "object" && k !== null && "key" in k) {
-                        this.keyWeights.push({ key: k.key, weight: k.weight });
+                        this._keyWeights.push({ key: k.key, weight: k.weight });
                     }
                     else {
-                        this.keyWeights.push({ key: k, weight: 1 });
+                        this._keyWeights.push({ key: k, weight: 1 });
                     }
                 }
             }
-            this.options = assign({
+            this._options = assign({
                 caseSensitive: false,
                 sort: false,
                 cache: false,
@@ -1058,8 +1058,8 @@
             if (query === void 0) { query = ''; }
             query = query.replace(/^\s+|\s+$/g, "");
             if (!query)
-                return this.items;
-            var _a = this.options, caseSensitive = _a.caseSensitive, cache = _a.cache, sort = _a.sort, maxCacheSize = _a.maxCacheSize;
+                return this._items;
+            var _a = this._options, caseSensitive = _a.caseSensitive, cache = _a.cache, sort = _a.sort, maxCacheSize = _a.maxCacheSize;
             query = caseSensitive ? query : query.toLowerCase();
             if (cache && Object.prototype.hasOwnProperty.call(this._cache, query)) {
                 this.refreshCacheKey(query);
@@ -1067,39 +1067,37 @@
             }
             var matchedItems = [];
             var qChars = query.split('');
-            for (var _i = 0, _b = this.items; _i < _b.length; _i++) {
-                var item = _b[_i];
-                var bestScore = -1;
-                if (this.keyWeights.length === 0) {
-                    if (typeof item !== "string")
-                        continue;
+            var iLen = this._items.length;
+            var kLen = this._keyWeights.length;
+            for (var i = 0; i < iLen; i++) {
+                var item = this._items[i];
+                var bestScore = -1000000 /* FuzzySearchScore.NOT_FOUND */;
+                if (this._keyWeights.length === 0) {
                     var targetText = caseSensitive ? item : item.toLowerCase();
                     bestScore = this.calculateScore(targetText, query, qChars, item);
                 }
                 else {
-                    for (var _c = 0, _d = this.keyWeights; _c < _d.length; _c++) {
-                        var kw = _d[_c];
+                    for (var j = 0; j < kLen; j++) {
+                        var kw = this._keyWeights[j];
                         var value = item[kw.key];
-                        if (typeof value !== "string")
-                            continue;
                         var targetText = caseSensitive ? value : value.toLowerCase();
                         var score = this.calculateScore(targetText, query, qChars, value);
-                        if (score > -1) {
+                        if (score > -1000000 /* FuzzySearchScore.NOT_FOUND */) {
                             score *= kw.weight;
                             if (score > bestScore)
                                 bestScore = score;
                         }
                     }
                 }
-                if (bestScore > -1)
+                if (bestScore > -1000000 /* FuzzySearchScore.NOT_FOUND */)
                     matchedItems.push({ item: item, score: bestScore });
             }
             if (sort) {
                 matchedItems.sort(function (a, b) { return b.score - a.score; });
             }
             var result = [];
-            for (var _e = 0, matchedItems_1 = matchedItems; _e < matchedItems_1.length; _e++) {
-                var item = matchedItems_1[_e];
+            for (var _i = 0, matchedItems_1 = matchedItems; _i < matchedItems_1.length; _i++) {
+                var item = matchedItems_1[_i];
                 result.push(item.item);
             }
             if (cache) {
@@ -1129,46 +1127,44 @@
         FuzzySearch.prototype.calculateScore = function (text, query, qChars, original) {
             var firstFoundIdx = text.indexOf(qChars[0]);
             if (firstFoundIdx === -1)
-                return -1;
-            if (text === query)
-                return 100000;
+                return -1000000 /* FuzzySearchScore.NOT_FOUND */;
             var score = 0;
             var textIdx = firstFoundIdx + 1;
             var lastFoundIdx = firstFoundIdx;
-            var consecutiveCount = 0;
+            var consecutiveBonus = 0;
             if (firstFoundIdx === 0) {
-                score += 500;
+                if (text === query)
+                    return 100000 /* FuzzySearchScore.PERFECT_MATCH */;
+                score += 500 /* FuzzySearchScore.START_OF_STRING */;
                 if (text.indexOf(query) === 0)
-                    score += 10000;
+                    score += 10000 /* FuzzySearchScore.PREFIX_MATCH */;
             }
-            score += 100 - firstFoundIdx;
+            score -= firstFoundIdx;
             for (var i = 1; i < qChars.length; i++) {
-                var ch = qChars[i];
-                var foundIdx = text.indexOf(ch, textIdx);
+                var foundIdx = text.indexOf(qChars[i], textIdx);
                 if (foundIdx === -1)
-                    return -1;
+                    return -1000000 /* FuzzySearchScore.NOT_FOUND */;
                 var prevCh = text[foundIdx - 1];
                 if (prevCh === ' ' || prevCh === '_' || prevCh === '.' || prevCh === '-') {
-                    score += 250;
+                    score += 250 /* FuzzySearchScore.BOUNDARY_BONUS */;
                 }
                 else {
                     var code = original.charCodeAt(foundIdx);
                     if (code >= 65 && code <= 90)
-                        score += 250;
+                        score += 250 /* FuzzySearchScore.CAMEL_CASE_BONUS */;
                 }
-                score += 100 - foundIdx;
-                if (lastFoundIdx !== -1 && foundIdx === lastFoundIdx + 1) {
-                    consecutiveCount++;
-                    score += 200 * consecutiveCount;
+                score -= foundIdx;
+                if (foundIdx === lastFoundIdx + 1) {
+                    consecutiveBonus += 200 /* FuzzySearchScore.CONSECUTIVE_STEP */;
+                    score += consecutiveBonus;
                 }
                 else {
-                    consecutiveCount = 0;
+                    consecutiveBonus = 0;
                 }
                 lastFoundIdx = foundIdx;
                 textIdx = foundIdx + 1;
             }
-            score += 100 - (lastFoundIdx - firstFoundIdx);
-            score -= text.length; // length penalty
+            score -= (lastFoundIdx - firstFoundIdx) + text.length;
             return score;
         };
         return FuzzySearch;

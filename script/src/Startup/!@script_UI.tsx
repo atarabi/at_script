@@ -1177,10 +1177,20 @@
         maxCacheSize?: number;
     }
 
+    const enum FuzzySearchScore {
+        NOT_FOUND = -1000000,
+        PERFECT_MATCH = 100000,
+        START_OF_STRING = 500,
+        PREFIX_MATCH = 10000,
+        BOUNDARY_BONUS = 250,
+        CAMEL_CASE_BONUS = 250,
+        CONSECUTIVE_STEP = 200,
+    }
+
     class FuzzySearch<T> {
-        private items: T[];
-        private keyWeights: { key: keyof T; weight: number }[];
-        private options: {
+        private _items: T[];
+        private _keyWeights: { key: keyof T; weight: number }[];
+        private _options: {
             caseSensitive: boolean;
             cache: boolean;
             sort: boolean;
@@ -1189,18 +1199,18 @@
         private _cache: { [key: string]: T[] } = {};
         private _cacheKeys: string[] = [];
         constructor(items: T[], keys: ((keyof T) | { key: keyof T; weight: number; })[], options: FuzzySearchOptions = {}) {
-            this.items = items;
-            this.keyWeights = [];
+            this._items = items;
+            this._keyWeights = [];
             if (keys != null) {
                 for (const k of keys) {
                     if (typeof k === "object" && k !== null && "key" in k) {
-                        this.keyWeights.push({ key: k.key, weight: k.weight });
+                        this._keyWeights.push({ key: k.key, weight: k.weight });
                     } else {
-                        this.keyWeights.push({ key: k as keyof T, weight: 1 });
+                        this._keyWeights.push({ key: k as keyof T, weight: 1 });
                     }
                 }
             }
-            this.options = assign({
+            this._options = assign({
                 caseSensitive: false,
                 sort: false,
                 cache: false,
@@ -1209,9 +1219,9 @@
         }
         public search(query: string = ''): T[] {
             query = query.replace(/^\s+|\s+$/g, "");
-            if (!query) return this.items;
+            if (!query) return this._items;
 
-            const { caseSensitive, cache, sort, maxCacheSize } = this.options;
+            const { caseSensitive, cache, sort, maxCacheSize } = this._options;
             query = caseSensitive ? query : query.toLowerCase();
 
             if (cache && Object.prototype.hasOwnProperty.call(this._cache, query)) {
@@ -1221,25 +1231,27 @@
 
             const matchedItems: { item: T; score: number; }[] = [];
             const qChars = query.split('');
-            for (const item of this.items) {
-                let bestScore = -1;
-                if (this.keyWeights.length === 0) {
-                    if (typeof item !== "string") continue;
-                    const targetText = caseSensitive ? item : item.toLowerCase();
-                    bestScore = this.calculateScore(targetText, query, qChars, item);
+            const iLen = this._items.length;
+            const kLen = this._keyWeights.length;
+            for (let i = 0; i < iLen; i++) {
+                const item = this._items[i];
+                let bestScore = FuzzySearchScore.NOT_FOUND;
+                if (this._keyWeights.length === 0) {
+                    const targetText = caseSensitive ? item as string : (item as string).toLowerCase();
+                    bestScore = this.calculateScore(targetText, query, qChars, item as string);
                 } else {
-                    for (const kw of this.keyWeights) {
-                        const value = item[kw.key];
-                        if (typeof value !== "string") continue;
+                    for (let j = 0; j < kLen; j++) {
+                        const kw = this._keyWeights[j];
+                        const value = item[kw.key] as string;
                         const targetText = caseSensitive ? value : value.toLowerCase();
                         let score = this.calculateScore(targetText, query, qChars, value);
-                        if (score > -1) {
+                        if (score > FuzzySearchScore.NOT_FOUND) {
                             score *= kw.weight;
                             if (score > bestScore) bestScore = score;
                         }
                     }
                 }
-                if (bestScore > -1) matchedItems.push({ item, score: bestScore });
+                if (bestScore > FuzzySearchScore.NOT_FOUND) matchedItems.push({ item, score: bestScore });
             }
 
             if (sort) {
@@ -1277,43 +1289,41 @@
         }
         private calculateScore(text: string, query: string, qChars: string[], original: string): number {
             const firstFoundIdx = text.indexOf(qChars[0]);
-            if (firstFoundIdx === -1) return -1;
-            if (text === query) return 100000;
+            if (firstFoundIdx === -1) return FuzzySearchScore.NOT_FOUND;
 
             let score = 0;
             let textIdx = firstFoundIdx + 1;
             let lastFoundIdx = firstFoundIdx;
-            let consecutiveCount = 0;
+            let consecutiveBonus = 0;
             if (firstFoundIdx === 0) {
-                score += 500;
-                if (text.indexOf(query) === 0) score += 10000;
+                if (text === query) return FuzzySearchScore.PERFECT_MATCH;
+                score += FuzzySearchScore.START_OF_STRING;
+                if (text.indexOf(query) === 0) score += FuzzySearchScore.PREFIX_MATCH;
             }
 
-            score += 100 - firstFoundIdx;
+            score -= firstFoundIdx;
 
             for (let i = 1; i < qChars.length; i++) {
-                const ch = qChars[i];
-                const foundIdx = text.indexOf(ch, textIdx);
-                if (foundIdx === -1) return -1;
+                const foundIdx = text.indexOf(qChars[i], textIdx);
+                if (foundIdx === -1) return FuzzySearchScore.NOT_FOUND;
                 const prevCh = text[foundIdx - 1];
                 if (prevCh === ' ' || prevCh === '_' || prevCh === '.' || prevCh === '-') {
-                    score += 250;
-                } else  {
-                    const code = original.charCodeAt(foundIdx);
-                    if (code >= 65 && code <= 90) score += 250;
-                }
-                score += 100 - foundIdx;
-                if (lastFoundIdx !== -1 && foundIdx === lastFoundIdx + 1) {
-                    consecutiveCount++;
-                    score += 200 * consecutiveCount;
+                    score += FuzzySearchScore.BOUNDARY_BONUS;
                 } else {
-                    consecutiveCount = 0;
+                    const code = original.charCodeAt(foundIdx);
+                    if (code >= 65 && code <= 90) score += FuzzySearchScore.CAMEL_CASE_BONUS;
+                }
+                score -= foundIdx;
+                if (foundIdx === lastFoundIdx + 1) {
+                    consecutiveBonus += FuzzySearchScore.CONSECUTIVE_STEP;
+                    score += consecutiveBonus;
+                } else {
+                    consecutiveBonus = 0;
                 }
                 lastFoundIdx = foundIdx;
                 textIdx = foundIdx + 1;
             }
-            score += 100 - (lastFoundIdx - firstFoundIdx);
-            score -= text.length; // length penalty
+            score -= (lastFoundIdx - firstFoundIdx) + text.length;
             return score;
         }
     }
