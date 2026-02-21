@@ -36,13 +36,11 @@ CC2018-
 
     その他スクリプトは任意で、画像関係を扱うプラグインである `@image <../Plugin/@image/index.html>`_ と、 SVGを扱うスクリプト `@svg.jsx <../Script/Startup/@svg.html>`_ といった機能を拡張する特殊な例を除けば、すべて実際にAPIを利用して作成したスクリプトの例となります。 `Script <../Script/index.html>`_ に解説があるので、興味があれば導入してみてください。
     
-    ただし、GUIのあるスクリプトに関しては、 `!@script_UI.jsx <../Script/Startup/!@script_UI.html>`_ に依存しているので、Startupフォルダに  **!@script_UI.jsx** をコピーするのを忘れないでください。
-
 `Releases · atarabi/at_script <https://github.com/atarabi/at_script/releases>`_ から **@script.zip** をダウンロード。
 
 プラグインは、pluginフォルダにある@scriptプラグイン(Windowsの場合は **@script.aex** , Macの場合は **@script.plugin** )をAfter Effectsのプラグイン関係のフォルダ内にコピー。
 
-スクリプトは、script/Startupフォルダにある **!@script_initializer.jsx**、 **!@script_UI.jsx** をAfter EffectsのStartup向けスクリプトのフォルダ内にコピー(例えば、Windows、AE2025の場合、 **C:\Program Files\Adobe\Adobe After Effects 2025\Support Files\Scripts\Startup** )。
+スクリプトは、script/Startupフォルダにある **!@script_initializer.jsx** をAfter EffectsのStartup向けスクリプトのフォルダ内にコピー(例えば、Windows、AE2025の場合、 **C:\Program Files\Adobe\Adobe After Effects 2025\Support Files\Scripts\Startup** )。
 
 後は各自使いたいスクリプトを各自script/Startupフォルダないしscript/ScriptUIフォルダからコピーする。
 
@@ -62,6 +60,25 @@ Atarabi.version
 ---------------
 
 ``version: string;``
+
+v0.8.0(2026/02/21)
+^^^^^^^^^^^^^^^^^^^^
+Breaking Changes
+"""""""""""""""""
+- !@script_UIを@scriptに直接埋め込むようにした。@scriptをv0.8.0に上げる場合に、Startupフォルダの!@script_UI.jsxは削除してください
+
+Improve
+"""""""""""
+- !@script_UIのFuzzy Searchのパフォーマンスの改善
+
+Script
+"""""""""""
+- @effect_launcherのFuzzy Searchのスコアリングの改善
+  
+API
+"""""""""""
+- Perf.measure() の追加
+- Perf.compare() の追加
 
 v0.7.0(2026/02/07)
 ^^^^^^^^^^^^^^^^^^^^
