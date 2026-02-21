@@ -1,6 +1,7 @@
 /**
- * @effect_launcher v2.3.0
+ * @effect_launcher v3.0.0
  *
+ *      v3.0.0(2026/02/21)  Switched to new fuzzy search. dependency: @script >= v0.8.0
  *      v2.3.0(2026/02/07)  Added support for showing recent items
  *      v2.2.2(2025/04/16)  Fixed a bug where a script wasn’t executed
  *      v2.2.1(2025/04/02)  Switched to Types-for-Adobe
@@ -428,7 +429,7 @@
     // searcher
     var searcher = null;
     function initSearcher() {
-        searcher = Atarabi.UI.FuzzySearch([].concat(EFFECT_LIST, SCRIPT_LIST, PRESET_LIST), ['name', 'detail', 'category'], {
+        searcher = Atarabi.UI.FuzzySearch([].concat(EFFECT_LIST, SCRIPT_LIST, PRESET_LIST), ['name', 'detail', { key: 'category', weight: 0.1 }], {
             caseSensitive: false,
             sort: true,
             cache: true,

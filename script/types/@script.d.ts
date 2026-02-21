@@ -21,6 +21,7 @@ declare interface Atarabi {
     mouse: Atarabi.Mouse;
     image: Atarabi.Image_;
     API: Atarabi.API;
+    perf: Atarabi.Perf;
 }
 
 declare namespace Atarabi {
@@ -730,6 +731,12 @@ declare namespace Atarabi {
         enableHookByUuid(uuid: Uuid, enable: boolean): void;
 
         sendKeys(keys: Keyboard.Key[]): void;
+
+        // windows only
+        setNativeInput(enabled: boolean): void;
+
+        // windows only
+        isNativeInput(): boolean;
     }
 
     namespace Keyboard {
@@ -803,6 +810,42 @@ declare namespace Atarabi {
         invoke<F extends (...args: any[]) => any>(name: string, method: string, args?: Parameters<F>, fallback?: (...args: Parameters<F>) => ReturnType<F>): ReturnType<F>;
         remove(name: string, method: string): boolean;
         isAdded(name: string, method: string): boolean;
+    }
+
+    interface Perf {
+        Profiler: Perf.ProfilerStatic;
+    }
+
+    namespace Perf {
+        interface ProfilerOptions {
+            iterations?: number;
+            duration?: number;
+            silent?: boolean;
+            useGC?: boolean;
+        }
+
+        interface ProfileResult {
+            label: string;
+            iterations: number;
+            totalMs: number;
+            averageMs: number;
+        }
+
+        interface CompareEntry {
+            label: string;
+            action: () => void;
+        }
+
+        interface CompareResult {
+            results: ProfileResult[];
+            winner: ProfileResult;
+            loser: ProfileResult;
+        }
+
+        interface ProfilerStatic {
+            measure(label: string, action: () => void, options?: ProfilerOptions): ProfileResult;
+            compare(entries: CompareEntry[], options?: ProfilerOptions): CompareResult;
+        }
     }
 
     /*
